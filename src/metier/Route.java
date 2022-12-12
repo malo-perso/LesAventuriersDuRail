@@ -1,3 +1,4 @@
+package metier;
 public class Route {
     Ville  ville1;
     Ville  ville2;

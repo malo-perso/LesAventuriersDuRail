@@ -1,3 +1,4 @@
+package metier;
 public class Ville{
     private String nom;
     private int x;
