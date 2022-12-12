@@ -23,21 +23,20 @@ public class PanelCreationMappe extends JPanel //implements ActionListener
     public PanelCreationMappe ()
     {
         this.setLayout(new GridLayout(10,1));
-        this.lblMappe = new JLabel("Création d'une mappe");
-        this.lblTheme = new JLabel("Thème");
+        this.lblMappe = new JLabel("Créer Mappe");
+        this.lblTheme = new JLabel("Sélection Thème");
         this.pnlNomTheme = new JPanel();
-        this.lblInformationJoueur = new JLabel("Information sur le joueur");
+        this.lblInformationJoueur = new JLabel("Information Joueur");
         this.pnlFormulaireJoueur = new JPanel();
-        this.lblInformationWagon = new JLabel("Information sur le wagon");
+        this.lblInformationWagon = new JLabel("Information Wagon");
         this.pnlFormulaireWagon = new JPanel();
-        this.lblVille = new JLabel("Ville");
+        this.lblVille = new JLabel("Ajouter Ville");
         this.pnlVille = new JPanel();
-        this.lblRoute = new JLabel("Route");
+        this.lblRoute = new JLabel("Ajouter Route");
         this.pnlRoute = new JPanel();
-        this.lblInformationObjectif = new JLabel("Information sur l'objectif");
+        this.lblInformationObjectif = new JLabel("Information Carte Objectif");
         this.pnlFormulaireObjectif = new JPanel();
 
-        this.setLayout(new GridLayout(10,1));
         this.add(lblMappe);
         this.add(lblTheme);
         this.add(pnlNomTheme);
