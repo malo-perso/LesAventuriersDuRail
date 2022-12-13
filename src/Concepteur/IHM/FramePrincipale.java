@@ -1,5 +1,7 @@
 package IHM;
 
+import IHM.asuppr.PanelCreationMappe;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Dimension;

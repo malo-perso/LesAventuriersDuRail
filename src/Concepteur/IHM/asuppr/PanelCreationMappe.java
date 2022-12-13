@@ -1,4 +1,6 @@
-package IHM;
+package IHM.asuppr;
+
+import IHM.PanelSelectTheme;
 
 import javax.swing.*;
 import java.awt.GridLayout;
