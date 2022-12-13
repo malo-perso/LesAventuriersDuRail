@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 import java.util.ArrayList;
 
 public class Joueur {
@@ -32,7 +32,7 @@ public class Joueur {
         return this.lstCarteObjectifs;
     }
 
-    public ArrayList <Cartevehicule> getLstCarteVehicules() {
+    public ArrayList <CarteVehicule> getLstCarteVehicules() {
         return this.lstCarteVehicules;
     }
 

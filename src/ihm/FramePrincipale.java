@@ -1,3 +1,5 @@
+package src.ihm;
+
 import javax.swing.*;
 
 //import javafx.scene.layout.Border;

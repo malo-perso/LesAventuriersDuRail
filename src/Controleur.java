@@ -1,4 +1,8 @@
-package metier;
+package src;
+
+import src.ihm.*;
+import src.metier.*;
+
 import java.util.ArrayList;
 
 public class Controleur{
@@ -29,5 +33,6 @@ public class Controleur{
         return 0;
     }
 
+    public static void main (String[] args) {new Controleur();}
 
 }

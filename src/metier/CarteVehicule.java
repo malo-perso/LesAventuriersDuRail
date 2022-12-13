@@ -1,4 +1,4 @@
-package metier;
-public class CarteWagon {
+package src.metier;
+public class CarteVehicule {
     
 }

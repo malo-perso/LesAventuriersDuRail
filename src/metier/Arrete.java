@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 public class Arrete {
     Noeud  Noeud1;
     Noeud  Noeud2;

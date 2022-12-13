@@ -1,4 +1,4 @@
-package metier;
+package src.metier;
 public class Noeud{
     private String nom;
     private int x;
