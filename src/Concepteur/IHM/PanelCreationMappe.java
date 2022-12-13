@@ -1,8 +1,7 @@
-import javax.swing.*; 
-import java.awt.*; 
-import java.awt.event.*;
+package IHM;
+
+import javax.swing.*;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 
 public class PanelCreationMappe extends JPanel //implements ActionListener
 {
@@ -27,13 +26,13 @@ public class PanelCreationMappe extends JPanel //implements ActionListener
         this.lblMappe.setSize(50,50);
         this.lblTheme = new JLabel("Sélection Thème",JLabel.CENTER);
         this.pnlNomTheme = new PanelSelectTheme();
-        this.lblInformationJoueur = new JLabel("Information Joueur",JLabel.CENTER);
+        this.lblInformationJoueur = new JLabel("Information Metier.Joueur",JLabel.CENTER);
         this.pnlFormulaireJoueur = new PanelInformationPoint();
         this.lblInformationWagon = new JLabel("Information Wagon",JLabel.CENTER);
         this.pnlFormulaireWagon = new JPanel();
-        this.lblVille = new JLabel("Ajouter Ville",JLabel.CENTER);
+        this.lblVille = new JLabel("Ajouter Metier.Ville",JLabel.CENTER);
         this.pnlVille = new JPanel();
-        this.lblRoute = new JLabel("Ajouter Route",JLabel.CENTER);
+        this.lblRoute = new JLabel("Ajouter Metier.Route",JLabel.CENTER);
         this.pnlRoute = new JPanel();
         this.lblInformationObjectif = new JLabel("Information Carte Objectif",JLabel.CENTER);
         this.pnlFormulaireObjectif = new JPanel();

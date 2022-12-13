@@ -1,3 +1,5 @@
+import Metier.Joueur;
+
 import java.util.ArrayList;
 
 public class Controleur{
@@ -15,7 +17,7 @@ public class Controleur{
         return true;
     }
 
-    public int gagnerPoints(Joueur joueur,int taille)
+    public int gagnerPoints(Joueur joueur, int taille)
     {
         switch (taille) {
             case 1:

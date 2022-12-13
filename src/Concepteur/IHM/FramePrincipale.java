@@ -1,7 +1,7 @@
-import javax.swing.*; 
-import java.awt.*; 
-import java.awt.event.*;
-import java.awt.GridLayout;
+package IHM;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.Dimension;
 
 public class FramePrincipale extends JFrame 
