@@ -20,7 +20,7 @@ public class PanelAretes extends JPanel implements ActionListener {
     public PanelAretes() {
 
         // création des composants
-        JScrollPane spTabCarte; 
+        JScrollPane spTabAretes; 
         
         this.panelTable = new JPanel();
         this.tabAretes = new JTable();
@@ -32,14 +32,14 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.setLayout(new BorderLayout());
         this.panelValidation.setLayout(new GridLayout(1,2, 10, 10));
 
-        spTabCarte = new JScrollPane(this.tabAretes);
+        spTabAretes = new JScrollPane(this.tabAretes);
 
         // activation des composants
         this.btnRetour.addActionListener(this);
 
         // ajout des composants
         this.panelTable.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
-        this.panelTable.add(spTabCarte, BorderLayout.CENTER);
+        this.panelTable.add(spTabAretes, BorderLayout.CENTER);
 
         this.panelValidation.add(this.btnRetour);
         this.panelValidation.add(this.btnSuivant);
