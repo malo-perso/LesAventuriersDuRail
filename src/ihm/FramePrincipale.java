@@ -1,4 +1,4 @@
-//package ihm;
+package ihm;
 
 import javax.swing.*;
 
