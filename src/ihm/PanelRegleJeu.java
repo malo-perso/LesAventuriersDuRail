@@ -136,25 +136,24 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         return noeud;
     }
     
-    
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.txtNbJoueurMin) {
 
-            this.txtNbJoueurMax.setText(this.txtNbJoueurMin.getText());
+        if (e.getSource() == this.txtNbJoueurMin) {
+            this.nbJoueurMin = Integer.parseInt(this.txtNbJoueurMin.getText());
         }
         if (e.getSource() == this.txtNbJoueurMax) {
-            this.txtNbJoueurMin.setText(this.txtNbJoueurMax.getText());
+            this.nbJoueurMax = Integer.parseInt(this.txtNbJoueurMax.getText());
         }
         if (e.getSource() == this.txtDoubleVoie) {
-            this.txtDoubleVoie.setText(this.txtDoubleVoie.getText());
+            this.doubleVoie = Integer.parseInt(this.txtDoubleVoie.getText());
         }
         if (e.getSource() == this.txtNbWagonJoueur) {
-            this.txtNbWagonJoueur.setText(this.txtNbWagonJoueur.getText());
+            this.nbWagonJoueur =Integer.parseInt(this.txtNbWagonJoueur.getText());
         }
         if (e.getSource() == this.txtNbWagonFin) {
-            this.txtNbWagonFin.setText(this.txtNbWagonFin.getText());
+            this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
         }
 
         if (e.getSource() == this.btnAjoutVille) {
@@ -172,4 +171,5 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.txtY.setText(" ");
         }
     }
+
 }
