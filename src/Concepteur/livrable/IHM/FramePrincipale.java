@@ -28,7 +28,7 @@ public class FramePrincipale extends JFrame
 
 		// Création des panels 
 		this.panelAccueil = new PanelAccueil(this);
-		this.pnlConcepteur = new PanelConcepteur();
+		this.pnlConcepteur = new PanelConcepteur(this.ctrl);
 
 		// Positionnement des composants
 		this.setContentPane(this.panelAccueil);
@@ -42,6 +42,8 @@ public class FramePrincipale extends JFrame
 
 	public void changerConcepteur()
 	{
+		this.setSize(1200,800);
+		this.setLocation(50,50);
 		this.setContentPane(this.pnlConcepteur);
 		this.revalidate();
 	}

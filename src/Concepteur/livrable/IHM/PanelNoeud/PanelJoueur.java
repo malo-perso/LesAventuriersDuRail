@@ -11,22 +11,25 @@ public class PanelJoueur extends JPanel implements ActionListener {
     private JTextField txtNbJoueurMax;
     private JPanel pnlNbJoueur;
     private JTextField txtDoubleVoie;
+    private JButton btnSuivant;
 
     private int nbJoueurMin;
     private int nbJoueurMax;
     private int doubleVoie;
 
     public PanelJoueur() {
-        this.setLayout(new GridLayout(3, 3));
+        this.setLayout(new GridLayout(3, 1));
 
         this.txtNbJoueurMin = new JTextField("2");
-        this.txtNbJoueurMax = new JTextField("2");
-        this.pnlNbJoueur = new JPanel(new GridLayout(2, 2));
+        this.txtNbJoueurMax = new JTextField("5");
+        this.pnlNbJoueur = new JPanel(new GridLayout(3, 1));
 
         this.pnlNbJoueur.add(new JLabel("Joueur minimum"));
         this.pnlNbJoueur.add(this.txtNbJoueurMin);
         this.pnlNbJoueur.add(new JLabel("Joueur maximum"));
         this.pnlNbJoueur.add(this.txtNbJoueurMax);
+        this.btnSuivant = new JButton("Suivant");
+
 
         this.add(this.pnlNbJoueur);
 
@@ -38,12 +41,9 @@ public class PanelJoueur extends JPanel implements ActionListener {
         this.txtNbJoueurMin.addActionListener(this);
         this.txtNbJoueurMax.addActionListener(this);
         this.txtDoubleVoie.addActionListener(this);
+        this.btnSuivant.addActionListener(this);
 
-
-
-
-        //this.txtNbJoueurMax.addKeyListener(new KeyAdapter
-
+        this.add(this.btnSuivant);
     }
 
     public int getNbJoueurMin() {
@@ -65,6 +65,9 @@ public class PanelJoueur extends JPanel implements ActionListener {
         if (e.getSource() == this.txtDoubleVoie) {
             this.txtDoubleVoie.setText(this.txtDoubleVoie.getText());
         }
+
+
+
     }
 
 

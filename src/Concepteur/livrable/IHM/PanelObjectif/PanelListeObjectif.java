@@ -1,4 +1,6 @@
 package livrable.IHM.PanelObjectif;
 
-public class PanelListeObjectif{
+import javax.swing.*;
+
+public class PanelListeObjectif extends JPanel {
 }

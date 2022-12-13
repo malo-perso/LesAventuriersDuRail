@@ -27,7 +27,7 @@ public class PanelWagonJoueur extends JPanel implements ActionListener {
         this.pnlWagonJoueur.add(new JLabel("Wagon par Joueur"));
         this.pnlWagonJoueur.add(this.txtNbWagonJoueur);
 
-        this.txtNbWagonFin.add(this.txtNbWagonFin);
+        this.pnlWagonFin.add(this.txtNbWagonFin);
         this.pnlWagonFin.add(new JLabel("wagons"));
 
         this.add(this.pnlWagonJoueur);
