@@ -1,6 +1,6 @@
-package IHM;
-
-import IHM.asuppr.PanelCreationMappe;
+package livrable.IHM;
+import livrable.Controleur;
+import livrable.IHM.asuppr.PanelCreationMappe;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,11 @@ public class FramePrincipale extends JFrame
 {
 	private PanelCreationMappe panelAccueil;
 	private Image        imgBackground;
+	private Controleur ctrl;
 
-	public FramePrincipale()
+	public FramePrincipale(Controleur ctrl)
 	{
+		this.ctrl = ctrl;
 		//parametres de la fenetre
 		Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int hauteur = (int) (tailleEcran.getHeight());
@@ -42,9 +44,5 @@ public class FramePrincipale extends JFrame
         g.drawImage(this.imgBackground,0,0,null);
     }
 
-    public static void main(String[] args) 
-    {
-        new FramePrincipale();
-    }
 }
 

@@ -1,4 +1,4 @@
-package Metier;
+package livrable.Metier;
 
 public class Type {
     

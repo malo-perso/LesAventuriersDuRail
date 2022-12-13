@@ -1,6 +1,6 @@
-package IHM.asuppr;
+package livrable.IHM.asuppr;
 
-import IHM.PanelSelectTheme;
+import livrable.IHM.PanelSelectTheme;
 
 import javax.swing.*;
 import java.awt.GridLayout;
@@ -28,13 +28,13 @@ public class PanelCreationMappe extends JPanel //implements ActionListener
         this.lblMappe.setSize(50,50);
         this.lblTheme = new JLabel("Sélection Thème",JLabel.CENTER);
         this.pnlNomTheme = new PanelSelectTheme();
-        this.lblInformationJoueur = new JLabel("Information Metier.Joueur",JLabel.CENTER);
+        this.lblInformationJoueur = new JLabel("Information livrable.Metier.Joueur",JLabel.CENTER);
         this.pnlFormulaireJoueur = new PanelInformationPoint();
         this.lblInformationWagon = new JLabel("Information Wagon",JLabel.CENTER);
         this.pnlFormulaireWagon = new JPanel();
-        this.lblVille = new JLabel("Ajouter Metier.Ville",JLabel.CENTER);
+        this.lblVille = new JLabel("Ajouter livrable.Metier.Ville",JLabel.CENTER);
         this.pnlVille = new JPanel();
-        this.lblRoute = new JLabel("Ajouter Metier.Route",JLabel.CENTER);
+        this.lblRoute = new JLabel("Ajouter livrable.Metier.Route",JLabel.CENTER);
         this.pnlRoute = new JPanel();
         this.lblInformationObjectif = new JLabel("Information Carte Objectif",JLabel.CENTER);
         this.pnlFormulaireObjectif = new JPanel();

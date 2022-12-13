@@ -1,10 +1,9 @@
-package IHM;
+package livrable.IHM;
 
 import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 
 public class PanelSelectTheme extends JPanel implements ActionListener{
 
@@ -31,6 +30,7 @@ public class PanelSelectTheme extends JPanel implements ActionListener{
         this.add(this.pnlBoutton, BorderLayout.CENTER);
 
         this.txtMappe.addActionListener(this);
+
 
     }    
 

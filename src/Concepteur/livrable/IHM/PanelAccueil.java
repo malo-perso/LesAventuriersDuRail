@@ -1,10 +1,8 @@
-package IHM;
+package livrable.IHM;
 
 import javax.swing.*;
-import java.awt.*; 
-import java.awt.event.*;
+import java.awt.*;
 import java.awt.GridLayout;
-import java.util.ArrayList;
 
 public class PanelAccueil extends JPanel //implements ActionListener
 {

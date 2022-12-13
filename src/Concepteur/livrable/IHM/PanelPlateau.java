@@ -1,4 +1,4 @@
-package IHM;
+package livrable.IHM;
 
 public class PanelPlateau {
 }

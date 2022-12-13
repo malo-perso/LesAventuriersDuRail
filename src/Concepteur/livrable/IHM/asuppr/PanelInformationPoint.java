@@ -1,4 +1,4 @@
-package IHM.asuppr;
+package livrable.IHM.asuppr;
 
 import javax.swing.*;
 import java.awt.*;
