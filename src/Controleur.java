@@ -1,8 +1,7 @@
-package livrable;
+package src;
 
-import livrable.IHM.FramePrincipale;
-import livrable.Metier.Joueur;
-import livrable.Metier.Metier;
+import ihm.*;
+import metier.*;
 
 import java.util.ArrayList;
 
