@@ -6,7 +6,7 @@ import java.awt.Dimension;
 
 public class FramePrincipale extends JFrame 
 {
-	private PanelAccueil panelAccueil;
+	private PanelCreationMappe panelAccueil;
 	private Image        imgBackground;
 
 	public FramePrincipale()
@@ -23,7 +23,7 @@ public class FramePrincipale extends JFrame
 		
 
 		// Création des panels 
-		this.panelAccueil = new PanelAccueil();
+		this.panelAccueil = new PanelCreationMappe();
 		// Positionnement des composants
 		this.add(panelAccueil);
 

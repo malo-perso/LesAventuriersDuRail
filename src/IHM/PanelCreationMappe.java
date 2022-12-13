@@ -8,9 +8,9 @@ public class PanelCreationMappe extends JPanel //implements ActionListener
 {
     private JLabel lblMappe;
     private JLabel lblTheme;
-    private JPanel pnlNomTheme;
+    private PanelSelectTheme pnlNomTheme;
     private JLabel lblInformationJoueur;
-    private JPanel pnlFormulaireJoueur;
+    private PanelInformationPoint pnlFormulaireJoueur;
     private JLabel lblInformationWagon;
     private JPanel pnlFormulaireWagon;
     private JLabel lblVille;
@@ -22,19 +22,20 @@ public class PanelCreationMappe extends JPanel //implements ActionListener
 
     public PanelCreationMappe ()
     {
-        this.setLayout(new GridLayout(10,1));
-        this.lblMappe = new JLabel("Créer Mappe");
-        this.lblTheme = new JLabel("Sélection Thème");
-        this.pnlNomTheme = new JPanel();
-        this.lblInformationJoueur = new JLabel("Information Joueur");
-        this.pnlFormulaireJoueur = new JPanel();
-        this.lblInformationWagon = new JLabel("Information Wagon");
+        this.setLayout(new GridLayout(14,1));
+        this.lblMappe = new JLabel("Créer Mappe",JLabel.CENTER);
+        this.lblMappe.setSize(50,50);
+        this.lblTheme = new JLabel("Sélection Thème",JLabel.CENTER);
+        this.pnlNomTheme = new PanelSelectTheme();
+        this.lblInformationJoueur = new JLabel("Information Joueur",JLabel.CENTER);
+        this.pnlFormulaireJoueur = new PanelInformationPoint();
+        this.lblInformationWagon = new JLabel("Information Wagon",JLabel.CENTER);
         this.pnlFormulaireWagon = new JPanel();
-        this.lblVille = new JLabel("Ajouter Ville");
+        this.lblVille = new JLabel("Ajouter Ville",JLabel.CENTER);
         this.pnlVille = new JPanel();
-        this.lblRoute = new JLabel("Ajouter Route");
+        this.lblRoute = new JLabel("Ajouter Route",JLabel.CENTER);
         this.pnlRoute = new JPanel();
-        this.lblInformationObjectif = new JLabel("Information Carte Objectif");
+        this.lblInformationObjectif = new JLabel("Information Carte Objectif",JLabel.CENTER);
         this.pnlFormulaireObjectif = new JPanel();
 
         this.add(lblMappe);

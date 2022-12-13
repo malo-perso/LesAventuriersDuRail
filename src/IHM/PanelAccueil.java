@@ -44,7 +44,7 @@ public class PanelAccueil extends JPanel //implements ActionListener
     public void paintComponent(Graphics g)
     {
         g.drawImage(this.imgBackground,0,0,null);
-        super.paintComponent(g&²²é);
+        super.paintComponent(g);
     }
 
 }
