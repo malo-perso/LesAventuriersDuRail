@@ -15,8 +15,13 @@ public class Controleur{
         this.finPartie = false;
         this.lstJoueurs = new ArrayList<>();
         this.metier = new Metier(this);
-
         this.IHM = new FramePrincipale(this);
+
+
+    }
+
+    public static void main(String[] args) {
+        Controleur controleur = new Controleur();
     }
     /*
     public boolean PrendreRoute()

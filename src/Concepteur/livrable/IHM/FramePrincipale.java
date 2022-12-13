@@ -8,9 +8,11 @@ import java.awt.Dimension;
 
 public class FramePrincipale extends JFrame 
 {
-	private PanelCreationMappe panelAccueil;
+	private PanelAccueil panelAccueil;
 	private Image        imgBackground;
 	private Controleur ctrl;
+	private PanelConcepteur pnlConcepteur;
+
 
 	public FramePrincipale(Controleur ctrl)
 	{
@@ -23,13 +25,13 @@ public class FramePrincipale extends JFrame
 		this.setSize(largeur, hauteur);
 		this.setTitle("Les aventuriers du IIIe Reich");
 		this.setLocation(500, 500);
-		this.setLayout(new FlowLayout());
-		
 
 		// Création des panels 
-		this.panelAccueil = new PanelCreationMappe();
+		this.panelAccueil = new PanelAccueil(this);
+		this.pnlConcepteur = new PanelConcepteur();
+
 		// Positionnement des composants
-		this.add(panelAccueil);
+		this.setContentPane(this.panelAccueil);
 
 		// Affichage de la fenêtre
 		this.setResizable(false);
@@ -37,6 +39,14 @@ public class FramePrincipale extends JFrame
 		this.setVisible(true);
 		this.pack();
 	}
+
+	public void changerConcepteur()
+	{
+		this.setContentPane(this.pnlConcepteur);
+		this.revalidate();
+	}
+
+
 
 	
     public void paintComponent(Graphics g)
