@@ -60,7 +60,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.reglePDF = new File("../data/PDF/Regles.pdf");
 
         this.menuRegles.addActionListener(this::actionPerformed);
-        this.menuFichier.addActionListener(this::actionPerformed);
+        this.menuNouveau.addActionListener(this::actionPerformed);
         this.menuOuvrir.addActionListener(this::actionPerformed);
 
 
@@ -83,15 +83,28 @@ public class FramePrincipale extends JFrame implements ActionListener
                 Desktop.getDesktop().open(reglePDF);
             }catch(Exception erreur){erreur.printStackTrace();}
         }
-        /*if(e.getSource() == this.menuNouveau){
+		if(e.getSource() == this.menuNouveau){
+			try{
+				System.out.println("Nouveau");
+				JFileChooser nouveau = new JFileChooser(".");
+				
+				int res = nouveau.showOpenDialog(this);
+			}catch(Exception erreur){erreur.printStackTrace();}
+		}
+        if(e.getSource() == this.menuOuvrir){
             try{
+				System.out.println("Ouvrir");
+				JFileChooser ouvrir = new JFileChooser(".");
+				
+				int res = ouvrir.showOpenDialog(this);
+				/*if (res == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile().getPath() != null)
+					this.ouvrir(new File(chooser.getSelectedFile().getPath()));*/
 
-            }catch(){}
-        }*/
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
     }
 
     public static void main(String[] arg){new FramePrincipale();}
-
 
 }
 
