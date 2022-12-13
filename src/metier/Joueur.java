@@ -4,40 +4,40 @@ import java.util.ArrayList;
 public class Joueur {
     private String pseudo ;
     private int    nbPoints;
-    private int    nbWagon;
+    private int    nbVehicule;
     private ArrayList <CarteObjectif> lstCarteObjectifs;
-    private ArrayList <CarteWagon>    lstCarteWagons;
+    private ArrayList <CarteVehicule>    lstCarteVehicules;
 
-    public Joueur(String pseudo, int nbWagon) {
+    public Joueur(String pseudo, int nbvehicule) {
         this.pseudo   = pseudo;
         this.nbPoints = 0;
-        this.nbWagon  = nbWagon;
+        this.nbVehicule  = nbVehicule;
         this.lstCarteObjectifs = new ArrayList <CarteObjectif>();
-        this.lstCarteWagons    = new ArrayList <CarteWagon>();
+        this.lstCarteVehicules    = new ArrayList <CarteVehicule>();
     }
 
     public String getPseudo() {
-        return pseudo;
+        return this.pseudo;
     }
 
-    public int getNbWagon() {
-        return nbWagon;
+    public int getNbVehicule() {
+        return this.nbVehicule;
     }
 
     public int getNbPoints() {
-        return nbPoints;
+        return this.nbPoints;
     }
 
     public ArrayList <CarteObjectif> getLstCarteObjectifs() {
-        return lstCarteObjectifs;
+        return this.lstCarteObjectifs;
     }
 
-    public ArrayList <CarteWagon> getLstCarteWagons() {
-        return lstCarteWagons;
+    public ArrayList <Cartevehicule> getLstCarteVehicules() {
+        return this.lstCarteVehicules;
     }
 
-    public void setNbWagon(int nbWagon) {
-        this.nbWagon = nbWagon;
+    public void setNbvehicule(int nbVehicule) {
+        this.nbVehicule = nbVehicule;
     }
 
     public void earnPoints(int points) {

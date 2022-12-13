@@ -1,37 +1,37 @@
 package metier;
-public class Route {
-    Ville  ville1;
-    Ville  ville2;
+public class Arrete {
+    Noeud  Noeud1;
+    Noeud  Noeud2;
     int    longueur;
     Type   type;
     Joueur possession;
 
-    public Route(Ville ville1, Ville ville2, int longueur, Type type) {
-        this.ville1    = ville1;
-        this.ville2    = ville2;
+    public Arrete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
+        this.noeud1    = noeud1;
+        this.noeud2    = noeud2;
         this.longueur  = longueur;
         this.type      = type;
         this.possession = null;
     }
 
-    public Ville getVille1() {
-        return ville1;
+    public Noeud getNoeud1() {
+        return this.noeud1;
     }
 
-    public Ville getVille2() {
-        return ville2;
+    public Noeud getNoeud2() {
+        return this.noeud2;
     }
 
     public int getLongueur() {
-        return longueur;
+        return this.longueur;
     }
 
     public Type getType() {
-        return type;
+        return this.type;
     }
 
     public Joueur getPossession() {
-        return possession;
+        return this.possession;
     }
 
     public void setPossession(Joueur possession) {

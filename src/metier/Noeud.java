@@ -1,29 +1,29 @@
 package metier;
-public class Ville{
+public class Noeud{
     private String nom;
     private int x;
     private int y;
 
-    public Ville(String nom, int x, int y) {
+    public Noeud(String nom, int x, int y) {
         this.nom = nom;
         this.x = x;
         this.y = y;
     }
 
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     public int getX() {
-        return x;
+        return this.x;
     }
 
     public int getY() {
-        return y;
+        return this.y;
     }
 
     public void setx(int x) {
-        this.x = y;
+        this.x = x;
     }
 
     public void sety(int y) {

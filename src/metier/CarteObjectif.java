@@ -4,13 +4,13 @@ import java.util.ArrayList;;
 public class CarteObjectif {
     private static ArrayList<CarteObjectif> pioche = new ArrayList<>();
 
-    private Ville ville1;
-    private Ville ville2;
+    private Noeud noeud1;
+    private Noeud noeud2;
     private int   points;
 
-    public CarteObjectif(Ville ville1, Ville ville2, int points) {
-        this.ville1 = ville1;
-        this.ville2 = ville2;
+    public CarteObjectif(Noeud noeud1, Noeud noeud2, int points) {
+        this.noeud1 = noeud1;
+        this.noeud2 = noeud2;
         this.points = points;
     }
 }
