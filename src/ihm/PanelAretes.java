@@ -1,15 +1,25 @@
 package src.ihm;
 
 import src.Controleur;
+import src.metier.Noeud;
+import src.metier.Arete;
+import src.metier.Type;
+
+import java.awt.Image;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.awt.Dimension;
+import java.awt.event.*;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.*;
 
 public class PanelAretes extends JPanel implements ActionListener {
 
     private Controleur ctrl;
+
+    private Image  imgFond;
     
     private JPanel panelTable;
     private JTable tabAretes;
@@ -35,6 +45,8 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         spTabAretes = new JScrollPane(this.tabAretes);
 
+        this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
+
         // activation des composants
         this.btnRetour.addActionListener(this);
 
@@ -58,4 +70,19 @@ public class PanelAretes extends JPanel implements ActionListener {
             System.out.println("Suivant");
         }
     }
+
+
+    public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
+        // TODO
+    }
+        
+    }
+
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2 = (Graphics2D) g;
+
+		g.drawImage ( this.imgFond, 0, 0, this );
+	}
 }
