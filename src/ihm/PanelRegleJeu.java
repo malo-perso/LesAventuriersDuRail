@@ -1,8 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Component;
+import java.awt.Color;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import src.metier.Noeud;
 
@@ -75,8 +78,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
 
         this.model = new DefaultTableModel(NOM_COLONNE, 0);
         this.tableVille = new JTable(this.model);
-        
-        
+                
         this.panelVilleBtn.add(this.btnAjoutVille);
         this.panelVilleBtn.add(this.btnSupprVille);
         this.panelVilleBtn.add(this.btnClear);
@@ -141,26 +143,42 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.txtNbJoueurMin) {
+            if(!fonctionAux.isInteger(this.txtNbJoueurMin.getText()))
+                this.txtNbJoueurMin.setText(" ");
             this.nbJoueurMin = Integer.parseInt(this.txtNbJoueurMin.getText());
         }
         if (e.getSource() == this.txtNbJoueurMax) {
+            if(!fonctionAux.isInteger(this.txtNbJoueurMax.getText()))
+                    this.txtNbJoueurMax.setText(" ");
             this.nbJoueurMax = Integer.parseInt(this.txtNbJoueurMax.getText());
         }
         if (e.getSource() == this.txtDoubleVoie) {
+            if(!fonctionAux.isInteger(this.txtDoubleVoie.getText()))
+                    this.txtDoubleVoie.setText(" ");
             this.doubleVoie = Integer.parseInt(this.txtDoubleVoie.getText());
         }
         if (e.getSource() == this.txtNbWagonJoueur) {
+            if(!fonctionAux.isInteger(this.txtNbWagonJoueur.getText()))
+                    this.txtNbWagonJoueur.setText(" ");
             this.nbWagonJoueur =Integer.parseInt(this.txtNbWagonJoueur.getText());
         }
         if (e.getSource() == this.txtNbWagonFin) {
+            if(!fonctionAux.isInteger(this.txtNbWagonFin.getText()))
+                    this.txtNbWagonFin.setText(" ");
             this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
         }
 
         if (e.getSource() == this.btnAjoutVille) {
-            this.model.addRow(new Object[] {
-            this.txtNomVille.getText(),
-            this.txtX.getText(),
-            this.txtY.getText()});
+            if (fonctionAux.isInteger(this.txtX.getText()) && fonctionAux.isInteger(this.txtY.getText()) && !this.txtNomVille.getText().equals(""))  
+                {
+                    this.model.addRow(new Object[] {
+                    this.txtNomVille.getText(),
+                    this.txtX.getText(),
+                    this.txtY.getText()});
+                }
+                this.txtNomVille.setText("");
+                this.txtX.setText("");
+                this.txtY.setText("");
         }
         if (e.getSource() == this.btnSupprVille) {
             this.model.removeRow(this.tableVille.getSelectedRow());
@@ -170,6 +188,12 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.txtX.setText(" ");
             this.txtY.setText(" ");
         }
+    }
+
+        public static void main(String[] args) {
+        JFrame jf = new JFrame();
+        jf.add(new PanelRegleJeu());
+        jf.setVisible(true);
     }
 
 }
