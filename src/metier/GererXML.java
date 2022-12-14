@@ -1,6 +1,6 @@
 package src.metier;
 
-import livrable.Controleur;
+import src.Controleur;
 
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;

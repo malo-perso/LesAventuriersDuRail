@@ -1,6 +1,9 @@
+package src.metier;
+
 import java.awt.Component;
 
-import javax.swing.table.TableCellRenderer; 
+import javax.swing.table.TableCellRenderer;
+
 public class fonctionAux {
     
     public static boolean isInteger(String s) {
