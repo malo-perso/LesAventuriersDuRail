@@ -170,11 +170,12 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
         
         if(e.getSource() == this.btnRetour){
-            
+            this.ctrl.changerPanel("panelArrete");
         }
 
         if(e.getSource() == this.btnSuivant){
-            
+            this.ctrl.changerPanel("panelResume");
+
         }
 
         if(e.getSource() == this.kbNoeud1){
@@ -215,18 +216,5 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
             
         }
 
-    }
-    
-
-    public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        ArrayList<Noeud> artest = new ArrayList<>();
-        artest.add(new Noeud("Paris", 12, 12));
-        artest.add(new Noeud("Lille", 150, 120));
-        artest.add(new Noeud("Rouen", 50, 100));
-        artest.add(new Noeud("Mans", 0, 72));
-    
-        //jf.add(new PanelListeObjectif(artest));
-        //jf.setVisible(true);
     }
 }

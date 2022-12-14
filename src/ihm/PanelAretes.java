@@ -2,13 +2,11 @@ package src.ihm;
 
 import src.Controleur;
 import src.metier.Noeud;
-import src.metier.Arete;
 import src.metier.Type;
 
 import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.Graphics;
-import java.awt.Dimension;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -28,10 +26,12 @@ public class PanelAretes extends JPanel implements ActionListener {
     private JButton btnRetour;
     private JButton btnSuivant;
 
-    public PanelAretes() {
+    public PanelAretes(Controleur ctrl) {
 
         // création des composants
         JScrollPane spTabAretes; 
+
+        this.ctrl = ctrl;
         
         this.panelTable = new JPanel();
         this.tabAretes = new JTable();
@@ -59,24 +59,25 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
+
+        this.btnRetour.addActionListener(this);
+        this.btnSuivant.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnRetour) {
-            System.out.println("Retour");
-            
+            this.ctrl.changerPanel("panelRegleJeu");
         }
-        else if ( e.getSource() == this.btnSuivant) {
-            System.out.println("Suivant");
+        if ( e.getSource() == this.btnSuivant) {
+            this.ctrl.changerPanel("panelListeObjectif");
         }
     }
 
 
     public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
-        // TODO
-    }
         
     }
+        
 
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);

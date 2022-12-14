@@ -9,6 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import src.Controleur;
 import src.metier.Noeud;
 import src.metier.fonctionAux;
 
@@ -36,11 +37,15 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     private int nbWagonJoueur;
     private int nbWagonFin;
 
+    private Controleur ctrl;
+
 
     
-    public PanelRegleJeu()
+    public PanelRegleJeu(Controleur ctrl)
     {
         this.setLayout(new BorderLayout());
+
+        this.ctrl = ctrl;
 
         this.nbJoueurMax = 5;
         this.nbJoueurMin = 2;
@@ -62,7 +67,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtX = new JTextField("X");
         this.txtY = new JTextField("Y");
 
-        this.panelRegle = new JPanel(new GridLayout(10,2, 5, 5));
+        this.panelRegle = new JPanel(new GridLayout(10,2));
         this.panelVille = new JPanel(new BorderLayout());
         this.panelVilleBtn = new JPanel();
         this.panelValidation = new JPanel(new BorderLayout());
@@ -109,6 +114,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.btnSupprVille.addActionListener(this);
         this.btnClear.addActionListener(this);
         this.btnSuivant.addActionListener(this);
+
         
     }
 
@@ -190,12 +196,10 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.txtX.setText(" ");
             this.txtY.setText(" ");
         }
-    }
-
-        public static void main(String[] args) {
-        JFrame jf = new JFrame();
-        jf.add(new PanelRegleJeu());
-        jf.setVisible(true);
+        if (e.getSource() == this.btnSuivant) {
+            this.setVisible(false);
+            this.ctrl.changerPanel("panelArrete");
+        }
     }
 
 }

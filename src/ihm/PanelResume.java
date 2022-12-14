@@ -3,6 +3,8 @@ package src.ihm;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import src.Controleur;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -15,7 +17,7 @@ public class PanelResume extends JPanel implements ActionListener{
 
     private DefaultTableModel tabNoeud = new DefaultTableModel(colNoeud, 0);
     private DefaultTableModel tabArrete = new DefaultTableModel(colArrete, 0);
-    private DefaultTableModel tabCarte = new DefaultTableModel(colNoeud, 0);
+    private DefaultTableModel tabCarte = new DefaultTableModel(colCarte, 0);
 
     private JPanel panelAll;
     private JPanel panelBtn;
@@ -37,9 +39,13 @@ public class PanelResume extends JPanel implements ActionListener{
     private JButton btnRetour;
     private JButton btnEnregistrer;
 
+    private Controleur ctrl;
+
     //private JScrollBar sbTout;
 
-    public PanelResume(){
+    public PanelResume(Controleur ctrl){
+
+        this.ctrl = ctrl;
 
         JScrollPane spTabNoeud;
         JScrollPane spTabArrete;
@@ -95,10 +101,6 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelBtn.add(this.btnRetour);
         this.panelBtn.add(new JLabel(""));
         this.panelBtn.add(this.btnEnregistrer);
-
-        this.btnEnregistrer.addActionListener(this::actionPerformed);
-        this.btnRetour.addActionListener(this::actionPerformed);
-
         
         this.panelAll.add(this.panelJoueur);
         this.panelAll.add(this.panelNoeud);
@@ -106,22 +108,18 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelAll.add(this.panelObjectif);
         this.add(this.panelAll);
         this.add(this.panelBtn,BorderLayout.SOUTH);
-
+        
+        this.btnRetour.addActionListener(this);
+        this.btnEnregistrer.addActionListener(this);
     }
+
     public void actionPerformed( ActionEvent e){
-        if(e.getSource == this.btnRetour){
-            System.out.println("Retour");
-            //this.ctrl.changerPanel("PanelListeObjectif");
+        if(e.getSource() == this.btnRetour){
+            this.ctrl.changerPanel("panelListeObjectif");
         }
-        if(e.getSource == this.btnEnregistrer){
+        if(e.getSource() == this.btnEnregistrer){
             System.out.println("Enregistrer");
+            this.ctrl.enregistrer();
         }
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setExtendedState(frame.MAXIMIZED_BOTH);
-        frame.add(new PanelResume());
-        frame.setVisible(true);
     }
 }
