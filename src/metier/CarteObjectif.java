@@ -13,4 +13,16 @@ public class CarteObjectif {
         this.noeud2 = noeud2;
         this.points = points;
     }
+
+    public Noeud getNoeud1() {
+        return this.noeud1;
+    }
+
+    public Noeud getNoeud2() {
+        return this.noeud2;
+    }
+
+    public int getPoints() {
+        return this.points;
+    }
 }
