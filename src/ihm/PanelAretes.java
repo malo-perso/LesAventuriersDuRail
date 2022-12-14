@@ -1,4 +1,5 @@
 package src.ihm;
+
 import src.Controleur;
 
 import javax.swing.*;
