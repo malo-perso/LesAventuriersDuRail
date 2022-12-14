@@ -10,13 +10,13 @@ public class FramePrincipale extends JFrame implements ActionListener
 {
     private JPanel panelFormulaire;
 
-    private PanelArretes panelArrete;
+    private PanelAretes panelArrete;
 
     private PanelListeObjectif panelListeObjectif;
 
     private PanelRegleJeu panelRegleJeu;
 
-    private PanelResume panelresume;
+    private PanelResume panelResume;
 
 	private JMenuBar menuBarre;
 
@@ -45,6 +45,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         Toolkit kit = Toolkit.getDefaultToolkit();
 
+        this.panelFormulaire = new JPanel(new CardLayout());
         this.panelArrete = new PanelAretes();
         this.panelListeObjectif = new PanelListeObjectif();
         this.panelRegleJeu = new PanelRegleJeu();
@@ -68,10 +69,10 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png"   ) );
         
-        this.card.add(panelArrete);
-        this.card.add(panelListeObjectif);
-        this.card.add(panelRegleJeu);
-        this.card.add(panelResume);
+        this.panelFormulaire.add(panelArrete,"panelArrete");
+        this.panelFormulaire.add(panelListeObjectif,"panelListeObjectif");
+        this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
+        this.panelFormulaire.add(panelResume,"panelResume");
 
 
         this.menuFichier.add(menuNouveau);
@@ -82,7 +83,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
 
-        this.add(card,BorderLayout.EAST);
+        this.add(this.panelFormulaire,BorderLayout.EAST);
 
 
         this.setJMenuBar(menuBarre);
