@@ -29,4 +29,8 @@ public class Noeud{
     public void sety(int y) {
         this.y = y;
     }
+
+    public String toString(){
+        return this.nom + ";" + this.x + ";" + this.y;
+    }
 }
