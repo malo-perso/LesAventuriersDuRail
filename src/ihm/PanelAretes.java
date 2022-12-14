@@ -54,7 +54,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnRetour.addActionListener(this);
 
         // ajout des composants
-        this.panelTable.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
+        this.panelTable.add(new JLabel("Creation aretes", SwingConstants.CENTER), BorderLayout.NORTH);
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
 
         this.panelValidation.add(this.btnRetour);
