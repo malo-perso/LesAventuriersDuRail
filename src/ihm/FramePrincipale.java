@@ -8,6 +8,16 @@ import java.io.*;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
+    private JPanel panelFormulaire;
+
+    private PanelArretes panelArrete;
+
+    private PanelListeObjectif panelListeObjectif;
+
+    private PanelRegleJeu panelRegleJeu;
+
+    private PanelResume panelresume;
+
 	private JMenuBar menuBarre;
 
     private JMenu menuFichier;
@@ -20,6 +30,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private JMenuItem menuRegles;
 
+    private JButton btn1;
+    private JButton btn2;
+    private JButton btn3;
+
+    CardLayout card;
+
     private File reglePDF;
 
     private Image imgLogo;
@@ -28,6 +44,11 @@ public class FramePrincipale extends JFrame implements ActionListener
 	public FramePrincipale(){
 
         Toolkit kit = Toolkit.getDefaultToolkit();
+
+        this.panelArrete = new PanelAretes();
+        this.panelListeObjectif = new PanelListeObjectif();
+        this.panelRegleJeu = new PanelRegleJeu();
+        this.panelResume = new PanelResume();
 
         this.setTitle("Concepteur de Plateau");
         this.setResizable(false);
@@ -47,6 +68,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png"   ) );
         
+        this.card.add(panelArrete);
+        this.card.add(panelListeObjectif);
+        this.card.add(panelRegleJeu);
+        this.card.add(panelResume);
+
+
         this.menuFichier.add(menuNouveau);
         this.menuFichier.add(menuOuvrir);
 
@@ -54,6 +81,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
+
+        this.add(card,BorderLayout.EAST);
+
 
         this.setJMenuBar(menuBarre);
 
@@ -98,7 +128,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = ouvrir.showOpenDialog(this);
 				/*if (res == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile().getPath() != null)
-					this.ouvrir(new File(chooser.getSelectedFile().getPath()));*/
+					this.ctrl.setFichierPlateau(new File(chooser.getSelectedFile().getPath()));*/
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }

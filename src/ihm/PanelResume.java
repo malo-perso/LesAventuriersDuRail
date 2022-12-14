@@ -1,4 +1,4 @@
-//package ihm;
+package src.ihm;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -97,6 +97,7 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelBtn.add(this.btnEnregistrer);
 
         this.btnEnregistrer.addActionListener(this::actionPerformed);
+        this.btnRetour.addActionListener(this::actionPerformed);
 
         
         this.panelAll.add(this.panelJoueur);
@@ -108,6 +109,13 @@ public class PanelResume extends JPanel implements ActionListener{
 
     }
     public void actionPerformed( ActionEvent e){
+        if(e.getSource == this.btnRetour){
+            System.out.println("Retour");
+            //this.ctrl.changerPanel("PanelListeObjectif");
+        }
+        if(e.getSource == this.btnEnregistrer){
+            System.out.println("Enregistrer");
+        }
     }
 
     public static void main(String[] args) {
