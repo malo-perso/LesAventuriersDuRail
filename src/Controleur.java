@@ -22,6 +22,11 @@ public class Controleur{
     public static void main(String[] args) {
         Controleur controleur = new Controleur();
     }
+    //public void setFichierPlateau(String fic) {this.FichierPlateau = fic; this.ihm.maj();}
+
+    /*public void changerPanel(String panel){
+        FramePrincipale.setContentPane(panel);
+    }*/
     /*
     public boolean PrendreRoute()
     {

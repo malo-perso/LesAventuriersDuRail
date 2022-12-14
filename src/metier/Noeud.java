@@ -1,5 +1,6 @@
 package src.metier;
-public class Noeud{
+
+public class Noeud {
     private String nom;
     private int x;
     private int y;

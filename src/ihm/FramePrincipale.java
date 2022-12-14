@@ -8,6 +8,16 @@ import java.io.*;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
+    private JPanel panelFormulaire;
+
+    private PanelAretes panelArrete;
+
+    private PanelListeObjectif panelListeObjectif;
+
+    private PanelRegleJeu panelRegleJeu;
+
+    private PanelResume panelResume;
+
 	private JMenuBar menuBarre;
 
     private JMenu menuFichier;
@@ -20,6 +30,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private JMenuItem menuRegles;
 
+    private JButton btn1;
+    private JButton btn2;
+    private JButton btn3;
+
+    CardLayout card;
+
     private File reglePDF;
 
     private Image imgLogo;
@@ -28,6 +44,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 	public FramePrincipale(){
 
         Toolkit kit = Toolkit.getDefaultToolkit();
+
+        this.panelFormulaire = new JPanel(new CardLayout());
+        this.panelArrete = new PanelAretes();
+        this.panelListeObjectif = new PanelListeObjectif();
+        this.panelRegleJeu = new PanelRegleJeu();
+        this.panelResume = new PanelResume();
 
         this.setTitle("Concepteur de Plateau");
         this.setResizable(false);
@@ -47,6 +69,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png"   ) );
         
+        this.panelFormulaire.add(panelArrete,"panelArrete");
+        this.panelFormulaire.add(panelListeObjectif,"panelListeObjectif");
+        this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
+        this.panelFormulaire.add(panelResume,"panelResume");
+
+
         this.menuFichier.add(menuNouveau);
         this.menuFichier.add(menuOuvrir);
 
@@ -54,6 +82,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
+
+        this.add(this.panelFormulaire,BorderLayout.EAST);
+
 
         this.setJMenuBar(menuBarre);
 
@@ -98,7 +129,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = ouvrir.showOpenDialog(this);
 				/*if (res == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile().getPath() != null)
-					this.ouvrir(new File(chooser.getSelectedFile().getPath()));*/
+					this.ctrl.setFichierPlateau(new File(chooser.getSelectedFile().getPath()));*/
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }

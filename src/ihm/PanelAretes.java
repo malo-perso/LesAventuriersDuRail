@@ -1,4 +1,5 @@
 package src.ihm;
+
 import src.Controleur;
 
 import javax.swing.*;
@@ -51,6 +52,7 @@ public class PanelAretes extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnRetour) {
             System.out.println("Retour");
+            
         }
         else if ( e.getSource() == this.btnSuivant) {
             System.out.println("Suivant");
