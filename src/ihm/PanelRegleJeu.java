@@ -29,7 +29,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     private JTable tableVille;
     private DefaultTableModel model; 
 
-    private JPanel panelRegle,panelValidation,panelVille,panelVilleBtn,panelTexteVille;
+    private JPanel panelRegle,panelValidation,panelVille,panelVilleBtn,panelTexteVille,panelTable;
 
     private int nbJoueurMin;
     private int nbJoueurMax;
@@ -67,9 +67,11 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtX = new JTextField("X");
         this.txtY = new JTextField("Y");
 
-        this.panelRegle = new JPanel(new GridLayout(10,2));
+        this.panelRegle = new JPanel(new GridLayout(5,2));
+        
+        this.panelTable = new JPanel(new BorderLayout());
+
         this.panelVille = new JPanel(new BorderLayout());
-        this.panelVilleBtn = new JPanel();
         this.panelValidation = new JPanel(new BorderLayout());
 
         this.panelRegle.add(new JLabel("Joueur minimum"));
@@ -86,14 +88,15 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.model = new DefaultTableModel(NOM_COLONNE, 0);
         this.tableVille = new JTable(this.model);
                 
+        this.panelVilleBtn = new JPanel(new GridLayout(1,3));
         this.panelVilleBtn.add(this.btnAjoutVille);
         this.panelVilleBtn.add(this.btnSupprVille);
         this.panelVilleBtn.add(this.btnClear);
 
-        this.panelTexteVille = new JPanel(new BorderLayout());
-        this.panelTexteVille.add(this.txtNomVille, BorderLayout.NORTH);
-        this.panelTexteVille.add(this.txtX, BorderLayout.CENTER);
-        this.panelTexteVille.add(this.txtY, BorderLayout.SOUTH);
+        this.panelTexteVille = new JPanel(new GridLayout(1,3));
+        this.panelTexteVille.add(this.txtNomVille);
+        this.panelTexteVille.add(this.txtX);
+        this.panelTexteVille.add(this.txtY);
 
         this.panelVille.add(this.panelTexteVille, BorderLayout.NORTH);
         this.panelVille.add(new JScrollPane(this.tableVille), BorderLayout.CENTER);
@@ -101,8 +104,13 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
 
         this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
 
-        this.add(this.panelRegle, BorderLayout.NORTH);
-        this.add(this.panelVille, BorderLayout.CENTER);
+        this.panelTable.add(this.panelRegle, BorderLayout.NORTH);
+        this.panelTable.add(this.panelVille, BorderLayout.CENTER);
+
+        this.add(new JLabel("Paramètre du plateau", SwingConstants.CENTER), BorderLayout.NORTH);
+        
+        this.add(this.panelTable, BorderLayout.CENTER);
+        
         this.add(this.panelValidation, BorderLayout.SOUTH);
 
         this.txtNbJoueurMin.addActionListener(this);
