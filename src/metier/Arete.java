@@ -27,5 +27,5 @@ public class Arete {
 
     public Type getType() {
         return this.type;
-    }    
+    }
 }
