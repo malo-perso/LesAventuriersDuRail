@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import src.metier.Noeud;
+import src.metier.fonctionAux;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +60,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtNomVille = new JTextField("Nom de la ville");
         this.txtX = new JTextField("X");
         this.txtY = new JTextField("Y");
-
 
         this.panelRegle = new JPanel(new GridLayout(10,2, 5, 5));
         this.panelVille = new JPanel(new BorderLayout());
