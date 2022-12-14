@@ -12,6 +12,7 @@ import java.awt.Dimension;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -34,7 +35,6 @@ public class PanelAretes extends JPanel implements ActionListener {
         JScrollPane spTabAretes; 
         
         this.panelTable = new JPanel();
-        this.tabAretes = new JTable();
         this.panelValidation = new JPanel();
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
@@ -43,9 +43,12 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.setLayout(new BorderLayout());
         this.panelValidation.setLayout(new GridLayout(1,2, 10, 10));
 
-        spTabAretes = new JScrollPane(this.tabAretes);
-
         this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
+
+        
+        String[] entetes = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
+        this.tabAretes = new JTable(new DefaultTableModel(entetes, 0));
+        spTabAretes = new JScrollPane(this.tabAretes);
 
         // activation des composants
         this.btnRetour.addActionListener(this);
@@ -64,7 +67,6 @@ public class PanelAretes extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnRetour) {
             System.out.println("Retour");
-            
         }
         else if ( e.getSource() == this.btnSuivant) {
             System.out.println("Suivant");
@@ -73,9 +75,9 @@ public class PanelAretes extends JPanel implements ActionListener {
 
 
     public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
-        // TODO
-    }
         
+        DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
+        model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
     }
 
     public void paintComponent(Graphics g) {
