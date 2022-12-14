@@ -1,5 +1,4 @@
 package src.metier;
-
 import java.awt.Component;
 
 import javax.swing.table.TableCellRenderer;
