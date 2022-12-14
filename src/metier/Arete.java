@@ -1,7 +1,7 @@
 package src.metier;
 public class Arete {
-    Noeud  Noeud1;
-    Noeud  Noeud2;
+    Noeud  noeud1;
+    Noeud  noeud2;
     int    longueur;
     Type   type;
     Joueur possession;
