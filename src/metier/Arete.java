@@ -1,17 +1,15 @@
 package src.metier;
 public class Arete {
-    Noeud  Noeud1;
-    Noeud  Noeud2;
+    Noeud  noeud1;
+    Noeud  noeud2;
     int    longueur;
     Type   type;
-    Joueur possession;
 
     public Arete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
         this.noeud1    = noeud1;
         this.noeud2    = noeud2;
         this.longueur  = longueur;
         this.type      = type;
-        this.possession = null;
     }
 
     public Noeud getNoeud1() {
@@ -28,15 +26,5 @@ public class Arete {
 
     public Type getType() {
         return this.type;
-    }
-
-    public Joueur getPossession() {
-        return this.possession;
-    }
-
-    public void setPossession(Joueur possession) {
-        this.possession = possession;
-    }
-
-    
+    }    
 }

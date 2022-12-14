@@ -17,4 +17,8 @@ public class Type {
 			this.couleurActuelle = couleur;
 		}
 	}
+
+	public String toString(){
+		return this.couleurActuelle;
+	}
 }
