@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import src.Controleur;
 import src.metier.CarteObjectif;
 import src.metier.Noeud;
 
@@ -16,7 +17,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     private static final String[] COLUMNS = {"Noeud1", "Noeud2", "Points"};
     private DefaultTableModel tabCarte = new DefaultTableModel(COLUMNS, 0);
 
-    private ArrayList<Noeud> arNoeud;
+    private String[] tabNoeud;
 
     private JPanel panelRemplissage;
     private JComboBox kbNoeud1;
@@ -38,16 +39,14 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     private int indN1;
     private int indN2;
 
-    public PanelListeObjectif( ArrayList<Noeud> arNoeud){
+    private Controleur ctrl;
 
+    public PanelListeObjectif(Controleur ctrl){
+
+        this.ctrl = ctrl;
         JScrollPane spTabCarte; 
-        this.arNoeud = arNoeud;
-
-        String[] tabNoeud = new String[this.arNoeud.size()];
-
-        for(int i=0; i<tabNoeud.length; i++){
-            tabNoeud[i] = this.arNoeud.get(i).getNom();
-        }
+        
+        this.tabNoeud = new String[0];
 
         this.panelRemplissage = new JPanel();
         this.kbNoeud1 = new JComboBox<>(tabNoeud);
@@ -112,8 +111,14 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
-        
+    }
 
+    public void setTableNoeud(ArrayList<Noeud> arNoeud){
+    
+        this.tabNoeud = new String[arNoeud.size()];
+        for(int i=0; i<arNoeud.size(); i++){
+            this.tabNoeud[i] = arNoeud.get(i).getNom();
+        }
     }
 
     public ArrayList<CarteObjectif> getListCarteObjectif(){
@@ -123,7 +128,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
             arCarteObj.add(new CarteObjectif(null, null, i));
         }
         
-        return null;
+        return arCarteObj;
     }
 
     private void removePanelRemplissage(){
@@ -221,7 +226,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         artest.add(new Noeud("Rouen", 50, 100));
         artest.add(new Noeud("Mans", 0, 72));
     
-        jf.add(new PanelListeObjectif(artest));
-        jf.setVisible(true);
+        //jf.add(new PanelListeObjectif(artest));
+        //jf.setVisible(true);
     }
 }
