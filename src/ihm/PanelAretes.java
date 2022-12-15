@@ -29,7 +29,7 @@ public class PanelAretes extends JPanel implements ActionListener {
     private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable;
 
     private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
-    private JList listNoeud1, listNoeud2, listTypeArete;
+    private JComboBox listNoeud1, listNoeud2, listTypeArete;
 
     private JTextField txtLongueurArete;
 
@@ -59,9 +59,9 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSupprArete = new JButton("Supprimer -");
         this.btnSuivant = new JButton("Suivant");
 
-        this.listNoeud1 = new JList();
-        this.listNoeud2 = new JList();
-        this.listTypeArete = new JList();
+        this.listNoeud1 = new JComboBox<>(this.ctrl.getNoeuds().toArray());
+        this.listNoeud2 = new JComboBox<>(this.ctrl.getNoeuds().toArray());
+        this.listTypeArete = new JComboBox<>(this.ctrl.getTypes().toArray());
         this.txtLongueurArete = new JTextField("Nb sections arete");
 
         // création des layouts
@@ -127,7 +127,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
         model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
     }
-        
+    
 
     public void paintComponent(Graphics g) {
 		super.paintComponent(g);

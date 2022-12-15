@@ -7,6 +7,7 @@ import src.Controleur;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
@@ -113,6 +114,14 @@ public class FramePrincipale extends JFrame implements ActionListener
     public void changePanel(String nomPanel){
         this.card = (CardLayout) this.panelFormulaire.getLayout();
         this.card.show(this.panelFormulaire,nomPanel);
+    }
+
+    public ArrayList getAretes() {
+        return this.panelArrete.getAretes();
+    }
+
+    public ArrayList getNoeuds() {
+        return this.panelRegleJeu.getNoeuds();
     }
 
     public void actionPerformed( ActionEvent e){

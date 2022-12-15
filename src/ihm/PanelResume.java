@@ -12,7 +12,7 @@ import java.io.*;
 public class PanelResume extends JPanel implements ActionListener{
 
     private static final String[] colNoeud = {"Nom", "x", "y"};
-    private static final String[] colArrete = {"Noeud1", "Noeud2", "taille","type"};
+    private static final String[] colArrete = {"Noeud1", "Noeud2", "Longueur","Type"};
     private static final String[] colCarte = {"Noeud1", "Noeud2", "Points"};
 
     private DefaultTableModel tabNoeud = new DefaultTableModel(colNoeud, 0);
