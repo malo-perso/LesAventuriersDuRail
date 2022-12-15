@@ -1,12 +1,15 @@
 package src.ihm;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
+import src.metier.Noeud;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
@@ -59,7 +62,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setResizable(false);
         this.setUndecorated(false);
 
-        this.imgLogo = kit.getImage("../data/images/logo.png") ;
+        this.imgLogo = kit.getImage("/../data/images/logo.png") ;
 		this.setIconImage(imgLogo);
 
         this.menuBarre = new JMenuBar();
@@ -71,7 +74,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuAide = new JMenu("Aide");
         this.menuRegles = new JMenuItem("Regles");
 
-        this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png"   ) );
+        this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png") );
         
         this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
         this.panelFormulaire.add(panelArrete,"panelArrete");
@@ -115,6 +118,20 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
+    public ArrayList getAretes() {
+        return this.panelArrete.getAretes();
+    }
+
+    public ArrayList getNoeuds() {
+        return this.panelRegleJeu.getNoeuds();
+    }
+
+    public void majIHM() { 
+        this.panelPlateau.repaint(); 
+        this.panelListeObjectif.setTableNoeud(this.ctrl.lstNoeudXMLtoIHM());
+
+    }
+
     public void actionPerformed( ActionEvent e){
 
         if(e.getSource() == this.menuRegles){
@@ -135,16 +152,13 @@ public class FramePrincipale extends JFrame implements ActionListener
         if(e.getSource() == this.menuOuvrir){
             try{
 				System.out.println("Ouvrir");
-				JFileChooser ouvrir = new JFileChooser(".");
+				JFileChooser chooser = new JFileChooser(".");
 				
-				int res = ouvrir.showOpenDialog(this);
-				/*if (res == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile().getPath() != null)
-					this.ctrl.setFichierPlateau(new File(chooser.getSelectedFile().getPath()));*/
+				int res = chooser.showOpenDialog(this);
+				if (res == JFileChooser.APPROVE_OPTION)
+					this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }
-
-
 }
-

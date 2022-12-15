@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.event.*;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 public class PanelPlateau extends JPanel
 {
@@ -34,7 +35,7 @@ public class PanelPlateau extends JPanel
 		this.NoeudCourant = null;
 		this.diametre = 100;
 
-		this.setBackground(Color.BLACK);
+		//this.setBackground(Color.BLACK);
 		this.setPreferredSize(new Dimension(800, 600));
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
@@ -154,5 +155,13 @@ public class PanelPlateau extends JPanel
 
 		}
 	}
+	public void paintComponent (Graphics g)
+	{
+		super.paintComponent(g);
 
+		Image img = getToolkit().getImage(this.ctrl.getFichierPlateau());
+
+		g.drawImage(img, 0, 0, this);
+
+	}
 }
