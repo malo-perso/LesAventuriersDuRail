@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
+import src.ihm.grilles.GrillesNoeudModel;
 import src.metier.fonctionAux;
 import src.metier.Noeud;
 
@@ -15,10 +16,8 @@ import java.util.ArrayList;
 
 
 public class PanelRegleJeu extends JPanel implements ActionListener{
-    
-    private static final String[] NOM_COLONNE = {"Nom", "X", "Y", "NomX","NomY"};
-    private DefaultTableModel model; 
 
+    private GrillesNoeudModel model;
     private JTable jTabNoeud;
     
     private JPanel panelRegle,panelValidation,panelNoeud,panelNoeudBtn,panelRemplissage,panelTable,panelSaisie,panelLabel;
@@ -45,16 +44,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
         this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
         this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
-        
-        this.model = new DefaultTableModel(NOM_COLONNE, 0);
-        if(this.ctrl.lstNoeudXMLtoIHM() != null)
-        {
-            for (Noeud noeud : this.ctrl.lstNoeudXMLtoIHM())
-            {
-                this.model.addRow(new Object[]{noeud.getNom(), noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY()});   
-            }
-        }
-        
+
+        this.model = new GrillesNoeudModel(this.ctrl);
         this.jTabNoeud = new JTable(this.model);
         this.jTabNoeud.setFillsViewportHeight(true);
         this.jTabNoeud.setEnabled(true);

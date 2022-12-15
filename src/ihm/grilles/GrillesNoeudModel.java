@@ -25,15 +25,15 @@ public class GrillesNoeudModel extends AbstractTableModel
         
         if(this.ctrl.lstNoeudXMLtoIHM() != null)
         {
-            for (int i=0; i<lstNoeuds.size(); i++)
+            for (int lig=0; lig<lstNoeuds.size(); lig++)
             {
-                n = lstNoeuds.get(i);
+                n = lstNoeuds.get(lig);
                 
-                tabDonnees[i][0] = n.getNom();
-                tabDonnees[i][1] = n.getX();
-                tabDonnees[i][2] = n.getY();
-                tabDonnees[i][3] = n.getNomX();
-                tabDonnees[i][4] = n.getNomY();
+                tabDonnees[lig][0] = n.getNom();
+                tabDonnees[lig][1] = n.getX();
+                tabDonnees[lig][2] = n.getY();
+                tabDonnees[lig][3] = n.getNomX();
+                tabDonnees[lig][4] = n.getNomY();
             }
 
         }
@@ -50,7 +50,20 @@ public class GrillesNoeudModel extends AbstractTableModel
 
     public void setValueAt(Object value, int row, int col)
     {
-        this.tabDonnees[row][col] = value;
-        fireTableCellUpdated(row, col);
+        boolean bRet;
+
+        if ( col > 0 )
+		{
+			bRet = this.ctrl.majPosNoeud ( row, col, (Integer) value );
+			if ( bRet )
+			{
+				this.tabDonnees[row][col] = value;
+				this.fireTableCellUpdated(row, col);
+			}
+		}
+        else {
+            this.tabDonnees[row][col] = value;
+			this.fireTableCellUpdated(row, col);
+        }
     }
 }

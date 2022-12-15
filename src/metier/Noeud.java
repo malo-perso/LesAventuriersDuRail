@@ -35,20 +35,36 @@ public class Noeud {
         return this.NomY;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    public boolean setX(int x) {
+        if ( x >= 0 && x <= 1200) {
+            this.x = x;
+            return true;
+        }
+        return false;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    public boolean setY(int y) {
+        if ( y >= 0 && y <= 1200) {
+            this.y = y;
+            return true;
+        }
+        return false;
     }
 
-    public void setNomX(int NomX) {
-        this.NomX = NomX;
+    public boolean setNomX(int NomX) {
+        if ( NomX >= 0 && NomX <= 1200) {
+            this.NomX = NomX;
+            return true;
+        }
+        return false;
     }
 
-    public void setNomY(int NomY) {
-        this.NomY = NomY;
+    public boolean setNomY(int NomY) {
+        if ( NomY >= 0 && NomY <= 1200) {
+            this.NomY = NomY;
+            return true;
+        }
+        return false;
     }
 
     public String toString(){
