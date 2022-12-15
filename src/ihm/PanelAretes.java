@@ -2,6 +2,7 @@ package src.ihm;
 
 import src.Controleur;
 import src.metier.Noeud;
+import src.metier.Arete;
 import src.metier.Type;
 
 import java.awt.Image;
@@ -14,24 +15,29 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import java.util.ArrayList;
+
 public class PanelAretes extends JPanel implements ActionListener {
 
-    private Controleur ctrl;
+    private static final String[] NOM_COLONNE = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
+    private DefaultTableModel model;
 
     private Image  imgFond;
-    
-    private JPanel panelTable;
+
     private JTable tabAretes;
 
-    private JPanel panelValidation;
-    private JButton btnRetour;
-    private JButton btnSuivant;
+    private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable;
+
+    private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
+    private JList listNoeud1, listNoeud2, listTypeArete;
+
+    private JTextField txtLongueurArete;
+
+    private Controleur ctrl;
 
     public PanelAretes(Controleur ctrl) {
 
         // création des composants
-        JScrollPane spTabAretes; 
-
         this.ctrl = ctrl;
         
         this.panelTable = new JPanel();
@@ -39,26 +45,66 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
 
-        this.setLayout(new BorderLayout());
-        this.panelTable.setLayout(new BorderLayout());
-        this.panelValidation.setLayout(new GridLayout(1,2, 10, 10));
-
         this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
 
-        
-        String[] entetes = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
-        this.tabAretes = new JTable(new DefaultTableModel(entetes, 0));
-        spTabAretes = new JScrollPane(this.tabAretes);
+        this.model = new DefaultTableModel(NOM_COLONNE, 0);
+        this.tabAretes = new JTable(this.model);
+        this.tabAretes.setFillsViewportHeight(true);
+        this.tabAretes.setEnabled(false);
+
+        JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
+
+        this.btnClear = new JButton("Effacer");
+        this.btnAjoutArete = new JButton("Ajouter +");
+        this.btnSupprArete = new JButton("Supprimer -");
+        this.btnSuivant = new JButton("Suivant");
+
+        this.listNoeud1 = new JList();
+        this.listNoeud2 = new JList();
+        this.listTypeArete = new JList();
+        this.txtLongueurArete = new JTextField("Nb sections arete");
+
+        // création des layouts
+        this.setLayout(new BorderLayout());
+        this.panelTable       = new JPanel(new BorderLayout());
+        this.panelArete       = new JPanel(new BorderLayout());
+        this.panelAreteBtn    = new JPanel(new GridLayout(2,2));
+        this.panelValidation  = new JPanel(new BorderLayout());
+        this.panelRemplissage = new JPanel(new GridLayout(3,4));
 
         // activation des composants
+        this.btnAjoutArete.addActionListener(this);
+        this.btnSupprArete.addActionListener(this);
+        this.btnClear.addActionListener(this);
+        this.btnSuivant.addActionListener(this);
         this.btnRetour.addActionListener(this);
 
         // ajout des composants
-        this.panelTable.add(new JLabel("Creation aretes", SwingConstants.CENTER), BorderLayout.NORTH);
-        this.panelTable.add(spTabAretes, BorderLayout.CENTER);
+        this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Noeud2 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Longueur :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Type :", SwingConstants.CENTER));
+        this.panelRemplissage.add(this.listNoeud1);
+        this.panelRemplissage.add(this.listNoeud2);
+        this.panelRemplissage.add(this.txtLongueurArete);
+        this.panelRemplissage.add(this.listTypeArete);
+        this.panelRemplissage.add(this.btnClear);
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
 
-        this.panelValidation.add(this.btnRetour);
-        this.panelValidation.add(this.btnSuivant);
+        this.panelArete.add(this.panelRemplissage, BorderLayout.CENTER);
+
+        this.panelAreteBtn.add(this.btnAjoutArete);
+        this.panelAreteBtn.add(this.btnSupprArete);
+        this.panelAreteBtn.add(new JLabel());
+        
+        this.panelTable.add(this.panelArete, BorderLayout.NORTH);
+        this.panelTable.add(spTabAretes, BorderLayout.CENTER);
+        this.panelTable.add(this.panelAreteBtn, BorderLayout.SOUTH);
+        
+        this.panelValidation.add(this.btnRetour, BorderLayout.WEST);
+        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
 
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
@@ -67,13 +113,12 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSuivant.addActionListener(this);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if ( e.getSource() == this.btnRetour) {
-            this.ctrl.changerPanel("panelRegleJeu");
+    public ArrayList<Arete> getAretes() {
+        ArrayList<Arete> aretes = new ArrayList<Arete>();
+        for (int i = 0; i < this.model.getRowCount(); i++) {
+            aretes.add(new Arete((Noeud) this.model.getValueAt(i, 0), (Noeud) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2), (Type) this.model.getValueAt(i, 3) ));
         }
-        if ( e.getSource() == this.btnSuivant) {
-            this.ctrl.changerPanel("panelListeObjectif");
-        }
+        return aretes;
     }
 
 
@@ -91,4 +136,13 @@ public class PanelAretes extends JPanel implements ActionListener {
 
 		g.drawImage ( this.imgFond, 0, 0, this );
 	}
+
+    public void actionPerformed(ActionEvent e) {
+        if ( e.getSource() == this.btnRetour) {
+            this.ctrl.changerPanel("panelRegleJeu");
+        }
+        if ( e.getSource() == this.btnSuivant) {
+            this.ctrl.changerPanel("panelListeObjectif");
+        }
+    }
 }
