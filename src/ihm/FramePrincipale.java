@@ -12,6 +12,8 @@ public class FramePrincipale extends JFrame implements ActionListener
 {
     private JPanel panelFormulaire;
 
+    private PanelPlateau panelPlateau;
+
     private PanelAretes panelArrete;
 
     private PanelListeObjectif panelListeObjectif;
@@ -47,6 +49,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         Toolkit kit = Toolkit.getDefaultToolkit();
 
         this.panelFormulaire = new JPanel(new CardLayout());
+        this.panelPlateau = new PanelPlateau(this.ctrl);
         this.panelArrete = new PanelAretes(this.ctrl);
         this.panelListeObjectif = new PanelListeObjectif(this.ctrl);
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
@@ -84,6 +87,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
 
+        this.add(this.panelPlateau,BorderLayout.CENTER);
         this.add(this.panelFormulaire,BorderLayout.EAST);
 
 

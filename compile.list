@@ -1,1 +1,17 @@
+./src/ihm/FramePrincipale.java
+./src/ihm/PanelAretes.java
+./src/ihm/PanelListeObjectif.java
+./src/ihm/PanelPlateau.java
+./src/ihm/PanelRegleJeu.java
+./src/ihm/PanelResume.java
 
+./src/metier/Arete.java
+./src/metier/CarteObjectif.java
+./src/metier/CarteVehicule.java
+./src/metier/fonctionAux.java
+./src/metier/GererXML.java
+./src/metier/Joueur.java
+./src/metier/Noeud.java
+./src/metier/Type.java
+
+./src/Controleur.java
