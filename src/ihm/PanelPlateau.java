@@ -110,6 +110,7 @@ public class PanelPlateau extends JPanel
 					PanelPlateau.this.NoeudCourant = clickSurNoeud(e.getX(), e.getY());
 				else //ajouter un noeud
 					PanelPlateau.this.addNoeud((Graphics2D) PanelPlateau.this.getGraphics(), e.getX(), e.getY());
+					PanelPlateau.this.ctrl.ajouterNoeud("Le Havre", e.getX(), e.getY());
 			}
 
 		}

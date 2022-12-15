@@ -5,6 +5,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
 import src.metier.Noeud;
+import src.metier.Arete;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -118,12 +119,16 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
-    public ArrayList getAretes() {
+    public ArrayList<Arete> getAretes() {
         return this.panelArrete.getAretes();
     }
 
-    public ArrayList getNoeuds() {
+    public ArrayList<Noeud> getNoeuds() {
         return this.panelRegleJeu.getNoeuds();
+    }
+
+    public void ajouterNoeud(String nom, int x, int y) {
+        this.panelRegleJeu.ajouterNoeud(nom, x, y);
     }
 
     public void majIHM() { 

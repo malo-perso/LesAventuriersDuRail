@@ -79,6 +79,16 @@ public class Controleur{
         return null;//this.IHM.getObjectif();
     }
 
+    public ArrayList<String> getNomNoeuds() {
+        ArrayList<Noeud> noeuds = this.lstNoeudIHMtoXML();
+        ArrayList<String> nomNoeuds = new ArrayList<String>();
+        for (Noeud n : noeuds) {
+            nomNoeuds.add(n.getNom());
+        };
+
+        return nomNoeuds;
+    }
+
 
 
     public int getNombreJoueurMinimum() {
@@ -144,6 +154,10 @@ public class Controleur{
 
     public void changerPanel(String panel){
         IHM.changePanel(panel);
+    }
+
+    public void ajouterNoeud(String nom, int x, int y) {
+        this.IHM.ajouterNoeud(nom, x, y);
     }
 
     
