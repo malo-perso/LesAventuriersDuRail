@@ -30,7 +30,6 @@ public class PanelPlateau extends JPanel
 	public PanelPlateau(Controleur ctrl)
 	{
 		this.ctrl     = ctrl;
-
 		//TO DO
 		this.hashNoeud = new HashMap<Graphics2D,Noeud>();
 
@@ -205,7 +204,7 @@ public class PanelPlateau extends JPanel
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent(g);
-
+		System.out.println(this.ctrl.getFichierPlateau());
 		Image img = getToolkit().getImage(this.ctrl.getFichierPlateau());
 		
 		g.drawImage(img, 0, 0, this.getWidth() , this.getHeight() , this);

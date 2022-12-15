@@ -192,8 +192,10 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
 
         if(e.getSource() == this.btnSuppCarte){
-            if(this.tabCarte.getRowCount() > 0){
-                this.tabCarte.removeRow(this.tabCarte.getRowCount()-1);
+            if(this.jTabCarte.getRowCount() != -1){
+                if(this.jTabCarte.getRowSelectionAllowed()){
+                    this.tabCarte.removeRow(this.jTabCarte.getSelectedRow());
+                }
             }
         }
         

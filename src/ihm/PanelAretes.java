@@ -20,6 +20,8 @@ import java.util.Vector;
 
 public class PanelAretes extends JPanel implements ActionListener {
 
+    private PanelPlateau panelPlateau;
+
     private static final String[] NOM_COLONNE = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
     private DefaultTableModel model;
 
@@ -36,7 +38,8 @@ public class PanelAretes extends JPanel implements ActionListener {
 
     private Controleur ctrl;
 
-    private int indN1,indN2;
+    private int indN1;
+    private int indN2;
 
     public PanelAretes(Controleur ctrl) {
 
@@ -68,7 +71,10 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.listNoeud1 = new JComboBox<>(vNoeud);
         this.listNoeud2 = new JComboBox<>(vNoeud);
         this.listTypeArete = new JComboBox<>(vType);
-        this.txtLongueurArete = new JTextField("Nb sections arete");
+        this.txtLongueurArete = new JTextField();
+
+        this.listNoeud1.setSelectedItem(null);
+        this.listNoeud2.setSelectedItem(null);
 
         // création des layouts
         this.setLayout(new BorderLayout());
@@ -154,6 +160,26 @@ public class PanelAretes extends JPanel implements ActionListener {
             this.removePanelRemplissage();
         }
 
+        if(e.getSource() == this.btnAjoutArete){
+            if(this.listNoeud1.getSelectedItem() != null && this.listNoeud2.getSelectedItem() != null && !this.txtLongueurArete.equals("") ){
+
+                this.model.addRow(new Object[]{
+                    this.listNoeud1.getSelectedItem(),
+                    this.listNoeud2.getSelectedItem(),
+                    this.txtLongueurArete.getText(),
+                    this.listTypeArete.getSelectedItem()
+                });
+
+                this.removePanelRemplissage();
+
+                //this.panelPlateau.tracerArete();
+            }
+        }
+
+        if(e.getSource() == this.btnSupprArete){
+            if(this.tabAretes.getSelectedRow() != -1){this.model.removeRow(this.tabAretes.getSelectedRow());}
+        }
+
         if ( e.getSource() == this.btnRetour) {
             this.ctrl.getIHM().changePanel("panelRegleJeu");
         }
@@ -192,8 +218,8 @@ public class PanelAretes extends JPanel implements ActionListener {
                 this.listNoeud2.addActionListener(this);
             }
 
-            this.indN1 = this.listNoeud1.getSelectedIndex();
             this.indN2 = this.listNoeud2.getSelectedIndex();
+            this.indN1 = this.listNoeud1.getSelectedIndex();
         }
 
     }

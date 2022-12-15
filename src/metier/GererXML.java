@@ -197,7 +197,7 @@ public class GererXML {
 			while(i.hasNext()){
 				Element courant = (Element)i.next();
 				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), Integer.parseInt(courant.getChildText("x").trim()), Integer.parseInt(courant.getChildText("y").trim()),
-									Integer.parseInt(courant.getChildText("NomX")), Integer.parseInt(courant.getChildText("NomY"))));
+				Integer.parseInt(courant.getChildText("x").trim()) + 20 , Integer.parseInt(courant.getChildText("y").trim())+20 ));
 			}
 
 			List listArete = racine.getChild("lstAretes").getChildren("arrete");
@@ -255,7 +255,7 @@ public class GererXML {
 			byte[] bytes = Base64.getDecoder().decode(str);		
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
-			ImageIO.write(bImage2, "png", new File("mappe.png") );
+			ImageIO.write(bImage2, "png", new File("./src/data/images/mappe.png") );
 		}catch(Exception e){e.printStackTrace();} 
 	}
 
@@ -276,7 +276,7 @@ public class GererXML {
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
 
-		//g.ecrireXML();
+		//g.ecrireXML("/Images/Cable.png");
 		try{
 			g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}

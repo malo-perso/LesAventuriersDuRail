@@ -30,11 +30,12 @@ public class Controleur{
         this.IHM.majIHM();
     }
 
-    //permet au metier de lire le fichier xml
+    //permet au Controleur de lire le fichier xml
     public void lireXML(File fichier)
     {
         this.gererXML.lireXML(fichier);
         //this.IHM.majHashNoeud();
+        this.setFichierPlateau("./src/data/images/mappe.png");
     }
 
     //PROVISOIRE
@@ -73,6 +74,7 @@ public class Controleur{
     //              || ||
     //              || ||
     //              \/ \/
+    //BAHAHAHAHH
     
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
         this.IHM.ajouterNoeud(nom, x, y, nomX, nomY);
