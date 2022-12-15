@@ -127,6 +127,10 @@ public class FramePrincipale extends JFrame implements ActionListener
         return this.panelRegleJeu.getNoeuds();
     }
 
+    public void ajouterNoeud(String nom, int x, int y) {
+        this.panelRegleJeu.ajouterNoeud(nom, x, y);
+    }
+
     public void majIHM() { 
         this.panelPlateau.repaint(); 
         this.panelListeObjectif.setTableNoeud(this.ctrl.lstNoeudXMLtoIHM());

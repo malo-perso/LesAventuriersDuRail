@@ -166,6 +166,11 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         }
         return noeuds;
     }
+
+    public void ajouterNoeud(String nom, int x, int y) {
+        this.model.addRow(new Object[]{nom, x, y});
+        this.ctrl.majIHM();
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
