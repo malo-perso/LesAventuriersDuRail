@@ -1,6 +1,6 @@
 package src.metier;
 
-import livrable.Controleur;
+import src.Controleur;
 
 import java.io.FileOutputStream;
 import java.io.BufferedWriter;
@@ -38,6 +38,13 @@ public class GererXML {
 
 	public void ecrireXML(){
 		try{
+			/*ImagesCarteObj 1 fois
+			 * recto
+			 * verso
+			 * 
+			 * Thème principale image de fond
+			 * Nom Mappe
+			 */
 			File file = new File("./src/data/mappe/mappe.xml");
 			if(!file.exists()){
 				file.createNewFile();
@@ -47,10 +54,10 @@ public class GererXML {
 			bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n\n");
 
 			bw.write("<regles>\n" + 
-					 "<nombreJoueurMinimum>2<\n" +
-					 "<nombreJoueurMaximum = 5>\n" +
-					 "<nombreJoueurMiniDoubleRoute = 3>\n" +
-					 "</regles>");
+					 "\t<nombreJoueurMinimum>" + this.ctrl.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
+					 "\t<nombreJoueurMaximum >" + this.ctrl.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
+					 "\t<nombreJoueurMiniDoubleRoute >" + this.ctrl.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
+					 "</regles>\n");
 
 			bw.write("<lstNoeuds>"                         		 + "\n");
 
@@ -94,7 +101,8 @@ public class GererXML {
 	}
 
 	public static void main(String[] args){
-		GererXML g = new GererXML();
+		Controleur ctrl = new Controleur();
+		GererXML g = new GererXML(ctrl);
 
 		g.ecrireXML();
 	}
