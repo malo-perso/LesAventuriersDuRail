@@ -171,17 +171,12 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         }
         return noeuds;
     }
-    
-    public void ajouterNoeud (String nom, int x, int y, int nomX, int nomY) {
-        this.model.addRow(new Object[]{nom, x, y, nomX, nomY});
-    }
 
     public void maJTable(ArrayList<Noeud> noeuds) {
-        this.model.setRowCount(0);
-        for (Noeud n : noeuds) {
-            this.model.addRow(new Object[]{n.getNom(), n.getX(), n.getY(), n.getNomX(), n.getNomY()});
-        }
+        this.model = new GrillesNoeudModel(this.ctrl); // modifié
     }
+    // ai supprimé ajouterNoeud car le contenu de la table se cale uniquement sur le métier
+    // si changement dans le métier il y a, appeler la méthode maJTable
      
     public void setPositionNoeud (String nom, int x, int y, int nomX, int nomY) {
         for (int i = 0; i < this.model.getRowCount(); i++) {
@@ -243,7 +238,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         }
         if (e.getSource() == this.btnSupprNoeud) {
             if (this.jTabNoeud.getSelectedRow() != -1)
-            this.model.removeRow(this.jTabNoeud.getSelectedRow());
+            this.model.removeRow(this.jTabNoeud.getSelectedRow()); // reste à faire la méthode removeRow avec GrillesNoeudModel
         }
         if (e.getSource() == this.btnClear) {
             this.txtNomNoeud.setText(" ");

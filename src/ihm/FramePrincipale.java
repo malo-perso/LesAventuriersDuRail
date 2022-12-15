@@ -135,7 +135,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.panelRegleJeu.ajouterNoeud(nom, x, y, nomX, nomY);
+        this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML()); // modifié
         this.panelPlateau.ajouterNoeud(x, y, nomX, nomY);
     }
 

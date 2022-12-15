@@ -77,7 +77,7 @@ public class Controleur{
     //BAHAHAHAHH
     
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.IHM.ajouterNoeud(nom, x, y, nomX, nomY);
+        this.majIHM(); // modifié
         this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
     }
 
