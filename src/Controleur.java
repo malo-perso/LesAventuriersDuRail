@@ -11,20 +11,67 @@ public class Controleur{
     private FramePrincipale IHM;
     private Metier metier;*/
 
+    private String FichierPlateau;
+
     private int nombreJoueurMinimum;
     private int nombreJoueurMaximum;
     private int nombreJoueurMiniDoubleRoute;
 
     private FramePrincipale IHM;
+    private GererXML gererXML;
 
     public Controleur() {
         /*this.finPartie = false;
         this.lstJoueurs = new ArrayList<>();
         this.metier = new Metier(this);*/
+        this.FichierPlateau= "./data/images/USA.png";
         this.IHM = new FramePrincipale(this);
+        this.gererXML = new GererXML(this);
 
 
     }
+
+    public String getFichierPlateau() { return this.FichierPlateau;}
+    public void setFichierPlateau(String fic) {this.FichierPlateau = fic; this.IHM.majIHM();}
+
+    public ArrayList<Noeud> lstNoeudXMLtoIHM() {
+        //test
+        ArrayList<Noeud> lstNoeud = new ArrayList<Noeud>();
+        lstNoeud.add(new Noeud("test",5,10));
+        lstNoeud.add(new Noeud("ville2",25,10));
+
+        return lstNoeud;
+    }
+
+    public ArrayList<Arete> lstAreteXMLtoIHM() {
+        //test
+        ArrayList<Arete> lstArete = new ArrayList<Arete>();
+        lstArete.add(new Arete( this.lstNoeudXMLtoIHM().get(0) , this.lstNoeudXMLtoIHM().get(1)  ,  10, new Type("orange")));
+        
+        return lstArete;
+    }
+
+    public ArrayList<CarteObjectif> lstObjectifXMLtoIHM() {
+        //test
+        ArrayList<CarteObjectif> lstObjectif = new ArrayList<CarteObjectif>();
+        lstObjectif.add(new CarteObjectif( this.lstNoeudXMLtoIHM().get(0) , this.lstNoeudXMLtoIHM().get(1)  ,  10));
+        
+        return lstObjectif;
+    }
+
+    public ArrayList<Noeud> lstNoeudIHMtoXML() {
+        //test
+        
+        return this.IHM.getNoeud();
+    }
+
+    public ArrayList<CarteObjectif> lstObjectifIHMtoXML() {
+        //test
+        
+        return null;//this.IHM.getObjectif();
+    }
+
+
 
     public int getNombreJoueurMinimum() {
         return this.nombreJoueurMinimum;
@@ -50,8 +97,10 @@ public class Controleur{
         this.nombreJoueurMiniDoubleRoute = nombreJoueurMiniDoubleRoute;
     }
 
+    public void majIHM() {
+        this.IHM.majIHM();
+    }
 
-    //public void setFichierPlateau(String fic) {this.FichierPlateau = fic; this.ihm.maj();}
 
     /*public void changerPanel(String panel){
         FramePrincipale.setContentPane(panel);

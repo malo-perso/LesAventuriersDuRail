@@ -194,6 +194,10 @@ public class GererXML {
 		}catch(Exception e){e.printStackTrace();}*/
 	}
 
+	public ArrayList<Noeud> getLstNoeuds() {
+		return this.lstNoeuds;
+	}
+
 	/*public static void main(String[] args){
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);

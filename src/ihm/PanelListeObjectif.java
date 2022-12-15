@@ -49,6 +49,13 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         
         this.tabNoeud = new String[0];
         this.jTabCarte = new JTable(this.tabCarte);
+        if(this.ctrl.lstObjectifXMLtoIHM() != null)
+        {
+            for (CarteObjectif objectif : this.ctrl.lstObjectifXMLtoIHM()) {
+                this.tabCarte.addRow(new Object[]{objectif.getNoeud1().getNom(), objectif.getNoeud2().getNom(), objectif.getPoints()});   
+            }
+        }
+
         this.jTabCarte.setFillsViewportHeight(true);
         this.jTabCarte.setEnabled(false);
 
@@ -77,7 +84,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelRemplissage.setLayout(new GridLayout(4,3));
         this.panelTable.setLayout(new BorderLayout());
         this.panelActionTab.setLayout(new GridLayout(2,2));
-        this.panelValidation.setLayout(new BorderLayout());
+        this.panelValidation.setLayout(new GridLayout(1,3));
 
 
         //Action listener
@@ -110,8 +117,9 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelTable.add(spTabCarte, BorderLayout.CENTER);
         this.panelTable.add(this.panelActionTab, BorderLayout.SOUTH);
 
-        this.panelValidation.add(this.btnRetour, BorderLayout.WEST);
-        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
+        this.panelValidation.add(this.btnRetour);
+        this.panelValidation.add(new JLabel());
+        this.panelValidation.add(this.btnSuivant);
 
         this.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
@@ -130,6 +138,17 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         ArrayList<CarteObjectif> arCarteObj = new ArrayList<CarteObjectif>();
 
         for(int i=0; i<this.tabCarte.getRowCount()-1; i++){
+            Noeud n1;
+            Noeud n2;
+            for (int cpt = 0; cpt < this.ctrl.lstNoeudXMLtoIHM().size(); cpt++) {
+                if(this.tabCarte.getValueAt(i, 0).equals(this.ctrl.lstNoeudXMLtoIHM().get(cpt).getNom())){
+                    n1 = this.ctrl.lstNoeudXMLtoIHM().get(cpt);
+                }
+                if(this.tabCarte.getValueAt(i, 1).equals(this.ctrl.lstNoeudXMLtoIHM().get(cpt).getNom())){
+                    n2 = this.ctrl.lstNoeudXMLtoIHM().get(cpt);
+                }
+            }
+
             arCarteObj.add(new CarteObjectif(null, null, i));
         }
         
