@@ -161,11 +161,4 @@ public class FramePrincipale extends JFrame implements ActionListener
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }
-
-    public ArrayList<Noeud> getNoeud() {
-        return this.panelRegleJeu.getNoeud();
-    }
-
-
 }
-

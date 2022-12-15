@@ -62,7 +62,7 @@ public class Controleur{
     public ArrayList<Noeud> lstNoeudIHMtoXML() {
         //test
         
-        return this.IHM.getNoeud();
+        return this.IHM.getNoeuds();
     }
 
     public ArrayList<CarteObjectif> lstObjectifIHMtoXML() {
@@ -95,14 +95,6 @@ public class Controleur{
 
     public void setNombreJoueurMiniDoubleRoute(int nombreJoueurMiniDoubleRoute) {
         this.nombreJoueurMiniDoubleRoute = nombreJoueurMiniDoubleRoute;
-    }
-
-    public ArrayList<Arete> getAretes() {
-        return this.IHM.getAretes();
-    }
-
-    public ArrayList<Noeud> getNoeuds() {
-        return this.IHM.getNoeuds();
     }
 
     public ArrayList<Noeud> getTypes() {
