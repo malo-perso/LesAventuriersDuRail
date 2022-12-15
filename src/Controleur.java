@@ -11,7 +11,12 @@ public class Controleur{
     private FramePrincipale IHM;
     private Metier metier;*/
 
+    private int nombreJoueurMinimum;
+    private int nombreJoueurMaximum;
+    private int nombreJoueurMiniDoubleRoute;
+
     private FramePrincipale IHM;
+
     public Controleur() {
         /*this.finPartie = false;
         this.lstJoueurs = new ArrayList<>();
@@ -22,15 +27,27 @@ public class Controleur{
     }
 
     public int getNombreJoueurMinimum() {
-        return 2;
+        return this.nombreJoueurMinimum;
     }
 
     public int getNombreJoueurMaximum() {
-        return 5;
+        return this.nombreJoueurMaximum;
     }
 
     public int getNombreJoueurMiniDoubleRoute() {
-        return 3;
+        return this.nombreJoueurMiniDoubleRoute;
+    }
+
+    public void setNombreJoueurMinimum(int nombreJoueurMinimum) {
+        this.nombreJoueurMinimum = nombreJoueurMinimum;
+    }
+
+    public void setNombreJoueurMaximum(int nombreJoueurMaximum) {
+        this.nombreJoueurMaximum = nombreJoueurMaximum;
+    }
+
+    public void setNombreJoueurMiniDoubleRoute(int nombreJoueurMiniDoubleRoute) {
+        this.nombreJoueurMiniDoubleRoute = nombreJoueurMiniDoubleRoute;
     }
 
     public static void main(String[] args) {
