@@ -159,12 +159,12 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public int getNbWagonJoueur() {return this.nbWagonJoueur;}
     public int getNbWagonFin() {return this.nbWagonFin;}
 
-    public ArrayList<Noeud> getNoeud() {
-        ArrayList<Noeud> noeud = new ArrayList<Noeud>();
+    public ArrayList<Noeud> getNoeuds() {
+        ArrayList<Noeud> noeuds = new ArrayList<Noeud>();
         for (int i = 0; i < this.model.getRowCount(); i++) {
-            noeud.add(new Noeud((String) this.model.getValueAt(i, 0), (int) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2)));
+            noeuds.add(new Noeud((String) this.model.getValueAt(i, 0), (int) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2)));
         }
-        return noeud;
+        return noeuds;
     }
     
     @Override

@@ -118,6 +118,14 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
+    public ArrayList getAretes() {
+        return this.panelArrete.getAretes();
+    }
+
+    public ArrayList getNoeuds() {
+        return this.panelRegleJeu.getNoeuds();
+    }
+
     public void majIHM() { 
         this.panelPlateau.repaint(); 
         this.panelListeObjectif.setTableNoeud(this.ctrl.lstNoeudXMLtoIHM());

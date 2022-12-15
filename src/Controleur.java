@@ -97,6 +97,19 @@ public class Controleur{
         this.nombreJoueurMiniDoubleRoute = nombreJoueurMiniDoubleRoute;
     }
 
+    public ArrayList<Arete> getAretes() {
+        return this.IHM.getAretes();
+    }
+
+    public ArrayList<Noeud> getNoeuds() {
+        return this.IHM.getNoeuds();
+    }
+
+    public ArrayList<Noeud> getTypes() {
+        return null;
+        // à implémenter ensuite mais je ne sais pas si on le fait dans l'IHM ou directement dans le controleur
+    }
+
     public void majIHM() {
         this.IHM.majIHM();
     }
