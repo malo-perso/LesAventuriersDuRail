@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class PanelRegleJeu extends JPanel implements ActionListener{
     
-    private static final String[] NOM_COLONNE = {"Nom", "X", "Y"};
+    private static final String[] NOM_COLONNE = {"Nom", "X", "Y", "NomX","NomY"};
     private DefaultTableModel model; 
 
     private JTable jTabNoeud;
@@ -25,7 +25,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     
     private JButton btnSuivant,btnAjoutNoeud,btnSupprNoeud,btnClear;
     
-    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY;
+    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY;
     
     private int nbJoueurMin;
     private int nbJoueurMax;
@@ -51,7 +51,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         {
             for (Noeud noeud : this.ctrl.lstNoeudXMLtoIHM())
             {
-                this.model.addRow(new Object[]{noeud.getNom(), noeud.getX(), noeud.getY()});   
+                this.model.addRow(new Object[]{noeud.getNom(), noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY()});   
             }
         }
         
@@ -74,6 +74,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtNomNoeud = new JTextField();
         this.txtX = new JTextField();
         this.txtY = new JTextField();
+        this.txtNomX = new JTextField();
+        this.txtNomY = new JTextField();
         
         //Creation des layout
         this.setLayout(new BorderLayout());
@@ -84,7 +86,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelNoeud = new JPanel(new BorderLayout());
         this.panelNoeudBtn = new JPanel(new GridLayout(2,2));
         this.panelValidation = new JPanel(new GridLayout(1,3));
-        this.panelRemplissage = new JPanel(new GridLayout(4,3));
+        this.panelRemplissage = new JPanel(new GridLayout(4,5));
         
         //Action listener
         this.txtNbJoueurMin.addActionListener(this);
@@ -124,12 +126,23 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelRemplissage.add(new JLabel("Nom :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("X :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Y :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("NomX :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("NomY :", SwingConstants.CENTER));
+
         this.panelRemplissage.add(this.txtNomNoeud);
         this.panelRemplissage.add(this.txtX);
         this.panelRemplissage.add(this.txtY);
+        this.panelRemplissage.add(this.txtNomX);
+        this.panelRemplissage.add(this.txtNomY);
+        this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(this.btnClear);
         this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());    
         this.panelRemplissage.add(new JLabel());
 
         this.panelNoeud.add(this.panelRegle, BorderLayout.NORTH);
@@ -162,7 +175,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public ArrayList<Noeud> getNoeuds() {
         ArrayList<Noeud> noeuds = new ArrayList<Noeud>();
         for (int i = 0; i < this.model.getRowCount(); i++) {
-            noeuds.add(new Noeud((String) this.model.getValueAt(i, 0), (int) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2)));
+            noeuds.add(new Noeud((String) this.model.getValueAt(i, 0), (int) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2), 0 , 0));
         }
         return noeuds;
     }

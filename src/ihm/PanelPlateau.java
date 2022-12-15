@@ -47,7 +47,7 @@ public class PanelPlateau extends JPanel
 	{
 		g2D.setColor(Color.RED);
 		g2D.fillOval(x-(this.diametre/2), y-(this.diametre/2), diametre, diametre);
-		this.hashNoeud.put(g2D, new Noeud("noeud", x, y));
+		this.hashNoeud.put(g2D, new Noeud("noeud", x, y, x+20, y+20));
 		majIHM();
 	}
 

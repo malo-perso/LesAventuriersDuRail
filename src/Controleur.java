@@ -41,8 +41,8 @@ public class Controleur{
     public ArrayList<Noeud> lstNoeudXMLtoIHM() {
         //test
         ArrayList<Noeud> lstNoeud = new ArrayList<Noeud>();
-        lstNoeud.add(new Noeud("test",5,10));
-        lstNoeud.add(new Noeud("ville2",25,10));
+        lstNoeud.add(new Noeud("test",5,10,5,10));
+        lstNoeud.add(new Noeud("ville2",25,10,25,10));
 
         return lstNoeud;
     }

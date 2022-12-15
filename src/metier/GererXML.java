@@ -29,9 +29,9 @@ public class GererXML {
 		this.ctrl = ctrl;
 		this.lstNoeuds = new ArrayList<Noeud>();
 
-		this.lstNoeuds.add(new Noeud("A", 0, 0));
-		this.lstNoeuds.add(new Noeud("B", 0, 1));
-		this.lstNoeuds.add(new Noeud("C", 0, 2));
+		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
+		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
+		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
 
 		this.lstAretes = new ArrayList<Arete>();
 
@@ -77,6 +77,8 @@ public class GererXML {
 						   "\t\t\t<nom>" + n.getNom() + "</nom>" + "\n" +
 						   "\t\t\t<x>"   + n.getX()   + "</x>"   + "\n" +
 						   "\t\t\t<y>"   + n.getY()   + "</y>"   + "\n" +
+						   "\t\t\t<NomX>" + n.getNomX() + "</NomX>" + "\n" +
+						   "\t\t\t<NomY>" + n.getNomY() + "</NomY>" + "\n" +
 						"    \t</noeud>\n");
 			}
 			bw.write("\t</lstNoeuds>\n");
@@ -127,7 +129,8 @@ public class GererXML {
 			Iterator i = listNoeud.iterator();
 			while(i.hasNext()){
 				Element courant = (Element)i.next();
-				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), Integer.parseInt(courant.getChildText("x").trim()), Integer.parseInt(courant.getChildText("y").trim())));
+				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), Integer.parseInt(courant.getChildText("x").trim()), Integer.parseInt(courant.getChildText("y").trim()),
+									Integer.parseInt(courant.getChildText("NomX")), Integer.parseInt(courant.getChildText("NomY"))));
 			}
 
 			List listArete = racine.getChild("lstAretes").getChildren("arrete");
@@ -202,6 +205,7 @@ public class GererXML {
 	}
 
 	public static void main(String[] args){
+
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
 
