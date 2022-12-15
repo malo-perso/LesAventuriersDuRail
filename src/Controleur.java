@@ -3,6 +3,7 @@ package src;
 import src.ihm.*;
 import src.metier.*;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class Controleur{
@@ -24,15 +25,18 @@ public class Controleur{
         /*this.finPartie = false;
         this.lstJoueurs = new ArrayList<>();
         this.metier = new Metier(this);*/
-        this.FichierPlateau= "./data/images/USA.png";
+        this.FichierPlateau = this.getClass().getResource("./data/images/USA.png").getPath();
         this.IHM = new FramePrincipale(this);
         this.gererXML = new GererXML(this);
-
-
     }
 
-    public String getFichierPlateau() { return this.FichierPlateau;}
-    public void setFichierPlateau(String fic) {this.FichierPlateau = fic; this.IHM.majIHM();}
+    public String getFichierPlateau() { 
+        return this.FichierPlateau;
+    }
+    public void setFichierPlateau(String fic) {
+        this.FichierPlateau = fic; 
+        this.IHM.majIHM();
+    }
 
     public ArrayList<Noeud> lstNoeudXMLtoIHM() {
         //test
@@ -43,6 +47,10 @@ public class Controleur{
         return lstNoeud;
     }
 
+    public void lireXML(File fichier)
+    {
+        this.gererXML.lireXML(fichier);
+    }
     public ArrayList<Arete> lstAreteXMLtoIHM() {
         //test
         ArrayList<Arete> lstArete = new ArrayList<Arete>();
