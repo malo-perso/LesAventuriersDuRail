@@ -59,9 +59,9 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSupprArete = new JButton("Supprimer -");
         this.btnSuivant = new JButton("Suivant");
 
-        this.listNoeud1 = new JComboBox<>(this.ctrl.getNoeuds().toArray());
-        this.listNoeud2 = new JComboBox<>(this.ctrl.getNoeuds().toArray());
-        this.listTypeArete = new JComboBox<>(this.ctrl.getTypes().toArray());
+        this.listNoeud1 = new JComboBox<>(/*this.ctrl.getNoeuds().toArray()*/);
+        this.listNoeud2 = new JComboBox<>(/*this.ctrl.getNoeuds().toArray()*/);
+        this.listTypeArete = new JComboBox<>(/*this.ctrl.getTypes().toArray()*/);
         this.txtLongueurArete = new JTextField("Nb sections arete");
 
         // création des layouts
