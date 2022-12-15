@@ -1,14 +1,24 @@
 package src.ihm;
+
 import src.Controleur;
+import src.metier.Noeud;
+import src.metier.Type;
+
+import java.awt.Image;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.*;
 
 public class PanelAretes extends JPanel implements ActionListener {
 
     private Controleur ctrl;
+
+    private Image  imgFond;
     
     private JPanel panelTable;
     private JTable tabAretes;
@@ -17,13 +27,14 @@ public class PanelAretes extends JPanel implements ActionListener {
     private JButton btnRetour;
     private JButton btnSuivant;
 
-    public PanelAretes() {
+    public PanelAretes(Controleur ctrl) {
 
         // création des composants
         JScrollPane spTabAretes; 
+
+        this.ctrl = ctrl;
         
         this.panelTable = new JPanel();
-        this.tabAretes = new JTable();
         this.panelValidation = new JPanel();
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
@@ -32,13 +43,18 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.setLayout(new BorderLayout());
         this.panelValidation.setLayout(new GridLayout(1,2, 10, 10));
 
+        this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
+
+        
+        String[] entetes = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
+        this.tabAretes = new JTable(new DefaultTableModel(entetes, 0));
         spTabAretes = new JScrollPane(this.tabAretes);
 
         // activation des composants
         this.btnRetour.addActionListener(this);
 
         // ajout des composants
-        this.panelTable.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
+        this.panelTable.add(new JLabel("Creation aretes", SwingConstants.CENTER), BorderLayout.NORTH);
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
 
         this.panelValidation.add(this.btnRetour);
@@ -46,14 +62,33 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
+
+        this.btnRetour.addActionListener(this);
+        this.btnSuivant.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnRetour) {
-            System.out.println("Retour");
+            this.ctrl.changerPanel("panelRegleJeu");
         }
-        else if ( e.getSource() == this.btnSuivant) {
-            System.out.println("Suivant");
+        if ( e.getSource() == this.btnSuivant) {
+            this.ctrl.changerPanel("panelListeObjectif");
         }
     }
+
+
+    public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
+        
+        DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
+        model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
+    }
+        
+
+    public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2 = (Graphics2D) g;
+
+		g.drawImage ( this.imgFond, 0, 0, this );
+	}
 }

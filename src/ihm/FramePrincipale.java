@@ -2,12 +2,24 @@ package src.ihm;
 
 import javax.swing.*;
 
+import src.Controleur;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
+    private JPanel panelFormulaire;
+
+    private PanelAretes panelArrete;
+
+    private PanelListeObjectif panelListeObjectif;
+
+    private PanelRegleJeu panelRegleJeu;
+
+    private PanelResume panelResume;
+
 	private JMenuBar menuBarre;
 
     private JMenu menuFichier;
@@ -20,14 +32,25 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private JMenuItem menuRegles;
 
+    CardLayout card;
+
     private File reglePDF;
 
     private Image imgLogo;
+    
+    private Controleur ctrl;
 
 
-	public FramePrincipale(){
+	public FramePrincipale(Controleur ctrl){
 
+        this.ctrl = ctrl;
         Toolkit kit = Toolkit.getDefaultToolkit();
+
+        this.panelFormulaire = new JPanel(new CardLayout());
+        this.panelArrete = new PanelAretes(this.ctrl);
+        this.panelListeObjectif = new PanelListeObjectif(this.ctrl);
+        this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
+        this.panelResume = new PanelResume(this.ctrl);
 
         this.setTitle("Concepteur de Plateau");
         this.setResizable(false);
@@ -47,6 +70,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png"   ) );
         
+        this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
+        this.panelFormulaire.add(panelArrete,"panelArrete");
+        this.panelFormulaire.add(panelListeObjectif,"panelListeObjectif");
+        this.panelFormulaire.add(panelResume,"panelResume");
+
+
         this.menuFichier.add(menuNouveau);
         this.menuFichier.add(menuOuvrir);
 
@@ -54,6 +83,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
+
+        this.add(this.panelFormulaire,BorderLayout.EAST);
+
 
         this.setJMenuBar(menuBarre);
 
@@ -72,6 +104,11 @@ public class FramePrincipale extends JFrame implements ActionListener
 		this.setVisible(true);
 
 
+    }
+
+    public void changePanel(String nomPanel){
+        this.card = (CardLayout) this.panelFormulaire.getLayout();
+        this.card.show(this.panelFormulaire,nomPanel);
     }
 
     public void actionPerformed( ActionEvent e){
@@ -98,13 +135,12 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = ouvrir.showOpenDialog(this);
 				/*if (res == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile().getPath() != null)
-					this.ouvrir(new File(chooser.getSelectedFile().getPath()));*/
+					this.ctrl.setFichierPlateau(new File(chooser.getSelectedFile().getPath()));*/
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }
 
-    public static void main(String[] arg){new FramePrincipale();}
 
 }
 

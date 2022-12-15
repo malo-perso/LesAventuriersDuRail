@@ -1,4 +1,5 @@
 package src.metier;
+
 public class Arete {
     Noeud  noeud1;
     Noeud  noeud2;
@@ -26,5 +27,5 @@ public class Arete {
 
     public Type getType() {
         return this.type;
-    }    
+    }
 }
