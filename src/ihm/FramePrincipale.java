@@ -91,14 +91,16 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(menuFichier);
         this.menuBarre.add(menuAide);
 
+        
         this.add(this.panelPlateau,BorderLayout.CENTER);
         this.add(this.panelFormulaire,BorderLayout.EAST);
 
 
         this.setJMenuBar(menuBarre);
 
-        this.reglePDF = new File("../data/PDF/Regles.pdf");
+        this.reglePDF = new File(this.getClass().getResource("../data/PDF/Regles.pdf").getFile());
 
+        //Ajout des listener
         this.menuRegles.addActionListener(this::actionPerformed);
         this.menuNouveau.addActionListener(this::actionPerformed);
         this.menuOuvrir.addActionListener(this::actionPerformed);
@@ -114,29 +116,45 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     }
 
+    //Permet de changer de panel 
+    //nomPanel : nom du panel a afficher
     public void changePanel(String nomPanel){
         this.card = (CardLayout) this.panelFormulaire.getLayout();
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
+    //geter des listes d'aretes du panel aretes
     public ArrayList<Arete> getAretes() {
         return this.panelArrete.getAretes();
     }
 
+    //geter des listes de noeud du panel regle du jeu
     public ArrayList<Noeud> getNoeuds() {
         return this.panelRegleJeu.getNoeuds();
     }
 
-    public void ajouterNoeud(String nom, int x, int y) {
-        this.panelRegleJeu.ajouterNoeud(nom, x, y);
+    
+    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
+        this.panelRegleJeu.ajouterNoeud(nom, x, y, nomX, nomY);
+        this.panelPlateau.ajouterNoeud(x, y, nomX, nomY);
     }
 
-    public void majIHM() { 
+
+    public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
+        this.panelRegleJeu.setPositionNoeud(noeud.getNom(), x, y, nomX, nomY);
+        this.panelPlateau.setPositionNoeud(noeud, x, y, nomX, nomY);
+    }
+
+    //
+    public void majIHM() {
+        this.panelPlateau.majIHM();
         this.panelPlateau.repaint(); 
-        this.panelListeObjectif.setTableNoeud(this.ctrl.lstNoeudXMLtoIHM());
 
+        this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML());
+        this.panelListeObjectif.majTableNoeud();
     }
 
+    
     public void actionPerformed( ActionEvent e){
 
         if(e.getSource() == this.menuRegles){
@@ -168,4 +186,5 @@ public class FramePrincipale extends JFrame implements ActionListener
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }
+
 }

@@ -20,13 +20,28 @@ import javax.imageio.ImageIO;
 public class GererXML {
 
 	private Controleur       ctrl;
+	private int              diametre;
+	private int  nbrJoueurMinimum;
+	private int  nbrJoueurMaximum;
+	private int  nbrJoueurMiniDoubleRoute;
+	private int  nbWagonJoueur;
+	private int  nbWagonFinPartie;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
 
 	public GererXML(Controleur ctrl){
 
+		this.nbrJoueurMaximum = 5;
+		this.nbrJoueurMinimum = 2;
+		this.nbrJoueurMiniDoubleRoute = 3;
+		this.nbWagonJoueur = 45;
+		this.nbWagonFinPartie = 2;
+
 		this.ctrl = ctrl;
+
+		this.diametre = 20;
+
 		this.lstNoeuds = new ArrayList<Noeud>();
 
 		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
@@ -42,6 +57,58 @@ public class GererXML {
 
 		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
 		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
+	}
+
+	public int getDiametre(){
+		return this.diametre;
+	}
+
+	public int setDiametre(int diametre){
+		return this.diametre = diametre;
+	}
+
+	public int getNombreJoueurMinimum(){
+		return this.nbrJoueurMinimum;
+	}
+
+	public int setNombreJoueurMinimum(int nbrJoueurMinimum){
+		return this.nbrJoueurMinimum = nbrJoueurMinimum;
+	}
+
+	public int getNombreJoueurMaximum(){
+		return this.nbrJoueurMaximum;
+	}
+
+	public int setNombreJoueurMaximum(int nbrJoueurMaximum){
+		return this.nbrJoueurMaximum = nbrJoueurMaximum;
+	}
+
+	public int getNombreJoueurMiniDoubleRoute(){
+		return this.nbrJoueurMiniDoubleRoute;
+	}
+
+	public int setNombreJoueurMiniDoubleRoute(int nbrJoueurMiniDoubleRoute){
+		return this.nbrJoueurMiniDoubleRoute = nbrJoueurMiniDoubleRoute;
+	}
+
+	public int getNbWagonJoueur(){
+		return this.nbWagonJoueur;
+	}
+
+	public int setNbWagonJoueur(int nbWagonJoueur){
+		return this.nbWagonJoueur = nbWagonJoueur;
+	}
+
+	public int getNbWagonFinPartie(){
+		return this.nbWagonFinPartie;
+	}
+
+	public int setNbWagonFinPartie(int nbWagonFinPartie){
+		return this.nbWagonFinPartie = nbWagonFinPartie;
+	}
+
+	public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY){
+		this.lstNoeuds.add(new Noeud(nom, x, y, nomX, nomY));
 	}
 
 	public void ecrireXML(String chemin){
@@ -62,9 +129,9 @@ public class GererXML {
 			bw.write("<mappe>\n");
 
 			bw.write("\t<regles>\n" + 
-					 "\t\t<nombreJoueurMinimum>" + this.ctrl.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
-					 "\t\t<nombreJoueurMaximum >" + this.ctrl.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
-					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.ctrl.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
+					 "\t\t<nombreJoueurMinimum>" + this.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
+					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
+					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
 					 "\t</regles>\n");
 
 			bw.write("\t<lstNoeuds>"                         		 + "\n");
@@ -121,9 +188,9 @@ public class GererXML {
 			racine = document.getRootElement();
 
 			Element regles = racine.getChild("regles");
-			this.ctrl.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
-			this.ctrl.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
-			this.ctrl.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
+			this.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
+			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
+			this.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
 			Iterator i = listNoeud.iterator();
@@ -192,15 +259,15 @@ public class GererXML {
 		}catch(Exception e){e.printStackTrace();} 
 	}
 
-	public List getLstNoeuds(){
+	public ArrayList<Noeud> getLstNoeuds(){
 		return this.lstNoeuds;
 	}
 
-	public List getLstAretes(){
+	public ArrayList<Arete> getLstAretes(){
 		return this.lstAretes;
 	}
 
-	public List getLstCarteObjectifs(){
+	public ArrayList<CarteObjectif> getLstCarteObjectifs(){
 		return this.lstCarteObjectifs;
 	}
 

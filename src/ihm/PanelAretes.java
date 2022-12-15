@@ -16,6 +16,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class PanelAretes extends JPanel implements ActionListener {
 
@@ -34,6 +35,8 @@ public class PanelAretes extends JPanel implements ActionListener {
     private JTextField txtLongueurArete;
 
     private Controleur ctrl;
+
+    private int indN1,indN2;
 
     public PanelAretes(Controleur ctrl) {
 
@@ -59,9 +62,12 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSupprArete = new JButton("Supprimer -");
         this.btnSuivant = new JButton("Suivant");
 
-        this.listNoeud1 = new JComboBox<>(/*this.ctrl.getNoeuds().toArray()*/);
-        this.listNoeud2 = new JComboBox<>(/*this.ctrl.getNoeuds().toArray()*/);
-        this.listTypeArete = new JComboBox<>(/*this.ctrl.getTypes().toArray()*/);
+        Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+        Vector<String> vType = new Vector<String>(this.ctrl.getTypes()); 
+
+        this.listNoeud1 = new JComboBox<>(vNoeud);
+        this.listNoeud2 = new JComboBox<>(vNoeud);
+        this.listTypeArete = new JComboBox<>(vType);
         this.txtLongueurArete = new JTextField("Nb sections arete");
 
         // création des layouts
@@ -113,6 +119,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSuivant.addActionListener(this);
     }
 
+    //renvoie la liste des aretes de la JTable
     public ArrayList<Arete> getAretes() {
         ArrayList<Arete> aretes = new ArrayList<Arete>();
         for (int i = 0; i < this.model.getRowCount(); i++) {
@@ -121,28 +128,73 @@ public class PanelAretes extends JPanel implements ActionListener {
         return aretes;
     }
 
+    // fonction qui permet d effacer le contenu des composant du panelRemplissage
+    private void removePanelRemplissage(){
+        this.listNoeud1.removeActionListener(this);
+        this.listNoeud2.removeActionListener(this);
 
+        this.listNoeud1.setSelectedItem(null);
+        this.listNoeud2.setSelectedItem(null);
+        this.txtLongueurArete.setText("");
+        this.listTypeArete.setSelectedItem(null);
+
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
+    }
+
+    // ajoute une arete dans le JTable
     public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
         
         DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
         model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
     }
     
-
-    public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		Graphics2D g2 = (Graphics2D) g;
-
-		g.drawImage ( this.imgFond, 0, 0, this );
-	}
-
     public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == this.btnClear){
+            this.removePanelRemplissage();
+        }
+
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.changerPanel("panelRegleJeu");
+            this.ctrl.getIHM().changePanel("panelRegleJeu");
         }
+
         if ( e.getSource() == this.btnSuivant) {
-            this.ctrl.changerPanel("panelListeObjectif");
+            this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
+
+        if(e.getSource() == this.listNoeud1){
+            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
+
+                this.listNoeud1.removeActionListener(this);
+                this.listNoeud2.removeActionListener(this);
+
+                this.listNoeud1.setSelectedIndex(this.listNoeud2.getSelectedIndex());
+                this.listNoeud2.setSelectedIndex(this.indN1);
+
+                this.listNoeud1.addActionListener(this);
+                this.listNoeud2.addActionListener(this);
+            }
+
+            this.indN1 = this.listNoeud1.getSelectedIndex();
+            this.indN2 = this.listNoeud2.getSelectedIndex();
+        }
+
+        if(e.getSource() == this.listNoeud2){
+            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
+
+                this.listNoeud1.removeActionListener(this);
+                this.listNoeud2.removeActionListener(this);
+
+                this.listNoeud2.setSelectedIndex(this.listNoeud1.getSelectedIndex());
+                this.listNoeud1.setSelectedIndex(this.indN2);
+
+                this.listNoeud1.addActionListener(this);
+                this.listNoeud2.addActionListener(this);
+            }
+
+            this.indN1 = this.listNoeud1.getSelectedIndex();
+            this.indN2 = this.listNoeud2.getSelectedIndex();
+        }
+
     }
 }

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     private static final String[] COLUMNS = {"Noeud1", "Noeud2", "Points"};
     private DefaultTableModel tabCarte = new DefaultTableModel(COLUMNS, 0);
 
-    private String[] tabNoeud;
+    private Vector vNoeud;
     private JTable jTabCarte;
 
     private JPanel panelRemplissage;
@@ -47,7 +48,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         //Creation des composants
         this.ctrl = ctrl;
         
-        this.tabNoeud = new String[0];
+        this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+
         this.jTabCarte = new JTable(this.tabCarte);
         if(this.ctrl.lstObjectifXMLtoIHM() != null)
         {
@@ -66,8 +68,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelActionTab = new JPanel();
         this.panelValidation = new JPanel();
 
-        this.kbNoeud1 = new JComboBox<>(tabNoeud);
-        this.kbNoeud2 = new JComboBox<>(tabNoeud);
+        this.kbNoeud1 = new JComboBox<String>(this.vNoeud);
+        this.kbNoeud2 = new JComboBox<String>(this.vNoeud);
         this.kbNoeud1.setSelectedItem(null);
         this.kbNoeud2.setSelectedItem(null);
         
@@ -126,14 +128,14 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.add(this.panelValidation, BorderLayout.SOUTH);
     }
 
-    public void setTableNoeud(ArrayList<Noeud> arNoeud){
-    
-        this.tabNoeud = new String[arNoeud.size()];
-        for(int i=0; i<arNoeud.size(); i++){
-            this.tabNoeud[i] = arNoeud.get(i).getNom();
-        }
+    // fonction pour mettre à jour les composants des 2 JComboBox 
+    public void majTableNoeud(){
+        this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+        this.kbNoeud1 = new JComboBox<String>(this.vNoeud);
+        this.kbNoeud2 = new JComboBox<String>(this.vNoeud);
     }
 
+    // Fonction qui retourn la liste des cartes Objectifs
     public ArrayList<CarteObjectif> getListCarteObjectif(){
         ArrayList<CarteObjectif> arCarteObj = new ArrayList<CarteObjectif>();
 
@@ -155,6 +157,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         return arCarteObj;
     }
 
+    // fonction qui permet d effacer le contenu des composant du panelRemplissage
     private void removePanelRemplissage(){
         this.kbNoeud1.removeActionListener(this);
         this.kbNoeud2.removeActionListener(this);
@@ -169,10 +172,12 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        //bouton Effacer pressé -> efface le contenu des composants du panelRemplissage
         if(e.getSource() == this.btnClear){
             this.removePanelRemplissage();
         }
         
+        //bouton ajouter + pressé -> ajoute une carteObjectif à la Jliste
         if(e.getSource() == this.btnAjoutCarte){
             if (this.kbNoeud1.getSelectedItem() != null && this.kbNoeud2.getSelectedItem() != null && !this.txtNbPoints.getText().equals("") ){
                 
@@ -193,11 +198,11 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
         
         if(e.getSource() == this.btnRetour){
-            this.ctrl.changerPanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelArrete");
         }
 
         if(e.getSource() == this.btnSuivant){
-            this.ctrl.changerPanel("panelResume");
+            this.ctrl.getIHM().changePanel("panelResume");
 
         }
 

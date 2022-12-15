@@ -39,6 +39,12 @@ public class PanelResume extends JPanel implements ActionListener{
     private JButton btnRetour;
     private JButton btnEnregistrer;
 
+    private int nbJoueurMin;
+    private int nbJoueurMax;
+    private int DoubleVoie;
+    private int nbWagonJoueur;
+    private int nbWagonFin;
+
     private Controleur ctrl;
 
     //private JScrollBar sbTout;
@@ -58,11 +64,17 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelObjectif = new JPanel();
         this.panelBtn = new JPanel();
 
-        this.lblJMin = new JLabel("Joueur Min : 2");
-        this.lblJMax = new JLabel("Joueur Max : 5");
-        this.lblDoubleMin = new JLabel("Joueur Min pour double voies : 2");
-        this.lblVehicule = new JLabel("Vehicule par joueur : 45");
-        this.lblFin = new JLabel("Fin de partie si moins de  vehicules 2");
+        this.nbJoueurMin = this.ctrl.getMetier().getNombreJoueurMinimum();
+        this.nbJoueurMax = this.ctrl.getMetier().getNombreJoueurMaximum();
+        this.DoubleVoie = this.ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
+        this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
+        this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
+
+        this.lblJMin = new JLabel("Joueur Min : " + this.nbJoueurMin);
+        this.lblJMax = new JLabel("Joueur Max : " + this.nbJoueurMax);
+        this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.DoubleVoie );
+        this.lblVehicule = new JLabel("Vehicule par joueur : " + this.nbWagonJoueur);
+        this.lblFin = new JLabel("Fin de partie si moins de  vehicules " +  this.nbWagonFin); 
 
         this.jTabNoeud = new JTable(this.tabNoeud);
         this.jTabArrete = new JTable(this.tabArrete);
@@ -115,7 +127,7 @@ public class PanelResume extends JPanel implements ActionListener{
 
     public void actionPerformed( ActionEvent e){
         if(e.getSource() == this.btnRetour){
-            this.ctrl.changerPanel("panelListeObjectif");
+            this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
         if(e.getSource() == this.btnEnregistrer){
             System.out.println("Enregistrer");

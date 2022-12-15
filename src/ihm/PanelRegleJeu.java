@@ -25,7 +25,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     
     private JButton btnSuivant,btnAjoutNoeud,btnSupprNoeud,btnClear;
     
-    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY;
+    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY,txtTailleNoeud;
     
     private int nbJoueurMin;
     private int nbJoueurMax;
@@ -40,11 +40,11 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         //Creation des composants
         this.ctrl = ctrl;
         
-        this.nbJoueurMax = 5;
-        this.nbJoueurMin = 2;
-        this.doubleVoie = 3;
-        this.nbWagonJoueur = 45;
-        this.nbWagonFin = 2;
+        this.nbJoueurMax   = ctrl.getMetier().getNombreJoueurMaximum();
+        this.nbJoueurMin   = ctrl.getMetier().getNombreJoueurMinimum();
+        this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
+        this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
+        this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
         
         this.model = new DefaultTableModel(NOM_COLONNE, 0);
         if(this.ctrl.lstNoeudXMLtoIHM() != null)
@@ -64,16 +64,17 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.btnClear = new JButton("Effacer");
         this.btnAjoutNoeud = new JButton("Ajouter +");
         this.btnSupprNoeud = new JButton("Supprimer -");
-        this.btnSuivant = new JButton("Suivant");
+        this.btnSuivant    = new JButton("Suivant");
         
-        this.txtNbJoueurMin = new JTextField(this.nbJoueurMin+" ");
-        this.txtNbJoueurMax = new JTextField(this.nbJoueurMax+" ");
+        this.txtNbJoueurMin   = new JTextField(this.nbJoueurMin+" ");
+        this.txtNbJoueurMax   = new JTextField(this.nbJoueurMax+" ");
         this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+" ");
-        this.txtDoubleVoie = new JTextField(this.doubleVoie+" ");
-        this.txtNbWagonFin = new JTextField(this.nbWagonFin+" ");
-        this.txtNomNoeud = new JTextField();
-        this.txtX = new JTextField();
-        this.txtY = new JTextField();
+        this.txtDoubleVoie    = new JTextField(this.doubleVoie+" ");
+        this.txtNbWagonFin    = new JTextField(this.nbWagonFin+" ");
+        this.txtNomNoeud      = new JTextField();
+        this.txtTailleNoeud   = new JTextField();
+        this.txtX    = new JTextField();
+        this.txtY    = new JTextField();
         this.txtNomX = new JTextField();
         this.txtNomY = new JTextField();
         
@@ -105,7 +106,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelLabel.add(new JLabel("Nombre de wagon par joueur :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur minimum pour les doubles voies :", SwingConstants.RIGHT));      
         this.panelLabel.add(new JLabel("Nombre de wagon pour finir la partie :", SwingConstants.RIGHT));
-        this.panelLabel.add(new JLabel());
+        this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
 
         this.panelSaisie.add(this.txtNbJoueurMin);
         this.panelSaisie.add(new JLabel());
@@ -117,7 +118,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbWagonFin);
         this.panelSaisie.add(new JLabel());
-        this.panelSaisie.add(new JLabel());
+        //this.panelSaisie.add(this.txtTailleNoeud);
+        //this.panelSaisie.add(new JLabel());
 
         this.panelRegle.add(this.panelLabel);
         this.panelRegle.add(this.panelSaisie);
@@ -137,7 +139,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(this.btnClear);
-        this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
@@ -179,11 +180,29 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         }
         return noeuds;
     }
-
-    public void ajouterNoeud(String nom, int x, int y) {
-        this.model.addRow(new Object[]{nom, x, y});
-        this.ctrl.majIHM();
+    
+    public void ajouterNoeud (String nom, int x, int y, int nomX, int nomY) {
+        this.model.addRow(new Object[]{nom, x, y, nomX, nomY});
     }
+
+    public void maJTable(ArrayList<Noeud> noeuds) {
+        this.model.setRowCount(0);
+        for (Noeud n : noeuds) {
+            this.model.addRow(new Object[]{n.getNom(), n.getX(), n.getY(), n.getNomX(), n.getNomY()});
+        }
+    }
+     
+    public void setPositionNoeud (String nom, int x, int y, int nomX, int nomY) {
+        for (int i = 0; i < this.model.getRowCount(); i++) {
+            if (this.model.getValueAt(i, 0).equals(nom)) {
+                this.model.setValueAt(x, i, 1);
+                this.model.setValueAt(y, i, 2);
+                this.model.setValueAt(nomX, i, 3);
+                this.model.setValueAt(nomY, i, 4);
+            }
+        }
+    }
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -217,23 +236,19 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         if (e.getSource() == this.btnAjoutNoeud) {
             if (fonctionAux.isInteger(this.txtX.getText()) && fonctionAux.isInteger(this.txtY.getText()) && !this.txtNomNoeud.getText().equals(""))  
                 {
-                    for (int cpt = 0; cpt < this.model.getRowCount(); cpt++) {
-                        if (this.model.getValueAt(cpt, 0).equals(this.txtNomNoeud.getText())) {
-                            this.txtNomNoeud.setText("");
-                            this.txtX.setText("");
-                            this.txtY.setText("");
-                            return;
-                        }
-                    }
-                    this.model.addRow(new Object[] {
-                    this.txtNomNoeud.getText(),
-                    this.txtX.getText(),
-                    this.txtY.getText()});
+                    this.ctrl.ajouterNoeud(this.txtNomNoeud.getText(),
+                                           Integer.parseInt(this.txtX.getText()),
+                                           Integer.parseInt(this.txtY.getText()),
+                                           Integer.parseInt(this.txtNomX.getText()),
+                                           Integer.parseInt(this.txtNomY.getText())
+                                        );
                     this.ctrl.majIHM();
                 }
                 this.txtNomNoeud.setText("");
                 this.txtX.setText("");
                 this.txtY.setText("");
+                this.txtNomX.setText("");
+                this.txtNomY.setText("");
         }
         if (e.getSource() == this.btnSupprNoeud) {
             if (this.jTabNoeud.getSelectedRow() != -1)
@@ -243,10 +258,12 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.txtNomNoeud.setText(" ");
             this.txtX.setText(" ");
             this.txtY.setText(" ");
+            this.txtNomX.setText("");
+            this.txtNomY.setText("");
         }
         if (e.getSource() == this.btnSuivant) {
             this.setVisible(false);
-            this.ctrl.changerPanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelArrete");
         }
     }
 
