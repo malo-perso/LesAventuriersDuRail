@@ -6,15 +6,14 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import org.jdom2.*;
 import org.jdom2.input.*;
-import java.io.BufferedWriter;
+
 import java.util.ArrayList;
-import java.io.File;
-import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
+import java.awt.image.WritableRaster;
 
 import javax.imageio.ImageIO;
 
@@ -45,10 +44,10 @@ public class GererXML {
 		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
 	}
 
-	public void ecrireXML(){
+	public void ecrireXML(String chemin){
 		try{
 			File file = new File("./src/data/mappe/mappe.xml");
-			File fileImage = new File("./src/data/images/93baf29414f5feedacbe9eb51f1354e7.jpg");
+			File fileImage = new File(chemin);
 
 			byte[] bytes = Files.readAllBytes(fileImage.toPath());
 
@@ -103,8 +102,8 @@ public class GererXML {
 			}
 			bw.write("\t</lstCarteObjectifs>\n");
 
-			bw.write("\t<imagePlateau>" + "\n\t\t" + Base64.getEncoder().encodeToString(bytes) +"\n" +
-					 "\t</imagePlateau>\n");
+			bw.write("\t<imagePlateau>" + Base64.getEncoder().encodeToString(bytes) +
+					 "</imagePlateau>\n");
 
 			bw.write("</mappe>");
 			bw.close();
@@ -178,33 +177,37 @@ public class GererXML {
 				}
 			
 			}
-				
-		}catch(Exception e){e.printStackTrace();}
-		/* 
 
-		Element imagePlateau = racine.getChild("imagePlateau");
 
-		byte[] bytes = Base64.getDecoder().decode(imagePlateau.getText());
-		System.out.println(bytes);
-		try{
+			Element imagePlateau = racine.getChild("imagePlateau");
+
+			String str = imagePlateau.getText();
+			byte[] bytes = Base64.getDecoder().decode(str);		
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
 			ImageIO.write(bImage2, "png", new File("mappe.png") );
-			System.out.println("Fini");
-		}catch(Exception e){e.printStackTrace();}*/
+		}catch(Exception e){e.printStackTrace();} 
 	}
 
-	public ArrayList<Noeud> getLstNoeuds() {
+	public List getLstNoeuds(){
 		return this.lstNoeuds;
 	}
 
-	/*public static void main(String[] args){
+	public List getLstAretes(){
+		return this.lstAretes;
+	}
+
+	public List getLstCarteObjectifs(){
+		return this.lstCarteObjectifs;
+	}
+
+	public static void main(String[] args){
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
 
-		g.ecrireXML();
+		//g.ecrireXML();
 		try{
 			g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}
-	}*/
+	}
 }

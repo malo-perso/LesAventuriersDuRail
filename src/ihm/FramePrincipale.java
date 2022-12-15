@@ -63,7 +63,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setResizable(false);
         this.setUndecorated(false);
 
-        this.imgLogo = kit.getImage("/../data/images/logo.png") ;
+        this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
 		this.setIconImage(imgLogo);
 
         this.menuBarre = new JMenuBar();
@@ -75,7 +75,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuAide = new JMenu("Aide");
         this.menuRegles = new JMenuItem("Regles");
 
-        this.menuRegles.setIcon( new ImageIcon( "../data/images/Regles.png") );
+        this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
         
         this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
         this.panelFormulaire.add(panelArrete,"panelArrete");
@@ -105,7 +105,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
 
         this.pack();
-		this.setDefaultLookAndFeelDecorated(true);
+		//this.setDefaultLookAndFeelDecorated(true);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -145,9 +145,11 @@ public class FramePrincipale extends JFrame implements ActionListener
 		if(e.getSource() == this.menuNouveau){
 			try{
 				System.out.println("Nouveau");
-				JFileChooser nouveau = new JFileChooser(".");
+				JFileChooser chooser = new JFileChooser(".");
 				
-				int res = nouveau.showOpenDialog(this);
+				int res = chooser.showOpenDialog(this);
+                if(res == JFileChooser.APPROVE_OPTION)
+                    this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
 			}catch(Exception erreur){erreur.printStackTrace();}
 		}
         if(e.getSource() == this.menuOuvrir){
@@ -157,7 +159,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = chooser.showOpenDialog(this);
 				if (res == JFileChooser.APPROVE_OPTION)
-					this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
+					this.ctrl.lireXML(chooser.getSelectedFile());
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }
