@@ -12,29 +12,30 @@ import src.Controleur;
 import src.metier.CarteObjectif;
 import src.metier.Noeud;
 
+
 public class PanelListeObjectif extends JPanel implements ActionListener{
 
     private static final String[] COLUMNS = {"Noeud1", "Noeud2", "Points"};
     private DefaultTableModel tabCarte = new DefaultTableModel(COLUMNS, 0);
 
     private String[] tabNoeud;
-
-    private JPanel panelRemplissage;
-    private JComboBox kbNoeud1;
-    private JComboBox kbNoeud2;
-    private JTextField txtNbPoints;
-    private JButton btnClear;
-
-    private JPanel panelTable;
     private JTable jTabCarte;
 
+    private JPanel panelRemplissage;
+    private JPanel panelTable;
     private JPanel panelActionTab;
+    private JPanel panelValidation;
+
+    private JComboBox<String> kbNoeud1;
+    private JComboBox<String> kbNoeud2;
+
+    private JButton btnClear;
     private JButton btnAjoutCarte;
     private JButton btnSuppCarte;
-
-    private JPanel panelValidation;
     private JButton btnRetour;
     private JButton btnSuivant;
+
+    private JTextField txtNbPoints;
 
     private int indN1;
     private int indN2;
@@ -43,47 +44,53 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
     public PanelListeObjectif(Controleur ctrl){
 
+        //Creation des composants
         this.ctrl = ctrl;
-        JScrollPane spTabCarte; 
         
         this.tabNoeud = new String[0];
+        this.jTabCarte = new JTable(this.tabCarte);
+        this.jTabCarte.setFillsViewportHeight(true);
+        this.jTabCarte.setEnabled(false);
 
+        JScrollPane spTabCarte = new JScrollPane(this.jTabCarte);
+        
         this.panelRemplissage = new JPanel();
+        this.panelTable = new JPanel();
+        this.panelActionTab = new JPanel();
+        this.panelValidation = new JPanel();
+
         this.kbNoeud1 = new JComboBox<>(tabNoeud);
         this.kbNoeud2 = new JComboBox<>(tabNoeud);
         this.kbNoeud1.setSelectedItem(null);
         this.kbNoeud2.setSelectedItem(null);
-        this.txtNbPoints = new JTextField();
+        
         this.btnClear = new JButton("Effacer");
-    
-        this.panelTable = new JPanel();
-        this.jTabCarte = new JTable(this.tabCarte);
-        this.panelActionTab = new JPanel();
         this.btnAjoutCarte = new JButton("Ajouter +");
         this.btnSuppCarte = new JButton("Supprimer -");
-        this.panelValidation = new JPanel();
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
-
-        this.jTabCarte.setFillsViewportHeight(true);
+        
+        this.txtNbPoints = new JTextField();
+        
+        //Creation des layout
         this.setLayout(new BorderLayout());
         this.panelRemplissage.setLayout(new GridLayout(4,3));
         this.panelTable.setLayout(new BorderLayout());
         this.panelActionTab.setLayout(new GridLayout(2,2));
-        this.panelValidation.setLayout(new GridLayout(1,3));
+        this.panelValidation.setLayout(new BorderLayout());
 
-        this.jTabCarte.setEnabled(false);
+
         //Action listener
         this.kbNoeud1.addActionListener(this);
         this.kbNoeud2.addActionListener(this);
+
         this.btnClear.addActionListener(this);
         this.btnAjoutCarte.addActionListener(this);
         this.btnSuppCarte.addActionListener(this);
         this.btnRetour.addActionListener(this);
         this.btnSuivant.addActionListener(this);
 
-        spTabCarte = new JScrollPane(this.jTabCarte);
-        
+        // Positionnement des composants
         this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Noeud2 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Points :", SwingConstants.CENTER));
@@ -103,10 +110,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelTable.add(spTabCarte, BorderLayout.CENTER);
         this.panelTable.add(this.panelActionTab, BorderLayout.SOUTH);
 
-
-        this.panelValidation.add(this.btnRetour);
-        this.panelValidation.add(new JLabel());
-        this.panelValidation.add(this.btnSuivant);
+        this.panelValidation.add(this.btnRetour, BorderLayout.WEST);
+        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
 
         this.add(new JLabel("Carte objectif", SwingConstants.CENTER), BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
@@ -163,7 +168,6 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
 
         if(e.getSource() == this.btnSuppCarte){
-            
             if(this.tabCarte.getRowCount() > 0){
                 this.tabCarte.removeRow(this.tabCarte.getRowCount()-1);
             }
@@ -179,7 +183,6 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
 
         if(e.getSource() == this.kbNoeud1){
-
             if(this.kbNoeud1.getSelectedIndex() == this.kbNoeud2.getSelectedIndex()){
                 
                 this.kbNoeud1.removeActionListener(this);
@@ -194,11 +197,9 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
             this.indN1 = this.kbNoeud1.getSelectedIndex();
             this.indN2 = this.kbNoeud2.getSelectedIndex();
-            
         }
 
         if(e.getSource() == this.kbNoeud2){
-
             if(this.kbNoeud1.getSelectedIndex() == this.kbNoeud2.getSelectedIndex()){
                 
                 this.kbNoeud1.removeActionListener(this);
@@ -213,8 +214,6 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
             this.indN2 = this.kbNoeud2.getSelectedIndex();
             this.indN1 = this.kbNoeud1.getSelectedIndex();
-            
         }
-
     }
 }

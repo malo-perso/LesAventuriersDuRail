@@ -2,35 +2,31 @@ package src.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.Component;
-import java.awt.Color;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import src.Controleur;
-import src.metier.Noeud;
 import src.metier.fonctionAux;
+import src.metier.Noeud;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
 public class PanelRegleJeu extends JPanel implements ActionListener{
     
     private static final String[] NOM_COLONNE = {"Nom", "X", "Y"};
-
-    private JButton btnSuivant,btnAjoutVille,btnSupprVille,btnClear;
-
-    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomVille,txtX,txtY;
-
-    private JTable tableVille;
     private DefaultTableModel model; 
 
-    private JPanel panelRegle,panelValidation,panelVille,panelVilleBtn,panelTexteVille,panelTable;
-
+    private JTable jTabNoeud;
+    
+    private JPanel panelRegle,panelValidation,panelNoeud,panelNoeudBtn,panelRemplissage,panelTable;
+    
+    private JButton btnSuivant,btnAjoutNoeud,btnSupprNoeud,btnClear;
+    
+    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY;
+    
     private int nbJoueurMin;
     private int nbJoueurMax;
     private int doubleVoie; 
@@ -39,112 +35,106 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
 
     private Controleur ctrl;
 
-
-    
     public PanelRegleJeu(Controleur ctrl)
     {
-        this.setLayout(new BorderLayout());
-
+        //Creation des composants
         this.ctrl = ctrl;
-
+        
         this.nbJoueurMax = 5;
         this.nbJoueurMin = 2;
         this.doubleVoie = 3;
         this.nbWagonJoueur = 45;
         this.nbWagonFin = 2;
+        
+        this.model = new DefaultTableModel(NOM_COLONNE, 0);
+        this.jTabNoeud = new JTable(this.model);
+        this.jTabNoeud.setFillsViewportHeight(true);
+        this.jTabNoeud.setEnabled(false);
 
+        JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
+
+        this.btnClear = new JButton("Effacer");
+        this.btnAjoutNoeud = new JButton("Ajouter +");
+        this.btnSupprNoeud = new JButton("Supprimer -");
         this.btnSuivant = new JButton("Suivant");
-        this.btnAjoutVille = new JButton("Ajouter");
-        this.btnSupprVille = new JButton("Supprimer");
-        this.btnClear = new JButton("Clear");
         
         this.txtNbJoueurMin = new JTextField(this.nbJoueurMin+" ");
         this.txtNbJoueurMax = new JTextField(this.nbJoueurMax+" ");
         this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+" ");
         this.txtDoubleVoie = new JTextField(this.doubleVoie+" ");
         this.txtNbWagonFin = new JTextField(this.nbWagonFin+" ");
-        this.txtNomVille = new JTextField("Nom de la ville");
+        this.txtNomNoeud = new JTextField("Nom de la ville");
         this.txtX = new JTextField("X");
         this.txtY = new JTextField("Y");
-
-        this.panelRegle = new JPanel(new GridLayout(5,2));
         
+        //Creation des layout
+        this.setLayout(new BorderLayout());
+        this.panelRegle = new JPanel(new GridLayout(6,2, 0, 3));
         this.panelTable = new JPanel(new BorderLayout());
-
-        this.panelVille = new JPanel(new BorderLayout());
+        this.panelNoeud = new JPanel(new BorderLayout());
+        this.panelNoeudBtn = new JPanel(new GridLayout(2,2));
         this.panelValidation = new JPanel(new BorderLayout());
-
-        this.panelRegle.add(new JLabel("Joueur minimum"));
-        this.panelRegle.add(this.txtNbJoueurMin);
-        this.panelRegle.add(new JLabel("Joueur maximum"));
-        this.panelRegle.add(this.txtNbJoueurMax);
-        this.panelRegle.add(new JLabel("Nombre de wagon par joueur"));
-        this.panelRegle.add(this.txtNbWagonJoueur);
-        this.panelRegle.add(new JLabel("Joueur minimum pour utiliser les doubles voies"));
-        this.panelRegle.add(this.txtDoubleVoie);
-        this.panelRegle.add(new JLabel("Nombre de wagon pour finir la partie"));
-        this.panelRegle.add(this.txtNbWagonFin);
-
-        this.model = new DefaultTableModel(NOM_COLONNE, 0);
-        this.tableVille = new JTable(this.model);
-                
-        this.panelVilleBtn = new JPanel(new GridLayout(1,3));
-        this.panelVilleBtn.add(this.btnAjoutVille);
-        this.panelVilleBtn.add(this.btnSupprVille);
-        this.panelVilleBtn.add(this.btnClear);
-
-        this.panelTexteVille = new JPanel(new GridLayout(1,3));
-        this.panelTexteVille.add(this.txtNomVille);
-        this.panelTexteVille.add(this.txtX);
-        this.panelTexteVille.add(this.txtY);
-
-        this.panelVille.add(this.panelTexteVille, BorderLayout.NORTH);
-        this.panelVille.add(new JScrollPane(this.tableVille), BorderLayout.CENTER);
-        this.panelVille.add(this.panelVilleBtn, BorderLayout.SOUTH);
-
-        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
-
-        this.panelTable.add(this.panelRegle, BorderLayout.NORTH);
-        this.panelTable.add(this.panelVille, BorderLayout.CENTER);
-
-        this.add(new JLabel("Paramètre du plateau", SwingConstants.CENTER), BorderLayout.NORTH);
+        this.panelRemplissage = new JPanel(new GridLayout(4,3));
         
-        this.add(this.panelTable, BorderLayout.CENTER);
-        
-        this.add(this.panelValidation, BorderLayout.SOUTH);
-
+        //Action listener
         this.txtNbJoueurMin.addActionListener(this);
         this.txtNbJoueurMax.addActionListener(this);
         this.txtDoubleVoie.addActionListener(this);
         this.txtNbWagonJoueur.addActionListener(this);
         this.txtNbWagonFin.addActionListener(this);
-        this.btnAjoutVille.addActionListener(this);
-        this.btnSupprVille.addActionListener(this);
+        this.btnAjoutNoeud.addActionListener(this);
+        this.btnSupprNoeud.addActionListener(this);
         this.btnClear.addActionListener(this);
         this.btnSuivant.addActionListener(this);
 
+        //Positionnement des composants
+        this.panelRegle.add(new JLabel("Joueur minimum :", SwingConstants.RIGHT));
+        this.panelRegle.add(this.txtNbJoueurMin);
+        this.panelRegle.add(new JLabel("Joueur maximum :", SwingConstants.RIGHT));
+        this.panelRegle.add(this.txtNbJoueurMax);
+        this.panelRegle.add(new JLabel("Nombre de wagon par joueur :", SwingConstants.RIGHT));
+        this.panelRegle.add(this.txtNbWagonJoueur);
+        this.panelRegle.add(new JLabel("Joueur minimum pour les doubles voies :", SwingConstants.RIGHT));
+        this.panelRegle.add(this.txtDoubleVoie);        
+        this.panelRegle.add(new JLabel("Nombre de wagon pour finir la partie :", SwingConstants.RIGHT));
+        this.panelRegle.add(this.txtNbWagonFin);
+        this.panelRegle.add(new JLabel());
+
+        this.panelRemplissage.add(new JLabel("Nom :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("X :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Y :", SwingConstants.CENTER));
+        this.panelRemplissage.add(this.txtNomNoeud);
+        this.panelRemplissage.add(this.txtX);
+        this.panelRemplissage.add(this.txtY);
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(this.btnClear);
+        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());
+
+        this.panelNoeud.add(this.panelRegle, BorderLayout.NORTH);
+        this.panelNoeud.add(this.panelRemplissage, BorderLayout.CENTER);
+
+        this.panelNoeudBtn.add(this.btnAjoutNoeud);
+        this.panelNoeudBtn.add(this.btnSupprNoeud);
+        this.panelNoeudBtn.add(new JLabel());
         
+        this.panelTable.add(this.panelNoeud, BorderLayout.NORTH);
+        this.panelTable.add(spTabNoeud, BorderLayout.CENTER);
+        this.panelTable.add(this.panelNoeudBtn, BorderLayout.SOUTH);
+        
+        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
+        
+        this.add(new JLabel("Paramètre du plateau", SwingConstants.CENTER), BorderLayout.NORTH);
+        this.add(this.panelTable, BorderLayout.CENTER);
+        this.add(this.panelValidation, BorderLayout.SOUTH);
     }
 
-    public int getNbJoueurMin() {
-        return this.nbJoueurMin;
-    }
-
-    public int getNbJoueurMax() {
-        return this.nbJoueurMax;
-    }
-
-    public int getDoubleVoie() {
-        return this.doubleVoie;
-    }
-
-    public int getNbWagonJoueur() {
-        return this.nbWagonJoueur;
-    }
-
-    public int getNbWagonFin() {
-        return this.nbWagonFin;
-    }
+    //Getter
+    public int getNbJoueurMin() {return this.nbJoueurMin;}
+    public int getNbJoueurMax() {return this.nbJoueurMax;}
+    public int getDoubleVoie() {return this.doubleVoie;}
+    public int getNbWagonJoueur() {return this.nbWagonJoueur;}
+    public int getNbWagonFin() {return this.nbWagonFin;}
 
     public ArrayList<Noeud> getNoeud() {
         ArrayList<Noeud> noeud = new ArrayList<Noeud>();
@@ -154,7 +144,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         return noeud;
     }
     
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -184,23 +173,23 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
         }
 
-        if (e.getSource() == this.btnAjoutVille) {
-            if (fonctionAux.isInteger(this.txtX.getText()) && fonctionAux.isInteger(this.txtY.getText()) && !this.txtNomVille.getText().equals(""))  
+        if (e.getSource() == this.btnAjoutNoeud) {
+            if (fonctionAux.isInteger(this.txtX.getText()) && fonctionAux.isInteger(this.txtY.getText()) && !this.txtNomNoeud.getText().equals(""))  
                 {
                     this.model.addRow(new Object[] {
-                    this.txtNomVille.getText(),
+                    this.txtNomNoeud.getText(),
                     this.txtX.getText(),
                     this.txtY.getText()});
                 }
-                this.txtNomVille.setText("");
+                this.txtNomNoeud.setText("");
                 this.txtX.setText("");
                 this.txtY.setText("");
         }
-        if (e.getSource() == this.btnSupprVille) {
-            this.model.removeRow(this.tableVille.getSelectedRow());
+        if (e.getSource() == this.btnSupprNoeud) {
+            this.model.removeRow(this.jTabNoeud.getSelectedRow());
         }
         if (e.getSource() == this.btnClear) {
-            this.txtNomVille.setText(" ");
+            this.txtNomNoeud.setText(" ");
             this.txtX.setText(" ");
             this.txtY.setText(" ");
         }
