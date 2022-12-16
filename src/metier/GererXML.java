@@ -125,9 +125,10 @@ public class GererXML {
 				noeud.setX(x);
 				noeud.setY(y);
 				noeud.setNomX(nomX);
-				noeud.setY(nomY);
+				noeud.setNomY(nomY);
 				return;
 			}
+			this.ctrl.majNoeud();
 		}
 	}
 
