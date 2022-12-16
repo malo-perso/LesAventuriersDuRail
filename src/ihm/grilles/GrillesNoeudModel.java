@@ -21,7 +21,7 @@ public class GrillesNoeudModel extends AbstractTableModel
         Noeud n;
 		ArrayList<Noeud> lstNoeuds = this.ctrl.lstNoeudIHMtoXML();
 
-		tabDonnees = new Object[lstNoeuds.size()][4];
+		this.tabDonnees = new Object[lstNoeuds.size()][5];
         
         if(this.ctrl.lstNoeudXMLtoIHM() != null)
         {
@@ -29,11 +29,11 @@ public class GrillesNoeudModel extends AbstractTableModel
             {
                 n = lstNoeuds.get(lig);
                 
-                tabDonnees[lig][0] = n.getNom();
-                tabDonnees[lig][1] = n.getX();
-                tabDonnees[lig][2] = n.getY();
-                tabDonnees[lig][3] = n.getNomX();
-                tabDonnees[lig][4] = n.getNomY();
+                this.tabDonnees[lig][0] = n.getNom();
+                this.tabDonnees[lig][1] = n.getX();
+                this.tabDonnees[lig][2] = n.getY();
+                this.tabDonnees[lig][3] = n.getNomX();
+                this.tabDonnees[lig][4] = n.getNomY();
             }
 
         }

@@ -7,6 +7,7 @@ import src.metier.Noeud;
 import javax.swing.*;
 import java.awt.event.*;
 
+import java.awt.geom.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Dimension;
@@ -56,6 +57,7 @@ public class PanelPlateau extends JPanel
 		this.ctrl.majIHM();
 	}
 
+
 	//modifier la position d'un noeud
 	public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY)
 	{
@@ -99,7 +101,7 @@ public class PanelPlateau extends JPanel
 			int yNoeud = hashNoeud.get(graphics2d).getY();
 			if (xNoeud-(this.diametre/2) <= x && x <= xNoeud+(this.diametre/2) && yNoeud-(this.diametre/2) <= y && y <= yNoeud+(this.diametre/2)) {
 				return graphics2d;
-			}			
+			}
 		}
 		return null;
 	}
@@ -204,7 +206,6 @@ public class PanelPlateau extends JPanel
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent(g);
-		System.out.println(this.ctrl.getFichierPlateau());
 		Image img = getToolkit().getImage(this.ctrl.getFichierPlateau());
 		
 		g.drawImage(img, 0, 0, this.getWidth() , this.getHeight() , this);
