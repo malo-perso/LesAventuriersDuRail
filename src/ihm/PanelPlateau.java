@@ -6,8 +6,6 @@ import src.metier.Noeud;
 
 import javax.swing.*;
 
-import javafx.scene.shape.Ellipse;
-
 import java.awt.event.*;
 
 import java.awt.geom.*;
