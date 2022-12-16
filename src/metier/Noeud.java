@@ -38,6 +38,14 @@ public class Noeud extends Ellipse2D {
         return this.NomY;
     }
 
+    public boolean setNom(String nom) {
+        if ( nom != null && nom.length() > 0) {
+            this.nom = nom;
+            return true;
+        }
+        return false;
+    }
+
     public boolean setX(int x) {
         if ( x >= 0 && x <= 1200) {
             this.x = x;

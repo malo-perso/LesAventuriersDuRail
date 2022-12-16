@@ -34,15 +34,15 @@ public class GrillesNoeudModel extends AbstractTableModel
         switch(col)
         {
             case 0: return this.lstNoeuds.get(row).getNom();
-            case 1: return String.valueOf(this.lstNoeuds.get(row).getX());
-            case 2: return String.valueOf(this.lstNoeuds.get(row).getY());
+            case 1: return (int) (this.lstNoeuds.get(row).getX());
+            case 2: return (int) (this.lstNoeuds.get(row).getY());
             case 3: return this.lstNoeuds.get(row).getNomX();
             case 4: return this.lstNoeuds.get(row).getNomY();
             default: return null;
         }
     }
 
-	public Class  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }
+	public Class<?>  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }
 
     public void majTable(ArrayList<Noeud> lstNoeuds)
     {   
@@ -50,9 +50,27 @@ public class GrillesNoeudModel extends AbstractTableModel
         this.fireTableRowsInserted(0, this.lstNoeuds.size() - 1);
     }
 
+    public boolean isCellEditable(int row, int col)
+    {
+        return true;
+    }
+
     public void setValueAt(Object value, int row, int col)
     {
         boolean bRet;
+        if (col < 0 || col > 4) return;
+
+        else {
+            switch(col) {
+                case 0 -> bRet = this.lstNoeuds.get(row).setNom((String)value);
+                case 1 -> bRet = this.lstNoeuds.get(row).setX(Integer.parseInt((String)value));
+                case 2 -> bRet = this.lstNoeuds.get(row).setY(Integer.parseInt((String)value));
+                case 3 -> bRet = this.lstNoeuds.get(row).setNomX(Integer.parseInt((String)value));
+                case 4 -> bRet = this.lstNoeuds.get(row).setNomY(Integer.parseInt((String)value));
+            }
+            this.fireTableCellUpdated(row, col);
+            this.ctrl.majIHM();
+        }
         
     }
 
