@@ -183,10 +183,6 @@ public class Controleur{
         return nomNoeuds;
     }
 
-    public boolean majPosNoeud ( int ligne, int colonne, int val ) {
-        return this.gererXML.majPosNoeud  ( ligne, colonne, val );
-    }
-
     public static void main(String[] args) {
         Controleur controleur = new Controleur();
     }

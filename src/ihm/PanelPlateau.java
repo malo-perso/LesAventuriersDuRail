@@ -195,7 +195,13 @@ public class PanelPlateau extends JPanel
 		{
 			//bouger la position si un noeud est sélectionné
 			if (PanelPlateau.this.NoeudCourant != null) {
-				PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+				PanelPlateau.this.ctrl.setPositionNoeud(
+														PanelPlateau.this.NoeudCourant,
+														e.getX(),
+														e.getY(),
+														(int) (e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX())),
+														(int) (e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()))
+													   );
 				majIHM();
 			}
 		}

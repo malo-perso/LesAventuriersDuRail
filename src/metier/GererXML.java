@@ -292,17 +292,6 @@ public class GererXML {
 		return this.lstCarteObjectifs;
 	}
 
-	public boolean majPosNoeud ( int ligne, int colonne, int val )
-	{
-		switch (colonne) {
-			case 1 : return this.lstNoeuds.get(ligne).setX(val);
-			case 2 : return this.lstNoeuds.get(ligne).setY(val);
-			case 3 : return this.lstNoeuds.get(ligne).setNomX(val);
-			case 4 : return this.lstNoeuds.get(ligne).setNomY(val);
-		}
-		return false;
-	}
-
 	public static void main(String[] args){
 
 		Controleur ctrl = new Controleur();
