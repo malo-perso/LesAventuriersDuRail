@@ -239,7 +239,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         if (e.getSource() == this.btnSupprNoeud) {
             if (this.jTabNoeud.getSelectedRow() != -1)
                 this.ctrl.supprimerNoeud(this.jTabNoeud.getSelectedRow());
-            this.model.removeRow(this.jTabNoeud.getSelectedRow()); // reste à faire la méthode removeRow avec GrillesNoeudModel
         }
         if (e.getSource() == this.btnClear) {
             this.txtNomNoeud.setText(" ");
