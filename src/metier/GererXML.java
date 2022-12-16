@@ -111,6 +111,10 @@ public class GererXML {
 		this.lstNoeuds.add(new Noeud(nom, x, y, nomX, nomY));
 	}
 
+	public void supprimerNoeud (int lig) {
+		this.lstNoeuds.remove(lig);
+	}
+
 	public void ecrireXML(String chemin){
 		try{
 			File file = new File("./src/data/mappe/mappe.xml");

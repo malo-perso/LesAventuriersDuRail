@@ -77,12 +77,17 @@ public class Controleur{
     //BAHAHAHAHH
     
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.majIHM(); // modifié
         this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
+        this.majIHM(); // modifié
     }
 
     public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
         this.IHM.setPositionNoeud(noeud, x, y, nomX, nomY);
+    }
+
+    public void supprimerNoeud(int lig) {
+        this.gererXML.supprimerNoeud(lig);
+        this.majIHM();
     }
 
     //TO DO
