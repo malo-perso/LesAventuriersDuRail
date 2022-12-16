@@ -121,7 +121,7 @@ public class Controleur{
     }
 
     public ArrayList<Noeud> lstNoeudIHMtoXML() {        
-        return this.IHM.getNoeuds();
+        return this.gererXML.getLstNoeuds();
     }
 
     public ArrayList<CarteObjectif> lstObjectifIHMtoXML() {
