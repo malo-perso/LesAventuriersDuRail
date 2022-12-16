@@ -5,6 +5,8 @@
 ./src/ihm/PanelRegleJeu.java
 ./src/ihm/PanelResume.java
 
+./src//ihm/grilles/GrillesNoeudModel.java
+
 ./src/metier/Arete.java
 ./src/metier/CarteObjectif.java
 ./src/metier/CarteVehicule.java
