@@ -39,6 +39,7 @@ public class FramePrincipale extends JFrame
 		//this.pack();
 	}
 
+<<<<<<< Updated upstream
 	
     public void paintComponent(Graphics g)
     {
@@ -49,5 +50,97 @@ public class FramePrincipale extends JFrame
     {
         new FramePrincipale();
     }
+=======
+
+    }
+
+    /*****************/
+    /*     NOEUD     */
+    /*****************/
+
+    public void majNoeud()
+    {
+        //TO DO
+    }
+
+
+    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds()); // modifié
+        this.panelPlateau.majIHM();
+    }
+
+    public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
+        //this.panelRegleJeu.setPositionNoeud(noeud.getNom(), x, y, nomX, nomY);
+        this.panelPlateau.majIHM();
+    }
+    
+    /*****************/
+    /*     Arete     */
+    /*****************/
+    
+    public void majArete()
+    {   
+        //TO DO
+    }
+
+    /*****************/
+    /*    CarteObj   */
+    /*****************/
+
+    public void majCarteObjectif()
+    {   
+        //TO DO
+    }
+
+    //Permet de changer de panel 
+    //nomPanel : nom du panel a afficher
+    public void changePanel(String nomPanel){
+        this.card = (CardLayout) this.panelFormulaire.getLayout();
+        this.card.show(this.panelFormulaire,nomPanel);
+    }
+
+
+    public void majIHM() {
+        this.panelPlateau.majIHM();
+        this.panelPlateau.repaint(); 
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
+        //this.panelPlateau.majTEST(this.ctrl.getLstNoeuds());
+        this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
+    }
+
+    
+    public void actionPerformed( ActionEvent e){
+
+        if(e.getSource() == this.menuRegles){
+
+            try{
+                System.out.println("Aide");
+                Desktop.getDesktop().open(reglePDF);
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
+		if(e.getSource() == this.menuNouveau){
+			try{
+				System.out.println("Nouveau");
+				JFileChooser chooser = new JFileChooser(".");
+				
+				int res = chooser.showOpenDialog(this);
+                if(res == JFileChooser.APPROVE_OPTION)
+                    this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
+			}catch(Exception erreur){erreur.printStackTrace();}
+		}
+        if(e.getSource() == this.menuOuvrir){
+            try{
+				System.out.println("Ouvrir");
+				JFileChooser chooser = new JFileChooser(".");
+				
+				int res = chooser.showOpenDialog(this);
+				if (res == JFileChooser.APPROVE_OPTION)
+					this.ctrl.lireXML(chooser.getSelectedFile());
+
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
+    }
+
+>>>>>>> Stashed changes
 }
 
