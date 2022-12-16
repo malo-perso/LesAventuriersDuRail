@@ -43,6 +43,13 @@ public class PanelPlateau extends JPanel
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
 
+    public void majTEST(ArrayList<Noeud> lNoeuds)
+    {
+        this.hashNoeud = new HashMap<Graphics2D,Noeud>();
+    	for (Noeud noeud : lNoeuds)
+    		this.ajouterNoeud(noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY());
+        majIHM();
+    }
 
 	//ajoute un noeud au plateau
 	public void ajouterNoeud(int x, int y, int nomX, int nomY) {
@@ -54,7 +61,7 @@ public class PanelPlateau extends JPanel
 		g2D.setColor(Color.RED);
 		g2D.fillOval(x-(this.diametre/2), y-(this.diametre/2), diametre, diametre);
 		this.hashNoeud.put(g2D, new Noeud("noeud", x, y, nomX, nomY));
-		this.ctrl.majIHM();
+		//this.ctrl.majIHM();
 	}
 
 
@@ -150,7 +157,6 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
 					PanelPlateau.this.ctrl.ajouterNoeud("Nouvelle ville", e.getX(), e.getY(), e.getX()+20, e.getY()+20);
 			}
-
 		}
 
 		public ArrayList<Noeud> getLstNoeuds()

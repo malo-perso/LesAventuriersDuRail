@@ -6,8 +6,6 @@ import src.metier.Arete;
 import src.metier.Type;
 
 import java.awt.Image;
-import java.awt.Graphics2D;
-import java.awt.Graphics;
 import java.awt.event.*;
 
 import javax.swing.*;

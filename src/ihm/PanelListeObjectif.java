@@ -129,8 +129,13 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     }
 
     // fonction pour mettre à jour les composants des 2 JComboBox 
-    public void majTableNoeud(){
+    public void majTableNoeud(ArrayList<Noeud> lstNoeud){
         this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+        ArrayList<String> nomNoeuds = new ArrayList<String>();
+        for (Noeud n : lstNoeud) {
+            nomNoeuds.add(n.getNom());
+        };
+
         this.kbNoeud1 = new JComboBox<String>(this.vNoeud);
         this.kbNoeud2 = new JComboBox<String>(this.vNoeud);
     }
