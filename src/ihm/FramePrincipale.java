@@ -122,13 +122,15 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     public void majNoeud()
     {
-        //TO DO
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
     }
 
 
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds()); // modifié
         this.panelPlateau.majIHM();
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
+
     }
 
     public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
