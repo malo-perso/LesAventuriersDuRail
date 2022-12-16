@@ -128,11 +128,6 @@ public class FramePrincipale extends JFrame implements ActionListener
         return this.panelArrete.getAretes();
     }
 
-    //geter des listes de noeud du panel regle du jeu
-    public ArrayList<Noeud> getNoeuds() {
-        return this.panelRegleJeu.getNoeuds();
-    }
-
     
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
         this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML()); // modifié
