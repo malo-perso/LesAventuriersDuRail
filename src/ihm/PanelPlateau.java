@@ -7,6 +7,7 @@ import src.metier.Noeud;
 import javax.swing.*;
 
 import java.awt.event.*;
+import java.lang.Math;
 
 import java.awt.geom.*;
 import java.awt.Color;
@@ -26,6 +27,9 @@ public class PanelPlateau extends JPanel
 	private Controleur  ctrl;
 	private Noeud  NoeudCourant;
 	private int diametre;
+
+    //PROVISOIRE
+    private final int TAILLEWAGON = 100;
 
 	public PanelPlateau(Controleur ctrl)
 	{
@@ -111,7 +115,19 @@ public class PanelPlateau extends JPanel
 
 		Graphics2D g1 = (Graphics2D)g;
 		//parcourir la liste des noeuds et les afficher les coordonnées des noeuds correspondans
-		for (Noeud noeud : this.ctrl.getLstNoeuds())
+		
+        for (Arete arete : this.ctrl.getLstAretes()) {
+            double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX()-arete.getNoeud2().getX(),2)+Math.pow(arete.getNoeud1().getY()-arete.getNoeud2().getY(),2));
+            
+            //a garder pour le moment 
+            //if(longueur > TAILLEWAGON * arete.getLongueur())            
+            //    System.out.println("higehigigikgnfkbnfb");
+
+            g.drawLine((int)arete.getNoeud1().getX(), (int)arete.getNoeud1().getY(), (int)arete.getNoeud2().getX(), (int)arete.getNoeud2().getY());
+            
+        }
+        
+        for (Noeud noeud : this.ctrl.getLstNoeuds())
 		{
 			g1.draw(noeud);
 			g.setColor(Color.BLACK);
@@ -120,6 +136,8 @@ public class PanelPlateau extends JPanel
 		}
 
 		g.setColor(Color.RED);
+
+        
 
 	}
 
@@ -144,8 +162,11 @@ public class PanelPlateau extends JPanel
 				if (SourisSurNoeud(e.getX(), e.getY())!= null)
 					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
 				else //ajouter un noeud
-					PanelPlateau.this.ctrl.ajouterNoeud("Nouvelle ville", e.getX(), e.getY(), e.getX()+20, e.getY()+20);
-			}
+                {
+                    String nomVille = JOptionPane.showInputDialog("Nom de la ville");
+                    PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+                }
+            }
 		}
 
 		//si le clic souris est relaché, on ne sélectionne plus de noeud

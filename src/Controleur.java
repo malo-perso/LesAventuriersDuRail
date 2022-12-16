@@ -144,6 +144,14 @@ public class Controleur{
         return this.gererXML.getLstNoeuds();
     }
 
+    public ArrayList<Arete> getLstAretes() {
+        return this.gererXML.getLstAretes();
+    }
+
+    public ArrayList<CarteObjectif> getLstObjectifs() {
+        return this.gererXML.getLstCarteObjectifs();
+    }
+
     public ArrayList<Arete> lstAreteXMLtoIHM() {
         //test
         ArrayList<Arete> lstArete = new ArrayList<Arete>();
