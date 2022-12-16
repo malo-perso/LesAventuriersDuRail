@@ -1,13 +1,5 @@
 package src.metier;
-<<<<<<< Updated upstream
 public class Noeud{
-=======
-
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-
-public class Noeud extends Ellipse2D {
->>>>>>> Stashed changes
     private String nom;
     private int x;
     private int y;
@@ -22,11 +14,11 @@ public class Noeud extends Ellipse2D {
         return this.nom;
     }
 
-    public double getX() {
+    public int getX() {
         return this.x;
     }
 
-    public double getY() {
+    public int getY() {
         return this.y;
     }
 
@@ -36,35 +28,5 @@ public class Noeud extends Ellipse2D {
 
     public void sety(int y) {
         this.y = y;
-    }
-
-    @Override
-    public Rectangle2D getBounds2D() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public double getHeight() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public double getWidth() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public void setFrame(double arg0, double arg1, double arg2, double arg3) {
-        // TODO Auto-generated method stub
-        
     }
 }
