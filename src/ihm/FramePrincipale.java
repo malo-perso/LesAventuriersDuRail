@@ -144,9 +144,9 @@ public class FramePrincipale extends JFrame implements ActionListener
     public void majIHM() {
         this.panelPlateau.majIHM();
         this.panelPlateau.repaint(); 
-
         this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML());
-        this.panelListeObjectif.majTableNoeud();
+        this.panelPlateau.majTEST(this.ctrl.lstNoeudIHMtoXML());
+        this.panelListeObjectif.majTableNoeud(this.ctrl.lstNoeudIHMtoXML());
     }
 
     
