@@ -40,6 +40,7 @@ public class GrillesNoeudModel extends AbstractTableModel
             case 4: return this.lstNoeuds.get(row).getNomY();
             default: return null;
         }
+
     }
 
 	public Class  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }

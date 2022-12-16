@@ -6,8 +6,6 @@ import src.metier.Noeud;
 
 import javax.swing.*;
 
-import javafx.scene.shape.Ellipse;
-
 import java.awt.event.*;
 
 import java.awt.geom.*;
@@ -122,6 +120,11 @@ public class PanelPlateau extends JPanel
 		}
 
 		g.setColor(Color.RED);
+
+        for (Arete arete : this.ctrl.getLstAretes()) {
+            g.drawLine((int)arete.getNoeud1().getX(), (int)arete.getNoeud1().getY(), (int)arete.getNoeud2().getX(), (int)arete.getNoeud2().getY());
+            
+        }
 
 	}
 
