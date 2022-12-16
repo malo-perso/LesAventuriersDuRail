@@ -19,7 +19,7 @@ public class GrillesNoeudModel extends AbstractTableModel
         this.ctrl = ctrl;
 
         Noeud n;
-		lstNoeuds = this.ctrl.lstNoeudIHMtoXML();
+		lstNoeuds = this.ctrl.getLstNoeuds();
         
         this.tabEntetes = new String[] { "Nom", "X", "Y", "Nom X", "Nom Y"};
     }
@@ -53,5 +53,8 @@ public class GrillesNoeudModel extends AbstractTableModel
     public void setValueAt(Object value, int row, int col)
     {
         boolean bRet;
+        
     }
+
+    
 }

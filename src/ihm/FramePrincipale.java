@@ -116,6 +116,44 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     }
 
+    /*****************/
+    /*     NOEUD     */
+    /*****************/
+
+    public void majNoeud()
+    {
+        //TO DO
+    }
+
+
+    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds()); // modifié
+        this.panelPlateau.majIHM();
+    }
+
+    public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
+        //this.panelRegleJeu.setPositionNoeud(noeud.getNom(), x, y, nomX, nomY);
+        this.panelPlateau.majIHM();
+    }
+    
+    /*****************/
+    /*     Arete     */
+    /*****************/
+    
+    public void majArete()
+    {   
+        //TO DO
+    }
+
+    /*****************/
+    /*    CarteObj   */
+    /*****************/
+
+    public void majCarteObjectif()
+    {   
+        //TO DO
+    }
+
     //Permet de changer de panel 
     //nomPanel : nom du panel a afficher
     public void changePanel(String nomPanel){
@@ -123,30 +161,13 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
-    //geter des listes d'aretes du panel aretes
-    public ArrayList<Arete> getAretes() {
-        return this.panelArrete.getAretes();
-    }
 
-    
-    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML()); // modifié
-        this.panelPlateau.ajouterNoeud(x, y, nomX, nomY);
-    }
-
-
-    public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
-        this.panelRegleJeu.setPositionNoeud(noeud.getNom(), x, y, nomX, nomY);
-        this.panelPlateau.setPositionNoeud(noeud, x, y, nomX, nomY);
-    }
-
-    //
     public void majIHM() {
         this.panelPlateau.majIHM();
         this.panelPlateau.repaint(); 
-        this.panelRegleJeu.maJTable(this.ctrl.lstNoeudIHMtoXML());
-        this.panelPlateau.majTEST(this.ctrl.lstNoeudIHMtoXML());
-        this.panelListeObjectif.majTableNoeud(this.ctrl.lstNoeudIHMtoXML());
+        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
+        //this.panelPlateau.majTEST(this.ctrl.getLstNoeuds());
+        this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
     }
 
     

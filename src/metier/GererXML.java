@@ -111,8 +111,24 @@ public class GererXML {
 		this.lstNoeuds.add(new Noeud(nom, x, y, nomX, nomY));
 	}
 
-	public void supprimerNoeud (int lig) {
-		this.lstNoeuds.remove(lig);
+	public void supprimerNoeud (Noeud n) {
+		this.lstNoeuds.remove(n);
+				
+	}
+
+	public void setPositionNoeud(Noeud n, int x, int y, int nomX, int nomY)
+	{	
+		for (Noeud noeud : this.lstNoeuds)
+		{
+			if(noeud.equals(n))
+			{	
+				noeud.setX(x);
+				noeud.setY(y);
+				noeud.setNomX(nomX);
+				noeud.setY(nomY);
+				return;
+			}
+		}
 	}
 
 	public void ecrireXML(String chemin){
@@ -295,5 +311,9 @@ public class GererXML {
 		try{
 			g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}
+	}
+
+	public void ajouterArete(Noeud n1, Noeud n2, int n) {
+		//TO DO
 	}
 }

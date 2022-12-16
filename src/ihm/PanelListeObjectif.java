@@ -147,12 +147,12 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         for(int i=0; i<this.tabCarte.getRowCount()-1; i++){
             Noeud n1;
             Noeud n2;
-            for (int cpt = 0; cpt < this.ctrl.lstNoeudXMLtoIHM().size(); cpt++) {
-                if(this.tabCarte.getValueAt(i, 0).equals(this.ctrl.lstNoeudXMLtoIHM().get(cpt).getNom())){
-                    n1 = this.ctrl.lstNoeudXMLtoIHM().get(cpt);
+            for (int cpt = 0; cpt < this.ctrl.getLstNoeuds().size(); cpt++) {
+                if(this.tabCarte.getValueAt(i, 0).equals(this.ctrl.getLstNoeuds().get(cpt).getNom())){
+                    n1 = this.ctrl.getLstNoeuds().get(cpt);
                 }
-                if(this.tabCarte.getValueAt(i, 1).equals(this.ctrl.lstNoeudXMLtoIHM().get(cpt).getNom())){
-                    n2 = this.ctrl.lstNoeudXMLtoIHM().get(cpt);
+                if(this.tabCarte.getValueAt(i, 1).equals(this.ctrl.getLstNoeuds().get(cpt).getNom())){
+                    n2 = this.ctrl.getLstNoeuds().get(cpt);
                 }
             }
 

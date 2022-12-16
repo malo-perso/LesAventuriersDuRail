@@ -55,20 +55,70 @@ public class Controleur{
 		return couleurs;
     }
 
-    //met à jour l'IHM
+
     public void majIHM() {
         this.IHM.majIHM();
     }
 
-    //geter de l IHM
     public FramePrincipale getIHM() {
         return this.IHM;
     }
 
-    //geter du metier
     public GererXML getMetier() {
         return this.gererXML;
     }
+
+    /*****************/
+    /*     NOEUD     */
+    /*****************/
+
+    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
+        //ajoute le noeud a l'arraylist
+        this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
+        //majNoeud
+        this.majIHM(); // modifié
+    }
+
+    public void supprimerNoeud(Noeud n) {
+        this.gererXML.supprimerNoeud(n);
+        this.majIHM();
+    }
+
+    public void setPositionNoeud(Noeud n, int x, int y, int nomX, int nomY)
+    {
+        this.gererXML.setPositionNoeud(n,x,y,nomX,nomY);
+    }
+
+    public void majNoeud() {
+        this.IHM.majNoeud();
+    }
+    
+    /*****************/
+    /*     Arete     */
+    /*****************/
+
+    public void ajouterArete(Noeud n1, Noeud n2, int n) {
+        this.gererXML.ajouterArete(n1,n2,n);
+        this.majArete();
+    }
+    
+    public void majArete()
+    {   
+        //TO DO
+    }
+
+    /*****************/
+    /*    CarteObj   */
+    /*****************/
+
+    public void majCarteObjectif()
+    {   
+        //TO DO
+    }
+
+
+
+    
 
     //GROS BORDEL EN DESSOUS
     //              || ||
@@ -76,38 +126,28 @@ public class Controleur{
     //              \/ \/
     //BAHAHAHAHH
     
-    public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
-        this.majIHM(); // modifié
-    }
-
+    
+    //ancienne methode
+    /*
     public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
         this.IHM.setPositionNoeud(noeud, x, y, nomX, nomY);
-    }
+    }*/
 
-    public void supprimerNoeud(int lig) {
-        this.gererXML.supprimerNoeud(lig);
-        this.majIHM();
-    }
+    
 
     //TO DO
 	public void enregistrer() {
         System.out.println("Enregistrer");
 	}
 
-    public ArrayList<Noeud> lstNoeudXMLtoIHM() {
-        //test
-        ArrayList<Noeud> lstNoeud = new ArrayList<Noeud>();
-        lstNoeud.add(new Noeud("test",5,10,5,10));
-        lstNoeud.add(new Noeud("ville2",25,10,25,10));
-
+    public ArrayList<Noeud> getLstNoeuds() {
         return this.gererXML.getLstNoeuds();
     }
 
     public ArrayList<Arete> lstAreteXMLtoIHM() {
         //test
         ArrayList<Arete> lstArete = new ArrayList<Arete>();
-        lstArete.add(new Arete( this.lstNoeudXMLtoIHM().get(0) , this.lstNoeudXMLtoIHM().get(1)  ,  10, new Type("orange")));
+        lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, new Type("orange")));
         
         return lstArete;
     }
@@ -115,14 +155,11 @@ public class Controleur{
     public ArrayList<CarteObjectif> lstObjectifXMLtoIHM() {
         //test
         ArrayList<CarteObjectif> lstObjectif = new ArrayList<CarteObjectif>();
-        lstObjectif.add(new CarteObjectif( this.lstNoeudXMLtoIHM().get(0) , this.lstNoeudXMLtoIHM().get(1)  ,  10));
+        lstObjectif.add(new CarteObjectif( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10));
         
         return lstObjectif;
     }
-
-    public ArrayList<Noeud> lstNoeudIHMtoXML() {        
-        return this.gererXML.getLstNoeuds();
-    }
+    
 
     public ArrayList<CarteObjectif> lstObjectifIHMtoXML() {
         return null;//this.IHM.getObjectif();

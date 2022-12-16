@@ -5,6 +5,9 @@ import src.metier.Arete;
 import src.metier.Noeud;
 
 import javax.swing.*;
+
+import javafx.scene.shape.Ellipse;
+
 import java.awt.event.*;
 
 import java.awt.geom.*;
@@ -23,16 +26,12 @@ import java.awt.Image;
 public class PanelPlateau extends JPanel
 {
 	private Controleur  ctrl;
-	private Color[]     tabRouge;
-	private Graphics2D  NoeudCourant;
-	private HashMap<Graphics2D,Noeud> hashNoeud;
+	private Noeud  NoeudCourant;
 	private int diametre;
 
 	public PanelPlateau(Controleur ctrl)
 	{
 		this.ctrl     = ctrl;
-		//TO DO
-		this.hashNoeud = new HashMap<Graphics2D,Noeud>();
 
 		this.NoeudCourant = null;
 		this.diametre = this.ctrl.getMetier().getDiametre();
@@ -42,44 +41,59 @@ public class PanelPlateau extends JPanel
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
-
+	
+	/*
+	//afficher les noeuds
     public void majTEST(ArrayList<Noeud> lNoeuds)
     {
+		this.ctrl.getLstNoeuds();
         this.hashNoeud = new HashMap<Graphics2D,Noeud>();
     	for (Noeud noeud : lNoeuds)
     		this.ajouterNoeud(noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY());
         majIHM();
-    }
+    }*/
 
 	//ajoute un noeud au plateau
 	public void ajouterNoeud(int x, int y, int nomX, int nomY) {
-		this.ajouterNoeud((Graphics2D) this.getGraphics(), x, y, nomX, nomY);
+		this.ctrl.ajouterNoeud("nom", x, y, nomX, nomY);
+		//this.ajouterNoeud((Graphics2D) this.getGraphics(), x, y, nomX, nomY);
 	}
 
-	public void ajouterNoeud(Graphics2D g2D, int x, int y, int nomX, int nomY)
+	//supprimer un noeud
+	public void supprimerNoeud(Noeud n)
 	{
-		g2D.setColor(Color.RED);
-		g2D.fillOval(x-(this.diametre/2), y-(this.diametre/2), diametre, diametre);
-		this.hashNoeud.put(g2D, new Noeud("noeud", x, y, nomX, nomY));
-		//this.ctrl.majIHM();
-	}
-
-
-	//modifier la position d'un noeud
-	public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY)
-	{
-		for ( Graphics2D g2D : this.hashNoeud.keySet() )
-			if ( this.hashNoeud.get(g2D) == noeud) {
-				this.hashNoeud.get(g2D).setX(x);
-				this.hashNoeud.get(g2D).setY(y);
-				this.hashNoeud.get(g2D).setNomX(nomX);
-				this.hashNoeud.get(g2D).setNomY(nomY);
-			}
-
+		this.ctrl.supprimerNoeud(n);
 		this.ctrl.majIHM();
 	}
 
+	//modifier la position d'un noeud lors d'un deplacem
+	public void setPositionNoeud(int x, int y, int nomX, int nomY)
+	{
+		this.ctrl.setPositionNoeud(NoeudCourant,x, y, nomX, nomY);
+		this.ctrl.majIHM();
+	}
+
+
+	//retourne le noeud correspondant au clique de la souris
+	public Noeud SourisSurNoeud(int x, int y){
+		for (Noeud n : this.ctrl.getLstNoeuds())
+		{
+			int xNoeud = (int) n.getX();
+			int yNoeud = (int) n.getY();
+			if (xNoeud-(this.diametre/2) <= x && x <= xNoeud+(this.diametre/2) && yNoeud-(this.diametre/2) <= y && y <= yNoeud+(this.diametre/2)) {
+				return n;
+			}
+		}
+		return null;
+	}
+
+	public void majIHM()
+	{
+		super.repaint();		
+	}
+
 	//PAS ENCORE UTILISE
+	/*
 	//trace les aretes entre les noeuds
 	public void tracerArete(Graphics2D g2D, int x, int y)
 	{
@@ -91,45 +105,20 @@ public class PanelPlateau extends JPanel
 			}
 		}	
 	}
-	
-	//supprimer un noeud
-	public void removeNoeud(Graphics2D g2D)
-	{
-		this.hashNoeud.remove(g2D);
-		this.ctrl.majIHM();
-	}
-	
-
-	//retourne le noeud correspondant au clique de la souris
-	public Graphics2D clickSurNoeud(int x, int y)
-	{
-		for (Graphics2D graphics2d : hashNoeud.keySet()) {
-			int xNoeud = hashNoeud.get(graphics2d).getX();
-			int yNoeud = hashNoeud.get(graphics2d).getY();
-			if (xNoeud-(this.diametre/2) <= x && x <= xNoeud+(this.diametre/2) && yNoeud-(this.diametre/2) <= y && y <= yNoeud+(this.diametre/2)) {
-				return graphics2d;
-			}
-		}
-		return null;
-	}
-
-	public void majIHM()
-	{
-		super.repaint();		
-	}
-
+	*/
 	public void paint(Graphics g)
 	{
 		super.paint(g);
 		g.setColor(Color.RED);
 
+		Graphics2D g1 = (Graphics2D)g;
 		//parcourir la liste des noeuds et les afficher les coordonnées des noeuds correspondans
-		for (Graphics2D graphics2d : hashNoeud.keySet()) {
-			int x = hashNoeud.get(graphics2d).getX();
-			int y = hashNoeud.get(graphics2d).getY();
-			g.fillOval(x-(this.diametre/2), y-(this.diametre/2), this.diametre, this.diametre);
-			g.drawString(PanelPlateau.this.hashNoeud.get(graphics2d).getNom(), hashNoeud.get(graphics2d).getNomX(), hashNoeud.get(graphics2d).getNomY());
-			//graphics2d.draw(new Ellipse2D.Double(hashNoeud.get(graphics2d).getX(), hashNoeud.get(graphics2d).getY(), 20, 20));
+		for (Noeud noeud : this.ctrl.getLstNoeuds())
+		{
+			g1.draw(noeud);
+			g.setColor(Color.BLACK);
+			g1.fillOval((int) noeud.getX()-this.diametre/2, (int) noeud.getY()-this.diametre/2, this.diametre, this.diametre);
+			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
 		g.setColor(Color.RED);
@@ -145,27 +134,20 @@ public class PanelPlateau extends JPanel
 			if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				//vérifier si on a cliqué sur un noeud et le supprimer
-				if (clickSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.removeNoeud(clickSurNoeud(e.getX(), e.getY()));
+				if (SourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
+					PanelPlateau.this.supprimerNoeud(NoeudCourant);
+					PanelPlateau.this.NoeudCourant = null;
 			}
 			//if click gauche, ajouter un noeud
 			else if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (clickSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.NoeudCourant = clickSurNoeud(e.getX(), e.getY());
+				if (SourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
 				else //ajouter un noeud
 					PanelPlateau.this.ctrl.ajouterNoeud("Nouvelle ville", e.getX(), e.getY(), e.getX()+20, e.getY()+20);
 			}
-		}
-
-		public ArrayList<Noeud> getLstNoeuds()
-		{	
-			ArrayList<Noeud> lstNoeuds = new ArrayList<Noeud>();
-			for (Graphics2D graphics2d : hashNoeud.keySet()) {
-				lstNoeuds.add(hashNoeud.get(graphics2d));
-			}
-			return lstNoeuds;
 		}
 
 		//si le clic souris est relaché, on ne sélectionne plus de noeud
@@ -181,9 +163,8 @@ public class PanelPlateau extends JPanel
 				System.out.println("double clicked");
 				
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (clickSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.NoeudCourant = clickSurNoeud(e.getX(), e.getY());
-
+				if (SourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
 			}
 		}
 		
@@ -195,7 +176,7 @@ public class PanelPlateau extends JPanel
 		{
 			//bouger la position si un noeud est sélectionné
 			if (PanelPlateau.this.NoeudCourant != null) {
-				PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.hashNoeud.get(PanelPlateau.this.NoeudCourant), e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+				PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
 				majIHM();
 			}
 		}
@@ -203,7 +184,7 @@ public class PanelPlateau extends JPanel
 		public void mouseMoved(MouseEvent e) 
 		{
 			//si on survole un noeud avec la souris, le sélectionner
-			if (clickSurNoeud(e.getX(), e.getY())!= null)
+			if (SourisSurNoeud(e.getX(), e.getY())!= null)
 				System.out.println("survol");
 		}
 	}
