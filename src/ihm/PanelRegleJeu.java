@@ -166,7 +166,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
 
 
     public void maJTable(ArrayList<Noeud> noeuds) {
-        this.model = new GrillesNoeudModel(this.ctrl); // modifié
+        this.model.majTable(noeuds);
     }
     // ai supprimé ajouterNoeud car le contenu de la table se cale uniquement sur le métier
     // si changement dans le métier il y a, appeler la méthode maJTable

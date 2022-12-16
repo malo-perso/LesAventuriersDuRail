@@ -21,7 +21,7 @@ public class GrillesNoeudModel extends AbstractTableModel
         Noeud n;
 		ArrayList<Noeud> lstNoeuds = this.ctrl.lstNoeudIHMtoXML();
 
-		tabDonnees = new Object[lstNoeuds.size()][4];
+		tabDonnees = new Object[lstNoeuds.size()][5];
         
         if(this.ctrl.lstNoeudXMLtoIHM() != null)
         {
@@ -29,11 +29,11 @@ public class GrillesNoeudModel extends AbstractTableModel
             {
                 n = lstNoeuds.get(lig);
                 
-                tabDonnees[lig][0] = n.getNom();
-                tabDonnees[lig][1] = n.getX();
-                tabDonnees[lig][2] = n.getY();
-                tabDonnees[lig][3] = n.getNomX();
-                tabDonnees[lig][4] = n.getNomY();
+                this.tabDonnees[lig][0] = n.getNom();
+                this.tabDonnees[lig][1] = n.getX();
+                this.tabDonnees[lig][2] = n.getY();
+                this.tabDonnees[lig][3] = n.getNomX();
+                this.tabDonnees[lig][4] = n.getNomY();
             }
 
         }
@@ -47,6 +47,30 @@ public class GrillesNoeudModel extends AbstractTableModel
 	public String getColumnName (int col)          { return this.tabEntetes[col];        }
 	public Object getValueAt    (int row, int col) { return this.tabDonnees[row][col];   }
 	public Class  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }
+
+    public void majTable(ArrayList<Noeud> lstNoeuds)
+    {   
+        Noeud n;
+
+        tabDonnees = new Object[lstNoeuds.size()][5];
+        
+        if(this.ctrl.lstNoeudXMLtoIHM() != null)
+        {
+            for (int lig=0; lig<lstNoeuds.size(); lig++)
+            {
+                n = lstNoeuds.get(lig);
+                
+                this.tabDonnees[lig][0] = n.getNom();
+                this.tabDonnees[lig][1] = n.getX();
+                this.tabDonnees[lig][2] = n.getY();
+                this.tabDonnees[lig][3] = n.getNomX();
+                this.tabDonnees[lig][4] = n.getNomY();
+            }
+
+        }
+        
+        this.tabEntetes = new String[] { "Nom", "X", "Y", "Nom X", "Nom Y"};
+    }
 
     public void setValueAt(Object value, int row, int col)
     {
