@@ -21,7 +21,7 @@ public class GrillesNoeudModel extends AbstractTableModel
         Noeud n;
 		ArrayList<Noeud> lstNoeuds = this.ctrl.lstNoeudIHMtoXML();
 
-		tabDonnees = new Object[lstNoeuds.size()][5];
+		this.tabDonnees = new Object[lstNoeuds.size()][5];
         
         if(this.ctrl.lstNoeudXMLtoIHM() != null)
         {
