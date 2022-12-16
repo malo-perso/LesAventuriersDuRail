@@ -1,32 +1,106 @@
 package src.metier;
-public class Noeud{
+
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+
+public class Noeud extends Ellipse2D {
     private String nom;
     private int x;
     private int y;
+    private int NomX;
+    private int NomY;
 
-    public Noeud(String nom, int x, int y) {
+    public Noeud(String nom, int x, int y, int NomX, int NomY) {
         this.nom = nom;
         this.x = x;
         this.y = y;
+        this.NomX = NomX;
+        this.NomY = NomY;
     }
 
     public String getNom() {
         return this.nom;
     }
 
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
-    public void setx(int x) {
-        this.x = x;
+    public int getNomX() {
+        return this.NomX;
     }
 
-    public void sety(int y) {
-        this.y = y;
+    public int getNomY() {
+        return this.NomY;
+    }
+
+    public boolean setX(int x) {
+        if ( x >= 0 && x <= 1200) {
+            this.x = x;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setY(int y) {
+        if ( y >= 0 && y <= 1200) {
+            this.y = y;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setNomX(int NomX) {
+        if ( NomX >= 0 && NomX <= 1200) {
+            this.NomX = NomX;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setNomY(int NomY) {
+        if ( NomY >= 0 && NomY <= 1200) {
+            this.NomY = NomY;
+            return true;
+        }
+        return false;
+    }
+
+    public String toString(){
+        return this.nom + ";" + this.x + ";" + this.y;
+    }
+
+    @Override
+    public Rectangle2D getBounds2D() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getHeight() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getWidth() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public void setFrame(double arg0, double arg1, double arg2, double arg3) {
+        // TODO Auto-generated method stub
+        
     }
 }
