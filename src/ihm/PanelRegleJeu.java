@@ -164,13 +164,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public int getNbWagonJoueur() {return this.nbWagonJoueur;}
     public int getNbWagonFin() {return this.nbWagonFin;}
 
-    public ArrayList<Noeud> getNoeuds() {
-        ArrayList<Noeud> noeuds = new ArrayList<Noeud>();
-        for (int i = 0; i < this.model.getRowCount(); i++) {
-            noeuds.add(new Noeud((String) this.model.getValueAt(i, 0), (int) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2), 0 , 0));
-        }
-        return noeuds;
-    }
 
     public void maJTable(ArrayList<Noeud> noeuds) {
         this.model = new GrillesNoeudModel(this.ctrl); // modifié
