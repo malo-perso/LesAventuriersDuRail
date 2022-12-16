@@ -6,8 +6,6 @@ import src.metier.Noeud;
 
 import javax.swing.*;
 
-import javafx.scene.shape.Ellipse;
-
 import java.awt.event.*;
 
 import java.awt.geom.*;
@@ -109,15 +107,15 @@ public class PanelPlateau extends JPanel
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		g.setColor(Color.RED);
 
 		Graphics2D g1 = (Graphics2D)g;
 		//parcourir la liste des noeuds et les afficher les coordonnées des noeuds correspondans
 		for (Noeud noeud : this.ctrl.getLstNoeuds())
 		{
-			g1.draw(noeud);
-			g.setColor(Color.BLACK);
+			//g1.draw(noeud);
+			g.setColor(Color.RED);
 			g1.fillOval((int) noeud.getX()-this.diametre/2, (int) noeud.getY()-this.diametre/2, this.diametre, this.diametre);
+			g.setColor(Color.BLACK);
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
@@ -176,7 +174,8 @@ public class PanelPlateau extends JPanel
 		{
 			//bouger la position si un noeud est sélectionné
 			if (PanelPlateau.this.NoeudCourant != null) {
-				PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+				//PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX(), e.getY());
+				PanelPlateau.this.NoeudCourant.setFrame( e.getX() / 30d , e.getY() / 30d, PanelPlateau.this.diametre /1d, PanelPlateau.this.diametre /1d);
 				majIHM();
 			}
 		}
