@@ -130,7 +130,8 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelAll.add(this.panelNoeud);
         this.panelAll.add(this.panelArrete);
         this.panelAll.add(this.panelObjectif);
-        this.add(this.panelAll);
+        this.add(new JLabel("Resumer de l'ensemble des parametres",SwingConstants.CENTER),BorderLayout.NORTH);
+        this.add(this.panelAll,BorderLayout.CENTER);
         this.add(this.panelBtn,BorderLayout.SOUTH);
         
         this.btnRetour.addActionListener(this);
