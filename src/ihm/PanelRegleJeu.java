@@ -57,11 +57,11 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.btnSupprNoeud = new JButton("Supprimer -");
         this.btnSuivant    = new JButton("Suivant");
         
-        this.txtNbJoueurMin   = new JTextField(this.nbJoueurMin+" ");
-        this.txtNbJoueurMax   = new JTextField(this.nbJoueurMax+" ");
-        this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+" ");
-        this.txtDoubleVoie    = new JTextField(this.doubleVoie+" ");
-        this.txtNbWagonFin    = new JTextField(this.nbWagonFin+" ");
+        this.txtNbJoueurMin   = new JTextField(this.nbJoueurMin+"");
+        this.txtNbJoueurMax   = new JTextField(this.nbJoueurMax+"");
+        this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+"");
+        this.txtDoubleVoie    = new JTextField(this.doubleVoie+"");
+        this.txtNbWagonFin    = new JTextField(this.nbWagonFin+"");
         this.txtNomNoeud      = new JTextField();
         this.txtTailleNoeud   = new JTextField();
         this.txtX    = new JTextField();
