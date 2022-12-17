@@ -241,7 +241,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         }
         if (e.getSource() == this.btnSuivant) {
             this.setVisible(false);
-            this.ctrl.getIHM().changePanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelVehicule");
         }
     }
 
