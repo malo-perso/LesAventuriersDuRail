@@ -158,7 +158,7 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
-					if(nomVille.equals("") || nomVille.equals(null))
+					if(nomVille.equals("") || nomVille == null)
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
 					else
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
@@ -190,16 +190,41 @@ public class PanelPlateau extends JPanel
 	{
 		public void mouseDragged(MouseEvent e) 
 		{
+			int largeur = e.getX();
+			int largeurNom = (int)(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()));		
+			int hauteur = e.getY();
+			int hauteurNom = (int)(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()));
 			//bouger la position si un noeud est sélectionné
 			if (PanelPlateau.this.NoeudCourant != null) {
 				//PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX(), e.getY());
 				PanelPlateau.this.NoeudCourant.setFrame( e.getX() / 30d , e.getY() / 30d, PanelPlateau.this.diametre /1d, PanelPlateau.this.diametre /1d);
+				
+				if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
+				{
+					largeur = PanelPlateau.this.getWidth();
+					largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX()));
+					if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
+					{
+						hauteur = PanelPlateau.this.getHeight();
+						hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
+					}
+				}
+				else if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
+				{
+					hauteur = PanelPlateau.this.getHeight();
+					hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
+					if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
+					{
+						largeur = PanelPlateau.this.getWidth();
+						largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX()));
+					}
+				}
 				PanelPlateau.this.ctrl.setPositionNoeud(
 														PanelPlateau.this.NoeudCourant,
-														e.getX(),
-														e.getY(),
-														(int) (e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX())),
-														(int) (e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()))
+														largeur,
+														hauteur,
+														largeurNom,
+														hauteurNom
 													   );
 				majIHM();
 			}
