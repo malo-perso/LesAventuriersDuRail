@@ -199,24 +199,28 @@ public class PanelPlateau extends JPanel
 				//PanelPlateau.this.ctrl.setPositionNoeud(PanelPlateau.this.NoeudCourant, e.getX(), e.getY(), e.getX(), e.getY());
 				PanelPlateau.this.NoeudCourant.setFrame( e.getX() / 30d , e.getY() / 30d, PanelPlateau.this.diametre /1d, PanelPlateau.this.diametre /1d);
 				
+				//Si on dépasse à droite du Panel
 				if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
 				{
 					largeur = PanelPlateau.this.getWidth();
 					largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX()));
+					//Si on dépasse à droite et en bas du Panel
 					if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
 					{
 						hauteur = PanelPlateau.this.getHeight();
 						hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
 					}
 				}
+				//Si on dépasse en bas du Panel
 				else if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
 				{
 					hauteur = PanelPlateau.this.getHeight();
 					hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
+					//Si on dépasse à droite et en bas du Panel
 					if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
 					{
 						largeur = PanelPlateau.this.getWidth();
-						largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX()));
+						largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX())-20);
 					}
 				}
 				PanelPlateau.this.ctrl.setPositionNoeud(
