@@ -29,6 +29,7 @@ public class GererXML {
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
+	private ArrayList<CarteVehicule> lstCarteVehicules;
 
 	public GererXML(Controleur ctrl){
 
@@ -43,10 +44,13 @@ public class GererXML {
 		this.diametre = 20;
 
 		this.lstNoeuds = new ArrayList<Noeud>();
+		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
 		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
 		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
 		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
+
+		this.lstCarteVehicules.add(new CarteVehicule(new Type("marron")));
 
 		this.lstAretes = new ArrayList<Arete>();
 

@@ -18,6 +18,8 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private PanelPlateau panelPlateau;
 
+    private PanelVehicule PanelVehicule;
+
     private PanelAretes panelArrete;
 
     private PanelListeObjectif panelListeObjectif;
@@ -54,6 +56,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.panelFormulaire = new JPanel(new CardLayout());
         this.panelPlateau = new PanelPlateau(this.ctrl);
+        this.PanelVehicule = new PanelVehicule(this.ctrl);
         this.panelArrete = new PanelAretes(this.ctrl);
         this.panelListeObjectif = new PanelListeObjectif(this.ctrl);
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
@@ -78,6 +81,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
         
         this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
+        this.panelFormulaire.add(PanelVehicule,"panelVehicule");
         this.panelFormulaire.add(panelArrete,"panelArrete");
         this.panelFormulaire.add(panelListeObjectif,"panelListeObjectif");
         this.panelFormulaire.add(panelResume,"panelResume");
