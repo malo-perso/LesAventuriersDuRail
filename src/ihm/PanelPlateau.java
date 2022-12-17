@@ -77,7 +77,7 @@ public class PanelPlateau extends JPanel
 
 
 	//retourne le noeud correspondant au clique de la souris
-	public Noeud SourisSurNoeud(int x, int y){
+	public Noeud sourisSurNoeud(int x, int y){
 		for (Noeud n : this.ctrl.getLstNoeuds())
 		{
 			int xNoeud = (int) n.getX();
@@ -150,8 +150,8 @@ public class PanelPlateau extends JPanel
 			if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				//vérifier si on a cliqué sur un noeud et le supprimer
-				if (SourisSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
+				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
 					PanelPlateau.this.supprimerNoeud(NoeudCourant);
 					PanelPlateau.this.NoeudCourant = null;
 			}
@@ -159,8 +159,8 @@ public class PanelPlateau extends JPanel
 			else if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (SourisSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
+				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
@@ -182,8 +182,8 @@ public class PanelPlateau extends JPanel
 				System.out.println("double clicked");
 				
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (SourisSurNoeud(e.getX(), e.getY())!= null)
-					PanelPlateau.this.NoeudCourant = SourisSurNoeud(e.getX(), e.getY());
+				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
 			}
 		}
 		
@@ -211,7 +211,7 @@ public class PanelPlateau extends JPanel
 		public void mouseMoved(MouseEvent e) 
 		{
 			//si on survole un noeud avec la souris, le sélectionner
-			if (SourisSurNoeud(e.getX(), e.getY())!= null)
+			if (sourisSurNoeud(e.getX(), e.getY())!= null)
 				System.out.println("survol");
 		}
 	}
