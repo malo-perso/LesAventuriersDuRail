@@ -55,12 +55,6 @@ public class PanelPlateau extends JPanel
         majIHM();
     }*/
 
-	//ajoute un noeud au plateau
-	public void ajouterNoeud(int x, int y, int nomX, int nomY) {
-		this.ctrl.ajouterNoeud("nom", x, y, nomX, nomY);
-		//this.ajouterNoeud((Graphics2D) this.getGraphics(), x, y, nomX, nomY);
-	}
-
 	//supprimer un noeud
 	public void supprimerNoeud(Noeud n)
 	{
@@ -164,7 +158,10 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
-                    PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+					if(nomVille.equals("") || nomVille.equals(null))
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					else
+                    	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
                 }
             }
 		}
