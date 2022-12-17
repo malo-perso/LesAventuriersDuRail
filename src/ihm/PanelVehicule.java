@@ -105,7 +105,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelRegles");
+            this.ctrl.getIHM().changePanel("panelRegleJeu");
         }
 
         if ( e.getSource() == this.btnSuivant) {
