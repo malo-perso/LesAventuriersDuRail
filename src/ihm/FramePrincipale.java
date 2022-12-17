@@ -60,7 +60,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelResume = new PanelResume(this.ctrl);
 
         this.setTitle("Concepteur de Plateau");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setUndecorated(false);
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
