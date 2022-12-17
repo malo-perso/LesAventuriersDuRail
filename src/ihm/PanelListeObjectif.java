@@ -12,12 +12,15 @@ import javax.swing.table.DefaultTableModel;
 import src.Controleur;
 import src.metier.CarteObjectif;
 import src.metier.Noeud;
+import src.ihm.grilles.GrillesCartesObjectifsModel;
 
 
 public class PanelListeObjectif extends JPanel implements ActionListener{
 
     private static final String[] COLUMNS = {"Noeud1", "Noeud2", "Points"};
     private DefaultTableModel tabCarte = new DefaultTableModel(COLUMNS, 0);
+
+    private GrillesCartesObjectifsModel model;
 
     private Vector vNoeud;
     private JTable jTabCarte;
@@ -46,6 +49,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     public PanelListeObjectif(Controleur ctrl){
 
         //Creation des composants
+        //this.model = new GrillesCartesObjectifsModel(this.ctrl);
         this.ctrl = ctrl;
         
         this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
