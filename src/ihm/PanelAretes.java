@@ -159,7 +159,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == this.btnAjoutArete){
-            if(this.listNoeud1.getSelectedItem() != null && this.listNoeud2.getSelectedItem() != null && !this.txtLongueurArete.equals("") ){
+            if(this.listNoeud1.getSelectedItem() != null && this.listNoeud2.getSelectedItem() != null && !this.txtLongueurArete.equals("") && this.listNoeud1.getSelectedItem() != this.listNoeud2.getSelectedItem()){
 
                 this.model.addRow(new Object[]{
                     this.listNoeud1.getSelectedItem(),
@@ -179,7 +179,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelVehicule");
+            this.ctrl.getIHM().changePanel("panelRegleJeu");
         }
 
         if ( e.getSource() == this.btnSuivant) {
