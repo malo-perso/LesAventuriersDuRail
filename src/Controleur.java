@@ -82,6 +82,7 @@ public class Controleur{
     public void supprimerNoeud(Noeud n) {
         this.gererXML.supprimerNoeud(n);
         this.majIHM();
+        this.majNoeud();
     }
 
     public void setPositionNoeud(Noeud n, int x, int y, int nomX, int nomY)
