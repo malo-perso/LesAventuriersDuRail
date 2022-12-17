@@ -77,6 +77,7 @@ public class Controleur{
         this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
         //majNoeud
         this.majIHM(); // modifié
+        this.majNoeud();
     }
 
     public void supprimerNoeud(Noeud n) {

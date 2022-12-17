@@ -36,8 +36,6 @@ public class PanelAretes extends JPanel implements ActionListener {
 
     private Controleur ctrl;
 
-    private int indN1;
-    private int indN2;
 
     public PanelAretes(Controleur ctrl) {
 
@@ -121,6 +119,9 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.btnRetour.addActionListener(this);
         this.btnSuivant.addActionListener(this);
+
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
     }
 
     //renvoie la liste des aretes de la JTable
@@ -152,6 +153,28 @@ public class PanelAretes extends JPanel implements ActionListener {
         DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
         model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
     }
+
+    //renvoie une liste de noms de noeud sauf celui passé en parametre
+    public ArrayList<String> getNomNoeuds(String nomNoeud){
+        ArrayList<String> lstNomNoeuds = this.ctrl.getNomNoeuds();
+        lstNomNoeuds.remove(nomNoeud);
+        return lstNomNoeuds;
+    }
+
+    public void majNoeud(ArrayList<Noeud> lstNoeuds) {
+        this.listNoeud1.removeActionListener(this);
+        this.listNoeud2.removeActionListener(this);
+
+        this.listNoeud1.removeAllItems();
+        this.listNoeud2.removeAllItems();
+
+        for (Noeud noeud : lstNoeuds) {
+            this.listNoeud1.addItem(noeud.getNom());
+        }
+
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
+    }
     
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnClear){
@@ -179,7 +202,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelRegleJeu");
+            this.ctrl.getIHM().changePanel("panelVehicule");
         }
 
         if ( e.getSource() == this.btnSuivant) {
@@ -187,37 +210,17 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == this.listNoeud1){
-            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
-
-                this.listNoeud1.removeActionListener(this);
-                this.listNoeud2.removeActionListener(this);
-
-                this.listNoeud1.setSelectedIndex(this.listNoeud2.getSelectedIndex());
-                this.listNoeud2.setSelectedIndex(this.indN1);
-
-                this.listNoeud1.addActionListener(this);
-                this.listNoeud2.addActionListener(this);
+            
+            if (this.listNoeud1.getSelectedItem() == this.listNoeud2.getSelectedItem()) {
+                this.listNoeud2.setSelectedItem(null);
             }
-
-            this.indN1 = this.listNoeud1.getSelectedIndex();
-            this.indN2 = this.listNoeud2.getSelectedIndex();
         }
 
         if(e.getSource() == this.listNoeud2){
-            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
-
-                this.listNoeud1.removeActionListener(this);
-                this.listNoeud2.removeActionListener(this);
-
-                this.listNoeud2.setSelectedIndex(this.listNoeud1.getSelectedIndex());
-                this.listNoeud1.setSelectedIndex(this.indN2);
-
-                this.listNoeud1.addActionListener(this);
-                this.listNoeud2.addActionListener(this);
+            
+            if (this.listNoeud2.getSelectedItem() == this.listNoeud1.getSelectedItem()) {
+                this.listNoeud1.setSelectedItem(null);
             }
-
-            this.indN2 = this.listNoeud2.getSelectedIndex();
-            this.indN1 = this.listNoeud1.getSelectedIndex();
         }
 
     }

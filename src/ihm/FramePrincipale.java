@@ -18,9 +18,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private PanelPlateau panelPlateau;
 
-    private PanelVehicule PanelVehicule;
+    private PanelVehicule panelVehicule;
 
-    private PanelAretes panelArrete;
+    private PanelAretes panelArete;
 
     private PanelListeObjectif panelListeObjectif;
 
@@ -56,14 +56,14 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.panelFormulaire = new JPanel(new CardLayout());
         this.panelPlateau = new PanelPlateau(this.ctrl);
-        this.PanelVehicule = new PanelVehicule(this.ctrl);
-        this.panelArrete = new PanelAretes(this.ctrl);
+        this.panelVehicule = new PanelVehicule(this.ctrl);
+        this.panelArete = new PanelAretes(this.ctrl);
         this.panelListeObjectif = new PanelListeObjectif(this.ctrl);
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
         this.panelResume = new PanelResume(this.ctrl);
 
         this.setTitle("Concepteur de Plateau");
-        this.setResizable(true);
+        this.setResizable(false);
         this.setUndecorated(false);
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
@@ -80,27 +80,27 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
         
-        this.panelFormulaire.add(panelRegleJeu,"panelRegleJeu");
-        this.panelFormulaire.add(PanelVehicule,"panelVehicule");
-        this.panelFormulaire.add(panelArrete,"panelArrete");
-        this.panelFormulaire.add(panelListeObjectif,"panelListeObjectif");
-        this.panelFormulaire.add(panelResume,"panelResume");
+        this.panelFormulaire.add(this.panelRegleJeu,"panelRegleJeu");
+        this.panelFormulaire.add(this.panelVehicule,"panelVehicule");
+        this.panelFormulaire.add(this.panelArete,"panelArrete");
+        this.panelFormulaire.add(this.panelListeObjectif,"panelListeObjectif");
+        this.panelFormulaire.add(this.panelResume,"panelResume");
 
 
-        this.menuFichier.add(menuNouveau);
-        this.menuFichier.add(menuOuvrir);
+        this.menuFichier.add(this.menuNouveau);
+        this.menuFichier.add(this.menuOuvrir);
 
-        this.menuAide.add(menuRegles);
+        this.menuAide.add(this.menuRegles);
 
-        this.menuBarre.add(menuFichier);
-        this.menuBarre.add(menuAide);
+        this.menuBarre.add(this.menuFichier);
+        this.menuBarre.add(this.menuAide);
 
         
         this.add(this.panelPlateau,BorderLayout.CENTER);
         this.add(this.panelFormulaire,BorderLayout.EAST);
 
 
-        this.setJMenuBar(menuBarre);
+        this.setJMenuBar(this.menuBarre);
 
         this.reglePDF = new File(this.getClass().getResource("../data/PDF/Regles.pdf").getFile());
 
@@ -127,6 +127,7 @@ public class FramePrincipale extends JFrame implements ActionListener
     public void majNoeud()
     {
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
+        this.panelArete.majNoeud(this.ctrl.getLstNoeuds());
     }
 
 
