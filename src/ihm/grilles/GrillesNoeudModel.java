@@ -29,7 +29,7 @@ public class GrillesNoeudModel extends AbstractTableModel
 	public int    getRowCount   ()                 { return this.lstNoeuds.size();      }
 	public String getColumnName (int col)          { return this.tabEntetes[col];        }
 	
-    public Object getValueAt    (int row, int col) 
+    public Object getValueAt    (int row, int col)
     { 
         switch(col)
         {
@@ -47,8 +47,8 @@ public class GrillesNoeudModel extends AbstractTableModel
 
     public void majTable(ArrayList<Noeud> lstNoeuds)
     {   
-        this.lstNoeuds = lstNoeuds; 
-        this.fireTableRowsInserted(0, this.lstNoeuds.size() - 1);
+        this.lstNoeuds = lstNoeuds;
+        this.fireTableDataChanged();
     }
 
     public boolean isCellEditable(int row, int col)

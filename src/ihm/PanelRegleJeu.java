@@ -230,8 +230,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
                 this.txtNomY.setText("");
         }
         if (e.getSource() == this.btnSupprNoeud) {
-            //if (this.jTabNoeud.getSelectedRow() != -1)
-                //this.ctrl.supprimerNoeud(this.jTabNoeud.getSelectedRow());
+                this.ctrl.supprimerNoeud(this.ctrl.getLstNoeuds().get(this.jTabNoeud.getSelectedRow()));
         }
         if (e.getSource() == this.btnClear) {
             this.txtNomNoeud.setText(" ");

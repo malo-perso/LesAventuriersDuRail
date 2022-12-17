@@ -113,7 +113,6 @@ public class GererXML {
 
 	public void supprimerNoeud (Noeud n) {
 		this.lstNoeuds.remove(n);
-				
 	}
 
 	public void setPositionNoeud(Noeud n, int x, int y, int nomX, int nomY)
