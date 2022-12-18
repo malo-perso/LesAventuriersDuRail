@@ -26,4 +26,16 @@ public class CarteObjectif {
     public int getPoints() {
         return this.points;
     }
+
+    public boolean setNoeud1(String noeud1){
+        return true;
+    }
+
+    public boolean setNoeud2(String noeud2){
+        return true;
+    }
+
+    public boolean setPoints(int points){
+        return true;
+    }
 }
