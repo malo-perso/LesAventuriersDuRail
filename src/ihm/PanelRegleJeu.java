@@ -5,7 +5,6 @@ import java.awt.GridLayout;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.ihm.grilles.GrillesNoeudModel;
@@ -170,17 +169,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     }
     // ai supprimé ajouterNoeud car le contenu de la table se cale uniquement sur le métier
     // si changement dans le métier il y a, appeler la méthode maJTable
-     
-    public void setPositionNoeud (String nom, int x, int y, int nomX, int nomY) {
-        for (int i = 0; i < this.model.getRowCount(); i++) {
-            if (this.model.getValueAt(i, 0).equals(nom)) {
-                this.model.setValueAt(x, i, 1);
-                this.model.setValueAt(y, i, 2);
-                this.model.setValueAt(nomX, i, 3);
-                this.model.setValueAt(nomY, i, 4);
-            }
-        }
-    }
     
     
     @Override

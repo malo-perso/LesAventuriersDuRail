@@ -29,7 +29,7 @@ public class GrillesAreteModel extends AbstractTableModel {
 	public int    getRowCount   ()                 { return this.lstArete.size();}
 	public String getColumnName (int col)          { return this.tabEntetes[col];         }
 
-    @Override
+
     public Object getValueAt(int row, int col) {
         // TODO Auto-generated method stub
 
@@ -43,16 +43,15 @@ public class GrillesAreteModel extends AbstractTableModel {
         
     }
 
+    public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
+
     public void majTable(ArrayList<Arete> lstArete) {   
         this.lstArete = lstArete;
         this.fireTableDataChanged();
     }
 
     public boolean isCellEditable(int row, int col) {
-        if (col == 0 || col == 1 ) {
-            return false;
-        }
-        return true;
+        return col == 2 || col == 3;
     }
 
     public void setValueAt(Object value, int row, int col) {
@@ -62,6 +61,9 @@ public class GrillesAreteModel extends AbstractTableModel {
             default : break;
         }
         this.fireTableCellUpdated(row, col);
+        this.ctrl.majIHM();
+        this.ctrl.majNoeud();
+        this.ctrl.majArete();
     }
     
     

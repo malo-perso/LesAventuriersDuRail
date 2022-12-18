@@ -29,6 +29,7 @@ public class GrillesNoeudModel extends AbstractTableModel
 	public int    getRowCount   ()                 { return this.lstNoeuds.size();      }
 	public String getColumnName (int col)          { return this.tabEntetes[col];        }
 	
+
     public Object getValueAt    (int row, int col)
     { 
         switch(col)
@@ -43,7 +44,7 @@ public class GrillesNoeudModel extends AbstractTableModel
 
     }
 
-	public Class<?>  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }
+	public Class<?>  getColumnClass(int c) { return getValueAt(0, c).getClass(); }
 
     public void majTable(ArrayList<Noeud> lstNoeuds)
     {   
