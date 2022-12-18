@@ -158,7 +158,7 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
-					if(nomVille.equals("") || nomVille == null)
+					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
 					else
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
