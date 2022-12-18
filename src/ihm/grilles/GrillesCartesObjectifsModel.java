@@ -3,7 +3,6 @@ package src.ihm.grilles;
 import javax.swing.table.AbstractTableModel;
 
 import src.Controleur;
-import src.metier.Noeud;
 import src.metier.CarteObjectif;
 import src.metier.FonctionAux;
 

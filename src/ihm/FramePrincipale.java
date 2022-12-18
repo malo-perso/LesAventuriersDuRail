@@ -54,6 +54,10 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.ctrl = ctrl;
         Toolkit kit = Toolkit.getDefaultToolkit();
 
+        Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
+        Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
+        int tailleBarTache = scnMax.bottom;
+
         this.panelFormulaire = new JPanel(new CardLayout());
         this.panelPlateau = new PanelPlateau(this.ctrl);
         this.panelVehicule = new PanelVehicule(this.ctrl);
@@ -112,9 +116,13 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.pack();
 		//this.setDefaultLookAndFeelDecorated(true);
-		this.setExtendedState(this.MAXIMIZED_BOTH);
+
+        this.setSize(tailleEcran.width,tailleEcran.height - tailleBarTache);
+
+		//this.setExtendedState(this.MAXIMIZED_BOTH);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		this.setVisible(true);
 
 
