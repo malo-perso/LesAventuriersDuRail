@@ -1,25 +1,25 @@
 package src.metier;
 
-import java.time.temporal.JulianFields;
 import java.util.ArrayList;
 
 public class Type {
 
 	private String couleurActuelle;
 
-	public Type(String couleur){
-		
-		if(couleur != "violet" && couleur != "rouge" && couleur != "marron" && couleur != "blanc"
-		&& couleur != "bleu" && couleur != "jaune" && couleur != "vert" && couleur != "noir" &&
-		couleur != "multiColore"){
-			System.out.println("Erreur : la couleur n'est pas valide");
+	private Type(String couleur){
+		this.couleurActuelle = couleur;
+	}
+
+	public static Type creerType (String couleur) {
+		if (!Type.getCouleurs().contains(couleur)) {
+			return null;
 		}
 		else{
-			this.couleurActuelle = couleur;
+			return new Type(couleur);
 		}
 	}
 
-	public ArrayList<String> getCouleur(){
+	public static ArrayList<String> getCouleurs(){
 		ArrayList<String> couleurs = new ArrayList<String>();
 		couleurs.add("violet");
 		couleurs.add("rouge");
@@ -31,6 +31,10 @@ public class Type {
 		couleurs.add("noir");
 		couleurs.add("multiColore");
 		return couleurs;
+	}
+
+	public String getCouleurActuelle(){
+		return this.couleurActuelle;
 	}
 
 	public String toString(){

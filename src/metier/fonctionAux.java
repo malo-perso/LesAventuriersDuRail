@@ -3,10 +3,10 @@ import java.awt.Component;
 
 import javax.swing.table.TableCellRenderer;
 
-public class fonctionAux {
+public class FonctionAux {
     
     public static boolean isInteger(String s) {
-        try { 
+        try {
             Integer.parseInt(s); 
         } catch(NumberFormatException e) { 
             return false; 

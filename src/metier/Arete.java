@@ -28,4 +28,18 @@ public class Arete {
     public Type getType() {
         return this.type;
     }
+
+    public boolean setLongueur(int longueur) {
+        if (longueur < 0)
+            return false;
+        this.longueur = longueur;
+        return true;
+    }
+
+    public boolean setType(Type type) {
+        if (type == null)
+            return false;
+        this.type = type;
+        return true;
+    }
 }

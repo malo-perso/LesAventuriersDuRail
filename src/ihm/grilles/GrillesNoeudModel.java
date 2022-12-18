@@ -58,19 +58,19 @@ public class GrillesNoeudModel extends AbstractTableModel
 
     public void setValueAt(Object value, int row, int col)
     {
-        boolean bRet;
         if (col < 0 || col > 4) return;
 
         else {
             switch(col) {
-                case 0 : bRet = this.lstNoeuds.get(row).setNom((String)value);break;
-                case 1 : bRet = this.lstNoeuds.get(row).setX((int)value);break;
-                case 2 : bRet = this.lstNoeuds.get(row).setY((int)value);break;
-                case 3 : bRet = this.lstNoeuds.get(row).setNomX((int)value);break;
-                case 4 : bRet = this.lstNoeuds.get(row).setNomY((int)value);break;
+                case 0 : this.lstNoeuds.get(row).setNom((String)value);break;
+                case 1 : this.lstNoeuds.get(row).setX((int)value);break;
+                case 2 : this.lstNoeuds.get(row).setY((int)value);break;
+                case 3 : this.lstNoeuds.get(row).setNomX((int)value);break;
+                case 4 : this.lstNoeuds.get(row).setNomY((int)value);break;
             }
             this.fireTableCellUpdated(row, col);
             this.ctrl.majIHM();
+            this.ctrl.majNoeud();
         }
         
     }

@@ -69,14 +69,14 @@ public class Controleur{
     }
 
     /*****************/
-    /*     NOEUD     */
+    /*     Noeud     */
     /*****************/
 
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
         //ajoute le noeud a l'arraylist
         this.gererXML.ajouterNoeud(nom, x, y, nomX, nomY);
         //majNoeud
-        this.majIHM(); // modifié
+        this.majIHM();
         this.majNoeud();
     }
 
@@ -89,6 +89,7 @@ public class Controleur{
     public void setPositionNoeud(Noeud n, int x, int y, int nomX, int nomY)
     {
         this.gererXML.setPositionNoeud(n,x,y,nomX,nomY);
+        this.majNoeud();
     }
 
     public void majNoeud() {
@@ -99,14 +100,21 @@ public class Controleur{
     /*     Arete     */
     /*****************/
 
-    public void ajouterArete(Noeud n1, Noeud n2, int n) {
-        this.gererXML.ajouterArete(n1,n2,n);
+    public void ajouterArete(Noeud n1, Noeud n2, int n, String s) {
+        this.gererXML.ajouterArete(n1,n2,n,s);
+        this.majIHM();
+        this.majArete();
+    }
+
+    public void supprimerArete(Arete a) {
+        this.gererXML.supprimerArete(a);
+        this.majIHM();
         this.majArete();
     }
     
     public void majArete()
-    {   
-        //TO DO
+    {
+        this.IHM.majArete();
     }
 
     /*****************/
@@ -118,26 +126,11 @@ public class Controleur{
         //TO DO
     }
 
-
-
     
-
-    //GROS BORDEL EN DESSOUS
-    //              || ||
-    //              || ||
-    //              \/ \/
-    //BAHAHAHAHH
+    /*****************/
+    /*    getters    */
+    /*****************/
     
-    
-    //ancienne methode
-    /*
-    public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
-        this.IHM.setPositionNoeud(noeud, x, y, nomX, nomY);
-    }*/
-
-    
-
-    //TO DO
 	public void enregistrer() {
         System.out.println("Enregistrer");
 	}
@@ -157,7 +150,7 @@ public class Controleur{
     public ArrayList<Arete> lstAreteXMLtoIHM() {
         //test
         ArrayList<Arete> lstArete = new ArrayList<Arete>();
-        lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, new Type("orange")));
+        lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, Type.creerType("orange")));
         
         return lstArete;
     }
@@ -184,6 +177,10 @@ public class Controleur{
 
         return nomNoeuds;
     }
+
+    /*****************/
+    /*      Main     */
+    /*****************/
 
     public static void main(String[] args) {
         Controleur controleur = new Controleur();

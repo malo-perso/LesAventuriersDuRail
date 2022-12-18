@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.ihm.grilles.GrillesNoeudModel;
-import src.metier.fonctionAux;
+import src.metier.FonctionAux;
 import src.metier.Noeud;
 
 import java.util.ArrayList;
@@ -187,33 +187,33 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == this.txtNbJoueurMin) {
-            if(!fonctionAux.isInteger(this.txtNbJoueurMin.getText()))
+            if(!FonctionAux.isInteger(this.txtNbJoueurMin.getText()))
                 this.txtNbJoueurMin.setText(" ");
             this.nbJoueurMin = Integer.parseInt(this.txtNbJoueurMin.getText());
         }
         if (e.getSource() == this.txtNbJoueurMax) {
-            if(!fonctionAux.isInteger(this.txtNbJoueurMax.getText()))
+            if(!FonctionAux.isInteger(this.txtNbJoueurMax.getText()))
                     this.txtNbJoueurMax.setText(" ");
             this.nbJoueurMax = Integer.parseInt(this.txtNbJoueurMax.getText());
         }
         if (e.getSource() == this.txtDoubleVoie) {
-            if(!fonctionAux.isInteger(this.txtDoubleVoie.getText()))
+            if(!FonctionAux.isInteger(this.txtDoubleVoie.getText()))
                     this.txtDoubleVoie.setText(" ");
             this.doubleVoie = Integer.parseInt(this.txtDoubleVoie.getText());
         }
         if (e.getSource() == this.txtNbWagonJoueur) {
-            if(!fonctionAux.isInteger(this.txtNbWagonJoueur.getText()))
+            if(!FonctionAux.isInteger(this.txtNbWagonJoueur.getText()))
                     this.txtNbWagonJoueur.setText(" ");
             this.nbWagonJoueur =Integer.parseInt(this.txtNbWagonJoueur.getText());
         }
         if (e.getSource() == this.txtNbWagonFin) {
-            if(!fonctionAux.isInteger(this.txtNbWagonFin.getText()))
+            if(!FonctionAux.isInteger(this.txtNbWagonFin.getText()))
                     this.txtNbWagonFin.setText(" ");
             this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
         }
 
         if (e.getSource() == this.btnAjoutNoeud) {
-            if (fonctionAux.isInteger(this.txtX.getText()) && fonctionAux.isInteger(this.txtY.getText()) && !this.txtNomNoeud.getText().equals(""))  
+            if (FonctionAux.isInteger(this.txtX.getText()) && FonctionAux.isInteger(this.txtY.getText()) && !this.txtNomNoeud.getText().equals(""))  
                 {
                     this.ctrl.ajouterNoeud(this.txtNomNoeud.getText(),
                                            Integer.parseInt(this.txtX.getText()),
@@ -221,7 +221,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
                                            Integer.parseInt(this.txtNomX.getText()),
                                            Integer.parseInt(this.txtNomY.getText())
                                         );
-                    this.ctrl.majIHM();
                 }
                 this.txtNomNoeud.setText("");
                 this.txtX.setText("");

@@ -50,12 +50,12 @@ public class GererXML {
 		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
 		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
 
-		this.lstCarteVehicules.add(new CarteVehicule(new Type("marron")));
+		this.lstCarteVehicules.add(new CarteVehicule(Type.creerType("marron")));
 
 		this.lstAretes = new ArrayList<Arete>();
 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, new Type("marron")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 1, new Type("rouge")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, Type.creerType("marron")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 1, Type.creerType("rouge")));
 		
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
@@ -111,6 +111,10 @@ public class GererXML {
 		return this.nbWagonFinPartie = nbWagonFinPartie;
 	}
 
+	/*****************/
+    /*     NOEUD     */
+    /*****************/
+
 	public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY){
 		this.lstNoeuds.add(new Noeud(nom, x, y, nomX, nomY));
 	}
@@ -132,6 +136,31 @@ public class GererXML {
 				return;
 			}
 			this.ctrl.majNoeud();
+		}
+	}
+
+	/*****************/
+    /*     Arete     */
+    /*****************/
+
+	public void ajouterArete(Noeud n1, Noeud n2, int longueur, String coulType){
+		this.lstAretes.add(new Arete(n1, n2, longueur, Type.creerType(coulType)));
+	}
+
+	public void supprimerArete (Arete a) {
+		this.lstAretes.remove(a);
+	}
+
+	public void setLongueurArete(Arete a, int longueur)
+	{
+		for (Arete arete : this.lstAretes)
+		{
+			if(arete.equals(a))
+			{
+				arete.setLongueur(longueur);
+				return;
+			}
+			this.ctrl.majArete();
 		}
 	}
 
@@ -241,7 +270,7 @@ public class GererXML {
 						{
 							if(m.getNom().equals(nomNoeud2))
 							{
-								this.lstAretes.add(new Arete(n, m, longueur, new Type(nomType)));
+								this.lstAretes.add(new Arete(n, m, longueur, Type.creerType(nomType)));
 							}
 						}
 					}

@@ -132,15 +132,13 @@ public class FramePrincipale extends JFrame implements ActionListener
 
 
     public void ajouterNoeud(String nom, int x, int y, int nomX, int nomY) {
-        this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds()); // modifié
-        this.panelPlateau.majIHM();
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
-
+        this.panelArete.majNoeud(this.ctrl.getLstNoeuds());
     }
 
     public void setPositionNoeud(Noeud noeud, int x, int y, int nomX, int nomY) {
-        //this.panelRegleJeu.setPositionNoeud(noeud.getNom(), x, y, nomX, nomY);
         this.panelPlateau.majIHM();
+        this.panelArete.majNoeud(this.ctrl.getLstNoeuds());
     }
     
     /*****************/
@@ -149,7 +147,7 @@ public class FramePrincipale extends JFrame implements ActionListener
     
     public void majArete()
     {   
-        //TO DO
+        this.panelArete.majArete(this.ctrl.getLstAretes());
     }
 
     /*****************/
@@ -169,11 +167,14 @@ public class FramePrincipale extends JFrame implements ActionListener
     }
 
 
+    /*****************/
+    /*     utiles    */
+    /*****************/
+
     public void majIHM() {
         this.panelPlateau.majIHM();
         this.panelPlateau.repaint(); 
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
-        //this.panelPlateau.majTEST(this.ctrl.getLstNoeuds());
         this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
     }
 

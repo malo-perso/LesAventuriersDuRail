@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.ihm.grilles.GrillesVehiculeModel;
-import src.metier.fonctionAux;
+import src.metier.FonctionAux;
 import src.metier.CarteVehicule;
 
 import java.awt.*;

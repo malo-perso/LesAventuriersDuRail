@@ -4,12 +4,12 @@ import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
 import src.metier.Type;
+import src.ihm.grilles.GrillesAreteModel;
 
 import java.awt.Image;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -21,7 +21,7 @@ public class PanelAretes extends JPanel implements ActionListener {
     private PanelPlateau panelPlateau;
 
     private static final String[] NOM_COLONNE = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
-    private DefaultTableModel model;
+    private GrillesAreteModel model;
 
     private Image  imgFond;
 
@@ -49,7 +49,7 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
 
-        this.model = new DefaultTableModel(NOM_COLONNE, 0);
+        this.model = new GrillesAreteModel(this.ctrl);
         this.tabAretes = new JTable(this.model);
         this.tabAretes.setFillsViewportHeight(true);
         this.tabAretes.setEnabled(false);
@@ -124,15 +124,6 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.listNoeud2.addActionListener(this);
     }
 
-    //renvoie la liste des aretes de la JTable
-    public ArrayList<Arete> getAretes() {
-        ArrayList<Arete> aretes = new ArrayList<Arete>();
-        for (int i = 0; i < this.model.getRowCount(); i++) {
-            aretes.add(new Arete((Noeud) this.model.getValueAt(i, 0), (Noeud) this.model.getValueAt(i, 1), (int) this.model.getValueAt(i, 2), (Type) this.model.getValueAt(i, 3) ));
-        }
-        return aretes;
-    }
-
     // fonction qui permet d effacer le contenu des composant du panelRemplissage
     private void removePanelRemplissage(){
         this.listNoeud1.removeActionListener(this);
@@ -145,13 +136,6 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.listNoeud1.addActionListener(this);
         this.listNoeud2.addActionListener(this);
-    }
-
-    // ajoute une arete dans le JTable
-    public void ajouterArete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
-        
-        DefaultTableModel model = (DefaultTableModel) this.tabAretes.getModel();
-        model.addRow( new Object[] {noeud1, noeud2, longueur, type} );
     }
 
     //renvoie une liste de noms de noeud sauf celui passé en parametre
@@ -175,6 +159,10 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.listNoeud1.addActionListener(this);
         this.listNoeud2.addActionListener(this);
     }
+
+    public void majArete(ArrayList<Arete> lstAretes) {
+        this.model.majTable(lstAretes);
+    }
     
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnClear){
@@ -182,23 +170,25 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == this.btnAjoutArete){
-            if(this.listNoeud1.getSelectedItem() != null && this.listNoeud2.getSelectedItem() != null && !this.txtLongueurArete.equals("") && this.listNoeud1.getSelectedItem() != this.listNoeud2.getSelectedItem()){
-
-                this.model.addRow(new Object[]{
-                    this.listNoeud1.getSelectedItem(),
-                    this.listNoeud2.getSelectedItem(),
-                    this.txtLongueurArete.getText(),
-                    this.listTypeArete.getSelectedItem()
-                });
-
+            if(this.listNoeud1.getSelectedItem() != null    &&
+               this.listNoeud2.getSelectedItem() != null    &&
+               !this.txtLongueurArete.getText().equals("")  &&
+               this.listTypeArete.getSelectedItem() != null
+              )
+            {
+                this.ctrl.ajouterArete(
+                    this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
+                    this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
+                    Integer.parseInt(this.txtLongueurArete.getText()),
+                    (String)this.listTypeArete.getSelectedItem()
+                );
                 this.removePanelRemplissage();
-
-                //this.panelPlateau.tracerArete();
             }
+            //this.panelPlateau.tracerArete();
         }
 
         if(e.getSource() == this.btnSupprArete){
-            if(this.tabAretes.getSelectedRow() != -1){this.model.removeRow(this.tabAretes.getSelectedRow());}
+            this.ctrl.supprimerArete(this.ctrl.getLstAretes().get(this.tabAretes.getSelectedRow()));
         }
 
         if ( e.getSource() == this.btnRetour) {

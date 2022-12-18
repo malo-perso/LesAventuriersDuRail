@@ -1,6 +1,6 @@
 package src.metier;
 
-import java.util.ArrayList;;
+import java.util.ArrayList;
 
 public class CarteObjectif {
     private static ArrayList<CarteObjectif> pioche = new ArrayList<>();
@@ -25,5 +25,12 @@ public class CarteObjectif {
 
     public int getPoints() {
         return this.points;
+    }
+
+    public boolean setPoints(int points) {
+        if (points < 0)
+            return false;
+        this.points = points;
+        return true;
     }
 }
