@@ -117,9 +117,9 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.pack();
 		//this.setDefaultLookAndFeelDecorated(true);
 
-        this.setSize(tailleEcran.width,tailleEcran.height - tailleBarTache);
+        this.setSize((int) tailleEcran.getWidth(), (int) tailleEcran.getHeight() - tailleBarTache);
 
-		//this.setExtendedState(this.MAXIMIZED_BOTH);
+		this.setExtendedState(this.MAXIMIZED_BOTH);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
