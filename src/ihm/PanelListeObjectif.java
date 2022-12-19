@@ -22,7 +22,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
     private GrillesCartesObjectifsModel model;
 
-    private Vector vNoeud;
+    //private Vector vNoeud;
     private JTable jTabCarte;
 
     private JPanel panelRemplissage;
@@ -52,7 +52,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         //this.model = new GrillesCartesObjectifsModel(this.ctrl);
         this.ctrl = ctrl;
         
-        this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+        
 
         this.jTabCarte = new JTable(this.tabCarte);
         if(this.ctrl.lstObjectifXMLtoIHM() != null)
@@ -72,8 +72,10 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelActionTab = new JPanel();
         this.panelValidation = new JPanel();
 
-        this.kbNoeud1 = new JComboBox<String>(this.vNoeud);
-        this.kbNoeud2 = new JComboBox<String>(this.vNoeud);
+        Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
+
+        this.kbNoeud1 = new JComboBox<String>(vNoeud);
+        this.kbNoeud2 = new JComboBox<String>(vNoeud);
         this.kbNoeud1.setSelectedItem(null);
         this.kbNoeud2.setSelectedItem(null);
         
@@ -134,14 +136,17 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
     // fonction pour mettre à jour les composants des 2 JComboBox 
     public void majTableNoeud(ArrayList<Noeud> lstNoeud){
-        this.vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
-        ArrayList<String> nomNoeuds = new ArrayList<String>();
-        for (Noeud n : lstNoeud) {
-            nomNoeuds.add(n.getNom());
-        };
+        this.kbNoeud1.removeActionListener(this);
+        this.kbNoeud2.removeActionListener(this);
 
-        this.kbNoeud1 = new JComboBox<String>(this.vNoeud);
-        this.kbNoeud2 = new JComboBox<String>(this.vNoeud);
+        this.kbNoeud1.removeAllItems();
+        this.kbNoeud2.removeAllItems();
+
+        for(Noeud noeud : lstNoeud)
+            this.kbNoeud1.addItem(noeud.getNom());
+
+        this.kbNoeud1.addActionListener(this);
+        this.kbNoeud2.addActionListener(this);
     }
 
     // Fonction qui retourn la liste des cartes Objectifs

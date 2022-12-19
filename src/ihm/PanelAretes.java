@@ -52,7 +52,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.model = new GrillesAreteModel(this.ctrl);
         this.tabAretes = new JTable(this.model);
         this.tabAretes.setFillsViewportHeight(true);
-        this.tabAretes.setEnabled(false);
+        this.tabAretes.setEnabled(true);
 
         JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
 
