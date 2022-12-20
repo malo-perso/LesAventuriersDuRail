@@ -46,17 +46,20 @@ public class GererXML {
 		this.lstNoeuds = new ArrayList<Noeud>();
 		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
-		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
-		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
-		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
+		this.lstNoeuds.add(new Noeud("A", 200, 100, 220, 120));
+		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
+		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
+		
 
 		this.lstCarteVehicules.add(new CarteVehicule(Type.creerType("marron")));
 
 		this.lstAretes = new ArrayList<Arete>();
 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, Type.creerType("marron")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 1, Type.creerType("rouge")));
-		
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
+
+
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
 		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));

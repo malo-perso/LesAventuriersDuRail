@@ -29,7 +29,7 @@ public class PanelPlateau extends JPanel
 	private int diametre;
 
     //PROVISOIRE
-    private final int TAILLEWAGON = 100;
+    private final int TAILLEWAGON = 50;
 
 	public PanelPlateau(Controleur ctrl)
 	{
@@ -87,52 +87,112 @@ public class PanelPlateau extends JPanel
 	{
 		super.repaint();		
 	}
-
-	//PAS ENCORE UTILISE
-	/*
-	//trace les aretes entre les noeuds
-	public void tracerArete(Graphics2D g2D, int x, int y)
-	{
-		for (Arete aret : this.ctrl.getMetier().getLstAretes()) {
-			if (aret.getNoeud1().getX() == x && aret.getNoeud1().getY() == y) {
-				g2D.setColor(Color.RED);
-				g2D.setStroke(new BasicStroke(3));
-				g2D.drawLine(aret.getNoeud1().getX(), aret.getNoeud1().getY(), aret.getNoeud2().getX(), aret.getNoeud2().getY());
-			}
-		}	
-	}
-	*/
-	public void paint(Graphics g)
-	{
+	
+	public void paint(Graphics g) {
 		super.paint(g);
 
-		Graphics2D g1 = (Graphics2D)g;
-		//parcourir la liste des noeuds et les afficher les coordonnées des noeuds correspondans
-		
-        for (Arete arete : this.ctrl.getLstAretes()) {
-            double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX()-arete.getNoeud2().getX(),2)+Math.pow(arete.getNoeud1().getY()-arete.getNoeud2().getY(),2));
-            
-            //a garder pour le moment 
-            //if(longueur > TAILLEWAGON * arete.getLongueur())            
-            //    System.out.println("higehigigikgnfkbnfb");
+		Graphics2D g1 = (Graphics2D) g;
+		g1.setColor(Color.BLACK);
 
-            g.drawLine((int)arete.getNoeud1().getX(), (int)arete.getNoeud1().getY(), (int)arete.getNoeud2().getX(), (int)arete.getNoeud2().getY());
+		for (Arete arete : this.ctrl.getLstAretes()) {
+
+            // calcul de la longueur entre le noeud 1 et le noeud 2
+			double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX() - arete.getNoeud2().getX(), 2)	+ Math.pow(arete.getNoeud1().getY() - arete.getNoeud2().getY(), 2));
+            double distanceWagon = TAILLEWAGON * arete.getLongueur()*1.5;
+
+			if (longueur < distanceWagon) {
+
+
+                //calcule du demi petit rayon de l ellipse
+                double grandR = longueur/2/1.1;
+                double demiR = Math.sqrt(2*Math.pow(distanceWagon/Math.PI, 2)-Math.pow(grandR,2)*1.2);
+                
+                //calcule des coordonné du centre du cercle
+                double centreX = (arete.getNoeud2().getX() - arete.getNoeud1().getX()) / 2 + arete.getNoeud1().getX();
+                double centreY = (arete.getNoeud2().getY() - arete.getNoeud1().getY()) / 2 + arete.getNoeud1().getY();
+                
+                //l'angle entre la base du plan et l ellipse
+                double teta = Math.atan((arete.getNoeud2().getY()-arete.getNoeud1().getY())/(arete.getNoeud2().getX()-arete.getNoeud1().getX()));
+
+                for(int cpt = 0 ; cpt < arete.getLongueur();cpt++) {
+                    //coordonnée polaire des deux points du wagon
+                    double wagon1X =grandR*Math.cos((Math.PI)/arete.getLongueur()*cpt);
+                    double wagon1Y =demiR*Math.sin((Math.PI)/arete.getLongueur()*cpt);
+                    
+                    double wagon2X =  grandR*Math.cos((Math.PI)/arete.getLongueur()*(cpt+1));
+                    double wagon2Y =  demiR*Math.sin((Math.PI)/arete.getLongueur()*(cpt+1));
+                    
+                    //on applique la rotation et la translation
+                    double w1XP = centreX +rotationX(wagon1X,wagon1Y,teta);
+                    double y1YP = centreY +rotationY(wagon1X,wagon1Y,teta);
+                    double x2XP = centreX +rotationX(wagon2X,wagon2Y,teta);
+                    double y2YP = centreY +rotationY(wagon2X,wagon2Y,teta);
+
+                    tracerWagon( w1XP, y1YP, x2XP, y2YP,1,g1,arete.getType().getColor());
+                }
+            }
+            else 
+				tracerWagon(arete.getNoeud1().getX(), arete.getNoeud1().getCenterY(), arete.getNoeud2().getX(), arete.getNoeud2().getY(), arete.getLongueur(), g1,arete.getType().getColor());
+			
+			} 
             
-        }
-        
-        for (Noeud noeud : this.ctrl.getLstNoeuds())
-		{
-			//g1.draw(noeud);
-			g.setColor(Color.RED);
-			g1.fillOval((int) noeud.getX()-this.diametre/2, (int) noeud.getY()-this.diametre/2, this.diametre, this.diametre);
+        for (Noeud noeud : this.ctrl.getLstNoeuds()) {
+			g1.draw(noeud);
 			g.setColor(Color.BLACK);
+			g1.fillOval((int) noeud.getX() - this.diametre / 2, (int) noeud.getY() - this.diametre / 2, this.diametre, this.diametre);
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
 		g.setColor(Color.RED);
+    }
 
+    private double rotationX(double nX,double nY, double teta) {
+        double xM = nX;
+        double yM = nY;
+
+        double x = xM*Math.cos(teta)-yM*Math.sin(teta);
+        return x;
+    }
+    private double rotationY(double nX,double nY, double teta) {
+        double xM = nX;
+        double yM = nY;
+
+        double y = xM*Math.sin(teta)+ yM*Math.cos(teta);
+        return y;
+    }
+
+
+    private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color) {
+		double tX1 = ((bX - aX) / nbWagon);
+		double tY1 = ((bY - aY) / nbWagon);
+
+		double hypo = (int) Math.sqrt(Math.pow(tX1, 2) + Math.pow(tY1, 2));
+		double var = ((hypo - this.TAILLEWAGON) / 2) / hypo;
+
+		double ratioX = tX1 * var;
+		double ratioY = tY1 * var;
+
+		g1.setStroke(new BasicStroke(2));
+        g1.setColor(Color.BLACK);
+		g1.drawLine((int) aX, (int) aY,(int) bX, (int) bY);
         
-
+        g1.setStroke(new BasicStroke(10));
+		for (int cpt = 0; cpt < nbWagon; cpt++) 
+			g1.drawLine((int) (aX + cpt * tX1 + ratioX),
+					(int) (aY + cpt * tY1 + ratioY),
+					(int) (aX + cpt * tX1 + tX1 - ratioX),
+					(int) (aY + cpt * tY1 + tY1 - ratioY));
+        
+        g1.setColor(color);
+        g1.setStroke(new BasicStroke(8));
+		for (int cpt = 0; cpt < nbWagon; cpt++) 
+			g1.drawLine((int) (aX + cpt * tX1 + ratioX),
+					(int) (aY + cpt * tY1 + ratioY),
+					(int) (aX + cpt * tX1 + tX1 - ratioX),
+					(int) (aY + cpt * tY1 + tY1 - ratioY));
+        g1.setColor(Color.BLACK);
+        g1.setStroke(new BasicStroke(2));  
+		
 	}
 
 
@@ -237,8 +297,8 @@ public class PanelPlateau extends JPanel
 		public void mouseMoved(MouseEvent e) 
 		{
 			//si on survole un noeud avec la souris, le sélectionner
-			if (sourisSurNoeud(e.getX(), e.getY())!= null)
-				System.out.println("survol");
+			//if (sourisSurNoeud(e.getX(), e.getY())!= null)
+			//	System.out.println("survol");
 		}
 	}
 
