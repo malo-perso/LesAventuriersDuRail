@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.metier.CarteObjectif;
@@ -16,9 +15,6 @@ import src.ihm.grilles.GrillesCartesObjectifsModel;
 
 
 public class PanelListeObjectif extends JPanel implements ActionListener{
-
-    private static final String[] COLUMNS = {"Noeud1", "Noeud2", "Points"};
-    private DefaultTableModel tabCarte = new DefaultTableModel(COLUMNS, 0);
 
     private GrillesCartesObjectifsModel model;
 
@@ -49,21 +45,14 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     public PanelListeObjectif(Controleur ctrl){
 
         //Creation des composants
-        //this.model = new GrillesCartesObjectifsModel(this.ctrl);
         this.ctrl = ctrl;
         
         
-
-        this.jTabCarte = new JTable(this.tabCarte);
-        if(this.ctrl.lstObjectifXMLtoIHM() != null)
-        {
-            for (CarteObjectif objectif : this.ctrl.lstObjectifXMLtoIHM()) {
-                this.tabCarte.addRow(new Object[]{objectif.getNoeud1().getNom(), objectif.getNoeud2().getNom(), objectif.getPoints()});   
-            }
-        }
+        this.model = new GrillesCartesObjectifsModel(this.ctrl);
+        this.jTabCarte = new JTable(this.model);
 
         this.jTabCarte.setFillsViewportHeight(true);
-        this.jTabCarte.setEnabled(false);
+        this.jTabCarte.setEnabled(true);
 
         JScrollPane spTabCarte = new JScrollPane(this.jTabCarte);
         
@@ -145,30 +134,17 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         for(Noeud noeud : lstNoeud)
             this.kbNoeud1.addItem(noeud.getNom());
 
+        this.kbNoeud1.setSelectedItem(null);
+        this.kbNoeud2.setSelectedItem(null);
+        
         this.kbNoeud1.addActionListener(this);
         this.kbNoeud2.addActionListener(this);
+
     }
 
-    // Fonction qui retourn la liste des cartes Objectifs
-    public ArrayList<CarteObjectif> getListCarteObjectif(){
-        ArrayList<CarteObjectif> arCarteObj = new ArrayList<CarteObjectif>();
-
-        for(int i=0; i<this.tabCarte.getRowCount()-1; i++){
-            Noeud n1;
-            Noeud n2;
-            for (int cpt = 0; cpt < this.ctrl.getLstNoeuds().size(); cpt++) {
-                if(this.tabCarte.getValueAt(i, 0).equals(this.ctrl.getLstNoeuds().get(cpt).getNom())){
-                    n1 = this.ctrl.getLstNoeuds().get(cpt);
-                }
-                if(this.tabCarte.getValueAt(i, 1).equals(this.ctrl.getLstNoeuds().get(cpt).getNom())){
-                    n2 = this.ctrl.getLstNoeuds().get(cpt);
-                }
-            }
-
-            arCarteObj.add(new CarteObjectif(null, null, i));
-        }
-        
-        return arCarteObj;
+    public void majCarteObjectif(ArrayList<CarteObjectif> lstCarteObjectif){
+        this.model.majTable(lstCarteObjectif);
+        this.removePanelRemplissage();
     }
 
     // fonction qui permet d effacer le contenu des composant du panelRemplissage
@@ -193,23 +169,22 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         
         //bouton ajouter + pressé -> ajoute une carteObjectif à la Jliste
         if(e.getSource() == this.btnAjoutCarte){
-            if (this.kbNoeud1.getSelectedItem() != null && this.kbNoeud2.getSelectedItem() != null && !this.txtNbPoints.getText().equals("") ){
-                
-                this.tabCarte.addRow(new Object[]{
-                    this.kbNoeud1.getSelectedItem(),
-                    this.kbNoeud2.getSelectedItem(),
-                    this.txtNbPoints.getText()
-                });
-
+            if (this.kbNoeud1.getSelectedItem() != null &&
+                this.kbNoeud2.getSelectedItem() != null &&
+                !this.txtNbPoints.getText().equals("") )
+            {
+                this.ctrl.ajouterCarteObjectif(
+                    this.ctrl.getLstNoeuds().get(this.kbNoeud1.getSelectedIndex()),
+                    this.ctrl.getLstNoeuds().get(this.kbNoeud2.getSelectedIndex()),
+                    Integer.parseInt(this.txtNbPoints.getText())
+                );
                 this.removePanelRemplissage();
             }
         }
 
         if(e.getSource() == this.btnSuppCarte){
-            if(this.jTabCarte.getRowCount() != -1){
-                if(this.jTabCarte.getRowSelectionAllowed()){
-                    this.tabCarte.removeRow(this.jTabCarte.getSelectedRow());
-                }
+            if(this.jTabCarte.getSelectedRow() != -1){
+                this.ctrl.supprimerCarteObjectif(this.ctrl.getLstObjectifs().get(this.jTabCarte.getSelectedRow()));
             }
         }
         

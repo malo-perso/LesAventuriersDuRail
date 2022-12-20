@@ -167,6 +167,33 @@ public class GererXML {
 		}
 	}
 
+	/*****************/
+    /* CarteObjectif */
+    /*****************/
+
+	public void ajouterCarteObjectif(Noeud n1, Noeud n2, int points){
+		this.lstCarteObjectifs.add(new CarteObjectif(n1, n2, points));
+	}
+
+	public void supprimerCarteObjectif(CarteObjectif co){
+		this.lstCarteObjectifs.remove(co);
+	}
+
+	public void setPointCarteObjectif(CarteObjectif cObjectif, int points){
+
+		for(CarteObjectif co : this.lstCarteObjectifs){
+			if(co.equals(cObjectif)){
+				co.setPoints(points);
+				return;
+			}
+			this.ctrl.majCarteObjectif();
+		}
+	}
+
+	/*****************/
+	/*     Ecrire    */
+	/*****************/
+
 	public void ecrireXML(String chemin){
 		try{
 			File file = new File("./src/data/mappe/mappe.xml");

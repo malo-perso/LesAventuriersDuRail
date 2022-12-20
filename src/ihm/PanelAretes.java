@@ -19,8 +19,6 @@ import java.util.Vector;
 public class PanelAretes extends JPanel implements ActionListener {
 
     private PanelPlateau panelPlateau;
-
-    private static final String[] NOM_COLONNE = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
     private GrillesAreteModel model;
 
     private Image  imgFond;
@@ -77,7 +75,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable       = new JPanel(new BorderLayout());
         this.panelArete       = new JPanel(new BorderLayout());
         this.panelAreteBtn    = new JPanel(new GridLayout(2,2));
-        this.panelValidation  = new JPanel(new BorderLayout());
+        this.panelValidation  = new JPanel(new GridLayout(1,3));
         this.panelRemplissage = new JPanel(new GridLayout(3,4));
 
         // activation des composants
@@ -111,8 +109,9 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
         this.panelTable.add(this.panelAreteBtn, BorderLayout.SOUTH);
         
-        this.panelValidation.add(this.btnRetour, BorderLayout.WEST);
-        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
+        this.panelValidation.add(this.btnRetour);
+        this.panelValidation.add(new JLabel());
+        this.panelValidation.add(this.btnSuivant);
 
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
@@ -188,7 +187,9 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == this.btnSupprArete){
-            this.ctrl.supprimerArete(this.ctrl.getLstAretes().get(this.tabAretes.getSelectedRow()));
+            if(this.tabAretes.getSelectedRow() != -1){
+                this.ctrl.supprimerArete(this.ctrl.getLstAretes().get(this.tabAretes.getSelectedRow()));
+            }
         }
 
         if ( e.getSource() == this.btnRetour) {

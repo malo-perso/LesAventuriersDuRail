@@ -164,7 +164,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     public void majCarteObjectif()
     {   
-        //TO DO
+        this.panelListeObjectif.majCarteObjectif(this.ctrl.getLstObjectifs());
     }
 
     //Permet de changer de panel 

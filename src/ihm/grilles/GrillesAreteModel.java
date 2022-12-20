@@ -29,7 +29,7 @@ public class GrillesAreteModel extends AbstractTableModel {
 	public int    getRowCount   ()                 { return this.lstArete.size();}
 	public String getColumnName (int col)          { return this.tabEntetes[col];         }
 
-
+    @Override
     public Object getValueAt(int row, int col) {
         // TODO Auto-generated method stub
 

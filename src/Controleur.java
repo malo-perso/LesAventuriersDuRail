@@ -121,12 +121,23 @@ public class Controleur{
     /*    CarteObj   */
     /*****************/
 
-    public void majCarteObjectif()
-    {   
-        //TO DO
+    public void ajouterCarteObjectif(Noeud n1, Noeud n2, int points){
+        this.gererXML.ajouterCarteObjectif(n1, n2, points);
+        this.majIHM();
+        this.majCarteObjectif();
     }
 
-    
+    public void supprimerCarteObjectif(CarteObjectif cObjectif){
+        this.gererXML.supprimerCarteObjectif(cObjectif);
+        this.majIHM();
+        this.majCarteObjectif();
+    }
+
+    public void majCarteObjectif()
+    {   
+        this.IHM.majCarteObjectif();
+    }
+
     /*****************/
     /*    getters    */
     /*****************/
