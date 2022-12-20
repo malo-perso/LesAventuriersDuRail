@@ -3,6 +3,7 @@ package src.ihm;
 import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
+import src.metier.FonctionAux;
 import src.metier.Type;
 import src.ihm.grilles.GrillesAreteModel;
 
@@ -28,7 +29,7 @@ public class PanelAretes extends JPanel implements ActionListener {
     private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable;
 
     private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
-    private JComboBox listNoeud1, listNoeud2, listTypeArete;
+    private JComboBox<String> listNoeud1, listNoeud2, listTypeArete;
 
     private JTextField txtLongueurArete;
 
@@ -171,7 +172,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         if(e.getSource() == this.btnAjoutArete){
             if(this.listNoeud1.getSelectedItem() != null    &&
                this.listNoeud2.getSelectedItem() != null    &&
-               !this.txtLongueurArete.getText().equals("")  &&
+               FonctionAux.isInteger(this.txtLongueurArete.getText())  &&
                this.listTypeArete.getSelectedItem() != null
               )
             {
@@ -183,6 +184,11 @@ public class PanelAretes extends JPanel implements ActionListener {
                 );
                 this.removePanelRemplissage();
             }
+
+            if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){
+                this.txtLongueurArete.setText("");
+            }
+
             //this.panelPlateau.tracerArete();
         }
 
@@ -215,4 +221,5 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
     }
+    
 }
