@@ -56,8 +56,8 @@ public class GrillesAreteModel extends AbstractTableModel {
 
     public void setValueAt(Object value, int row, int col) {
         switch(col){
-            case 2 : if (FonctionAux.isInteger((String) value)){ this.lstArete.get(row).setLongueur((int) value); } break;
-            case 3 : Type t = Type.creerType((String) value); if (t != null) { this.lstArete.get(row).setType(t); } break;
+            case 2 : this.lstArete.get(row).setLongueur((int)value);break;
+            case 3 : Type t = Type.creerType((String)value); if (t != null){ this.lstArete.get(row).setType(t); }break;
             default : break;
         }
         this.fireTableCellUpdated(row, col);

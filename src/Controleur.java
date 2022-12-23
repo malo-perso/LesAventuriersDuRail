@@ -38,21 +38,9 @@ public class Controleur{
         this.setFichierPlateau("./src/data/images/mappe.png");
     }
 
-    //PROVISOIRE
     //retourne la liste des types de cartes
     public ArrayList<String> getTypes() {
-        ArrayList<String> couleurs = new ArrayList<String>();
-        couleurs.add("violet");
-        couleurs.add("rouge");
-        couleurs.add("marron");
-        couleurs.add("blanc");
-        couleurs.add("bleu");
-        couleurs.add("jaune");
-        couleurs.add("vert");
-        couleurs.add("noir");
-        couleurs.add("multicouleur");
-
-		return couleurs;
+        return Type.getCouleurs();
     }
 
 

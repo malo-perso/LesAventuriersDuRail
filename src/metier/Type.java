@@ -30,7 +30,7 @@ public class Type {
 		couleurs.add("jaune");
 		couleurs.add("vert");
 		couleurs.add("noir");
-		couleurs.add("multiColore");
+		couleurs.add("multicolore");
 		return couleurs;
 	}
 
@@ -54,7 +54,7 @@ public class Type {
                 return Color.decode("#00FF00");
             case "noir":
                 return Color.decode("#000000");
-            case "multiColore":
+            case "multicolore":
                 return Color.decode("#FF00FF");
             default:
                 return Color.decode("#000000");

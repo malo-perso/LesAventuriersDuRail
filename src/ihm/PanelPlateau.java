@@ -15,12 +15,10 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
-import java.awt.geom.Ellipse2D;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.awt.event.*;
-import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 public class PanelPlateau extends JPanel
 {
@@ -30,6 +28,7 @@ public class PanelPlateau extends JPanel
 
     //PROVISOIRE
     private final int TAILLEWAGON = 50;
+	private final int HAUTEURLABEL = 15;
 
 	public PanelPlateau(Controleur ctrl)
 	{
@@ -43,17 +42,7 @@ public class PanelPlateau extends JPanel
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
-	
-	/*
-	//afficher les noeuds
-    public void majTEST(ArrayList<Noeud> lNoeuds)
-    {
-		this.ctrl.getLstNoeuds();
-        this.hashNoeud = new HashMap<Graphics2D,Noeud>();
-    	for (Noeud noeud : lNoeuds)
-    		this.ajouterNoeud(noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY());
-        majIHM();
-    }*/
+
 
 	//supprimer un noeud
 	public void supprimerNoeud(Noeud n)
@@ -77,6 +66,20 @@ public class PanelPlateau extends JPanel
 			int xNoeud = (int) n.getX();
 			int yNoeud = (int) n.getY();
 			if (xNoeud-(this.diametre/2) <= x && x <= xNoeud+(this.diametre/2) && yNoeud-(this.diametre/2) <= y && y <= yNoeud+(this.diametre/2)) {
+				return n;
+			}
+		}
+		return null;
+	}
+
+	//retourne le noeud dont la position du nom correspond au clique de la souris
+	public Noeud sourisSurNomNoeud(Graphics g, int x, int y){
+		for (Noeud n : this.ctrl.getLstNoeuds())
+		{
+			int nomX = n.getNomX();
+			int nomY = n.getNomY();
+			int largeurNom = SwingUtilities.computeStringWidth(g.getFontMetrics(g.getFont()), n.getNom())+6;
+			if (nomX <= x && x <= nomX+largeurNom && nomY-this.HAUTEURLABEL <= y && y <= nomY) {
 				return n;
 			}
 		}
@@ -140,6 +143,9 @@ public class PanelPlateau extends JPanel
 			g1.draw(noeud);
 			g.setColor(Color.BLACK);
 			g1.fillOval((int) noeud.getX() - this.diametre / 2, (int) noeud.getY() - this.diametre / 2, this.diametre, this.diametre);
+			g.setColor(Color.WHITE);
+			g1.fillRect(noeud.getNomX()-2, noeud.getNomY()-12, SwingUtilities.computeStringWidth(g.getFontMetrics(g.getFont()), noeud.getNom())+6, this.HAUTEURLABEL);
+			g1.setColor(Color.BLACK);
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
@@ -198,23 +204,52 @@ public class PanelPlateau extends JPanel
 
 	private class GererSouris extends MouseAdapter
 	{
-		public void mousePressed (MouseEvent e)	
+		public void mousePressed (MouseEvent e)
 		{
 			//if clic droit, supprimer le noeud
 			if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				//vérifier si on a cliqué sur un noeud et le supprimer
-				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
-					PanelPlateau.this.supprimerNoeud(NoeudCourant);
+					boolean estRelie = false;
+					//vérifier si le noeud est relié à d'autres noeuds par une arête
+					for (Arete arete : PanelPlateau.this.ctrl.getLstAretes()) {
+						if (arete.getNoeud1() == PanelPlateau.this.NoeudCourant || arete.getNoeud2() == PanelPlateau.this.NoeudCourant) {
+							estRelie = true;
+							break;
+						}
+					}
+					if ( estRelie == false) {
+						PanelPlateau.this.supprimerNoeud(NoeudCourant);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Le noeud est relié à d'autres noeuds par une arête. Veuillez supprimer l'arête avant de supprimer le noeud.", "Erreur", JOptionPane.ERROR_MESSAGE);
+					}
 					PanelPlateau.this.NoeudCourant = null;
+				}
 			}
 			//if click gauche, ajouter un noeud
 			else if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
+				}
+				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
+				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
+					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
+					String nomVille = JOptionPane.showInputDialog("Nouveau nom de la ville " + NoeudCourant.getNom() + " :");
+					if(nomVille == null || nomVille.equals("")) {
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					}
+					else {
+						PanelPlateau.this.NoeudCourant.setNom(nomVille);
+						PanelPlateau.this.NoeudCourant = null;
+						PanelPlateau.this.ctrl.majIHM();
+						PanelPlateau.this.ctrl.majNoeud();
+					}
+				}
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
