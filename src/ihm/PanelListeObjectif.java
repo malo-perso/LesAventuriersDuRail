@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import src.Controleur;
 import src.metier.CarteObjectif;
+import src.metier.FonctionAux;
 import src.metier.Noeud;
 import src.ihm.grilles.GrillesCartesObjectifsModel;
 
@@ -26,8 +27,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
     private JPanel panelActionTab;
     private JPanel panelValidation;
 
-    private JComboBox<String> kbNoeud1;
-    private JComboBox<String> kbNoeud2;
+    private JComboBox<String> listNoeud1;
+    private JComboBox<String> listNoeud2;
 
     private JButton btnClear;
     private JButton btnAjoutCarte;
@@ -63,10 +64,10 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
         Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
 
-        this.kbNoeud1 = new JComboBox<String>(vNoeud);
-        this.kbNoeud2 = new JComboBox<String>(vNoeud);
-        this.kbNoeud1.setSelectedItem(null);
-        this.kbNoeud2.setSelectedItem(null);
+        this.listNoeud1 = new JComboBox<String>(vNoeud);
+        this.listNoeud2 = new JComboBox<String>(vNoeud);
+        this.listNoeud1.setSelectedItem(null);
+        this.listNoeud2.setSelectedItem(null);
         
         this.btnClear = new JButton("Effacer");
         this.btnAjoutCarte = new JButton("Ajouter +");
@@ -85,8 +86,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
 
         //Action listener
-        this.kbNoeud1.addActionListener(this);
-        this.kbNoeud2.addActionListener(this);
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
 
         this.btnClear.addActionListener(this);
         this.btnAjoutCarte.addActionListener(this);
@@ -98,8 +99,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Noeud2 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Points :", SwingConstants.CENTER));
-        this.panelRemplissage.add(this.kbNoeud1);
-        this.panelRemplissage.add(this.kbNoeud2);
+        this.panelRemplissage.add(this.listNoeud1);
+        this.panelRemplissage.add(this.listNoeud2);
         this.panelRemplissage.add(this.txtNbPoints);
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(this.btnClear);
@@ -125,20 +126,17 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
     // fonction pour mettre à jour les composants des 2 JComboBox 
     public void majTableNoeud(ArrayList<Noeud> lstNoeud){
-        this.kbNoeud1.removeActionListener(this);
-        this.kbNoeud2.removeActionListener(this);
+        this.listNoeud1.removeActionListener(this);
+        this.listNoeud2.removeActionListener(this);
 
-        this.kbNoeud1.removeAllItems();
-        this.kbNoeud2.removeAllItems();
+        this.listNoeud1.removeAllItems();
+        this.listNoeud2.removeAllItems();
 
         for(Noeud noeud : lstNoeud)
-            this.kbNoeud1.addItem(noeud.getNom());
-
-        this.kbNoeud1.setSelectedItem(null);
-        this.kbNoeud2.setSelectedItem(null);
+            this.listNoeud1.addItem(noeud.getNom());
         
-        this.kbNoeud1.addActionListener(this);
-        this.kbNoeud2.addActionListener(this);
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
 
     }
 
@@ -149,15 +147,16 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
     // fonction qui permet d effacer le contenu des composant du panelRemplissage
     private void removePanelRemplissage(){
-        this.kbNoeud1.removeActionListener(this);
-        this.kbNoeud2.removeActionListener(this);
+        this.listNoeud1.removeActionListener(this);
+        this.listNoeud2.removeActionListener(this);
 
-        this.kbNoeud1.setSelectedItem(null);
-        this.kbNoeud2.setSelectedItem(null);
+        this.listNoeud2.setSelectedIndex(1);
+        this.listNoeud1.setSelectedItem(null);
+        this.listNoeud2.setSelectedItem(null);
         this.txtNbPoints.setText("");
 
-        this.kbNoeud1.addActionListener(this);
-        this.kbNoeud2.addActionListener(this);
+        this.listNoeud1.addActionListener(this);
+        this.listNoeud2.addActionListener(this);
     }
     
     @Override
@@ -169,16 +168,21 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         
         //bouton ajouter + pressé -> ajoute une carteObjectif à la Jliste
         if(e.getSource() == this.btnAjoutCarte){
-            if (this.kbNoeud1.getSelectedItem() != null &&
-                this.kbNoeud2.getSelectedItem() != null &&
-                !this.txtNbPoints.getText().equals("") )
+            if (this.listNoeud1.getSelectedItem() != null &&
+                this.listNoeud2.getSelectedItem() != null &&
+                FonctionAux.isInteger(this.txtNbPoints.getText()) 
+               )
             {
                 this.ctrl.ajouterCarteObjectif(
-                    this.ctrl.getLstNoeuds().get(this.kbNoeud1.getSelectedIndex()),
-                    this.ctrl.getLstNoeuds().get(this.kbNoeud2.getSelectedIndex()),
+                    this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
+                    this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
                     Integer.parseInt(this.txtNbPoints.getText())
                 );
                 this.removePanelRemplissage();
+            }
+
+            if(!FonctionAux.isInteger(this.txtNbPoints.getText())){
+                this.txtNbPoints.setText("");
             }
         }
 
@@ -197,38 +201,38 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
 
         }
 
-        if(e.getSource() == this.kbNoeud1){
-            if(this.kbNoeud1.getSelectedIndex() == this.kbNoeud2.getSelectedIndex()){
-                
-                this.kbNoeud1.removeActionListener(this);
-                this.kbNoeud2.removeActionListener(this);
+        if(e.getSource() == this.listNoeud1){
+            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
+
+                this.listNoeud1.removeActionListener(this);
+                this.listNoeud2.removeActionListener(this);
     
-                this.kbNoeud1.setSelectedIndex(this.kbNoeud2.getSelectedIndex());
-                this.kbNoeud2.setSelectedIndex(this.indN1);
+                this.listNoeud1.setSelectedIndex(this.listNoeud2.getSelectedIndex());
+                this.listNoeud2.setSelectedIndex(this.indN1);
     
-                this.kbNoeud1.addActionListener(this);
-                this.kbNoeud2.addActionListener(this);
+                this.listNoeud1.addActionListener(this);
+                this.listNoeud2.addActionListener(this);
             }
 
-            this.indN1 = this.kbNoeud1.getSelectedIndex();
-            this.indN2 = this.kbNoeud2.getSelectedIndex();
+            this.indN1 = this.listNoeud1.getSelectedIndex();
+            this.indN2 = this.listNoeud2.getSelectedIndex();
         }
 
-        if(e.getSource() == this.kbNoeud2){
-            if(this.kbNoeud1.getSelectedIndex() == this.kbNoeud2.getSelectedIndex()){
-                
-                this.kbNoeud1.removeActionListener(this);
-                this.kbNoeud2.removeActionListener(this);
+        if(e.getSource() == this.listNoeud2){
+            if(this.listNoeud1.getSelectedIndex() == this.listNoeud2.getSelectedIndex()){
+
+                this.listNoeud1.removeActionListener(this);
+                this.listNoeud2.removeActionListener(this);
     
-                this.kbNoeud2.setSelectedIndex(this.kbNoeud1.getSelectedIndex());
-                this.kbNoeud1.setSelectedIndex(this.indN2);
+                this.listNoeud2.setSelectedIndex(this.listNoeud1.getSelectedIndex());
+                this.listNoeud1.setSelectedIndex(this.indN2);
     
-                this.kbNoeud1.addActionListener(this);
-                this.kbNoeud2.addActionListener(this);
+                this.listNoeud1.addActionListener(this);
+                this.listNoeud2.addActionListener(this);
             }
 
-            this.indN2 = this.kbNoeud2.getSelectedIndex();
-            this.indN1 = this.kbNoeud1.getSelectedIndex();
+            this.indN2 = this.listNoeud2.getSelectedIndex();
+            this.indN1 = this.listNoeud1.getSelectedIndex();
         }
     }
 }
