@@ -39,6 +39,7 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
         }
         
     }
+    public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
 
     public void majTable(ArrayList<CarteObjectif> lstCarteObjectifs) {   
         this.lstCarteObjectifs = lstCarteObjectifs;
@@ -46,15 +47,12 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int row, int col) {
-        if (col == 0 || col == 1 ) {
-            return false;
-        }
-        return true;
+        return col == 2;
     }
 
     public void setValueAt(Object value, int row, int col) {
         switch(col){
-            case 2 : if (FonctionAux.isInteger((String) value)){ this.lstCarteObjectifs.get(row).setPoints((int) value); } break;
+            case 2 : this.lstCarteObjectifs.get(row).setPoints((int)value);break;//if (FonctionAux.isInteger((String) value)){ this.lstCarteObjectifs.get(row).setPoints((int) value); } break;
             default : break;
         }
         this.fireTableCellUpdated(row, col);

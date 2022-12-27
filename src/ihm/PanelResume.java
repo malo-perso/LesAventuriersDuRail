@@ -1,10 +1,8 @@
 package src.ihm;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
-import src.ihm.PanelRegleJeu;
 import src.ihm.grilles.GrillesAreteModel;
 import src.ihm.grilles.GrillesCartesObjectifsModel;
 import src.ihm.grilles.GrillesNoeudModel;
@@ -14,7 +12,6 @@ import src.metier.Noeud;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.ArrayList;
 
 public class PanelResume extends JPanel implements ActionListener{
