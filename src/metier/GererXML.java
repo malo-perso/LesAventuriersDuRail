@@ -48,9 +48,10 @@ public class GererXML {
 		this.lstNoeuds = new ArrayList<Noeud>();
 		this.hashMapCarteVehicules = new HashMap<Type, ArrayList<CarteVehicule>>();
 
-		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
-		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
-		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
+		this.lstNoeuds.add(new Noeud("A", 200, 100, 220, 120));
+		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
+		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
+		
 
 		Type marron = Type.creerType("marron");
 		Type rouge = Type.creerType("rouge");
@@ -77,9 +78,10 @@ public class GererXML {
 
 		this.lstAretes = new ArrayList<Arete>();
 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, marron));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 1, Type.creerType("rouge")));
-		
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
+
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
 		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
@@ -186,6 +188,33 @@ public class GererXML {
 			this.ctrl.majArete();
 		}
 	}
+
+	/*****************/
+    /* CarteObjectif */
+    /*****************/
+
+	public void ajouterCarteObjectif(Noeud n1, Noeud n2, int points){
+		this.lstCarteObjectifs.add(new CarteObjectif(n1, n2, points));
+	}
+
+	public void supprimerCarteObjectif(CarteObjectif co){
+		this.lstCarteObjectifs.remove(co);
+	}
+
+	public void setPointCarteObjectif(CarteObjectif cObjectif, int points){
+
+		for(CarteObjectif co : this.lstCarteObjectifs){
+			if(co.equals(cObjectif)){
+				co.setPoints(points);
+				return;
+			}
+			this.ctrl.majCarteObjectif();
+		}
+	}
+
+	/*****************/
+	/*     Ecrire    */
+	/*****************/
 
 	public void ecrireXML(String chemin){
 		try{

@@ -1,27 +1,32 @@
 package src.ihm;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
-import src.ihm.PanelRegleJeu;
+import src.ihm.grilles.GrillesAreteModel;
+import src.ihm.grilles.GrillesCartesObjectifsModel;
 import src.ihm.grilles.GrillesNoeudModel;
+import src.metier.Arete;
+import src.metier.CarteObjectif;
+import src.metier.Noeud;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.util.ArrayList;
 
 public class PanelResume extends JPanel implements ActionListener{
 
     //private static final String[] colNoeud = {"Nom", "x", "y","NomX","NomY"};
-    private static final String[] colArrete = {"Noeud1", "Noeud2", "Longueur","Type"};
-    private static final String[] colCarte = {"Noeud1", "Noeud2", "Points"};
+    //private static final String[] colArrete = {"Noeud1", "Noeud2", "Longueur","Type"};
+    //private static final String[] colCarte = {"Noeud1", "Noeud2", "Points"};
 
     //private DefaultTableModel tabNoeud = new DefaultTableModel(colNoeud, 0);
-    private DefaultTableModel tabArrete = new DefaultTableModel(colArrete, 0);
-    private DefaultTableModel tabCarte = new DefaultTableModel(colCarte, 0);
+    //private DefaultTableModel tabArrete = new DefaultTableModel(colArrete, 0);
+    //private DefaultTableModel tabCarte = new DefaultTableModel(colCarte, 0);
 
-    private GrillesNoeudModel model;
+    private GrillesNoeudModel modelN;
+    private GrillesAreteModel modelA;
+    private GrillesCartesObjectifsModel modelO;
     private PanelRegleJeu panelRegleJeu;
 
     private JPanel panelAll;
@@ -57,13 +62,11 @@ public class PanelResume extends JPanel implements ActionListener{
     public PanelResume(Controleur ctrl){
 
         this.ctrl = ctrl;
-        this.model = new GrillesNoeudModel(this.ctrl);
+        this.modelN = new GrillesNoeudModel(this.ctrl);
+        this.modelA = new GrillesAreteModel(this.ctrl);
+        this.modelO = new GrillesCartesObjectifsModel(this.ctrl);
 
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
-
-        JScrollPane spTabNoeud;
-        JScrollPane spTabArrete;
-        JScrollPane spTabCarte;
 
         this.panelAll = new JPanel();
         this.panelJoueur = new JPanel();
@@ -80,13 +83,13 @@ public class PanelResume extends JPanel implements ActionListener{
 
         this.lblJMin = new JLabel("Joueur Min : " + this.nbJoueurMin);
         this.lblJMax = new JLabel("Joueur Max : " + this.nbJoueurMax);
-        this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.DoubleVoie );
         this.lblVehicule = new JLabel("Vehicule par joueur : " + this.nbWagonJoueur);
-        this.lblFin = new JLabel("Fin de partie si moins de  vehicules " +  this.nbWagonFin); 
+        this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.DoubleVoie );
+        this.lblFin = new JLabel("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin); 
 
-        this.jTabNoeud = new JTable(this.model);
-        this.jTabArrete = new JTable(this.tabArrete);
-        this.jTabCarte = new JTable(this.tabCarte);
+        this.jTabNoeud = new JTable(this.modelN);
+        this.jTabArrete = new JTable(this.modelA);
+        this.jTabCarte = new JTable(this.modelO);
 
         this.btnRetour = new JButton("Retour");
         this.btnEnregistrer = new JButton("Enregistrer");
@@ -98,18 +101,7 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelArrete.setLayout(new BorderLayout());
         this.panelObjectif.setLayout(new BorderLayout());
         this.panelBtn.setLayout(new GridLayout(1,3));
-
-        spTabNoeud = new JScrollPane(this.jTabNoeud);
-        spTabArrete = new JScrollPane(this.jTabArrete);
-        spTabCarte = new JScrollPane(this.jTabCarte);
-
-        this.panelJoueur.add(this.lblJMin);
-        this.panelJoueur.add(this.lblJMax);
-        this.panelJoueur.add(this.lblDoubleMin);
-        this.panelJoueur.add(this.lblVehicule);
-        this.panelJoueur.add(this.lblFin);
-
-
+         
         this.jTabNoeud.setFillsViewportHeight(true);
         this.jTabArrete.setFillsViewportHeight(true);
         this.jTabCarte.setFillsViewportHeight(true);
@@ -117,10 +109,20 @@ public class PanelResume extends JPanel implements ActionListener{
         this.jTabNoeud.setEnabled(false);
         this.jTabArrete.setEnabled(false);
         this.jTabCarte.setEnabled(false);
+        
+        JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
+        JScrollPane spTabArrete = new JScrollPane(this.jTabArrete);
+        JScrollPane spTabCarte = new JScrollPane(this.jTabCarte);
 
-        this.panelNoeud.add(spTabNoeud,BorderLayout.CENTER);
-        this.panelArrete.add(spTabArrete,BorderLayout.CENTER);
-        this.panelObjectif.add(spTabCarte,BorderLayout.CENTER);
+        this.panelJoueur.add(this.lblJMin);
+        this.panelJoueur.add(this.lblJMax);
+        this.panelJoueur.add(this.lblVehicule);
+        this.panelJoueur.add(this.lblDoubleMin);
+        this.panelJoueur.add(this.lblFin);
+
+        this.panelNoeud.add(spTabNoeud);
+        this.panelArrete.add(spTabArrete);
+        this.panelObjectif.add(spTabCarte);
 
         this.panelBtn.add(this.btnRetour);
         this.panelBtn.add(new JLabel(""));
@@ -136,6 +138,18 @@ public class PanelResume extends JPanel implements ActionListener{
         
         this.btnRetour.addActionListener(this);
         this.btnEnregistrer.addActionListener(this);
+    }
+    
+    public void majNoeud(ArrayList<Noeud> noeuds) {
+        this.modelN.majTable(noeuds);
+    }
+
+    public void majArete(ArrayList<Arete> lstAretes) {
+        this.modelA.majTable(lstAretes);
+    }
+
+    public void majCarteObjectif(ArrayList<CarteObjectif> lstCarteObjectif){
+        this.modelO.majTable(lstCarteObjectif);
     }
 
     public void actionPerformed( ActionEvent e){

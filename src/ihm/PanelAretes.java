@@ -3,10 +3,9 @@ package src.ihm;
 import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
-import src.metier.Type;
+import src.metier.FonctionAux;
 import src.ihm.grilles.GrillesAreteModel;
 
-import java.awt.Image;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -18,19 +17,14 @@ import java.util.Vector;
 
 public class PanelAretes extends JPanel implements ActionListener {
 
-    private PanelPlateau panelPlateau;
-
-    private static final String[] NOM_COLONNE = {"Noeud 1", "Noeud 2", "Longueur", "Type"};
     private GrillesAreteModel model;
-
-    private Image  imgFond;
 
     private JTable tabAretes;
 
-    private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable;
+    private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable, panelClear;
 
     private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
-    private JComboBox listNoeud1, listNoeud2, listTypeArete;
+    private JComboBox<String> listNoeud1, listNoeud2, listTypeArete;
 
     private JTextField txtLongueurArete;
 
@@ -46,8 +40,6 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelValidation = new JPanel();
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
-
-        this.imgFond = getToolkit().getImage ( "../data/images/logo.png" );
 
         this.model = new GrillesAreteModel(this.ctrl);
         this.tabAretes = new JTable(this.model);
@@ -77,8 +69,9 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable       = new JPanel(new BorderLayout());
         this.panelArete       = new JPanel(new BorderLayout());
         this.panelAreteBtn    = new JPanel(new GridLayout(2,2));
-        this.panelValidation  = new JPanel(new BorderLayout());
-        this.panelRemplissage = new JPanel(new GridLayout(3,4));
+        this.panelValidation  = new JPanel(new GridLayout(1,3));
+        this.panelRemplissage = new JPanel(new GridLayout(2,4));
+        this.panelClear       = new JPanel(new GridLayout(2,3));
 
         // activation des composants
         this.btnAjoutArete.addActionListener(this);
@@ -96,11 +89,16 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelRemplissage.add(this.listNoeud2);
         this.panelRemplissage.add(this.txtLongueurArete);
         this.panelRemplissage.add(this.listTypeArete);
-        this.panelRemplissage.add(this.btnClear);
-        this.panelRemplissage.add(new JLabel());
-        this.panelRemplissage.add(new JLabel());
-        this.panelRemplissage.add(new JLabel());
 
+        this.panelClear.add(new JLabel());
+        this.panelClear.add(this.btnClear);
+        this.panelClear.add(new JLabel());
+        this.panelClear.add(new JLabel());
+        this.panelClear.add(new JLabel());
+        this.panelClear.add(new JLabel());
+        
+
+        this.panelArete.add(this.panelClear, BorderLayout.SOUTH);
         this.panelArete.add(this.panelRemplissage, BorderLayout.CENTER);
 
         this.panelAreteBtn.add(this.btnAjoutArete);
@@ -111,9 +109,11 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
         this.panelTable.add(this.panelAreteBtn, BorderLayout.SOUTH);
         
-        this.panelValidation.add(this.btnRetour, BorderLayout.WEST);
-        this.panelValidation.add(this.btnSuivant, BorderLayout.EAST);
+        this.panelValidation.add(this.btnRetour);
+        this.panelValidation.add(new JLabel());
+        this.panelValidation.add(this.btnSuivant);
 
+        this.add(new JLabel("Création des arêtes", SwingConstants.CENTER), BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
 
@@ -172,7 +172,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         if(e.getSource() == this.btnAjoutArete){
             if(this.listNoeud1.getSelectedItem() != null    &&
                this.listNoeud2.getSelectedItem() != null    &&
-               !this.txtLongueurArete.getText().equals("")  &&
+               FonctionAux.isInteger(this.txtLongueurArete.getText())  &&
                this.listTypeArete.getSelectedItem() != null
               )
             {
@@ -184,11 +184,18 @@ public class PanelAretes extends JPanel implements ActionListener {
                 );
                 this.removePanelRemplissage();
             }
+
+            if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){
+                this.txtLongueurArete.setText("");
+            }
+
             //this.panelPlateau.tracerArete();
         }
 
         if(e.getSource() == this.btnSupprArete){
-            this.ctrl.supprimerArete(this.ctrl.getLstAretes().get(this.tabAretes.getSelectedRow()));
+            if(this.tabAretes.getSelectedRow() != -1){
+                this.ctrl.supprimerArete(this.ctrl.getLstAretes().get(this.tabAretes.getSelectedRow()));
+            }
         }
 
         if ( e.getSource() == this.btnRetour) {
@@ -214,4 +221,5 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
     }
+    
 }

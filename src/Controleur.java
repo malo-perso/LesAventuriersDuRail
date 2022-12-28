@@ -38,21 +38,9 @@ public class Controleur{
         this.setFichierPlateau("./src/data/images/mappe.png");
     }
 
-    //PROVISOIRE
     //retourne la liste des types de cartes
     public ArrayList<String> getTypes() {
-        ArrayList<String> couleurs = new ArrayList<String>();
-        couleurs.add("violet");
-        couleurs.add("rouge");
-        couleurs.add("marron");
-        couleurs.add("blanc");
-        couleurs.add("bleu");
-        couleurs.add("jaune");
-        couleurs.add("vert");
-        couleurs.add("noir");
-        couleurs.add("multicouleur");
-
-		return couleurs;
+        return Type.getCouleurs();
     }
 
 
@@ -121,12 +109,23 @@ public class Controleur{
     /*    CarteObj   */
     /*****************/
 
-    public void majCarteObjectif()
-    {   
-        //TO DO
+    public void ajouterCarteObjectif(Noeud n1, Noeud n2, int points){
+        this.gererXML.ajouterCarteObjectif(n1, n2, points);
+        this.majIHM();
+        this.majCarteObjectif();
     }
 
-    
+    public void supprimerCarteObjectif(CarteObjectif cObjectif){
+        this.gererXML.supprimerCarteObjectif(cObjectif);
+        this.majIHM();
+        this.majCarteObjectif();
+    }
+
+    public void majCarteObjectif()
+    {   
+        this.IHM.majCarteObjectif();
+    }
+
     /*****************/
     /*    getters    */
     /*****************/

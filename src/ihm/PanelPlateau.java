@@ -15,12 +15,10 @@ import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
-import java.awt.geom.Ellipse2D;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.awt.event.*;
-import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Font;
+import java.awt.FontMetrics;
 
 public class PanelPlateau extends JPanel
 {
@@ -29,7 +27,8 @@ public class PanelPlateau extends JPanel
 	private int diametre;
 
     //PROVISOIRE
-    private final int TAILLEWAGON = 100;
+    private final int TAILLEWAGON = 50;
+	private final int HAUTEURLABEL = 15;
 
 	public PanelPlateau(Controleur ctrl)
 	{
@@ -43,17 +42,7 @@ public class PanelPlateau extends JPanel
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
-	
-	/*
-	//afficher les noeuds
-    public void majTEST(ArrayList<Noeud> lNoeuds)
-    {
-		this.ctrl.getLstNoeuds();
-        this.hashNoeud = new HashMap<Graphics2D,Noeud>();
-    	for (Noeud noeud : lNoeuds)
-    		this.ajouterNoeud(noeud.getX(), noeud.getY(), noeud.getNomX(), noeud.getNomY());
-        majIHM();
-    }*/
+
 
 	//supprimer un noeud
 	public void supprimerNoeud(Noeud n)
@@ -83,78 +72,184 @@ public class PanelPlateau extends JPanel
 		return null;
 	}
 
+	//retourne le noeud dont la position du nom correspond au clique de la souris
+	public Noeud sourisSurNomNoeud(Graphics g, int x, int y){
+		for (Noeud n : this.ctrl.getLstNoeuds())
+		{
+			int nomX = n.getNomX();
+			int nomY = n.getNomY();
+			int largeurNom = SwingUtilities.computeStringWidth(g.getFontMetrics(g.getFont()), n.getNom())+6;
+			if (nomX <= x && x <= nomX+largeurNom && nomY-this.HAUTEURLABEL <= y && y <= nomY) {
+				return n;
+			}
+		}
+		return null;
+	}
+
 	public void majIHM()
 	{
 		super.repaint();		
 	}
-
-	//PAS ENCORE UTILISE
-	/*
-	//trace les aretes entre les noeuds
-	public void tracerArete(Graphics2D g2D, int x, int y)
-	{
-		for (Arete aret : this.ctrl.getMetier().getLstAretes()) {
-			if (aret.getNoeud1().getX() == x && aret.getNoeud1().getY() == y) {
-				g2D.setColor(Color.RED);
-				g2D.setStroke(new BasicStroke(3));
-				g2D.drawLine(aret.getNoeud1().getX(), aret.getNoeud1().getY(), aret.getNoeud2().getX(), aret.getNoeud2().getY());
-			}
-		}	
-	}
-	*/
-	public void paint(Graphics g)
-	{
+	
+	public void paint(Graphics g) {
 		super.paint(g);
 
-		Graphics2D g1 = (Graphics2D)g;
-		//parcourir la liste des noeuds et les afficher les coordonnées des noeuds correspondans
-		
-        for (Arete arete : this.ctrl.getLstAretes()) {
-            double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX()-arete.getNoeud2().getX(),2)+Math.pow(arete.getNoeud1().getY()-arete.getNoeud2().getY(),2));
-            
-            //a garder pour le moment 
-            //if(longueur > TAILLEWAGON * arete.getLongueur())            
-            //    System.out.println("higehigigikgnfkbnfb");
+		Graphics2D g1 = (Graphics2D) g;
+		g1.setColor(Color.BLACK);
 
-            g.drawLine((int)arete.getNoeud1().getX(), (int)arete.getNoeud1().getY(), (int)arete.getNoeud2().getX(), (int)arete.getNoeud2().getY());
+		for (Arete arete : this.ctrl.getLstAretes()) {
+
+            // calcul de la longueur entre le noeud 1 et le noeud 2
+			double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX() - arete.getNoeud2().getX(), 2)	+ Math.pow(arete.getNoeud1().getY() - arete.getNoeud2().getY(), 2));
+            double distanceWagon = TAILLEWAGON * arete.getLongueur()*1.5;
+
+			if (longueur < distanceWagon) {
+
+
+                //calcule du demi petit rayon de l ellipse
+                double grandR = longueur/2/1.1;
+                double demiR = Math.sqrt(2*Math.pow(distanceWagon/Math.PI, 2)-Math.pow(grandR,2)*1.2);
+                
+                //calcule des coordonné du centre du cercle
+                double centreX = (arete.getNoeud2().getX() - arete.getNoeud1().getX()) / 2 + arete.getNoeud1().getX();
+                double centreY = (arete.getNoeud2().getY() - arete.getNoeud1().getY()) / 2 + arete.getNoeud1().getY();
+                
+                //l'angle entre la base du plan et l ellipse
+                double teta = Math.atan((arete.getNoeud2().getY()-arete.getNoeud1().getY())/(arete.getNoeud2().getX()-arete.getNoeud1().getX()));
+
+                for(int cpt = 0 ; cpt < arete.getLongueur();cpt++) {
+                    //coordonnée polaire des deux points du wagon
+                    double wagon1X =grandR*Math.cos((Math.PI)/arete.getLongueur()*cpt);
+                    double wagon1Y =demiR*Math.sin((Math.PI)/arete.getLongueur()*cpt);
+                    
+                    double wagon2X =  grandR*Math.cos((Math.PI)/arete.getLongueur()*(cpt+1));
+                    double wagon2Y =  demiR*Math.sin((Math.PI)/arete.getLongueur()*(cpt+1));
+                    
+                    //on applique la rotation et la translation
+                    double w1XP = centreX +rotationX(wagon1X,wagon1Y,teta);
+                    double y1YP = centreY +rotationY(wagon1X,wagon1Y,teta);
+                    double x2XP = centreX +rotationX(wagon2X,wagon2Y,teta);
+                    double y2YP = centreY +rotationY(wagon2X,wagon2Y,teta);
+
+                    tracerWagon( w1XP, y1YP, x2XP, y2YP,1,g1,arete.getType().getColor());
+                }
+            }
+            else 
+				tracerWagon(arete.getNoeud1().getX(), arete.getNoeud1().getCenterY(), arete.getNoeud2().getX(), arete.getNoeud2().getY(), arete.getLongueur(), g1,arete.getType().getColor());
+			
+			} 
             
-        }
-        
-        for (Noeud noeud : this.ctrl.getLstNoeuds())
-		{
-			//g1.draw(noeud);
-			g.setColor(Color.RED);
-			g1.fillOval((int) noeud.getX()-this.diametre/2, (int) noeud.getY()-this.diametre/2, this.diametre, this.diametre);
+        for (Noeud noeud : this.ctrl.getLstNoeuds()) {
+			g1.draw(noeud);
 			g.setColor(Color.BLACK);
+			g1.fillOval((int) noeud.getX() - this.diametre / 2, (int) noeud.getY() - this.diametre / 2, this.diametre, this.diametre);
+			g.setColor(Color.WHITE);
+			g1.fillRect(noeud.getNomX()-2, noeud.getNomY()-12, SwingUtilities.computeStringWidth(g.getFontMetrics(g.getFont()), noeud.getNom())+6, this.HAUTEURLABEL);
+			g1.setColor(Color.BLACK);
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
 		g.setColor(Color.RED);
+    }
 
+    private double rotationX(double nX,double nY, double teta) {
+        double xM = nX;
+        double yM = nY;
+
+        double x = xM*Math.cos(teta)-yM*Math.sin(teta);
+        return x;
+    }
+    private double rotationY(double nX,double nY, double teta) {
+        double xM = nX;
+        double yM = nY;
+
+        double y = xM*Math.sin(teta)+ yM*Math.cos(teta);
+        return y;
+    }
+
+
+    private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color) {
+		double tX1 = ((bX - aX) / nbWagon);
+		double tY1 = ((bY - aY) / nbWagon);
+
+		double hypo = (int) Math.sqrt(Math.pow(tX1, 2) + Math.pow(tY1, 2));
+		double var = ((hypo - this.TAILLEWAGON) / 2) / hypo;
+
+		double ratioX = tX1 * var;
+		double ratioY = tY1 * var;
+
+		g1.setStroke(new BasicStroke(2));
+        g1.setColor(Color.BLACK);
+		g1.drawLine((int) aX, (int) aY,(int) bX, (int) bY);
         
-
+        g1.setStroke(new BasicStroke(10));
+		for (int cpt = 0; cpt < nbWagon; cpt++) 
+			g1.drawLine((int) (aX + cpt * tX1 + ratioX),
+					(int) (aY + cpt * tY1 + ratioY),
+					(int) (aX + cpt * tX1 + tX1 - ratioX),
+					(int) (aY + cpt * tY1 + tY1 - ratioY));
+        
+        g1.setColor(color);
+        g1.setStroke(new BasicStroke(8));
+		for (int cpt = 0; cpt < nbWagon; cpt++) 
+			g1.drawLine((int) (aX + cpt * tX1 + ratioX),
+					(int) (aY + cpt * tY1 + ratioY),
+					(int) (aX + cpt * tX1 + tX1 - ratioX),
+					(int) (aY + cpt * tY1 + tY1 - ratioY));
+        g1.setColor(Color.BLACK);
+        g1.setStroke(new BasicStroke(2));  
+		
 	}
 
 
 	private class GererSouris extends MouseAdapter
 	{
-		public void mousePressed (MouseEvent e)	
+		public void mousePressed (MouseEvent e)
 		{
 			//if clic droit, supprimer le noeud
 			if (e.getButton() == MouseEvent.BUTTON3)
 			{
 				//vérifier si on a cliqué sur un noeud et le supprimer
-				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
-					PanelPlateau.this.supprimerNoeud(NoeudCourant);
+					boolean estRelie = false;
+					//vérifier si le noeud est relié à d'autres noeuds par une arête
+					for (Arete arete : PanelPlateau.this.ctrl.getLstAretes()) {
+						if (arete.getNoeud1() == PanelPlateau.this.NoeudCourant || arete.getNoeud2() == PanelPlateau.this.NoeudCourant) {
+							estRelie = true;
+							break;
+						}
+					}
+					if ( estRelie == false) {
+						PanelPlateau.this.supprimerNoeud(NoeudCourant);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Le noeud est relié à d'autres noeuds par une arête. Veuillez supprimer l'arête avant de supprimer le noeud.", "Erreur", JOptionPane.ERROR_MESSAGE);
+					}
 					PanelPlateau.this.NoeudCourant = null;
+				}
 			}
 			//if click gauche, ajouter un noeud
 			else if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (sourisSurNoeud(e.getX(), e.getY())!= null)
+				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
+				}
+				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
+				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
+					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
+					String nomVille = JOptionPane.showInputDialog("Nouveau nom de la ville " + NoeudCourant.getNom() + " :");
+					if(nomVille == null || nomVille.equals("")) {
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					}
+					else {
+						PanelPlateau.this.NoeudCourant.setNom(nomVille);
+						PanelPlateau.this.NoeudCourant = null;
+						PanelPlateau.this.ctrl.majIHM();
+						PanelPlateau.this.ctrl.majNoeud();
+					}
+				}
 				else //ajouter un noeud
                 {
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
@@ -237,8 +332,8 @@ public class PanelPlateau extends JPanel
 		public void mouseMoved(MouseEvent e) 
 		{
 			//si on survole un noeud avec la souris, le sélectionner
-			if (sourisSurNoeud(e.getX(), e.getY())!= null)
-				System.out.println("survol");
+			//if (sourisSurNoeud(e.getX(), e.getY())!= null)
+			//	System.out.println("survol");
 		}
 	}
 
