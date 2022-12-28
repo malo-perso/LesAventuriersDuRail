@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.awt.image.WritableRaster;
@@ -30,6 +31,7 @@ public class GererXML {
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
 	private ArrayList<CarteVehicule> lstCarteVehicules;
+	private HashMap<Type, ArrayList<CarteVehicule>> hashMapCarteVehicules;
 
 	public GererXML(Controleur ctrl){
 
@@ -44,17 +46,38 @@ public class GererXML {
 		this.diametre = 20;
 
 		this.lstNoeuds = new ArrayList<Noeud>();
-		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+		this.hashMapCarteVehicules = new HashMap<Type, ArrayList<CarteVehicule>>();
 
 		this.lstNoeuds.add(new Noeud("A", 0, 0, 0, 0));
 		this.lstNoeuds.add(new Noeud("B", 0, 1, 0, 1));
 		this.lstNoeuds.add(new Noeud("C", 0, 2, 0, 2));
 
-		this.lstCarteVehicules.add(new CarteVehicule(Type.creerType("marron")));
+		Type marron = Type.creerType("marron");
+		Type rouge = Type.creerType("rouge");
+
+		ArrayList<CarteVehicule> lstCarteMarron = new ArrayList<CarteVehicule>();
+		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
+		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
+		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
+
+		ArrayList<CarteVehicule> lstCarteRouge = new ArrayList<CarteVehicule>();
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+
+		this.hashMapCarteVehicules.put(marron, lstCarteMarron);
+
+		
+		this.hashMapCarteVehicules.put(rouge, lstCarteRouge);
+
+		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
 		this.lstAretes = new ArrayList<Arete>();
 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, Type.creerType("marron")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 1, marron));
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 1, Type.creerType("rouge")));
 		
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
@@ -224,6 +247,17 @@ public class GererXML {
 			}
 			bw.write("\t</lstCarteObjectifs>\n");
 
+			bw.write("\t<hashMapCarteVehicules>\n");
+
+			for(Type t : this.hashMapCarteVehicules.keySet()){
+				bw.write("	\t<lstCarteVehicule>"                +"\n" +
+						   "\t\t\t<nbCarte>" + this.hashMapCarteVehicules.get(t).size() + "</nbCarte>" + "\n" +
+						   "\t\t\t<Type>" + t + "</Type>" + "\n" +
+						"    \t</lstCarteVehicule>\n");
+			}
+
+			bw.write("\t</hashMapCarteVehicules>\n");
+
 			bw.write("\t<imagePlateau>" + Base64.getEncoder().encodeToString(bytes) +
 					 "</imagePlateau>\n");
 
@@ -301,6 +335,20 @@ public class GererXML {
 			
 			}
 
+			List listCarteVehicule = racine.getChild("lstCarteVehicules").getChildren("carteVehicule");
+			Iterator l = listCarteVehicule.iterator();
+			while(l.hasNext()){
+				Element courant = (Element)l.next();
+				int 	nbCarte = Integer.parseInt(courant.getChildText("type"));
+				String  nomType = courant.getChildText("nombre");
+
+				for(int m=0; m < nbCarte; m++){
+					this.lstCarteVehicules.add(new CarteVehicule(Type.creerType(nomType)));
+				}
+
+				this.hashMapCarteVehicules.put(Type.creerType(nomType), this.lstCarteVehicules);
+			}
+
 
 			Element imagePlateau = racine.getChild("imagePlateau");
 
@@ -329,9 +377,9 @@ public class GererXML {
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
 
-		//g.ecrireXML("/Images/Cable.png");
+		g.ecrireXML("./src/data/images/logo.png");
 		try{
-			g.lireXML(new File("./src/data/mappe/mappe.xml"));
+			//g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}
 	}
 
