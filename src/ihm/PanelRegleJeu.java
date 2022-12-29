@@ -108,7 +108,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbWagonFin);
         this.panelSaisie.add(new JLabel());
-        //this.panelSaisie.add(this.txtTailleNoeud);
+        this.panelSaisie.add(this.txtTailleNoeud);
         //this.panelSaisie.add(new JLabel());
 
         this.panelRegle.add(this.panelLabel);

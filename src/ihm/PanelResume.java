@@ -3,12 +3,8 @@ package src.ihm;
 import javax.swing.*;
 
 import src.Controleur;
-import src.ihm.grilles.GrillesAreteModel;
-import src.ihm.grilles.GrillesCartesObjectifsModel;
-import src.ihm.grilles.GrillesNoeudModel;
-import src.metier.Arete;
-import src.metier.CarteObjectif;
-import src.metier.Noeud;
+import src.metier.*;
+import src.ihm.grilles.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -56,17 +52,35 @@ public class PanelResume extends JPanel implements ActionListener{
     private int nbWagonFin;
 
     private Controleur ctrl;
+    private GererXML metier;
 
     //private JScrollBar sbTout;
 
     public PanelResume(Controleur ctrl){
 
         this.ctrl = ctrl;
+        this.metier = new GererXML(this.ctrl);
         this.modelN = new GrillesNoeudModel(this.ctrl);
         this.modelA = new GrillesAreteModel(this.ctrl);
         this.modelO = new GrillesCartesObjectifsModel(this.ctrl);
 
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
+
+        this.jTabNoeud = new JTable(this.modelN);
+        this.jTabArrete = new JTable(this.modelA);
+        this.jTabCarte = new JTable(this.modelO);
+
+        this.jTabNoeud.setFillsViewportHeight(true);
+        this.jTabArrete.setFillsViewportHeight(true);
+        this.jTabCarte.setFillsViewportHeight(true);
+
+        this.jTabNoeud.setEnabled(true);
+        this.jTabArrete.setEnabled(true);
+        this.jTabCarte.setEnabled(true);
+        
+        JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
+        JScrollPane spTabArrete = new JScrollPane(this.jTabArrete);
+        JScrollPane spTabCarte = new JScrollPane(this.jTabCarte);
 
         this.panelAll = new JPanel();
         this.panelJoueur = new JPanel();
@@ -87,10 +101,6 @@ public class PanelResume extends JPanel implements ActionListener{
         this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.DoubleVoie );
         this.lblFin = new JLabel("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin); 
 
-        this.jTabNoeud = new JTable(this.modelN);
-        this.jTabArrete = new JTable(this.modelA);
-        this.jTabCarte = new JTable(this.modelO);
-
         this.btnRetour = new JButton("Retour");
         this.btnEnregistrer = new JButton("Enregistrer");
         
@@ -102,17 +112,6 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelObjectif.setLayout(new BorderLayout());
         this.panelBtn.setLayout(new GridLayout(1,3));
          
-        this.jTabNoeud.setFillsViewportHeight(true);
-        this.jTabArrete.setFillsViewportHeight(true);
-        this.jTabCarte.setFillsViewportHeight(true);
-
-        this.jTabNoeud.setEnabled(false);
-        this.jTabArrete.setEnabled(false);
-        this.jTabCarte.setEnabled(false);
-        
-        JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
-        JScrollPane spTabArrete = new JScrollPane(this.jTabArrete);
-        JScrollPane spTabCarte = new JScrollPane(this.jTabCarte);
 
         this.panelJoueur.add(this.lblJMin);
         this.panelJoueur.add(this.lblJMax);
@@ -157,7 +156,8 @@ public class PanelResume extends JPanel implements ActionListener{
             this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
         if(e.getSource() == this.btnEnregistrer){
-            System.out.println("Enregistrer");
+            System.out.println("Enregistrer ");
+            this.metier.ecrireXML(this.getClass().getResource("../data/images/USA.png").getFile());
             this.ctrl.enregistrer();
         }
     }

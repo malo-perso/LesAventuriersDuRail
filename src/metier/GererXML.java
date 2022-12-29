@@ -289,7 +289,7 @@ public class GererXML {
 
 			bw.write("\t<imagePlateau>" + Base64.getEncoder().encodeToString(bytes) +
 					 "</imagePlateau>\n");
-
+					 
 			bw.write("</mappe>");
 			bw.close();
 		}catch(Exception e){e.printStackTrace();}
