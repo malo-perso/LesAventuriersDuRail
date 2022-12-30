@@ -216,10 +216,10 @@ public class GererXML {
 	/*     Ecrire    */
 	/*****************/
 
-	public void ecrireXML(String chemin){
+	public void ecrireXML(String imagePath, String filePath ){
 		try{
-			File file = new File("./src/data/mappe/mappe.xml");
-			File fileImage = new File(chemin);
+			File file = new File(filePath);
+			File fileImage = new File(imagePath);
 
 			byte[] bytes = Files.readAllBytes(fileImage.toPath());
 
@@ -406,7 +406,7 @@ public class GererXML {
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
 
-		g.ecrireXML("./src/data/images/logo.png");
+		g.ecrireXML("./src/data/images/logo.png", "./src/data/mappe/mappe.xml");
 		try{
 			//g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}

@@ -1,6 +1,8 @@
 package src.ihm;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
 import src.metier.*;
@@ -8,6 +10,7 @@ import src.ihm.grilles.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class PanelResume extends JPanel implements ActionListener{
@@ -147,8 +150,26 @@ public class PanelResume extends JPanel implements ActionListener{
         }
         if(e.getSource() == this.btnEnregistrer){
             System.out.println("Enregistrer ");
-            this.ctrl.ecrireXML(this.getClass().getResource("../data/images/USA.png").getFile());
-            this.ctrl.enregistrer();
+
+            JFileChooser chooser = new JFileChooser();
+
+            FileFilter filtre = new FileNameExtensionFilter("xml files", "xml");
+            chooser.setFileFilter(filtre);
+            chooser.setAcceptAllFileFilterUsed(false);
+
+            chooser.setSelectedFile(new File("Nouveau.xml"));
+            int res = chooser.showSaveDialog(null);
+
+            if(res == JFileChooser.APPROVE_OPTION){
+                File file = chooser.getSelectedFile();
+                System.out.println("File Saved as: " +file.getAbsolutePath() + file.getParent() + "   " +file.getName());
+
+                String path = file.getAbsolutePath();
+
+                if (!path .endsWith(".xml")) path += ".xml";
+
+                this.ctrl.ecrireXML(path);
+            }
         }
     }
 }

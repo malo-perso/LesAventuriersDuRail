@@ -130,9 +130,9 @@ public class Controleur{
     /*    Ecrire     */
     /*****************/
 
-    public void ecrireXML(String chemin){
+    public void ecrireXML(String path){
 
-        this.gererXML.ecrireXML(chemin);
+        this.gererXML.ecrireXML(this.FichierPlateau, path);
     }
 
     /*****************/
