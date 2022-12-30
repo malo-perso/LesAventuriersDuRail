@@ -149,9 +149,24 @@ public class PanelResume extends JPanel implements ActionListener{
             this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
         if(e.getSource() == this.btnEnregistrer){
-            System.out.println("Enregistrer ");
 
-            JFileChooser chooser = new JFileChooser();
+            JFileChooser chooser = new JFileChooser(){
+                public void approveSelection() {
+                    File f = getSelectedFile();
+
+                    if (f.exists() && getDialogType() == SAVE_DIALOG) {
+                        int verif = JOptionPane.showConfirmDialog(this, f.getName() + " existe déjà.\nVoulez-vous le remplacer ?", "Confirmer l'enregistrement", JOptionPane.YES_NO_OPTION);
+
+                        if(verif == JOptionPane.YES_OPTION){
+                            super.approveSelection();
+                            return;
+                        }else{
+                            return;
+                        }
+                    }
+                    super.approveSelection();
+                }
+            };
 
             FileFilter filtre = new FileNameExtensionFilter("xml files", "xml");
             chooser.setFileFilter(filtre);
@@ -162,8 +177,6 @@ public class PanelResume extends JPanel implements ActionListener{
 
             if(res == JFileChooser.APPROVE_OPTION){
                 File file = chooser.getSelectedFile();
-                System.out.println("File Saved as: " +file.getAbsolutePath() + file.getParent() + "   " +file.getName());
-
                 String path = file.getAbsolutePath();
 
                 if (!path .endsWith(".xml")) path += ".xml";
