@@ -127,6 +127,15 @@ public class Controleur{
     }
 
     /*****************/
+    /*    Ecrire     */
+    /*****************/
+
+    public void ecrireXML(String chemin){
+
+        this.gererXML.ecrireXML(chemin);
+    }
+
+    /*****************/
     /*    getters    */
     /*****************/
     

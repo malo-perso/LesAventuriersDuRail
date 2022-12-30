@@ -12,14 +12,6 @@ import java.util.ArrayList;
 
 public class PanelResume extends JPanel implements ActionListener{
 
-    //private static final String[] colNoeud = {"Nom", "x", "y","NomX","NomY"};
-    //private static final String[] colArrete = {"Noeud1", "Noeud2", "Longueur","Type"};
-    //private static final String[] colCarte = {"Noeud1", "Noeud2", "Points"};
-
-    //private DefaultTableModel tabNoeud = new DefaultTableModel(colNoeud, 0);
-    //private DefaultTableModel tabArrete = new DefaultTableModel(colArrete, 0);
-    //private DefaultTableModel tabCarte = new DefaultTableModel(colCarte, 0);
-
     private GrillesNoeudModel modelN;
     private GrillesAreteModel modelA;
     private GrillesCartesObjectifsModel modelO;
@@ -52,14 +44,12 @@ public class PanelResume extends JPanel implements ActionListener{
     private int nbWagonFin;
 
     private Controleur ctrl;
-    private GererXML metier;
 
     //private JScrollBar sbTout;
 
     public PanelResume(Controleur ctrl){
 
         this.ctrl = ctrl;
-        this.metier = new GererXML(this.ctrl);
         this.modelN = new GrillesNoeudModel(this.ctrl);
         this.modelA = new GrillesAreteModel(this.ctrl);
         this.modelO = new GrillesCartesObjectifsModel(this.ctrl);
@@ -157,7 +147,7 @@ public class PanelResume extends JPanel implements ActionListener{
         }
         if(e.getSource() == this.btnEnregistrer){
             System.out.println("Enregistrer ");
-            this.metier.ecrireXML(this.getClass().getResource("../data/images/USA.png").getFile());
+            this.ctrl.ecrireXML(this.getClass().getResource("../data/images/USA.png").getFile());
             this.ctrl.enregistrer();
         }
     }
