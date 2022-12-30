@@ -316,7 +316,7 @@ public class GererXML {
 				(int)Double.parseDouble(courant.getChildText("x").trim()) + 20 , (int)Double.parseDouble(courant.getChildText("y").trim())+20 ));
 			}
 
-			List listArete = racine.getChild("lstAretes").getChildren("arrete");
+			List listArete = racine.getChild("lstAretes").getChildren("arete");
 			Iterator j = listArete.iterator();
 			while(j.hasNext()){
 				Element courant = (Element)j.next();
@@ -386,6 +386,8 @@ public class GererXML {
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
 			ImageIO.write(bImage2, "png", new File("./src/data/images/mappe.png") );
+			System.out.println("modifier");
+			
 		}catch(Exception e){e.printStackTrace();} 
 	}
 

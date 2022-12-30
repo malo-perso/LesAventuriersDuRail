@@ -1,6 +1,7 @@
 package src.ihm;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
@@ -9,7 +10,7 @@ import src.metier.Arete;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class FramePrincipale extends JFrame implements ActionListener
@@ -198,14 +199,16 @@ public class FramePrincipale extends JFrame implements ActionListener
         }
 		if(e.getSource() == this.menuNouveau){
 			try{
-				System.out.println("Nouveau");
-				JFileChooser chooser = new JFileChooser(".");
+				JFileChooser chooser = new JFileChooser();
+
+                FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"jpg","jpeg", "gif", "png"});
+                chooser.setFileFilter(filtre);
+                chooser.setAcceptAllFileFilterUsed(false);
 				
 				int res = chooser.showOpenDialog(this);
                 if(res == JFileChooser.APPROVE_OPTION)
                 {
                     this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
-                    this.ctrl.lireXML(chooser.getSelectedFile());
                     this.ctrl.supprimerAretes();
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();
@@ -215,16 +218,19 @@ public class FramePrincipale extends JFrame implements ActionListener
         if(e.getSource() == this.menuOuvrir){
             try{
 				System.out.println("Ouvrir");
-				JFileChooser chooser = new JFileChooser(".");
+				JFileChooser chooser = new JFileChooser();
+
+                FileFilter filtre = new FileNameExtensionFilter("XML (*.xml)", "xml");
+                chooser.setFileFilter(filtre);
+                chooser.setAcceptAllFileFilterUsed(false);
 				
 				int res = chooser.showOpenDialog(this);
 				if (res == JFileChooser.APPROVE_OPTION)
                 {
-                    this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
-					this.ctrl.lireXML(chooser.getSelectedFile());
                     this.ctrl.supprimerAretes();
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();
+					this.ctrl.lireXML(chooser.getSelectedFile());
                 }
 
             }catch(Exception erreur){erreur.printStackTrace();}
