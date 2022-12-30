@@ -203,7 +203,13 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = chooser.showOpenDialog(this);
                 if(res == JFileChooser.APPROVE_OPTION)
+                {
                     this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
+                    this.ctrl.lireXML(chooser.getSelectedFile());
+                    this.ctrl.supprimerAretes();
+                    this.ctrl.supprimerNoeuds();
+                    this.ctrl.supprimerCartesObjectif();
+                }
 			}catch(Exception erreur){erreur.printStackTrace();}
 		}
         if(e.getSource() == this.menuOuvrir){
@@ -213,7 +219,13 @@ public class FramePrincipale extends JFrame implements ActionListener
 				
 				int res = chooser.showOpenDialog(this);
 				if (res == JFileChooser.APPROVE_OPTION)
+                {
+                    this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
 					this.ctrl.lireXML(chooser.getSelectedFile());
+                    this.ctrl.supprimerAretes();
+                    this.ctrl.supprimerNoeuds();
+                    this.ctrl.supprimerCartesObjectif();
+                }
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }

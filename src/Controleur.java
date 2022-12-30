@@ -38,6 +38,24 @@ public class Controleur{
         this.setFichierPlateau("./src/data/images/mappe.png");
     }
 
+    //supprime toute les arrêtes
+    public void supprimerAretes()
+    {
+        this.gererXML.supprimerLstAretes();
+    }
+
+    //supprime tout les noeuds
+    public void supprimerNoeuds()
+    {
+        this.gererXML.supprimerLstNoeuds();
+    }
+
+    //supprime tout les objectifs
+    public void supprimerCartesObjectif()
+    {
+        this.gererXML.supprimerLstCarteObjectifs();
+    }
+
     //retourne la liste des types de cartes
     public ArrayList<String> getTypes() {
         return Type.getCouleurs();

@@ -312,8 +312,8 @@ public class GererXML {
 			Iterator i = listNoeud.iterator();
 			while(i.hasNext()){
 				Element courant = (Element)i.next();
-				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), Integer.parseInt(courant.getChildText("x").trim()), Integer.parseInt(courant.getChildText("y").trim()),
-				Integer.parseInt(courant.getChildText("x").trim()) + 20 , Integer.parseInt(courant.getChildText("y").trim())+20 ));
+				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), (int)Double.parseDouble(courant.getChildText("x").trim()), (int)Double.parseDouble(courant.getChildText("y").trim()),
+				(int)Double.parseDouble(courant.getChildText("x").trim()) + 20 , (int)Double.parseDouble(courant.getChildText("y").trim())+20 ));
 			}
 
 			List listArete = racine.getChild("lstAretes").getChildren("arrete");
@@ -364,7 +364,7 @@ public class GererXML {
 			
 			}
 
-			List listCarteVehicule = racine.getChild("lstCarteVehicules").getChildren("carteVehicule");
+			List listCarteVehicule = racine.getChildren("lstCarteVehicules");
 			Iterator l = listCarteVehicule.iterator();
 			while(l.hasNext()){
 				Element courant = (Element)l.next();
@@ -399,6 +399,18 @@ public class GererXML {
 
 	public ArrayList<CarteObjectif> getLstCarteObjectifs(){
 		return this.lstCarteObjectifs;
+	}
+
+	public void supprimerLstAretes(){
+		this.lstAretes.clear();
+	}
+
+	public void supprimerLstCarteObjectifs(){
+		this.lstCarteObjectifs.clear();
+	}
+
+	public void supprimerLstNoeuds(){
+		this.lstNoeuds.clear();
 	}
 
 	public static void main(String[] args){
