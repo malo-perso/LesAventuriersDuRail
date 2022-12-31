@@ -240,7 +240,7 @@ public class PanelPlateau extends JPanel
 				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
 					boolean Nom = false;
-					String nomVille = JOptionPane.showInputDialog("Nouveau nom de la ville " + NoeudCourant.getNom() + " :");
+					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom de la ville " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
 					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
 						String nom = n.getNom();
 						if(nomVille.equals(nom))
@@ -263,11 +263,13 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
                 {
 					boolean Nom = false;
-                    String nomVille = JOptionPane.showInputDialog("Nom de la ville");
-					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
-						String nom = n.getNom();
-						if(nomVille.equals(nom))
-							Nom = true;
+                    String nomVille = JOptionPane.showInputDialog(null,"Nom de la Ville","Saisie",JOptionPane.QUESTION_MESSAGE);
+					if(nomVille!= null){
+						for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
+							String nom = n.getNom();
+							if(nomVille.equals(nom))
+								Nom = true;
+						}
 					}
 					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
