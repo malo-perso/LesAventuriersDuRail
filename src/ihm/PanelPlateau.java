@@ -363,7 +363,7 @@ public class PanelPlateau extends JPanel
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent(g);
-		Image img = getToolkit().getImage(this.ctrl.getFichierPlateau());
+		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, this.getWidth() , this.getHeight() , this);
 

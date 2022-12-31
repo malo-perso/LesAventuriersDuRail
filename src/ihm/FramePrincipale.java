@@ -1,5 +1,6 @@
 package src.ihm;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -10,6 +11,7 @@ import src.metier.Arete;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -208,7 +210,10 @@ public class FramePrincipale extends JFrame implements ActionListener
 				int res = chooser.showOpenDialog(this);
                 if(res == JFileChooser.APPROVE_OPTION)
                 {
-                    this.ctrl.setFichierPlateau(chooser.getSelectedFile().getPath());
+                    File file = new File(chooser.getSelectedFile().getPath());
+                    BufferedImage bi = ImageIO.read(file);
+
+                    this.ctrl.setImagePlateau(bi);
                     this.ctrl.supprimerAretes();
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();

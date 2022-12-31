@@ -3,31 +3,49 @@ package src;
 import src.ihm.*;
 import src.metier.*;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 public class Controleur{
 
-    private String FichierPlateau;
+    private BufferedImage imagePlateau;
 
     private GererXML gererXML;
 
     private FramePrincipale IHM;
 
     public Controleur() {
-        this.FichierPlateau = this.getClass().getResource("./data/images/USA.png").getPath();
+        //this.imagePlateau = this.getClass().getResource("./data/images/USA.png").getPath();
+        try {
+            this.imagePlateau = ImageIO.read(new File(this.getClass().getResource("./data/images/USA.png").getPath()));
+        } catch (Exception e) {
+            this.imagePlateau = null;
+            e.printStackTrace();
+        }
         this.gererXML       = new GererXML(this);
         this.IHM            = new FramePrincipale(this);
     }
     
     //geter et seter du fichier de la carte
-    public String getFichierPlateau() { 
-        return this.FichierPlateau;
+    public BufferedImage getImagePlateau() { 
+        return this.imagePlateau;
     }
 
-    public void setFichierPlateau(String fic) {
-        this.FichierPlateau = fic; 
+    public void setImagePlateau(BufferedImage image) {
+        this.imagePlateau = image; 
         this.IHM.majIHM();
+    }
+    public void setImagePlateau(String imagePath){
+        try {
+            File file = new File(imagePath);
+            this.imagePlateau = ImageIO.read(file);
+            System.out.println("oui");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //permet au Controleur de lire le fichier xml
@@ -35,7 +53,6 @@ public class Controleur{
     {
         this.gererXML.lireXML(fichier);
         //this.IHM.majHashNoeud();
-        this.setFichierPlateau("./src/data/images/mappe.png");
     }
 
     //supprime toute les arrêtes
@@ -150,7 +167,7 @@ public class Controleur{
 
     public void ecrireXML(String path){
 
-        this.gererXML.ecrireXML(this.FichierPlateau, path);
+        this.gererXML.ecrireXML(this.imagePlateau, path);
     }
 
     /*****************/

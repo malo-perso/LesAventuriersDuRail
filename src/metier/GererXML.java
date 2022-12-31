@@ -216,12 +216,14 @@ public class GererXML {
 	/*     Ecrire    */
 	/*****************/
 
-	public void ecrireXML(String imagePath, String filePath ){
+	public void ecrireXML(BufferedImage image, String filePath ){
 		try{
 			File file = new File(filePath);
-			File fileImage = new File(imagePath);
+			ByteArrayOutputStream convert = new ByteArrayOutputStream();
+			ImageIO.write(image,"jpg",convert);
 
-			byte[] bytes = Files.readAllBytes(fileImage.toPath());
+
+			byte[] bytes = convert.toByteArray();
 
 
 			if(!file.exists()){
@@ -385,7 +387,7 @@ public class GererXML {
 			byte[] bytes = Base64.getDecoder().decode(str);		
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
-			ImageIO.write(bImage2, "png", new File("./src/data/images/mappe.png") );
+			this.ctrl.setImagePlateau(bImage2);
 			System.out.println("modifier");
 			
 		}catch(Exception e){e.printStackTrace();} 
@@ -419,8 +421,14 @@ public class GererXML {
 
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
+		BufferedImage bi;
+		try {
+			bi = ImageIO.read(new File("./src/data/images/logo.png"));
+			g.ecrireXML(bi, "./src/data/mappe/mappe.xml");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
-		g.ecrireXML("./src/data/images/logo.png", "./src/data/mappe/mappe.xml");
 		try{
 			//g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}
