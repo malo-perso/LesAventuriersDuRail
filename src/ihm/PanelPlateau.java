@@ -239,10 +239,20 @@ public class PanelPlateau extends JPanel
 				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
 				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
+					boolean Nom = false;
 					String nomVille = JOptionPane.showInputDialog("Nouveau nom de la ville " + NoeudCourant.getNom() + " :");
+					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
+						String nom = n.getNom();
+						if(nomVille.equals(nom))
+							Nom = true;
+					}
 					if(nomVille == null || nomVille.equals("")) {
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
 					}
+					else if(nomVille.length() > 13)
+						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
+					else if(Nom == true)
+						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else {
 						PanelPlateau.this.NoeudCourant.setNom(nomVille);
 						PanelPlateau.this.NoeudCourant = null;
@@ -252,9 +262,19 @@ public class PanelPlateau extends JPanel
 				}
 				else //ajouter un noeud
                 {
+					boolean Nom = false;
                     String nomVille = JOptionPane.showInputDialog("Nom de la ville");
+					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
+						String nom = n.getNom();
+						if(nomVille.equals(nom))
+							Nom = true;
+					}
 					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					else if(nomVille.length() > 13)
+						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
+					else if(Nom == true)
+						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
                 }
