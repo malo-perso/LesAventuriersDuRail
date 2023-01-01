@@ -239,10 +239,20 @@ public class PanelPlateau extends JPanel
 				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
 				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
-					String nomVille = JOptionPane.showInputDialog("Nouveau nom de la ville " + NoeudCourant.getNom() + " :");
+					boolean Nom = false;
+					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom de la ville " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
+					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
+						String nom = n.getNom();
+						if(nomVille.equals(nom))
+							Nom = true;
+					}
 					if(nomVille == null || nomVille.equals("")) {
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
 					}
+					else if(nomVille.length() > 13)
+						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
+					else if(Nom == true)
+						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else {
 						PanelPlateau.this.NoeudCourant.setNom(nomVille);
 						PanelPlateau.this.NoeudCourant = null;
@@ -252,9 +262,21 @@ public class PanelPlateau extends JPanel
 				}
 				else //ajouter un noeud
                 {
-                    String nomVille = JOptionPane.showInputDialog("Nom de la ville");
+					boolean Nom = false;
+                    String nomVille = JOptionPane.showInputDialog(null,"Nom de la Ville","Saisie",JOptionPane.QUESTION_MESSAGE);
+					if(nomVille!= null){
+						for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
+							String nom = n.getNom();
+							if(nomVille.equals(nom))
+								Nom = true;
+						}
+					}
 					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					else if(nomVille.length() > 13)
+						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
+					else if(Nom == true)
+						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
                 }
@@ -341,7 +363,7 @@ public class PanelPlateau extends JPanel
 	public void paintComponent (Graphics g)
 	{
 		super.paintComponent(g);
-		Image img = getToolkit().getImage(this.ctrl.getFichierPlateau());
+		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, this.getWidth() , this.getHeight() , this);
 

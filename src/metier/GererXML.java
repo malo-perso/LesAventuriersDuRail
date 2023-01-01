@@ -216,12 +216,14 @@ public class GererXML {
 	/*     Ecrire    */
 	/*****************/
 
-	public void ecrireXML(String chemin){
+	public void ecrireXML(BufferedImage image, String filePath ){
 		try{
-			File file = new File("./src/data/mappe/mappe.xml");
-			File fileImage = new File(chemin);
+			File file = new File(filePath);
+			ByteArrayOutputStream convert = new ByteArrayOutputStream();
+			ImageIO.write(image,"jpg",convert);
 
-			byte[] bytes = Files.readAllBytes(fileImage.toPath());
+
+			byte[] bytes = convert.toByteArray();
 
 
 			if(!file.exists()){
@@ -312,11 +314,11 @@ public class GererXML {
 			Iterator i = listNoeud.iterator();
 			while(i.hasNext()){
 				Element courant = (Element)i.next();
-				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), Integer.parseInt(courant.getChildText("x").trim()), Integer.parseInt(courant.getChildText("y").trim()),
-				Integer.parseInt(courant.getChildText("x").trim()) + 20 , Integer.parseInt(courant.getChildText("y").trim())+20 ));
+				this.lstNoeuds.add(new Noeud(courant.getChildText("nom"), (int)Double.parseDouble(courant.getChildText("x").trim()), (int)Double.parseDouble(courant.getChildText("y").trim()),
+				(int)Double.parseDouble(courant.getChildText("x").trim()) + 20 , (int)Double.parseDouble(courant.getChildText("y").trim())+20 ));
 			}
 
-			List listArete = racine.getChild("lstAretes").getChildren("arrete");
+			List listArete = racine.getChild("lstAretes").getChildren("arete");
 			Iterator j = listArete.iterator();
 			while(j.hasNext()){
 				Element courant = (Element)j.next();
@@ -364,7 +366,7 @@ public class GererXML {
 			
 			}
 
-			List listCarteVehicule = racine.getChild("lstCarteVehicules").getChildren("carteVehicule");
+			List listCarteVehicule = racine.getChildren("lstCarteVehicules");
 			Iterator l = listCarteVehicule.iterator();
 			while(l.hasNext()){
 				Element courant = (Element)l.next();
@@ -385,7 +387,9 @@ public class GererXML {
 			byte[] bytes = Base64.getDecoder().decode(str);		
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
-			ImageIO.write(bImage2, "png", new File("./src/data/images/mappe.png") );
+			this.ctrl.setImagePlateau(bImage2);
+			System.out.println("modifier");
+			
 		}catch(Exception e){e.printStackTrace();} 
 	}
 
@@ -401,12 +405,30 @@ public class GererXML {
 		return this.lstCarteObjectifs;
 	}
 
+	public void supprimerLstAretes(){
+		this.lstAretes.clear();
+	}
+
+	public void supprimerLstCarteObjectifs(){
+		this.lstCarteObjectifs.clear();
+	}
+
+	public void supprimerLstNoeuds(){
+		this.lstNoeuds.clear();
+	}
+
 	public static void main(String[] args){
 
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
+		BufferedImage bi;
+		try {
+			bi = ImageIO.read(new File("./src/data/images/logo.png"));
+			g.ecrireXML(bi, "./src/data/mappe/mappe.xml");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
-		g.ecrireXML("./src/data/images/logo.png");
 		try{
 			//g.lireXML(new File("./src/data/mappe/mappe.xml"));
 		}catch(Exception e){e.printStackTrace();}

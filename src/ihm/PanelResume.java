@@ -1,6 +1,8 @@
 package src.ihm;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
 import src.metier.*;
@@ -8,17 +10,10 @@ import src.ihm.grilles.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class PanelResume extends JPanel implements ActionListener{
-
-    //private static final String[] colNoeud = {"Nom", "x", "y","NomX","NomY"};
-    //private static final String[] colArrete = {"Noeud1", "Noeud2", "Longueur","Type"};
-    //private static final String[] colCarte = {"Noeud1", "Noeud2", "Points"};
-
-    //private DefaultTableModel tabNoeud = new DefaultTableModel(colNoeud, 0);
-    //private DefaultTableModel tabArrete = new DefaultTableModel(colArrete, 0);
-    //private DefaultTableModel tabCarte = new DefaultTableModel(colCarte, 0);
 
     private GrillesNoeudModel modelN;
     private GrillesAreteModel modelA;
@@ -52,14 +47,12 @@ public class PanelResume extends JPanel implements ActionListener{
     private int nbWagonFin;
 
     private Controleur ctrl;
-    private GererXML metier;
 
     //private JScrollBar sbTout;
 
     public PanelResume(Controleur ctrl){
 
         this.ctrl = ctrl;
-        this.metier = new GererXML(this.ctrl);
         this.modelN = new GrillesNoeudModel(this.ctrl);
         this.modelA = new GrillesAreteModel(this.ctrl);
         this.modelO = new GrillesCartesObjectifsModel(this.ctrl);
@@ -156,9 +149,40 @@ public class PanelResume extends JPanel implements ActionListener{
             this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
         if(e.getSource() == this.btnEnregistrer){
-            System.out.println("Enregistrer ");
-            this.metier.ecrireXML(this.getClass().getResource("../data/images/USA.png").getFile());
-            this.ctrl.enregistrer();
+
+            JFileChooser chooser = new JFileChooser(){
+                public void approveSelection() {
+                    File f = getSelectedFile();
+
+                    if (f.exists() && getDialogType() == SAVE_DIALOG) {
+                        int verif = JOptionPane.showConfirmDialog(this, f.getName() + " existe déjà.\nVoulez-vous le remplacer ?", "Confirmer l'enregistrement", JOptionPane.YES_NO_OPTION);
+
+                        if(verif == JOptionPane.YES_OPTION){
+                            super.approveSelection();
+                            return;
+                        }else{
+                            return;
+                        }
+                    }
+                    super.approveSelection();
+                }
+            };
+
+            FileFilter filtre = new FileNameExtensionFilter("xml files", "xml");
+            chooser.setFileFilter(filtre);
+            chooser.setAcceptAllFileFilterUsed(false);
+
+            chooser.setSelectedFile(new File("Nouveau.xml"));
+            int res = chooser.showSaveDialog(null);
+
+            if(res == JFileChooser.APPROVE_OPTION){
+                File file = chooser.getSelectedFile();
+                String path = file.getAbsolutePath();
+
+                if (!path .endsWith(".xml")) path += ".xml";
+
+                this.ctrl.ecrireXML(path);
+            }
         }
     }
 }
