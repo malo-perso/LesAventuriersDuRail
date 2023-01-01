@@ -136,6 +136,8 @@ public class FramePrincipale extends JFrame implements ActionListener
     {
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
         this.panelArete.majNoeud(this.ctrl.getLstNoeuds());
+        this.panelResume.majNoeud(this.ctrl.getLstNoeuds());
+        this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
     }
 
 
