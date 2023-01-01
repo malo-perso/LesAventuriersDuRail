@@ -38,15 +38,6 @@ public class Controleur{
         this.imagePlateau = image; 
         this.IHM.majIHM();
     }
-    public void setImagePlateau(String imagePath){
-        try {
-            File file = new File(imagePath);
-            this.imagePlateau = ImageIO.read(file);
-            System.out.println("oui");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //permet au Controleur de lire le fichier xml
     public void lireXML(File fichier)
