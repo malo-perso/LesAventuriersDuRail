@@ -3,6 +3,7 @@ package src.ihm;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -61,12 +62,13 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+"");
         this.txtDoubleVoie    = new JTextField(this.doubleVoie+"");
         this.txtNbWagonFin    = new JTextField(this.nbWagonFin+"");
-        this.txtNomNoeud      = new JTextField();
         this.txtTailleNoeud   = new JTextField();
-        this.txtX    = new JTextField();
-        this.txtY    = new JTextField();
-        this.txtNomX = new JTextField();
-        this.txtNomY = new JTextField();
+
+        this.txtNomNoeud = new JTextField();
+        this.txtX        = new JTextField();
+        this.txtY        = new JTextField();
+        this.txtNomX     = new JTextField();
+        this.txtNomY     = new JTextField();
         
         //Creation des layout
         this.setLayout(new BorderLayout());
