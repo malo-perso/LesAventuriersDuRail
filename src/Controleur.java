@@ -4,8 +4,10 @@ import src.ihm.*;
 import src.metier.*;
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
@@ -160,10 +162,21 @@ public class Controleur{
 
         this.gererXML.ecrireXML(this.imagePlateau, path);
     }
+    /*****************/
+    /* CarteVehicule */
+    /*****************/
+    public HashMap<Integer, Color> getHashVehicules()
+    {
+        return this.gererXML.getHashVehicules();
+    }
 
-    /*****************/
-    /*    getters    */
-    /*****************/
+    public void setNbCarte (int nbCarte) {
+		//TO DO
+	}
+	public void setCouleur (Color c) {
+		//TO DO
+	}
+
     
 	public void enregistrer() {
         System.out.println("Enregistrer");
