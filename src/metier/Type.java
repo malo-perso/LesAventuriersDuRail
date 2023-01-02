@@ -69,3 +69,19 @@ public class Type {
 		return this.couleurActuelle;
 	}
 }
+
+/*
+ * public class Type {
+    private static List<Color> listeCouleurs = new ArrayList() {{
+        add(null);
+    }};
+
+    private static boolean ajouterCouleur(Color c) {
+        if( listeCouleurs.contains(c) ) return false;
+
+        listeCouleurs.add(c);
+
+        return true;
+    }
+}
+ */
