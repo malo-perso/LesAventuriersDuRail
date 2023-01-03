@@ -17,6 +17,7 @@ public class GrillesAreteModel extends AbstractTableModel {
     ArrayList<Arete>   lstArete;
 
     public GrillesAreteModel(Controleur ctrl) {
+        super();
         this.ctrl = ctrl;
         this.lstArete = this.ctrl.getLstAretes();
 
@@ -35,7 +36,7 @@ public class GrillesAreteModel extends AbstractTableModel {
             case 0 : return this.lstArete.get(row).getNoeud1().getNom();
             case 1 : return this.lstArete.get(row).getNoeud2().getNom();
             case 2 : return this.lstArete.get(row).getLongueur();
-            case 3 : return this.lstArete.get(row).getType().getCouleurActuelle();
+            case 3 : return this.lstArete.get(row).getType().getCouleurActuelle().toString();
             case 4 : return this.lstArete.get(row).getOrientation();
             default : return null;
         }
@@ -45,14 +46,9 @@ public class GrillesAreteModel extends AbstractTableModel {
     //public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
 
     @Override
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
-        switch(columnIndex){
-            case 3:
-                return String.class;
-            default:
-                return String.class;
-        }
+        return getValueAt(0, columnIndex).getClass();
     }
 
     public void majTable(ArrayList<Arete> lstArete) {   
