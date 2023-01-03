@@ -18,45 +18,39 @@ public class GrillesVehiculeModel extends AbstractTableModel
 	private String[]   tabEntetes;
     //private HashMap<Integer, Color> hashVehicules;
     private Object[][] tabVehicules;
-    private List<Type> lstType;
 
     public GrillesVehiculeModel(Controleur ctrl)
     {
         super();
         this.ctrl = ctrl;
         this.ctrl.getTypes();
-        //hashVehicules = this.ctrl.getHashVehicules();
-        
-        /*
-        this.hashVehicules = new HashMap<Integer, Color>();
-        this.hashVehicules.put(12, Color.WHITE);
-        this.hashVehicules.put(12, Color.BLUE);
-        this.hashVehicules.put(12, Color.YELLOW);
-        this.hashVehicules.put(12, Color.ORANGE);
-        this.hashVehicules.put(12, Color.BLACK);
-        this.hashVehicules.put(12, Color.RED);
-        this.hashVehicules.put(12, Color.GREEN);
-        this.hashVehicules.put(14, Color.PINK);
-        */
 
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
         //this.lstType = this.ctrl.getLstType();
 
-
         this.tabVehicules = new Object[][]{
-            {"12", Color.white},
-            {"12", Color.blue},
-            {"12", Color.yellow},
-            {"12", Color.orange},
-            {"12", Color.black},
-            {"12", Color.red},
-            {"12", Color.green},
-            {"14", Color.pink}
-
         };
+
+        majTable(this.ctrl.getLstType());
+
+
+        //this.tabVehicules.add(new Object[]{"12", Color.white});
+
         Font font = new Font("Arial", Font.PLAIN, 15);
         UIManager.put("Table.font", font);
         
+    }
+
+    public void majTable(List<Type> lstType) {
+        if (lstType.size() > 0)
+            for (int i = 0; i < lstType.size(); i++)
+            {
+                this.tabVehicules[i][0] = 12;
+                this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
+                System.out.println(this.ctrl.getLstType().get(i).getColor());
+
+            }
+
     }
 
     public int getRowCount() 

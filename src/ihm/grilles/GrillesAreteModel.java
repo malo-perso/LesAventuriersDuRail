@@ -1,7 +1,9 @@
 package src.ihm.grilles;
 
+import javax.naming.ldap.LdapContext;
 import javax.swing.table.AbstractTableModel;
 
+import java.awt.Color;
 import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
@@ -36,7 +38,7 @@ public class GrillesAreteModel extends AbstractTableModel {
             case 0 : return this.lstArete.get(row).getNoeud1().getNom();
             case 1 : return this.lstArete.get(row).getNoeud2().getNom();
             case 2 : return this.lstArete.get(row).getLongueur();
-            case 3 : return this.lstArete.get(row).getType().getCouleurActuelle().toString();
+            case 3 : return this.lstArete.get(row).getType().getColor().getRed() + " " + this.lstArete.get(row).getType().getColor().getGreen() + " " + this.lstArete.get(row).getType().getColor().getBlue();
             case 4 : return this.lstArete.get(row).getOrientation();
             default : return null;
         }
@@ -71,5 +73,14 @@ public class GrillesAreteModel extends AbstractTableModel {
         this.ctrl.majIHM();
         this.ctrl.majNoeud();
         this.ctrl.majArete();
+    }
+    
+    public Color couleurBAckground(int rowIndex, int columnIndex) 
+    {
+        String[] str = ((String) this.getValueAt(rowIndex, columnIndex)).split(" ");
+
+
+        
+        return   new Color (Integer.parseInt(str[0]), Integer.parseInt(str[1]), Integer.parseInt(str[2]));
     }   
 }

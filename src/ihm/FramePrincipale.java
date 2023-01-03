@@ -231,6 +231,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelPlateau.repaint(); 
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
         this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
+        //this.panelVehicule.majTableVehicule(this.ctrl.getLstType());
     }
 
     
