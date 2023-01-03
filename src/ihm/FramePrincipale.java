@@ -227,7 +227,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 			try{
 				JFileChooser chooser = new JFileChooser();
 
-                FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"jpg","jpeg", "gif", "png"});
+                FileFilter filtre = new FileNameExtensionFilter("Image files", "png");
                 chooser.setFileFilter(filtre);
                 chooser.setAcceptAllFileFilterUsed(false);
 				

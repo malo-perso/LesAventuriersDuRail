@@ -297,7 +297,7 @@ public class GererXML {
 		try{
 			File file = new File(filePath);
 			ByteArrayOutputStream convert = new ByteArrayOutputStream();
-			ImageIO.write(image,"jpg",convert);
+			ImageIO.write(image,"png",convert);
 
 
 			byte[] bytes = convert.toByteArray();
