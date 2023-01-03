@@ -28,7 +28,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
     private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable, panelClear;
 
     private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
-    private JComboBox<String> listNoeud1, listNoeud2, listTypeArete;
+    private JComboBox<String> listNoeud1, listNoeud2;
     private JScrollBar  sbLongueur, sbHauteur, sbEspacement;
 
     private JTextField txtLongueurArete;
@@ -70,12 +70,10 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.btnSuivant = new JButton("Suivant");
 
         Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
-        //Vector<String> vType = new Vector<String>(this.ctrl.getTypes()); 
 
         this.listNoeud1 = new JComboBox<>(vNoeud);
         this.listNoeud2 = new JComboBox<>(vNoeud);
         this.btnType = new JButton("Type");
-        //this.listTypeArete = new JComboBox<>(vType);
         this.txtLongueurArete = new JTextField();
 
         this.listNoeud1.setSelectedItem(null);
@@ -110,7 +108,6 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.panelRemplissage.add(this.listNoeud2);
         this.panelRemplissage.add(this.txtLongueurArete);
         this.panelRemplissage.add(this.btnType);
-        //this.panelRemplissage.add(this.listTypeArete);
 
         this.panelClear.add(new JLabel());
         this.panelClear.add(this.btnClear);
@@ -165,8 +162,6 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.listNoeud1.setSelectedItem(null);
         this.listNoeud2.setSelectedItem(null);
         this.txtLongueurArete.setText("");
-        //this.btnType.setBackground(null);
-        //this.listTypeArete.setSelectedItem(null);
 
         this.listNoeud1.addActionListener(this);
         this.listNoeud2.addActionListener(this);
@@ -208,7 +203,6 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
                this.listNoeud2.getSelectedItem() != null    &&
                FonctionAux.isInteger(this.txtLongueurArete.getText())  &&
                this.btnType.getBackground() != null
-               //this.listTypeArete.getSelectedItem() != null
               )
             {
                 this.ctrl.ajouterArete(
@@ -224,8 +218,6 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
             if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){
                 this.txtLongueurArete.setText("");
             }
-
-            //this.panelPlateau.tracerArete();
         }
 
         if(e.getSource() == this.btnSupprArete){

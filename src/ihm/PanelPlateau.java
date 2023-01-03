@@ -228,7 +228,6 @@ public class PanelPlateau extends JPanel
 
 		g1.setStroke(new BasicStroke(2));
         g1.setColor(Color.BLACK);
-		//g1.drawLine((int) aX, (int) aY,(int) bX, (int) bY);
         
         g1.setStroke(new BasicStroke(hauteurWagon));
 		for (int cpt = 0; cpt < nbWagon; cpt++) 
@@ -300,10 +299,6 @@ public class PanelPlateau extends JPanel
 					if(nomVille == null || nomVille.equals("")) {
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de noeud","Erreur", JOptionPane.ERROR_MESSAGE);
 					}
-					/*
-					else if(nomVille.length() > 13)
-						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
-					*/
 					else if(erreurNom == true)
 						JOptionPane.showMessageDialog(null, "Noeud déjà Existant","Erreur", JOptionPane.ERROR_MESSAGE);
 					else {
@@ -313,8 +308,7 @@ public class PanelPlateau extends JPanel
 						PanelPlateau.this.ctrl.majNoeud();
 					}
 				}
-				else //ajouter un noeud
-                {
+				else {//ajouter un noeud
 					boolean Nom = false;
                     String nomVille = JOptionPane.showInputDialog(null,"Nom du Noeud","Saisie",JOptionPane.QUESTION_MESSAGE);
 					if(nomVille!= null){
@@ -326,10 +320,6 @@ public class PanelPlateau extends JPanel
 					}
 					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de noeud");
-					/*
-					else if(nomVille.length() > 13)
-						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
-					*/
 					else if(Nom == true)
 						JOptionPane.showMessageDialog(null, "Noeud déjà Existant","Erreur", JOptionPane.ERROR_MESSAGE);
 					else if(e.getX() < 1200 && e.getY() < 800)
@@ -346,11 +336,9 @@ public class PanelPlateau extends JPanel
 			PanelPlateau.this.NoeudCourant = null;
 		}
 
-		//to do
 		public void mouseClicked(MouseEvent e)	
 			{
 			if (e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-				System.out.println("double clicked");
 				
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
 				if (sourisSurNoeud(e.getX(), e.getY())!= null)
@@ -406,13 +394,6 @@ public class PanelPlateau extends JPanel
 													   );
 				majIHM();
 			}
-		}
-
-		public void mouseMoved(MouseEvent e) 
-		{
-			//si on survole un noeud avec la souris, le sélectionner
-			//if (sourisSurNoeud(e.getX(), e.getY())!= null)
-			//	System.out.println("survol");
 		}
 	}
 

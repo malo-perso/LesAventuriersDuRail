@@ -17,8 +17,6 @@ public class GrillesNoeudModel extends AbstractTableModel
     public GrillesNoeudModel(Controleur ctrl)
     {
         this.ctrl = ctrl;
-
-        Noeud n;
 		lstNoeuds = this.ctrl.getLstNoeuds();
         
         this.tabEntetes = new String[] { "Nom", "X", "Y", "Nom X", "Nom Y"};

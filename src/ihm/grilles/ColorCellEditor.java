@@ -22,9 +22,7 @@ public class ColorCellEditor extends AbstractCellEditor implements TableCellEdit
         super();
  
         this.bouton = new JButton();
-        //this.bouton.setActionCommand("change");
         this.bouton.addActionListener(this);
-        //this.bouton.setBorderPainted(false);
  
         colorChooser = new JColorChooser();
         dialog = JColorChooser.createDialog(bouton, "Pick a Color", true, colorChooser, this, null);

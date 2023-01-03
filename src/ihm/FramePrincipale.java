@@ -86,7 +86,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide Regles : " + "\n" + "Regles de base des Aventuriers du Rail");
         this.txtAide.setEditable(false);
 
-        this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
+        this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png"));
 		this.setIconImage(imgLogo);
 
         this.menuBarre = new JMenuBar();
@@ -137,7 +137,6 @@ public class FramePrincipale extends JFrame implements ActionListener
 
 
         this.pack();
-		//this.setDefaultLookAndFeelDecorated(true);
 
         this.setSize((int) tailleEcran.getWidth(), (int) tailleEcran.getHeight() - tailleBarTache);
 
@@ -237,7 +236,6 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelPlateau.repaint(); 
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
         this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
-        //this.panelVehicule.majTableVehicule(this.ctrl.getLstType());
     }
 
     
@@ -246,7 +244,6 @@ public class FramePrincipale extends JFrame implements ActionListener
         if(e.getSource() == this.menuRegles){
 
             try{
-                System.out.println("Aide");
                 Desktop.getDesktop().open(reglePDF);
             }catch(Exception erreur){erreur.printStackTrace();}
         }
@@ -276,7 +273,6 @@ public class FramePrincipale extends JFrame implements ActionListener
 		}
         if(e.getSource() == this.menuOuvrir){
             try{
-				System.out.println("Ouvrir");
 				JFileChooser chooser = new JFileChooser("./src/data/mappe/");
 
                 FileFilter filtre = new FileNameExtensionFilter("XML (*.xml)", "xml");

@@ -78,9 +78,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.txtNbPointCheminLong.setText(this.nbPointCheminLong+"");
         }
 
-        //this.txtTailleNoeud   = new JTextField();
-
-
         this.txtNomNoeud = new JTextField();
         this.txtX        = new JTextField();
         this.txtY        = new JTextField();
@@ -117,7 +114,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelLabel.add(new JLabel("Nombre de Vehicule par joueur :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur min pour doubles voies :", SwingConstants.RIGHT));      
         this.panelLabel.add(new JLabel("Nombre Vehicule pour fin de partie :", SwingConstants.RIGHT));
-        //this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
         this.panelLabel.add(this.cbCheminLong);
 
         this.panelSaisie.add(this.txtNbJoueurMin);
@@ -132,8 +128,6 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbPointCheminLong);
         this.panelSaisie.add(new JLabel());
-        //this.panelSaisie.add(this.txtTailleNoeud);
-        //this.panelSaisie.add(new JLabel());
 
         this.panelRegle.add(this.panelLabel);
         this.panelRegle.add(this.panelSaisie);

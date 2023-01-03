@@ -18,8 +18,6 @@ import src.ihm.grilles.GrillesCartesObjectifsModel;
 public class PanelListeObjectif extends JPanel implements ActionListener{
 
     private GrillesCartesObjectifsModel model;
-
-    //private Vector vNoeud;
     private JTable jTabCarte;
 
     private JPanel panelRemplissage;

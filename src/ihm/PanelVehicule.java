@@ -6,7 +6,6 @@ import java.awt.event.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -61,9 +60,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.txtNomVehicule = new JTextField();
 
         this.model = new GrillesVehiculeModel(this.ctrl);
-        //this.jTabVehicule = new JTable();
-        //tabVehicules = this.ctrl.getHashVehicules();
-        //(12 de chaque type : violet, blanc, bleu, jaune, orange, noir, rouge et vert et 14 locomotives)
 
         jTabVehicule = new JTable(this.model);
         jTabVehicule.setDefaultRenderer(Color.class, new ColorCellRenderer());
@@ -79,23 +75,23 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.iconRecto     = new ImageIcon("./src/data/images/Cartes_Vehicules/wagonblanc.jpg");
         this.iconJoker     = new ImageIcon("./src/data/images/Cartes_Vehicules/loco.jpg");
 
-        this.btnCarteJoker  = new JButton("Carte Joker",iconJoker);
-        this.btnCarteRecto  = new JButton("Carte Recto",iconRecto);
-        this.btnCarteVerso  = new JButton("Carte Verso",iconVerso);
-        this.btnCarteVerso2 = new JButton("Carte Verso2",iconVerso);
+        this.btnCarteJoker  = new JButton("",iconJoker);
+        this.btnCarteRecto  = new JButton("",iconRecto);
+        this.btnCarteVerso  = new JButton("",iconVerso);
+        this.btnCarteVerso2 = new JButton("",iconVerso);
         
         this.btnCarteJoker.setPreferredSize(new Dimension(100, 100));
         this.btnCarteRecto.setPreferredSize(new Dimension(100, 100));
         this.btnCarteVerso.setPreferredSize(new Dimension(100, 100));
         this.btnCarteVerso2.setPreferredSize(new Dimension(100, 100));
         
-        btnCarteVerso.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteVerso.setVerticalTextPosition(SwingConstants.CENTER);
         btnCarteVerso.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnCarteRecto.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteRecto.setVerticalTextPosition(SwingConstants.CENTER);
         btnCarteRecto.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnCarteJoker.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteJoker.setVerticalTextPosition(SwingConstants.CENTER);
         btnCarteJoker.setHorizontalTextPosition(SwingConstants.CENTER);
-        btnCarteVerso2.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteVerso2.setVerticalTextPosition(SwingConstants.CENTER);
         btnCarteVerso2.setHorizontalTextPosition(SwingConstants.CENTER);
         
         
@@ -148,15 +144,12 @@ public class PanelVehicule extends JPanel implements ActionListener{
 
         this.nbrJoker.addKeyListener(new KeyAdapter() {
             public void keyTyped(KeyEvent e) {
-                System.out.println(e);
                 char c = e.getKeyChar();
                 if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
                     e.consume();  // ignorer l'événement
                 }
             }
         });
-
-        //this.setBackground(Color.PINK);
     }
 
     public void majTableVehicule(ArrayList<Type> listType)
@@ -176,7 +169,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         }
         if(e.getSource() == this.btnCarteRecto){
             try{
-				System.out.println("Catre recto");
 				JFileChooser file = new JFileChooser("./src/data/images");
                 //récupérer l'image choisi et l'afficher dans le bouton
                 	if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
@@ -207,7 +199,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
 
         if(e.getSource() == this.btnCarteVerso || e.getSource() == this.btnCarteVerso2){
             try{
-                System.out.println("Carte verso");
                 JFileChooser file = new JFileChooser("./src/data/images");
                 FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"jpg","jpeg", "gif", "png"});
                 file.setFileFilter(filtre);
@@ -237,7 +228,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         }
         if(e.getSource() == this.btnCarteJoker){
             try{
-				System.out.println("Carte Joker");
 				JFileChooser file = new JFileChooser("./src/data/images");
                 //récupérer l'image choisi et l'afficher dans le bouton
                 	if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){

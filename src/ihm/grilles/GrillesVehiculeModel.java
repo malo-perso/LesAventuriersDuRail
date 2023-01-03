@@ -16,7 +16,6 @@ public class GrillesVehiculeModel extends AbstractTableModel
     private Controleur ctrl;
 
 	private String[]   tabEntetes;
-    //private HashMap<Integer, Color> hashVehicules;
     private Object[][] tabVehicules;
 
     public GrillesVehiculeModel(Controleur ctrl)
@@ -29,24 +28,27 @@ public class GrillesVehiculeModel extends AbstractTableModel
         this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         majTable(this.ctrl.getLstType());
-        //this.tabVehicules.add(new Object[]{"12", Color.white});
 
         Font font = new Font("Arial", Font.PLAIN, 15);
         UIManager.put("Table.font", font);
-        
     }
 
     public void majTable(ArrayList<Type> lstType) {
         
         if (lstType.size() > 0) {
-            lstType.add(Type.creerType(Color.white));
-            lstType.add(Type.creerType(Color.black));
+            
             this.tabVehicules = new Object[lstType.size()][2];
-            for (int i = 2; i < lstType.size(); i++)
+
+            for (int i = 0; i < lstType.size(); i++)
+            {
+                this.tabVehicules[i][0] = 0;
+                this.tabVehicules[i][1] = null;
+            }
+
+            for (int i = 0; i < lstType.size(); i++)
             {
                 this.tabVehicules[i][0] = 12;
                 this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
-                System.out.println(this.ctrl.getLstType().get(i).getColor());
             }
         }
 
@@ -56,8 +58,6 @@ public class GrillesVehiculeModel extends AbstractTableModel
     public int getRowCount() 
     {
         return this.tabVehicules.length;
-        //return hashVehicules.size();
-        //return this.lstType.size();
     }
 
     public int getColumnCount() 
@@ -85,13 +85,6 @@ public class GrillesVehiculeModel extends AbstractTableModel
             default:
                 return null; //Ne devrait jamais arriver
         }
-        /*
-        if (columnIndex == 0) {
-            return hashVehicules.keySet().toArray()[rowIndex];
-        } else {
-            return hashVehicules.get(rowIndex);
-        }
-        */
     }
     
     @Override
@@ -109,13 +102,13 @@ public class GrillesVehiculeModel extends AbstractTableModel
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         //la valeur de chaque cellule doit etre un nombre sauf 0
         if(aValue instanceof Integer && (Integer)aValue > 0){
-            tabVehicules[rowIndex][columnIndex] = aValue;
+            this.tabVehicules[rowIndex][columnIndex] = aValue;
             fireTableCellUpdated(rowIndex, columnIndex);
         }
 
         //la valeur de chaque cellule ne peut pas être null, egal a zero ou vide
         if(aValue != null && !aValue.equals("") && !aValue.equals(0)){
-            tabVehicules[rowIndex][columnIndex] = aValue;
+            this.tabVehicules[rowIndex][columnIndex] = aValue;
             fireTableCellUpdated(rowIndex, columnIndex);
         }
 

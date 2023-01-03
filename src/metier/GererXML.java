@@ -56,11 +56,6 @@ public class GererXML {
 
 		this.lstNoeuds = new ArrayList<Noeud>();
 		this.hashMapCarteVehicules = new HashMap<Type, ArrayList<CarteVehicule>>();
-		/* 
-		this.lstNoeuds.add(new Noeud("A", 200, 100, 220, 120));
-		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
-		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
-		*/
 		this.hashVehicules = new HashMap<Integer, Color>();
 
 		Type marron = Type.creerType(Color.ORANGE);
@@ -80,32 +75,10 @@ public class GererXML {
 		this.hashVehicules.put(12, Color.GREEN);
 		this.hashVehicules.put(12, Color.RED);
 
-
-		ArrayList<CarteVehicule> lstCarteRouge = new ArrayList<CarteVehicule>();
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
-
-		this.hashMapCarteVehicules.put(marron, lstCarteMarron);
-
-		
-		this.hashMapCarteVehicules.put(rouge, lstCarteRouge);
-
 		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
 		this.lstAretes = new ArrayList<Arete>();
-		/* 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
-		*/
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
-
-		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
-		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
 	}
 
 	public int getDiametre(){
@@ -224,20 +197,23 @@ public class GererXML {
 		return this.hashVehicules;
 	}
 
-	public void setNbCarte (int nbCarte) {
-		//TO DO
-	}
-	public void setCouleur (Color c) {
-		//TO DO
-	}
-
 	public ArrayList<Type> getLstType() {
 		//parcourir la listArrte et recuperer les types des aretes
 		ArrayList<Type> listeType = new ArrayList();
+		boolean trouve;
 		for (Arete arete : this.lstAretes)
 		{
-			if (!listeType.contains(arete.getType()))
+			trouve = false;
+
+			for (int i=0; i<listeType.size(); i++) {
+				if (arete.getType().getColor() == listeType.get(i).getColor()) {
+					trouve = true;
+					break;
+				}
+			}
+			if (!trouve) {
 				listeType.add(arete.getType());
+			}
 		}
 		return listeType;
 	}
@@ -481,7 +457,6 @@ public class GererXML {
 			this.ctrl.setImagePlateau(bImage2);
 			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
 			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
-			System.out.println("modifier");
 			
 		}catch(Exception e){e.printStackTrace();} 
 	}
@@ -509,25 +484,4 @@ public class GererXML {
 	public void supprimerLstNoeuds(){
 		this.lstNoeuds.clear();
 	}
-
-	/*public static void main(String[] args){
-
-		Controleur ctrl = new Controleur();
-		GererXML g = new GererXML(ctrl);
-		BufferedImage bi;
-		try {
-			bi = ImageIO.read(new File("./src/data/images/logo.png"));
-			g.ecrireXML(bi, "./src/data/mappe/mappe.xml");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-
-		try{
-			//g.lireXML(new File("./src/data/mappe/mappe.xml"));
-		}catch(Exception e){e.printStackTrace();}
-	}
-
-	public void ajouterArete(Noeud n1, Noeud n2, int n) {
-		//TO DO
-	}*/
 }

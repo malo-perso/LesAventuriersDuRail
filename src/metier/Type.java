@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 public class Type {
-    private static ArrayList<Color> listeCouleurs = new ArrayList();
+    private static ArrayList<Color> listeCouleurs = new ArrayList<Color>();
 	private Color couleurActuelle;
 
 	private Type(Color couleur){

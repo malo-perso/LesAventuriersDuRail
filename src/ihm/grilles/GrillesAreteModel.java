@@ -1,14 +1,10 @@
 package src.ihm.grilles;
 
-import javax.naming.ldap.LdapContext;
 import javax.swing.table.AbstractTableModel;
 
 import java.awt.Color;
 import src.Controleur;
-import src.metier.Noeud;
 import src.metier.Arete;
-import src.metier.Type;
-import src.metier.FonctionAux;
 
 import java.util.ArrayList;
 
@@ -32,7 +28,6 @@ public class GrillesAreteModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        // TODO Auto-generated method stub
 
         switch(col){
             case 0 : return this.lstArete.get(row).getNoeud1().getNom();
@@ -44,8 +39,6 @@ public class GrillesAreteModel extends AbstractTableModel {
         }
         
     }
-
-    //public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
 
     @Override
     public Class<?> getColumnClass(int columnIndex)
@@ -65,7 +58,6 @@ public class GrillesAreteModel extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
         switch(col){
             case 2 : this.lstArete.get(row).setLongueur((int)value);break;
-            //case 3 : Type t = Type.creerType((String)value); if (t != null){ this.lstArete.get(row).setType(t); }break;
             case 4 : this.lstArete.get(row).inverserOrientation();break;
             default : break;
         }

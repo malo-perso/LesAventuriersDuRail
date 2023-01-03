@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controleur{
 
@@ -19,13 +18,6 @@ public class Controleur{
     private FramePrincipale IHM;
 
     public Controleur() {
-        //this.imagePlateau = this.getClass().getResource("./data/images/USA.png").getPath();
-        /*try {
-            this.imagePlateau = ImageIO.read(new File(this.getClass().getResource("./data/images/USA.png").getPath()));
-        } catch (Exception e) {
-            this.imagePlateau = null;
-            e.printStackTrace();
-        }*/
         this.gererXML       = new GererXML(this);
         this.IHM            = new FramePrincipale(this);
     }
@@ -44,7 +36,6 @@ public class Controleur{
     public void lireXML(File fichier)
     {
         this.gererXML.lireXML(fichier);
-        //this.IHM.majHashNoeud();
     }
 
     //supprime toute les arrêtes
@@ -188,23 +179,6 @@ public class Controleur{
     /*****************/
     /* CarteVehicule */
     /*****************/
-    /*
-    public HashMap<Integer, Color> getHashVehicules()
-    {
-        return this.gererXML.getHashVehicules();
-    }*/
-
-    public void setNbCarte (int nbCarte) {
-		//TO DO
-	}
-	public void setCouleur (Color c) {
-		//TO DO
-	}
-
-    
-	public void enregistrer() {
-        System.out.println("Enregistrer");
-	}
 
     public ArrayList<Noeud> getLstNoeuds() {
         return this.gererXML.getLstNoeuds();
@@ -216,28 +190,6 @@ public class Controleur{
 
     public ArrayList<CarteObjectif> getLstObjectifs() {
         return this.gererXML.getLstCarteObjectifs();
-    }
-
-    public ArrayList<Arete> lstAreteXMLtoIHM() {
-        //test
-        ArrayList<Arete> lstArete = new ArrayList<Arete>();
-        //lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, Type.creerType("orange")));
-        
-        return lstArete;
-    }
-
-
-    public ArrayList<CarteObjectif> lstObjectifXMLtoIHM() {
-        //test
-        ArrayList<CarteObjectif> lstObjectif = new ArrayList<CarteObjectif>();
-        lstObjectif.add(new CarteObjectif( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10));
-        
-        return lstObjectif;
-    }
-    
-
-    public ArrayList<CarteObjectif> lstObjectifIHMtoXML() {
-        return null;//this.IHM.getObjectif();
     }
 
     public ArrayList<String> getNomNoeuds() {

@@ -27,7 +27,6 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int row, int col) {
-        // TODO Auto-generated method stub
 
         switch(col){
             case 0 : return this.lstCarteObjectifs.get(row).getNoeud1().getNom();
@@ -50,7 +49,7 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
 
     public void setValueAt(Object value, int row, int col) {
         switch(col){
-            case 2 : this.lstCarteObjectifs.get(row).setPoints((int)value);break;//if (FonctionAux.isInteger((String) value)){ this.lstCarteObjectifs.get(row).setPoints((int) value); } break;
+            case 2 : this.lstCarteObjectifs.get(row).setPoints((int)value);break;
             default : break;
         }
         this.fireTableCellUpdated(row, col);
