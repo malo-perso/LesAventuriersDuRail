@@ -67,7 +67,7 @@ public class GrillesAreteModel extends AbstractTableModel {
         this.ctrl.majArete();
     }
     
-    public Color couleurBAckground(int rowIndex, int columnIndex) 
+    public Color couleurBackground(int rowIndex, int columnIndex)
     {
         String[] str = ((String) this.getValueAt(rowIndex, columnIndex)).split(" ");
 

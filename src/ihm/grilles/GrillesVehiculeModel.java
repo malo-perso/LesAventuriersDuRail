@@ -70,7 +70,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
         return this.tabEntetes[columnIndex];
     }
     
-    public Color couleurBAckground(int rowIndex, int columnIndex) 
+    public Color couleurBackground(int rowIndex, int columnIndex) 
     {
         return (Color)  this.tabVehicules[rowIndex][columnIndex];
     }

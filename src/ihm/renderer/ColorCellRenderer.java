@@ -25,7 +25,7 @@ public class ColorCellRenderer extends DefaultTableCellRenderer {
         Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         
-       Color tabCoul = model.couleurBAckground(row, column);
+       Color tabCoul = model.couleurBackground(row, column);
         
        c.setBackground(tabCoul);
        ((JLabel) c).setText("");
