@@ -29,12 +29,9 @@ public class PanelVehicule extends JPanel implements ActionListener{
 
     private GrillesVehiculeModel model;
     private JPanel  panelNomVehicule;
-    private JPanel  panelVehiculeBtn;
     private JPanel  panelTable;
     private JPanel  panelCarte;
     private JPanel  panelVisuCarte;
-    private JButton btnAjoutVehicule;
-    private JButton btnSupprVehicule;
     private JTextField txtNomVehicule,nbrJoker;
     private JButton btnRetour;
     private JButton btnSuivant;
@@ -76,10 +73,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
 
         JScrollPane spTabVehicule = new JScrollPane(this.jTabVehicule);
 
-        this.btnAjoutVehicule = new JButton("Ajouter");
-        this.btnSupprVehicule = new JButton("Supprimer");
-        
-
         this.nbrJoker = new JTextField("14");
 
         this.iconVerso     = new ImageIcon("./src/data/images/Cartes_Vehicules/CarteVersoDefault.png");
@@ -113,7 +106,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         //Creation des layouts
         this.setLayout(new BorderLayout());
         this.panelNomVehicule = new JPanel(new GridLayout(1, 3));
-        this.panelVehiculeBtn = new JPanel(new GridLayout(1, 3));
         this.panelTable = new JPanel(new BorderLayout());
         this.panelCarte = new JPanel(new GridLayout(2,1));
         this.panelVisuCarte = new JPanel(new GridLayout(2, 2));
@@ -123,10 +115,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         // Positionnement des composants
         this.panelNomVehicule.add(new JLabel("Nom du véhicule :", SwingConstants.RIGHT));
         this.panelNomVehicule.add(this.txtNomVehicule);
-
-        this.panelVehiculeBtn.add(this.btnAjoutVehicule);
-        this.panelVehiculeBtn.add(this.btnSupprVehicule);
-        this.panelVehiculeBtn.add(new JLabel());
         
         this.panelVisuCarte.add(this.btnCarteRecto);
         this.panelVisuCarte.add(this.btnCarteVerso);
@@ -135,10 +123,8 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelVisuCarte.add(this.btnCarteJoker);
         this.panelVisuCarte.add(this.btnCarteVerso2);
 
-        //this.panelTable.add(this.panelNomVehicule, BorderLayout.NORTH);
         this.panelTable.add(jTabVehicule, BorderLayout.CENTER);
-        //this.panelTable.add(this.panelVisuCarte, BorderLayout.SOUTH);
-        //this.panelTable.add(this.panelVehiculeBtn, BorderLayout.SOUTH);
+
 
         this.panelCarte.add(this.panelTable);
         this.panelCarte.add(this.panelVisuCarte);
@@ -148,8 +134,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelValidation.add(this.btnSuivant);
 
         //Action listener
-        this.btnAjoutVehicule.addActionListener(this);
-        this.btnSupprVehicule.addActionListener(this);
         this.btnRetour.addActionListener(this);
         this.btnSuivant.addActionListener(this);
         this.btnCarteJoker.addActionListener(this);
