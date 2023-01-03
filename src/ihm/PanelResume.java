@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import src.Controleur;
 import src.metier.*;
 import src.ihm.grilles.*;
+import src.ihm.renderer.ColorCellRendererArete;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -71,6 +72,9 @@ public class PanelResume extends JPanel implements ActionListener{
         this.jTabNoeud.setEnabled(true);
         this.jTabArrete.setEnabled(true);
         this.jTabCarte.setEnabled(true);
+
+        this.jTabArrete.setDefaultRenderer(Color.class, new ColorCellRendererArete());
+        this.jTabArrete.getColumnModel().getColumn(3).setCellRenderer(new ColorCellRendererArete());
         
         JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
         JScrollPane spTabArrete = new JScrollPane(this.jTabArrete);
