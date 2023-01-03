@@ -29,6 +29,7 @@ public class GererXML {
 	private int  nbPointCheminLong; //si < 0 (=-1) alors il n y a pas la regle du chemin le plus long
     private int  longueurVehicule;
     private int  hauteurVehicule;
+	private int nombreJoker;
     private double espacementVehicule;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
@@ -49,6 +50,7 @@ public class GererXML {
         this.longueurVehicule = 25;
         this.hauteurVehicule = 10;
         this.espacementVehicule = 1.5;
+		this.nombreJoker = 5;
 
 		this.ctrl = ctrl;
 
@@ -159,6 +161,14 @@ public class GererXML {
     public double setEspacementVehicule(double espacementVehicule){
         return this.espacementVehicule = espacementVehicule;
     }
+
+	public int getNombreJoker(){
+		return this.nombreJoker;
+	}
+
+	public int setNombreJoker(int nombreJoker){
+		return this.nombreJoker = nombreJoker;
+	}
     
 
 	/*****************/
@@ -348,6 +358,8 @@ public class GererXML {
 			}
 
 			bw.write("\t</hashMapCarteVehicules>\n");
+
+			bw.write("\t<nombreJoker>" + this.getNombreJoker() + "</nombreJoker>\n");
 
 			bw.write("\t<imagePlateau>" + Base64.getEncoder().encodeToString(bytes) +
 					 "</imagePlateau>\n");

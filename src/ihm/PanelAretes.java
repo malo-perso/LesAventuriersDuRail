@@ -205,14 +205,26 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
                this.btnType.getBackground() != null
               )
             {
-                this.ctrl.ajouterArete(
-                    this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
-                    this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
-                    Integer.parseInt(this.txtLongueurArete.getText()),
-                    this.btnType.getBackground()
-                );
-                this.removePanelRemplissage();
-                this.ctrl.majArete();
+                int nbdoublons = 0;
+                for(int i=0; i<this.tabAretes.getRowCount(); i++){
+                    if((this.tabAretes.getValueAt(i, 0).equals((String)this.listNoeud1.getSelectedItem()) &&
+                       this.tabAretes.getValueAt(i, 1).equals((String)this.listNoeud2.getSelectedItem())) || (
+                       this.tabAretes.getValueAt(i, 0).equals((String)this.listNoeud2.getSelectedItem()) &&
+                       this.tabAretes.getValueAt(i, 1).equals((String)this.listNoeud1.getSelectedItem()) )){
+                        nbdoublons++;
+                    }
+                }
+                if(nbdoublons<2){
+
+                    this.ctrl.ajouterArete(
+                        this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
+                        this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
+                        Integer.parseInt(this.txtLongueurArete.getText()),
+                        this.btnType.getBackground()
+                    );
+                    this.removePanelRemplissage();
+                    this.ctrl.majArete();
+                }
             }
 
             if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){

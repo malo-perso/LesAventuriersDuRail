@@ -22,13 +22,12 @@ public class GrillesVehiculeModel extends AbstractTableModel
     {
         super();
         this.ctrl = ctrl;
+        this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
 
-        this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         majTable(this.ctrl.getLstType());
-
         Font font = new Font("Arial", Font.PLAIN, 15);
         UIManager.put("Table.font", font);
     }
@@ -50,6 +49,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
                 this.tabVehicules[i][0] = 12;
                 this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
             }
+            System.out.println("oui");
         }
 
         this.fireTableDataChanged();
@@ -75,6 +75,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
         return (Color)  this.tabVehicules[rowIndex][columnIndex];
     }
 
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) 
     {
         switch(columnIndex){

@@ -166,6 +166,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
 
         if ( e.getSource() == this.btnSuivant) {
             this.ctrl.getIHM().changePanel("panelListeObjectif");
+            this.ctrl.getMetier().setNombreJoker(Integer.parseInt(this.nbrJoker.getText()));
         }
         if(e.getSource() == this.btnCarteRecto){
             try{
