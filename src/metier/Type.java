@@ -32,7 +32,7 @@ public class Type {
 	}
 
 	public static ArrayList<Color> getCouleurs(){
-		return listeCouleurs;
+		return Type.listeCouleurs;
 	}
 
 	public Color getCouleurActuelle(){

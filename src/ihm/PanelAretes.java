@@ -5,10 +5,7 @@ import src.metier.Noeud;
 import src.metier.Arete;
 import src.metier.FonctionAux;
 import src.ihm.grilles.GrillesAreteModel;
-<<<<<<< Updated upstream
-=======
 import src.ihm.renderer.ColorCellRendererArete;
->>>>>>> Stashed changes
 
 import java.awt.Color;
 
@@ -57,14 +54,10 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.tabAretes.setFillsViewportHeight(true);
         this.tabAretes.setEnabled(true);
 
-<<<<<<< Updated upstream
-        //this.tabAretes.setDefaultRenderer(Color.class, new ColorCellRenderer());
-=======
         this.tabAretes.setDefaultRenderer(Color.class, new ColorCellRendererArete());
         this.tabAretes.getColumnModel().getColumn(3).setCellRenderer(new ColorCellRendererArete());
 
 
->>>>>>> Stashed changes
         JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
 
         this.sbEspacement = new JScrollBar(JScrollBar.HORIZONTAL, 15, 1, 5, 25);
@@ -223,9 +216,9 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
                     this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
                     Integer.parseInt(this.txtLongueurArete.getText()),
                     this.btnType.getBackground()
-                    //(String)this.listTypeArete.getSelectedItem()
                 );
                 this.removePanelRemplissage();
+                this.ctrl.majArete();
             }
 
             if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){

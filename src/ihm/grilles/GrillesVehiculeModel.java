@@ -8,7 +8,7 @@ import src.metier.Type;
 
 import java.awt.Color;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.awt.Font;
 
 public class GrillesVehiculeModel extends AbstractTableModel
@@ -23,17 +23,12 @@ public class GrillesVehiculeModel extends AbstractTableModel
     {
         super();
         this.ctrl = ctrl;
-        this.ctrl.getTypes();
 
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
-        //this.lstType = this.ctrl.getLstType();
 
-        this.tabVehicules = new Object[][]{
-        };
+        this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         majTable(this.ctrl.getLstType());
-
-
         //this.tabVehicules.add(new Object[]{"12", Color.white});
 
         Font font = new Font("Arial", Font.PLAIN, 15);
@@ -41,43 +36,55 @@ public class GrillesVehiculeModel extends AbstractTableModel
         
     }
 
-    public void majTable(List<Type> lstType) {
-        if (lstType.size() > 0)
-            for (int i = 0; i < lstType.size(); i++)
+    public void majTable(ArrayList<Type> lstType) {
+        
+        if (lstType.size() > 0) {
+            lstType.add(Type.creerType(Color.white));
+            lstType.add(Type.creerType(Color.black));
+            this.tabVehicules = new Object[lstType.size()][2];
+            for (int i = 2; i < lstType.size(); i++)
             {
                 this.tabVehicules[i][0] = 12;
                 this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
                 System.out.println(this.ctrl.getLstType().get(i).getColor());
-
             }
+        }
 
+        this.fireTableDataChanged();
     }
 
     public int getRowCount() 
     {
-        return tabVehicules.length;
+        return this.tabVehicules.length;
         //return hashVehicules.size();
         //return this.lstType.size();
     }
 
     public int getColumnCount() 
     {
-        return tabEntetes.length;
+        return this.tabEntetes.length;
     }
 
     public String getColumnName(int columnIndex) 
     {
-        return tabEntetes[columnIndex];
+        return this.tabEntetes[columnIndex];
     }
     
     public Color couleurBAckground(int rowIndex, int columnIndex) 
     {
-        return (Color)  tabVehicules[rowIndex][columnIndex];
+        return (Color)  this.tabVehicules[rowIndex][columnIndex];
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) 
     {
-        return tabVehicules[rowIndex][columnIndex];
+        switch(columnIndex){
+            case 0:
+                return (int) this.tabVehicules[rowIndex][columnIndex];
+            case 1:
+                return (Color) this.tabVehicules[rowIndex][columnIndex];
+            default:
+                return null; //Ne devrait jamais arriver
+        }
         /*
         if (columnIndex == 0) {
             return hashVehicules.keySet().toArray()[rowIndex];

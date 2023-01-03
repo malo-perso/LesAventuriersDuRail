@@ -183,6 +183,8 @@ public class FramePrincipale extends JFrame implements ActionListener
     public void majArete()
     {   
         this.panelArete.majArete(this.ctrl.getLstAretes());
+        this.panelResume.majArete(this.ctrl.getLstAretes());
+        this.panelVehicule.majTableVehicule(this.ctrl.getLstType());
     }
 
     /*****************/

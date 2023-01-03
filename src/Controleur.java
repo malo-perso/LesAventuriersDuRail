@@ -132,7 +132,7 @@ public class Controleur{
         this.IHM.majArete();
     }
 
-    public List<Type> getLstType(){
+    public ArrayList<Type> getLstType(){
         return this.gererXML.getLstType();
     }
 

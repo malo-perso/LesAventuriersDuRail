@@ -231,12 +231,12 @@ public class GererXML {
 		//TO DO
 	}
 
-	public List<Type> getLstType() {
+	public ArrayList<Type> getLstType() {
 		//parcourir la listArrte et recuperer les types des aretes
-		List<Type> listeType = new ArrayList();
+		ArrayList<Type> listeType = new ArrayList();
 		for (Arete arete : this.lstAretes)
 		{
-			if (!listeType.contains(arete.getType().getColor()))
+			if (!listeType.contains(arete.getType()))
 				listeType.add(arete.getType());
 		}
 		return listeType;
