@@ -102,8 +102,8 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
 
 
         // ajout des composants
-        this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
-        this.panelRemplissage.add(new JLabel("Noeud2 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Noeud 1 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Noeud 2 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Longueur :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Type :", SwingConstants.CENTER));
         this.panelRemplissage.add(this.listNoeud1);
@@ -131,8 +131,8 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
         this.panelTable.add(this.panelAreteBtn, BorderLayout.SOUTH);
         
-        this.panelValidation.add(new JLabel("Hauteur Wagon", SwingConstants.CENTER));
-        this.panelValidation.add(new JLabel("Longueur Wagon", SwingConstants.CENTER));
+        this.panelValidation.add(new JLabel("Hauteur Vehicule", SwingConstants.CENTER));
+        this.panelValidation.add(new JLabel("Longueur Vehicule", SwingConstants.CENTER));
         this.panelValidation.add(new JLabel("Espacement", SwingConstants.CENTER));
         this.panelValidation.add(this.sbHauteur);
         this.panelValidation.add(this.sbLongueur);

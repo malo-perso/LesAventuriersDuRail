@@ -115,8 +115,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelLabel.add(new JLabel("Joueur minimum :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur maximum :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Nombre de Vehicule par joueur :", SwingConstants.RIGHT));
-        this.panelLabel.add(new JLabel("Joueur minimum pour les doubles voies :", SwingConstants.RIGHT));      
-        this.panelLabel.add(new JLabel("Nombre de Vehicule pour finir la partie :", SwingConstants.RIGHT));
+        this.panelLabel.add(new JLabel("Joueur min pour doubles voies :", SwingConstants.RIGHT));      
+        this.panelLabel.add(new JLabel("Nombre Vehicule pour fin de partie :", SwingConstants.RIGHT));
         //this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
         this.panelLabel.add(this.cbCheminLong);
 

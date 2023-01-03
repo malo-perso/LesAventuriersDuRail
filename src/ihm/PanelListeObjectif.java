@@ -96,8 +96,8 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         this.btnSuivant.addActionListener(this);
 
         // Positionnement des composants
-        this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
-        this.panelRemplissage.add(new JLabel("Noeud2 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Noeud 1 :", SwingConstants.CENTER));
+        this.panelRemplissage.add(new JLabel("Noeud 2 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Points :", SwingConstants.CENTER));
         this.panelRemplissage.add(this.listNoeud1);
         this.panelRemplissage.add(this.listNoeud2);

@@ -288,7 +288,7 @@ public class PanelPlateau extends JPanel
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
 
 					boolean erreurNom = false;
-					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom de la ville " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
+					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom du noeud " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
 					
 					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
 						String nom = n.getNom();
@@ -297,14 +297,14 @@ public class PanelPlateau extends JPanel
 					}
 
 					if(nomVille == null || nomVille.equals("")) {
-						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville","Erreur", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de noeud","Erreur", JOptionPane.ERROR_MESSAGE);
 					}
 					/*
 					else if(nomVille.length() > 13)
 						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
 					*/
 					else if(erreurNom == true)
-						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Noeud déjà Existant","Erreur", JOptionPane.ERROR_MESSAGE);
 					else {
 						PanelPlateau.this.NoeudCourant.setNom(nomVille);
 						PanelPlateau.this.NoeudCourant = null;
@@ -315,7 +315,7 @@ public class PanelPlateau extends JPanel
 				else //ajouter un noeud
                 {
 					boolean Nom = false;
-                    String nomVille = JOptionPane.showInputDialog(null,"Nom de la Ville","Saisie",JOptionPane.QUESTION_MESSAGE);
+                    String nomVille = JOptionPane.showInputDialog(null,"Nom du Noeud","Saisie",JOptionPane.QUESTION_MESSAGE);
 					if(nomVille!= null){
 						for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
 							String nom = n.getNom();
@@ -324,13 +324,13 @@ public class PanelPlateau extends JPanel
 						}
 					}
 					if(nomVille == null || nomVille.equals(""))
-						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de noeud");
 					/*
 					else if(nomVille.length() > 13)
 						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
 					*/
 					else if(Nom == true)
-						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Noeud déjà Existant","Erreur", JOptionPane.ERROR_MESSAGE);
 					else
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
                 }

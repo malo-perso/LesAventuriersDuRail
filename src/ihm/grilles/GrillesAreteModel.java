@@ -23,7 +23,7 @@ public class GrillesAreteModel extends AbstractTableModel {
         this.ctrl = ctrl;
         this.lstArete = this.ctrl.getLstAretes();
 
-        this.tabEntetes = new String[] {"Noeud1","Noeud2","Longueur","Type","Sens"};
+        this.tabEntetes = new String[] {"Noeud 1","Noeud 2","Longueur","Type","Sens"};
     }
 
     public int    getColumnCount()                 { return this.tabEntetes.length;       }
