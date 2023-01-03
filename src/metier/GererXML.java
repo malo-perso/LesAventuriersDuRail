@@ -319,7 +319,9 @@ public class GererXML {
 			bw.write("\t<regles>\n" + 
 					 "\t\t<nombreJoueurMinimum>" + this.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
 					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
+					 "\t\t<nombreWagonJoueur>" + this.getNbWagonJoueur() + "</nombreWagonJoueur>\n" +
 					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
+					 "\t\t<nombreWagonFin>" + this.getNbWagonFinPartie() + "</nombreWagonFin>\n" +
 					 "\t\t<nombrePointCheminLong>" + this.getNbPointCheminLong() + "</nombrePointCheminLong>\n" +
 					 "\t</regles>\n");
 
@@ -391,7 +393,9 @@ public class GererXML {
 			Element regles = racine.getChild("regles");
 			this.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
 			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
+			this.setNbWagonJoueur(Integer.parseInt(regles.getChildText("nombreWagonJoueur")));
 			this.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
+			this.setNbWagonFinPartie(Integer.parseInt(regles.getChildText("nombreWagonFin")));
 			this.setNbPointCheminLong(Integer.parseInt(regles.getChildText("nombrePointCheminLong")));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
@@ -473,6 +477,8 @@ public class GererXML {
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
 			this.ctrl.setImagePlateau(bImage2);
+			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbWagonJoueur, this.nbrJoueurMiniDoubleRoute,this.nbWagonFinPartie, this.nbPointCheminLong);
+			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbWagonJoueur, this.nbrJoueurMiniDoubleRoute,this.nbWagonFinPartie, this.nbPointCheminLong);
 			System.out.println("modifier");
 			
 		}catch(Exception e){e.printStackTrace();} 
