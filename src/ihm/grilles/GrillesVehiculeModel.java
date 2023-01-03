@@ -23,14 +23,14 @@ public class GrillesVehiculeModel extends AbstractTableModel
     {
         super();
         this.ctrl = ctrl;
+        this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
 
-        this.tabVehicules = new Object[this.ctrl.getLstType().size()][2];
 
         majTable(this.ctrl.getLstType());
         //this.tabVehicules.add(new Object[]{"12", Color.white});
-
+        
         Font font = new Font("Arial", Font.PLAIN, 15);
         UIManager.put("Table.font", font);
         
@@ -42,39 +42,24 @@ public class GrillesVehiculeModel extends AbstractTableModel
             lstType.add(Type.creerType(Color.white));
             lstType.add(Type.creerType(Color.black));
             this.tabVehicules = new Object[lstType.size()][2];
-            for (int i = 2; i < lstType.size(); i++)
+            for (int i = 0; i < lstType.size(); i++)
             {
                 this.tabVehicules[i][0] = 12;
                 this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
                 System.out.println(this.ctrl.getLstType().get(i).getColor());
             }
+            System.out.println("oui");
         }
 
         this.fireTableDataChanged();
     }
 
-    public int getRowCount() 
-    {
-        return this.tabVehicules.length;
-        //return hashVehicules.size();
-        //return this.lstType.size();
-    }
+    public int getRowCount() { return this.tabVehicules.length; }
+    public int getColumnCount() {return this.tabEntetes.length;}
+    public String getColumnName(int columnIndex) {return this.tabEntetes[columnIndex];}
+    public Color couleurBAckground(int rowIndex, int columnIndex) {return (Color)  this.tabVehicules[rowIndex][columnIndex]; }
 
-    public int getColumnCount() 
-    {
-        return this.tabEntetes.length;
-    }
-
-    public String getColumnName(int columnIndex) 
-    {
-        return this.tabEntetes[columnIndex];
-    }
-    
-    public Color couleurBAckground(int rowIndex, int columnIndex) 
-    {
-        return (Color)  this.tabVehicules[rowIndex][columnIndex];
-    }
-
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) 
     {
         switch(columnIndex){

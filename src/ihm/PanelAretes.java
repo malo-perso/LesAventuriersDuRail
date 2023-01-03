@@ -208,7 +208,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
                this.listNoeud2.getSelectedItem() != null    &&
                FonctionAux.isInteger(this.txtLongueurArete.getText())  &&
                this.btnType.getBackground() != null
-               //this.listTypeArete.getSelectedItem() != null
+               //this.listTypeArete.getSelectedItem() != 
               )
             {
                 this.ctrl.ajouterArete(
@@ -224,7 +224,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
             if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){
                 this.txtLongueurArete.setText("");
             }
-
+            this.ctrl.getIHM().majTableVehicule();
             //this.panelPlateau.tracerArete();
         }
 
