@@ -49,11 +49,11 @@ public class GererXML {
 
 		this.lstNoeuds = new ArrayList<Noeud>();
 		this.hashMapCarteVehicules = new HashMap<Type, ArrayList<CarteVehicule>>();
-
+		/* 
 		this.lstNoeuds.add(new Noeud("A", 200, 100, 220, 120));
 		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
 		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
-		
+		*/
 		this.hashVehicules = new HashMap<Integer, Color>();
 
 		Type marron = Type.creerType("marron");
@@ -92,15 +92,15 @@ public class GererXML {
 		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
 		this.lstAretes = new ArrayList<Arete>();
-
+		/* 
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
-
+		*/
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
-		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
-		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
+		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
+		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
 	}
 
 	public int getDiametre(){
@@ -448,7 +448,7 @@ public class GererXML {
 		this.lstNoeuds.clear();
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
@@ -467,5 +467,5 @@ public class GererXML {
 
 	public void ajouterArete(Noeud n1, Noeud n2, int n) {
 		//TO DO
-	}
+	}*/
 }
