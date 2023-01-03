@@ -250,6 +250,15 @@ public class Controleur{
         return nomNoeuds;
     }
 
+    public ArrayList<CarteVehicule> getCarteVehicule() {
+        ArrayList<CarteVehicule> lstCarteVehicule = new ArrayList<CarteVehicule>();
+        for ( Type type : this.gererXML.getLstType()) {
+            lstCarteVehicule.add(new CarteVehicule(type));
+        }
+        return lstCarteVehicule;
+    }
+    
+
     /*****************/
     /*      Main     */
     /*****************/

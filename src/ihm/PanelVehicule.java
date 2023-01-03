@@ -16,6 +16,9 @@ import src.ihm.renderer.ColorCellRenderer;
 import java.awt.*;
 import java.awt.Color;
 
+import java.util.List;
+import src.metier.Type;
+
 
 public class PanelVehicule extends JPanel implements ActionListener{
 
@@ -153,6 +156,11 @@ public class PanelVehicule extends JPanel implements ActionListener{
         });
 
         this.setBackground(Color.PINK);
+    }
+
+    public void majTableVehicule(List<Type> listType)
+    {
+        this.model.majTable(listType);
     }
 
     @Override

@@ -233,13 +233,13 @@ public class GererXML {
 
 	public List<Type> getLstType() {
 		//parcourir la listArrte et recuperer les types des aretes
-		List<Color> listeType = new ArrayList();
+		List<Type> listeType = new ArrayList();
 		for (Arete arete : this.lstAretes)
 		{
 			if (!listeType.contains(arete.getType().getColor()))
-				listeType.add(arete.getType().getColor());
+				listeType.add(arete.getType());
 		}
-		return null;
+		return listeType;
 	}
 	/*****************/
     /*     Arete     */
@@ -321,7 +321,7 @@ public class GererXML {
 					 "\t\t<nombreVehiculeFin>" + this.getNbVehiculeFinPartie() + "</nombreVehiculeFin>\n" +
 					 "\t\t<nombrePointCheminLong>" + this.getNbPointCheminLong() + "</nombrePointCheminLong>\n" +
 					 "\t\t<longueurVehicule>" + this.getLongueurVehicule() + "</longueurVehicule>\n" +
-					 "\t\t<largeurVehicule>" + this.getHauteurVehicule() + "</largeurVehicule>\n" +
+					 "\t\t<hauteurVehicule>" + this.getHauteurVehicule() + "</hauteurVehicule>\n" +
 					 "\t\t<espacementVehicule>" + this.getEspacementVehicule() + "</espacementVehicule>\n" +
 					 "\t</regles>\n");
 
@@ -399,7 +399,7 @@ public class GererXML {
 			this.setNbPointCheminLong(Integer.parseInt(regles.getChildText("nombrePointCheminLong")));
 			this.setLongueurVehicule(Integer.parseInt(regles.getChildText("longueurVehicule")));
 			this.setHauteurVehicule(Integer.parseInt(regles.getChildText("hauteurVehicule")));
-			this.setEspacementVehicule(Integer.parseInt(regles.getChildText("espacementVehicule")));
+			this.setEspacementVehicule(Double.parseDouble(regles.getChildText("espacementVehicule")));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
 			Iterator i = listNoeud.iterator();

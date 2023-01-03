@@ -101,7 +101,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.panelFormulaire.add(this.panelRegleJeu,"panelRegleJeu");
         this.panelFormulaire.add(this.panelVehicule,"panelVehicule");
-        this.panelFormulaire.add(this.panelArete,"panelArrete");
+        this.panelFormulaire.add(this.panelArete,"panelArete");
         this.panelFormulaire.add(this.panelListeObjectif,"panelListeObjectif");
         this.panelFormulaire.add(this.panelResume,"panelResume");
 
@@ -231,6 +231,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelPlateau.repaint(); 
         this.panelRegleJeu.maJTable(this.ctrl.getLstNoeuds());
         this.panelListeObjectif.majTableNoeud(this.ctrl.getLstNoeuds());
+        //this.panelVehicule.majTableVehicule(this.ctrl.getLstType());
     }
 
     
@@ -247,7 +248,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 			try{
 				JFileChooser chooser = new JFileChooser();
 
-                FileFilter filtre = new FileNameExtensionFilter("Image files", "png");
+                FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"png","jpg","gif"});
                 chooser.setFileFilter(filtre);
                 chooser.setAcceptAllFileFilterUsed(false);
 				
