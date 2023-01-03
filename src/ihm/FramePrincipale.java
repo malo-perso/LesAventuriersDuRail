@@ -83,7 +83,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setResizable(true);
         this.setUndecorated(false);
 
-        this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide Regles : " + "\n" + "Regles de base des Aventuriers du Rail");
+        this.txtAide = new JTextArea("Fichier > nouveau    Ctrl + N : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier > ouvrir         Ctrl + O : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide > Regles          Ctrl + A : " + "\n" + "Regles de base des Aventuriers du Rail");
         this.txtAide.setEditable(false);
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
@@ -100,6 +100,10 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
         
+        this.menuOuvrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  InputEvent.CTRL_DOWN_MASK));
+        this.menuNouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,  InputEvent.CTRL_DOWN_MASK));
+        this.menuRegles.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
+
         this.panelVide.add(this.txtAide);
         this.panelVide.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 
