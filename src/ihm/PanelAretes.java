@@ -216,9 +216,9 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
                     this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
                     Integer.parseInt(this.txtLongueurArete.getText()),
                     this.btnType.getBackground()
-                    //(String)this.listTypeArete.getSelectedItem()
                 );
                 this.removePanelRemplissage();
+                this.ctrl.majArete();
             }
 
             if(!FonctionAux.isInteger(this.txtLongueurArete.getText())){

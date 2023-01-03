@@ -17,7 +17,7 @@ import src.ihm.renderer.ColorCellRenderer;
 import java.awt.*;
 import java.awt.Color;
 
-import java.util.List;
+import java.util.ArrayList;
 import src.metier.Type;
 
 
@@ -124,7 +124,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelVisuCarte.add(this.btnCarteVerso2);
         this.panelVisuCarte.add(new JLabel());
 
-        this.panelTable.add(jTabVehicule, BorderLayout.CENTER);
+        this.panelTable.add(spTabVehicule, BorderLayout.CENTER);
 
         this.panelCarte.add(this.panelTable , BorderLayout.NORTH);
         this.panelCarte.add(this.panelVisuCarte, BorderLayout.CENTER );
@@ -159,7 +159,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
         //this.setBackground(Color.PINK);
     }
 
-    public void majTableVehicule(List<Type> listType)
+    public void majTableVehicule(ArrayList<Type> listType)
     {
         this.model.majTable(listType);
     }
