@@ -201,6 +201,26 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.card.show(this.panelFormulaire,nomPanel);
     }
 
+    /*****************/
+    /*     Resume    */
+    /*****************/
+
+    public void majLabelResume(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+        this.panelResume.majLabelResume(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
+    }
+
+    public void majTxtRegleJeu(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+        this.panelRegleJeu.majTxtRegleJeu(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
+    }
+
+    public void supprimerRegleJeu(){
+        this.panelRegleJeu.supprimerRegleJeu();
+    }
+
+    public void suppimerResume(){
+        this.panelResume.supprimerResume();
+    }
+
 
     /*****************/
     /*     utiles    */
@@ -241,6 +261,8 @@ public class FramePrincipale extends JFrame implements ActionListener
                     this.ctrl.supprimerAretes();
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();
+                    this.ctrl.supprimerRegleJeu();
+                    this.ctrl.supprimerResume();
                     this.changePanel();
                 }
 			}catch(Exception erreur){erreur.printStackTrace();}

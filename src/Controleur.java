@@ -156,6 +156,26 @@ public class Controleur{
     {   
         this.IHM.majCarteObjectif();
     }
+    /*****************/
+    /*    Resume     */
+    /*****************/
+
+    public void majLabelResume(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+        this.IHM.majLabelResume(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
+    }
+
+    public void majTxtRegleJeu(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+        this.IHM.majTxtRegleJeu(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
+    }
+
+    public void supprimerResume(){
+        this.IHM.suppimerResume();
+    }
+
+    public void supprimerRegleJeu(){
+        this.IHM.supprimerRegleJeu();
+    }
+
 
     /*****************/
     /*    Ecrire     */

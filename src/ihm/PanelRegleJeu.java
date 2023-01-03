@@ -178,6 +178,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.add(new JLabel("Paramètre du plateau", SwingConstants.CENTER), BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
+        
     }
 
     //Getter
@@ -195,6 +196,57 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     // ai supprimé ajouterNoeud car le contenu de la table se cale uniquement sur le métier
     // si changement dans le métier il y a, appeler la méthode maJTable
     
+    public void majTxtRegleJeu(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+        this.nbJoueurMin = nbJoueurMin;
+        this.nbJoueurMax = nbJoueurMax;
+        this.doubleVoie = doubeVoie;
+        this.nbWagonJoueur = nbWagon;
+        this.nbWagonFin    = nbWagonFin;
+        this.nbPointCheminLong = nbPointCheminLong;
+
+        this.txtNbJoueurMin.setText(nbJoueurMin +"");
+        this.txtNbJoueurMax.setText(nbJoueurMax+"");
+        this.txtDoubleVoie.setText(doubleVoie +"");
+        this.txtNbWagonJoueur.setText(nbWagon +"");
+        this.txtNbWagonFin.setText(nbWagonFin +"");
+
+        if(this.nbPointCheminLong < 1 ){
+            this.cbCheminLong.setSelected(false);
+            this.txtNbPointCheminLong.setText("");
+            this.txtNbPointCheminLong.setEditable(false);
+        }else{
+            this.cbCheminLong.setSelected(true);
+            this.txtNbPointCheminLong.setEditable(true);
+            this.txtNbPointCheminLong.setText(nbPointCheminLong +"");
+            
+        }
+    }
+
+    public void supprimerRegleJeu(){
+        this.nbJoueurMin = 2;
+        this.nbJoueurMax = 5;
+        this.doubleVoie = 3;
+        this.nbWagonJoueur = 45;
+        this.nbWagonFin    = 2;
+        this.nbPointCheminLong = -1;
+
+        this.txtNbJoueurMin.setText(this.nbJoueurMin+"");
+        this.txtNbJoueurMax.setText(this.nbJoueurMax+"");
+        this.txtNbWagonJoueur.setText(this.nbWagonJoueur+"");
+        this.txtDoubleVoie.setText(this.doubleVoie+"");
+        this.txtNbWagonFin.setText(this.nbWagonFin+"");
+
+        if(this.nbPointCheminLong < 1 ){
+            this.cbCheminLong.setSelected(false);
+            this.txtNbPointCheminLong.setText("");
+            this.txtNbPointCheminLong.setEditable(false);
+        }else{
+            this.cbCheminLong.setSelected(true);
+            this.txtNbPointCheminLong.setEditable(true);
+            this.txtNbPointCheminLong.setText(nbPointCheminLong +"");
+            
+        }
+    }
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -203,26 +255,36 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             if(!FonctionAux.isInteger(this.txtNbJoueurMin.getText()))
                 this.txtNbJoueurMin.setText(" ");
             this.nbJoueurMin = Integer.parseInt(this.txtNbJoueurMin.getText());
+            this.ctrl.getMetier().setNombreJoueurMinimum(this.nbJoueurMin);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
         if (e.getSource() == this.txtNbJoueurMax) {
             if(!FonctionAux.isInteger(this.txtNbJoueurMax.getText()))
                     this.txtNbJoueurMax.setText(" ");
             this.nbJoueurMax = Integer.parseInt(this.txtNbJoueurMax.getText());
+            this.ctrl.getMetier().setNombreJoueurMaximum(this.nbJoueurMax);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
         if (e.getSource() == this.txtDoubleVoie) {
             if(!FonctionAux.isInteger(this.txtDoubleVoie.getText()))
                     this.txtDoubleVoie.setText(" ");
             this.doubleVoie = Integer.parseInt(this.txtDoubleVoie.getText());
+            this.ctrl.getMetier().setNombreJoueurMiniDoubleRoute(this.doubleVoie);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
         if (e.getSource() == this.txtNbWagonJoueur) {
             if(!FonctionAux.isInteger(this.txtNbWagonJoueur.getText()))
                     this.txtNbWagonJoueur.setText(" ");
             this.nbWagonJoueur =Integer.parseInt(this.txtNbWagonJoueur.getText());
+            this.ctrl.getMetier().setNbWagonJoueur(this.nbWagonJoueur);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
         if (e.getSource() == this.txtNbWagonFin) {
             if(!FonctionAux.isInteger(this.txtNbWagonFin.getText()))
                     this.txtNbWagonFin.setText(" ");
             this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
+            this.ctrl.getMetier().setNbWagonFinPartie(this.nbWagonFin);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
 
         if (e.getSource() == this.btnAjoutNoeud) {
@@ -271,6 +333,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             if(!FonctionAux.isInteger(this.txtNbPointCheminLong.getText()))
                     this.txtNbPointCheminLong.setText(" ");
             this.nbPointCheminLong= Integer.parseInt(this.txtNbPointCheminLong.getText());
+            this.ctrl.getMetier().setNbPointCheminLong(this.nbPointCheminLong);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
         }
     }
 
