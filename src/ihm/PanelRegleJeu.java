@@ -24,13 +24,16 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     
     private JButton btnSuivant,btnAjoutNoeud,btnSupprNoeud,btnClear;
     
-    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY,txtTailleNoeud;
+    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY,txtNbPointCheminLong;/*txtTailleNoeud*/
     
+    private JCheckBox cbCheminLong;
+
     private int nbJoueurMin;
     private int nbJoueurMax;
     private int doubleVoie; 
     private int nbWagonJoueur;
     private int nbWagonFin;
+    private int nbPointCheminLong;
 
     private Controleur ctrl;
 
@@ -44,6 +47,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
         this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
         this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
+        this.nbPointCheminLong = ctrl.getMetier().getNbPointCheminLong();
 
         this.model = new GrillesNoeudModel(this.ctrl);
         this.jTabNoeud = new JTable(this.model);
@@ -51,6 +55,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.jTabNoeud.setEnabled(true);
 
         JScrollPane spTabNoeud = new JScrollPane(this.jTabNoeud);
+
+        this.cbCheminLong = new JCheckBox("Chemin le plus long :");
 
         this.btnClear = new JButton("Effacer");
         this.btnAjoutNoeud = new JButton("Ajouter +");
@@ -62,7 +68,19 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+"");
         this.txtDoubleVoie    = new JTextField(this.doubleVoie+"");
         this.txtNbWagonFin    = new JTextField(this.nbWagonFin+"");
-        this.txtTailleNoeud   = new JTextField();
+        this.txtNbPointCheminLong = new JTextField();
+
+        if(this.nbPointCheminLong < 1 ){
+            this.cbCheminLong.setSelected(false);
+            this.txtNbPointCheminLong.setEditable(false);
+        }else{
+            this.cbCheminLong.setSelected(true);
+            this.txtNbPointCheminLong.setEditable(true);
+            this.txtNbPointCheminLong.setText(this.nbPointCheminLong+"");
+        }
+
+        //this.txtTailleNoeud   = new JTextField();
+
 
         this.txtNomNoeud = new JTextField();
         this.txtX        = new JTextField();
@@ -87,10 +105,12 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtDoubleVoie.addActionListener(this);
         this.txtNbWagonJoueur.addActionListener(this);
         this.txtNbWagonFin.addActionListener(this);
+        this.txtNbPointCheminLong.addActionListener(this);
         this.btnAjoutNoeud.addActionListener(this);
         this.btnSupprNoeud.addActionListener(this);
         this.btnClear.addActionListener(this);
         this.btnSuivant.addActionListener(this);
+        this.cbCheminLong.addActionListener(this);
 
         //Positionnement des composants
         this.panelLabel.add(new JLabel("Joueur minimum :", SwingConstants.RIGHT));
@@ -98,7 +118,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelLabel.add(new JLabel("Nombre de wagon par joueur :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur minimum pour les doubles voies :", SwingConstants.RIGHT));      
         this.panelLabel.add(new JLabel("Nombre de wagon pour finir la partie :", SwingConstants.RIGHT));
-        this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
+        //this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
+        this.panelLabel.add(this.cbCheminLong);
 
         this.panelSaisie.add(this.txtNbJoueurMin);
         this.panelSaisie.add(new JLabel());
@@ -110,7 +131,9 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbWagonFin);
         this.panelSaisie.add(new JLabel());
-        this.panelSaisie.add(this.txtTailleNoeud);
+        this.panelSaisie.add(this.txtNbPointCheminLong);
+        this.panelSaisie.add(new JLabel());
+        //this.panelSaisie.add(this.txtTailleNoeud);
         //this.panelSaisie.add(new JLabel());
 
         this.panelRegle.add(this.panelLabel);
@@ -164,6 +187,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public int getDoubleVoie() {return this.doubleVoie;}
     public int getNbWagonJoueur() {return this.nbWagonJoueur;}
     public int getNbWagonFin() {return this.nbWagonFin;}
+    public int getNbPointCheminLong() {return this.nbPointCheminLong;}
 
 
     public void maJTable(ArrayList<Noeud> noeuds) {
@@ -234,6 +258,20 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         if (e.getSource() == this.btnSuivant) {
             this.setVisible(false);
             this.ctrl.getIHM().changePanel("panelArrete");
+        }
+        if (e.getSource() == this.cbCheminLong){
+            if(this.cbCheminLong.isSelected()){
+                this.txtNbPointCheminLong.setEditable(true);
+            }else{
+                this.txtNbPointCheminLong.setText("");
+                this.txtNbPointCheminLong.setEditable(false);
+                this.nbPointCheminLong = -1;
+            }
+        }
+        if(e.getSource() == this.txtNbPointCheminLong){
+            if(!FonctionAux.isInteger(this.txtNbPointCheminLong.getText()))
+                    this.txtNbPointCheminLong.setText(" ");
+            this.nbPointCheminLong= Integer.parseInt(this.txtNbPointCheminLong.getText());
         }
     }
 
