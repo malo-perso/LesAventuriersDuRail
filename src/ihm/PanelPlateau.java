@@ -95,6 +95,10 @@ public class PanelPlateau extends JPanel
 	}
 	
 	public void paint(Graphics g) {
+
+        int longueurWagon = this.ctrl.getMetier().getLongueurWagon();
+        double espacementWagon = this.ctrl.getMetier().getEspacementWagon();
+
 		super.paint(g);
 
 		Graphics2D g1 = (Graphics2D) g;
@@ -112,7 +116,7 @@ public class PanelPlateau extends JPanel
 
             // calcul de la longueur entre le noeud 1 et le noeud 2
 			double longueur = Math.sqrt(Math.pow(arete.getNoeud1().getX() - arete.getNoeud2().getX(), 2)	+ Math.pow(arete.getNoeud1().getY() - arete.getNoeud2().getY(), 2));
-            double distanceWagon = (TAILLEWAGON*ATTACHEWAGON) * arete.getLongueur();
+            double distanceWagon = (longueurWagon*espacementWagon) * arete.getLongueur();
 
             double nbArete=0;
             double indexeArete=0;
@@ -124,7 +128,7 @@ public class PanelPlateau extends JPanel
                         if (arete.equals(areteD))
                             indexeArete=nbArete;
                     }
-            indiceDecalage = ( -((nbArete-1)/2) + (indexeArete-1)) * LARGEURWAGON/2 ;
+            indiceDecalage = ( -((nbArete-1)/2) + (indexeArete-1)) * longueurWagon/2 ;
             //l'angle entre le point 1 et 2 par rapport à la base du plan
             double teta = Math.atan((arete.getNoeud2().getY()-arete.getNoeud1().getY())/(arete.getNoeud2().getX()-arete.getNoeud1().getX()));
 
@@ -204,19 +208,17 @@ public class PanelPlateau extends JPanel
 
     private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color) {
 
+        int hauteurWagon = this.ctrl.getMetier().getHauteurWagon();
+        int longueurWagon = this.ctrl.getMetier().getLongueurWagon();
 
         double longueur = Math.sqrt(Math.pow(aX- bX, 2)	+ Math.pow(aY - bY, 2));
 
         //longueur des wagon cumulé
-		double lWagon = nbWagon * TAILLEWAGON;
+		double lWagon = nbWagon * longueurWagon;
 
         double ecart = (longueur - lWagon)/(nbWagon+1);
         
         double beta = Math.atan((bY-aY)/(bX-aX));
-
-        double centreX = (bX - aX) / 2 + aX;
-        double centreY = (bY - aY) / 2 + aY;
-                
 
         if (bX < aX) {
             beta = beta + Math.PI;
@@ -224,14 +226,14 @@ public class PanelPlateau extends JPanel
 
         double ecX = ecart * Math.cos(beta);
         double ecY = ecart * Math.sin(beta);
-        double waX = TAILLEWAGON * Math.cos(beta);
-        double waY = TAILLEWAGON * Math.sin(beta);
+        double waX = longueurWagon * Math.cos(beta);
+        double waY = longueurWagon * Math.sin(beta);
 
 		g1.setStroke(new BasicStroke(2));
         g1.setColor(Color.BLACK);
 		//g1.drawLine((int) aX, (int) aY,(int) bX, (int) bY);
         
-        g1.setStroke(new BasicStroke(10));
+        g1.setStroke(new BasicStroke(hauteurWagon));
 		for (int cpt = 0; cpt < nbWagon; cpt++) 
 			g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
 					        (int) (aY + ecY +  cpt * ( ecY + waY)),
@@ -239,14 +241,12 @@ public class PanelPlateau extends JPanel
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
         
         g1.setColor(color);
-        g1.setStroke(new BasicStroke(8));
+        g1.setStroke(new BasicStroke(hauteurWagon-2));
 		for (int cpt = 0; cpt < nbWagon; cpt++) 
 			g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
 					        (int) (aY + ecY +  cpt * ( ecY + waY)),
 					        (int) (aX + (cpt+1) * ( ecX + waX)),
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
-        //g1.setColor(color.darker());
-        //g1.fillOval((int)centreX-LARGEURWAGON/4, (int)centreY-LARGEURWAGON/4, LARGEURWAGON/2-2, LARGEURWAGON/2-2);
 
         g1.setColor(Color.BLACK);
         g1.setStroke(new BasicStroke(2));  

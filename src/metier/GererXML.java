@@ -28,12 +28,16 @@ public class GererXML {
 	private int  nbrJoueurMiniDoubleRoute;
 	private int  nbWagonJoueur;
 	private int  nbWagonFinPartie;
+    private int  longueurWagon;
+    private int  hauteurWagon;
+    private double espacementWagon;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
 	private ArrayList<CarteVehicule> lstCarteVehicules;
 	private HashMap<Type, ArrayList<CarteVehicule>> hashMapCarteVehicules;
 	private HashMap<Integer, Color> hashVehicules;
+     
 
 	public GererXML(Controleur ctrl){
 
@@ -42,6 +46,9 @@ public class GererXML {
 		this.nbrJoueurMiniDoubleRoute = 3;
 		this.nbWagonJoueur = 45;
 		this.nbWagonFinPartie = 2;
+        this.longueurWagon = 25;
+        this.hauteurWagon = 10;
+        this.espacementWagon = 1.5;
 
 		this.ctrl = ctrl;
 
@@ -150,6 +157,31 @@ public class GererXML {
 	public int setNbWagonFinPartie(int nbWagonFinPartie){
 		return this.nbWagonFinPartie = nbWagonFinPartie;
 	}
+
+    public int getLongueurWagon(){
+        return this.longueurWagon;
+    }
+
+    public int setLongueurWagon(int longueurWagon){
+        return this.longueurWagon = longueurWagon;
+    }
+
+    public int getHauteurWagon(){
+        return this.hauteurWagon;
+    }
+
+    public int setHauteurWagon(int hauteurWagon){
+        return this.hauteurWagon = hauteurWagon;
+    }
+
+    public double getEspacementWagon(){
+        return this.espacementWagon;
+    }
+
+    public double setEspacementWagon(double espacementWagon){
+        return this.espacementWagon = espacementWagon;
+    }
+    
 
 	/*****************/
     /*     NOEUD     */

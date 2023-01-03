@@ -146,6 +146,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
 		this.setVisible(true);
 
+        
+
+
 
     }
 
