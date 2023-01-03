@@ -18,11 +18,9 @@ public class GrillesAreteModel extends AbstractTableModel {
 
     public GrillesAreteModel(Controleur ctrl) {
         this.ctrl = ctrl;
-
-        Arete a;
         this.lstArete = this.ctrl.getLstAretes();
 
-        this.tabEntetes = new String[] {"Noeud1","Noeud2","Longueur","Type"};
+        this.tabEntetes = new String[] {"Noeud1","Noeud2","Longueur","Type","Sens"};
     }
 
     public int    getColumnCount()                 { return this.tabEntetes.length;       }
@@ -38,6 +36,7 @@ public class GrillesAreteModel extends AbstractTableModel {
             case 1 : return this.lstArete.get(row).getNoeud2().getNom();
             case 2 : return this.lstArete.get(row).getLongueur();
             case 3 : return this.lstArete.get(row).getType().getCouleurActuelle();
+            case 4 : return this.lstArete.get(row).getOrientation();
             default : return null;
         }
         
@@ -51,20 +50,19 @@ public class GrillesAreteModel extends AbstractTableModel {
     }
 
     public boolean isCellEditable(int row, int col) {
-        return col == 2 || col == 3;
+        return col == 2 || col == 4;
     }
 
     public void setValueAt(Object value, int row, int col) {
         switch(col){
             case 2 : this.lstArete.get(row).setLongueur((int)value);break;
             case 3 : Type t = Type.creerType((String)value); if (t != null){ this.lstArete.get(row).setType(t); }break;
+            case 4 : this.lstArete.get(row).inverserOrientation();break;
             default : break;
         }
         this.fireTableCellUpdated(row, col);
         this.ctrl.majIHM();
         this.ctrl.majNoeud();
         this.ctrl.majArete();
-    }
-    
-    
+    }   
 }
