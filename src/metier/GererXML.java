@@ -241,7 +241,8 @@ public class GererXML {
 		List<Color> listeType = new ArrayList();
 		for (Arete arete : this.lstAretes)
 		{
-			listeType.add(arete.getType().getColor());
+			if (!listeType.contains(arete.getType().getColor()))
+				listeType.add(arete.getType().getColor());
 		}
 		return null;
 	}

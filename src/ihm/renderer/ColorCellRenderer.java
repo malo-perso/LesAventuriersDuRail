@@ -6,21 +6,27 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import src.ihm.grilles.GrillesVehiculeModel;
+
 
 
 public class ColorCellRenderer extends DefaultTableCellRenderer {
-    @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
- 
-        System.out.println("Value : " + value);
-        
-        Color color = new Color((int)value);
 
- 
-        setText("");
-        setBackground(color);
- 
-        return this;
+    public ColorCellRenderer()
+    {
+        this.setOpaque(true);
+    }
+
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+    {
+        GrillesVehiculeModel model = (GrillesVehiculeModel) table.getModel();
+
+        Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+        Color tabCoul = model.couleurBAckground(row, column);
+
+        c.setBackground(tabCoul);
+
+        return c;
     }
 }
