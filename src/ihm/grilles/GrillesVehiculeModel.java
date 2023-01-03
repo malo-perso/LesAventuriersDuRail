@@ -1,5 +1,6 @@
 package src.ihm.grilles;
 
+import javax.swing.UIManager;
 import javax.swing.table.AbstractTableModel;
 
 import src.Controleur;
@@ -9,6 +10,7 @@ import java.awt.Color;
 
 import java.util.ArrayList;
 import java.util.HashMap; 
+import java.awt.Font;
 
 public class GrillesVehiculeModel extends AbstractTableModel
 {
@@ -48,6 +50,8 @@ public class GrillesVehiculeModel extends AbstractTableModel
             {"12", Color.GREEN},
             {"14", Color.PINK}
         };
+        Font font = new Font("Arial", Font.PLAIN, 15);
+        UIManager.put("Table.font", font);
         
     }
 
