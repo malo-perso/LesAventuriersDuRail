@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+
 import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
@@ -12,6 +13,8 @@ import src.metier.Arete;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -57,8 +60,8 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.ctrl = ctrl;
         Toolkit kit = Toolkit.getDefaultToolkit();
 
-        Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
-        Insets scnMax = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
+        Dimension tailleEcran = kit.getScreenSize();
+        Insets scnMax = kit.getScreenInsets(getGraphicsConfiguration());
         int tailleBarTache = scnMax.bottom;
 
         this.panelFormulaire = new JPanel(new CardLayout());
@@ -72,6 +75,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setTitle("Concepteur de Plateau");
         this.setResizable(false);
         this.setUndecorated(false);
+        this.setLayout(new GridBagLayout());
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
 		this.setIconImage(imgLogo);
@@ -102,9 +106,35 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(this.menuFichier);
         this.menuBarre.add(this.menuAide);
 
-        
-        this.add(this.panelPlateau,BorderLayout.CENTER);
-        this.add(this.panelFormulaire,BorderLayout.EAST);
+        /* Le gridBagConstraints va définir la position et la taille des éléments */
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        /* le parametre fill sert à définir comment le composant sera rempli GridBagConstraints.BOTH permet d'occuper tout l'espace disponible
+		 * horizontalement et verticalement GridBagConstraints.HORIZONTAL maximise horizontalement GridBagConstraints.VERTICAL maximise verticalement
+		 */
+		gbc.fill = GridBagConstraints.BOTH;
+
+        /* insets définir la marge entre les composant new Insets(margeSupérieure, margeGauche, margeInférieur, margeDroite) */
+		gbc.insets = new Insets(0, 0, 0, 0);
+
+        /* weightx définit le nombre de cases en abscisse */
+		gbc.weightx = 4;
+		
+		/* weighty définit le nombre de cases en ordonnée */
+		gbc.weighty = 1;
+
+        /* pour dire qu'on ajoute un composant en position (i, j), on définit gridx=i et gridy=j */
+        gbc.gridx = 0;
+		gbc.gridy = 0;
+
+        /* On peut définit un composant qui prend plusieurs cases à l'aide de gridwidth */
+        gbc.gridwidth = 3;
+        this.add(this.panelPlateau, gbc);
+
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        this.add(this.panelFormulaire, gbc);
 
 
         this.setJMenuBar(this.menuBarre);

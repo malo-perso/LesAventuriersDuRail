@@ -41,7 +41,7 @@ public class PanelPlateau extends JPanel
 		this.diametre = this.ctrl.getMetier().getDiametre();
 
 		//this.setBackground(Color.BLACK);
-		this.setPreferredSize(new Dimension(800, 600));
+		//this.setPreferredSize(new Dimension(800, 600));
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
@@ -98,15 +98,15 @@ public class PanelPlateau extends JPanel
 		super.paint(g);
 
 		Graphics2D g1 = (Graphics2D) g;
-        g1.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION,
-            RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
+        g1.setRenderingHint(RenderingHints.KEY_ALPHA_INTERPOLATION, RenderingHints.VALUE_ALPHA_INTERPOLATION_QUALITY);
         g1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g1.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
         g1.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
         g1.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
         g1.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g1.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        g1.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);		g1.setColor(Color.BLACK);
+        g1.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+		g1.setColor(Color.BLACK);
 
 		for (Arete arete : this.ctrl.getLstAretes()) {
 
@@ -172,6 +172,9 @@ public class PanelPlateau extends JPanel
 			g1.draw(noeud);
 			g.setColor(Color.BLACK);
 			g1.fillOval((int) noeud.getX() - this.diametre / 2, (int) noeud.getY() - this.diametre / 2, this.diametre, this.diametre);
+			g.setColor(Color.WHITE);
+			g1.fillRect(noeud.getNomX()-2, noeud.getNomY()-12, SwingUtilities.computeStringWidth(g.getFontMetrics(g.getFont()), noeud.getNom())+5, this.HAUTEURLABEL);
+			g1.setColor(Color.BLACK);
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
@@ -266,7 +269,7 @@ public class PanelPlateau extends JPanel
 						PanelPlateau.this.supprimerNoeud(NoeudCourant);
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "Le noeud est relié à d'autres noeuds par une arête. Veuillez supprimer l'arête avant de supprimer le noeud.", "Erreur", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Le noeud est relié à d'autres noeuds par au moins une arête. Veuillez supprimer ces arêtes avant de supprimer le noeud.", "Erreur", JOptionPane.ERROR_MESSAGE);
 					}
 					PanelPlateau.this.NoeudCourant = null;
 				}
@@ -281,19 +284,24 @@ public class PanelPlateau extends JPanel
 				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
 				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
-					boolean Nom = false;
+
+					boolean erreurNom = false;
 					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom de la ville " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
+					
 					for(Noeud n : PanelPlateau.this.ctrl.getLstNoeuds()){
 						String nom = n.getNom();
 						if(nomVille.equals(nom))
-							Nom = true;
+							erreurNom = true;
 					}
+
 					if(nomVille == null || nomVille.equals("")) {
-						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville","Erreur", JOptionPane.ERROR_MESSAGE);
 					}
+					/*
 					else if(nomVille.length() > 13)
 						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
-					else if(Nom == true)
+					*/
+					else if(erreurNom == true)
 						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else {
 						PanelPlateau.this.NoeudCourant.setNom(nomVille);
@@ -315,8 +323,10 @@ public class PanelPlateau extends JPanel
 					}
 					if(nomVille == null || nomVille.equals(""))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom de ville");
+					/*
 					else if(nomVille.length() > 13)
 						JOptionPane.showMessageDialog(null, "Nom de ville trop grand","Erreur", JOptionPane.ERROR_MESSAGE);
+					*/
 					else if(Nom == true)
 						JOptionPane.showMessageDialog(null, "Ville déjà Existante","Erreur", JOptionPane.ERROR_MESSAGE);
 					else
