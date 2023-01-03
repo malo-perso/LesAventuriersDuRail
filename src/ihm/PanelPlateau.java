@@ -142,12 +142,18 @@ public class PanelPlateau extends JPanel
                     //coordonnée polaire des deux points du wagon
                     double angleWagon1 = (Math.PI)/arete.getLongueur()*cpt;
                     double wagon1X =grandR*Math.cos(angleWagon1)+ indiceDecalage*Math.cos(angleWagon1);
-                    double wagon1Y =demiR*Math.sin(angleWagon1)+ indiceDecalage*Math.cos(angleWagon1);
+                    double wagon1Y = demiR*Math.sin(angleWagon1)+ indiceDecalage*Math.cos(angleWagon1);
                     
                     double angleWagon2 = (Math.PI)/arete.getLongueur()*(cpt+1);
                     double wagon2X =  grandR*Math.cos(angleWagon2)+ indiceDecalage*Math.cos(angleWagon2);
                     double wagon2Y =  demiR*Math.sin(angleWagon2) +indiceDecalage*Math.sin(angleWagon2);
                     
+                    if(arete.getOrientation())
+                    {
+                        wagon1Y *= -1;
+                        wagon2Y *= -1;
+                    }
+
                     //on applique la rotation et la translation
                     double w1XP = centreX +rotationX(wagon1X,wagon1Y,teta);
                     double y1YP = centreY +rotationY(wagon1X,wagon1Y,teta);

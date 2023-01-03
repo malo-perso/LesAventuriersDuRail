@@ -5,12 +5,14 @@ public class Arete {
     Noeud  noeud2;
     int    longueur;
     Type   type;
+    Boolean orientation;
 
     public Arete(Noeud noeud1, Noeud noeud2, int longueur, Type type) {
         this.noeud1    = noeud1;
         this.noeud2    = noeud2;
         this.longueur  = longueur;
         this.type      = type;
+        this.orientation = true;
     }
 
     public Noeud getNoeud1() {
@@ -29,6 +31,11 @@ public class Arete {
         return this.type;
     }
 
+    public Boolean getOrientation()
+    {
+        return this.orientation;
+    }
+
     public boolean setLongueur(int longueur) {
         if (longueur < 0)
             return false;
@@ -41,5 +48,13 @@ public class Arete {
             return false;
         this.type = type;
         return true;
+    }
+
+    public void inverserOrientation()
+    {
+        if (this.orientation)
+            this.orientation=false;
+        else 
+            this.orientation=true;
     }
 }
