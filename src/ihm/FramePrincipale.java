@@ -86,7 +86,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.txtAide = new JTextArea("Fichier > nouveau    Ctrl + N : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier > ouvrir         Ctrl + O : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide > Regles          Ctrl + A : " + "\n" + "Regles de base des Aventuriers du Rail");
         this.txtAide.setEditable(false);
 
-        this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
+        this.imgLogo = kit.getImage("./src/data/images/logo.png") ;
 		this.setIconImage(imgLogo);
 
         this.menuBarre = new JMenuBar();
@@ -98,7 +98,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuAide = new JMenu("Aide");
         this.menuRegles = new JMenuItem("Regles");
 
-        this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
+        this.menuRegles.setIcon(new ImageIcon("./src/data/images/Regles.png"));
         
         this.menuOuvrir.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  InputEvent.CTRL_DOWN_MASK));
         this.menuNouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,  InputEvent.CTRL_DOWN_MASK));
@@ -132,7 +132,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.setJMenuBar(this.menuBarre);
 
-        this.reglePDF = new File(this.getClass().getResource("../data/PDF/Regles.pdf").getFile());
+        this.reglePDF = new File("./src/data/PDF/Regles.pdf");
 
         //Ajout des listener
         this.menuRegles.addActionListener(this::actionPerformed);
