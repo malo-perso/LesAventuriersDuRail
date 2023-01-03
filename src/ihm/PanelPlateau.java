@@ -10,6 +10,7 @@ import java.awt.event.*;
 import java.lang.Math;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
@@ -37,7 +38,7 @@ public class PanelPlateau extends JPanel
 		this.diametre = this.ctrl.getMetier().getDiametre();
 
 		//this.setBackground(Color.BLACK);
-		//this.setPreferredSize(new Dimension(800, 600));
+		this.setPreferredSize(new Dimension(1571, 918));
 		this.addMouseListener(new GererSouris());
 		this.addMouseMotionListener(new GererMouvementSouris());
     }
@@ -280,13 +281,13 @@ public class PanelPlateau extends JPanel
 			else if (e.getButton() == MouseEvent.BUTTON1)
 			{
 				//vérifier si on a cliqué sur un noeud et le sélectionner en noeud courant
-				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
+				if (sourisSurNoeud(e.getX(), e.getY())!= null && e.getX()< 1200 && e.getY() <800 ) {
 					PanelPlateau.this.NoeudCourant = sourisSurNoeud(e.getX(), e.getY());
 				}
 				//vérifier si on a cliqué sur un nom de noeud et le sélectionner en noeud courant
 				else if (sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY())!= null) {
 					PanelPlateau.this.NoeudCourant = sourisSurNomNoeud(PanelPlateau.this.getGraphics(), e.getX(), e.getY());
-
+				
 					boolean erreurNom = false;
 					String nomVille = JOptionPane.showInputDialog(null,"Nouveau nom du noeud " + NoeudCourant.getNom() + " :","Saisie",JOptionPane.QUESTION_MESSAGE);
 					
@@ -331,8 +332,10 @@ public class PanelPlateau extends JPanel
 					*/
 					else if(Nom == true)
 						JOptionPane.showMessageDialog(null, "Noeud déjà Existant","Erreur", JOptionPane.ERROR_MESSAGE);
-					else
+					else if(e.getX() < 1200 && e.getY() < 800)
                     	PanelPlateau.this.ctrl.ajouterNoeud(nomVille, e.getX(), e.getY(), e.getX()+20, e.getY()+20);
+					else
+						JOptionPane.showMessageDialog(null, "Vous êtes sorti du plateau","Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
 		}
@@ -371,27 +374,27 @@ public class PanelPlateau extends JPanel
 				PanelPlateau.this.NoeudCourant.setFrame( e.getX() / 30d , e.getY() / 30d, PanelPlateau.this.diametre /1d, PanelPlateau.this.diametre /1d);
 				
 				//Si on dépasse à droite du Panel
-				if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
+				if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > 1190)
 				{
-					largeur = PanelPlateau.this.getWidth();
-					largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX()));
+					largeur = 1190;
+					largeurNom = (int)(1200-(NoeudCourant.getNomX()-NoeudCourant.getX())-15);
 					//Si on dépasse à droite et en bas du Panel
-					if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
+					if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > 790)
 					{
-						hauteur = PanelPlateau.this.getHeight();
-						hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
+						hauteur = 790;
+						hauteurNom = (int)(800-(NoeudCourant.getNomY()-NoeudCourant.getY())-15);
 					}
 				}
 				//Si on dépasse en bas du Panel
-				else if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > PanelPlateau.this.getHeight())
+				else if(e.getY()+(NoeudCourant.getNomY()-NoeudCourant.getY()) > 790)
 				{
-					hauteur = PanelPlateau.this.getHeight();
-					hauteurNom = (int)(PanelPlateau.this.getHeight()-(NoeudCourant.getNomY()-NoeudCourant.getY()));
+					hauteur = 790;
+					hauteurNom = (int)(800-(NoeudCourant.getNomY()-NoeudCourant.getY())-15);
 					//Si on dépasse à droite et en bas du Panel
-					if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > PanelPlateau.this.getWidth())
+					if(e.getX()+(NoeudCourant.getNomX()-NoeudCourant.getX()) > 1190)
 					{
-						largeur = PanelPlateau.this.getWidth();
-						largeurNom = (int)(PanelPlateau.this.getWidth()-(NoeudCourant.getNomX()-NoeudCourant.getX())-20);
+						largeur = 1190;
+						largeurNom = (int)(1200-(NoeudCourant.getNomX()-NoeudCourant.getX())-20);
 					}
 				}
 				PanelPlateau.this.ctrl.setPositionNoeud(
@@ -419,7 +422,7 @@ public class PanelPlateau extends JPanel
 		super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
-		g.drawImage(img, 0, 0, this.getWidth() , this.getHeight() , this);
+		g.drawImage(img, 0, 0, 1200 , 800 , this);
 
 	}
 }

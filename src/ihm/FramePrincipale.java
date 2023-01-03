@@ -47,6 +47,8 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private JTextArea txtAide;
 
+    private JScrollPane scrollPane;
+
     CardLayout card;
 
     private File reglePDF;
@@ -75,8 +77,10 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelRegleJeu = new PanelRegleJeu(this.ctrl);
         this.panelResume = new PanelResume(this.ctrl);
 
+        this.scrollPane = new JScrollPane(this.panelPlateau);
+
         this.setTitle("Concepteur de Plateau");
-        this.setResizable(false);
+        this.setResizable(true);
         this.setUndecorated(false);
 
         this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide Regles : " + "\n" + "Regles de base des Aventuriers du Rail");
@@ -115,7 +119,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(this.menuAide);
 
         
-        this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
+        this.panelBase.add(this.scrollPane, BorderLayout.CENTER);
         this.panelFormulaire.setPreferredSize(new Dimension(400, 200));
         this.panelBase.add(this.panelFormulaire, BorderLayout.EAST);
         
