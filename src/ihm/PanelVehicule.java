@@ -6,6 +6,8 @@ import java.awt.event.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -204,6 +206,9 @@ public class PanelVehicule extends JPanel implements ActionListener{
             try{
                 System.out.println("Carte verso");
                 JFileChooser file = new JFileChooser("./src/data/images");
+                FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"jpg","jpeg", "gif", "png"});
+                file.setFileFilter(filtre);
+                file.setAcceptAllFileFilterUsed(false);
                 //récupérer l'image choisi et l'afficher dans le bouton
                     if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
                     CarteVerso = ImageIO.read(file.getSelectedFile());
