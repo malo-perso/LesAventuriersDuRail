@@ -4,15 +4,21 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.ihm.grilles.GrillesVehiculeModel;
+import src.ihm.renderer.ColorCellRenderer;
 import src.metier.FonctionAux;
 import src.metier.CarteVehicule;
 
 import java.awt.*;
+import java.awt.event.*;
+import java.awt.Color;
+import java.util.HashMap;
 
 import java.util.ArrayList;
 
@@ -25,6 +31,8 @@ public class PanelVehicule extends JPanel implements ActionListener{
     private JPanel  panelNomVehicule;
     private JPanel  panelVehiculeBtn;
     private JPanel  panelTable;
+    private JPanel  panelCarte;
+    private JPanel  panelVisuCarte;
     private JButton btnAjoutVehicule;
     private JButton btnSupprVehicule;
     private JTextField txtNomVehicule,nbrJoker;
@@ -36,11 +44,19 @@ public class PanelVehicule extends JPanel implements ActionListener{
     private Image CarteVerso;
     private Image CarteJoker;
 
+    private Icon iconRecto;
+    private Icon iconVerso;
+    private Icon iconJoker;
+
     private JButton btnCarteRecto;
     private JButton btnCarteVerso;
+    private JButton btnCarteVerso2;
     private JButton btnCarteJoker;
 
     private JTable jTabVehicule;
+
+    private String[] tabEntetes;
+
     
     public PanelVehicule(Controleur ctrl)
     {
@@ -50,16 +66,46 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.txtNomVehicule = new JTextField();
 
         this.model = new GrillesVehiculeModel(this.ctrl);
-        this.jTabVehicule = new JTable(this.model);
-        this.jTabVehicule.setFillsViewportHeight(true);
-        this.jTabVehicule.setEnabled(true);
+        //this.jTabVehicule = new JTable();
+        //tabVehicules = this.ctrl.getHashVehicules();
+        //(12 de chaque type : violet, blanc, bleu, jaune, orange, noir, rouge et vert et 14 locomotives)
+
+        jTabVehicule = new JTable(this.model);
+    
+        jTabVehicule.setDefaultRenderer(Color.class, new ColorCellRenderer());
 
         JScrollPane spTabVehicule = new JScrollPane(this.jTabVehicule);
 
         this.btnAjoutVehicule = new JButton("Ajouter");
         this.btnSupprVehicule = new JButton("Supprimer");
+        
 
-        this.nbrJoker = new JTextField();
+        this.nbrJoker = new JTextField("14");
+
+        this.iconVerso     = new ImageIcon("./src/data/images/Cartes_Vehicules/CarteVersoDefault.png");
+        this.iconRecto     = new ImageIcon("./src/data/images/Cartes_Vehicules/wagonblanc.jpg");
+        this.iconJoker     = new ImageIcon("./src/data/images/Cartes_Vehicules/loco.jpg");
+
+        this.btnCarteJoker = new JButton("Carte Joker",iconJoker);
+        this.btnCarteRecto = new JButton("Carte Recto",iconRecto);
+        this.btnCarteVerso = new JButton("Carte Verso",iconVerso);
+        this.btnCarteVerso2 = new JButton("Carte Verso2",iconVerso);
+//chaque bouton fait la moitié du panel
+        this.btnCarteJoker.setPreferredSize(new Dimension(150, 150));
+        this.btnCarteRecto.setPreferredSize(new Dimension(150, 150));
+        this.btnCarteVerso.setPreferredSize(new Dimension(150, 150));
+        this.btnCarteVerso2.setPreferredSize(new Dimension(150, 150));
+
+        btnCarteVerso.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteVerso.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnCarteRecto.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteRecto.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnCarteJoker.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteJoker.setHorizontalTextPosition(SwingConstants.CENTER);
+        btnCarteVerso2.setVerticalTextPosition(SwingConstants.BOTTOM);
+        btnCarteVerso2.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+        
 
         this.btnRetour = new JButton("Retour");
         this.btnSuivant = new JButton("Suivant");
@@ -69,6 +115,8 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelNomVehicule = new JPanel(new GridLayout(1, 3));
         this.panelVehiculeBtn = new JPanel(new GridLayout(1, 3));
         this.panelTable = new JPanel(new BorderLayout());
+        this.panelCarte = new JPanel(new GridLayout(2,1));
+        this.panelVisuCarte = new JPanel(new GridLayout(2, 2));
 
         this.panelValidation = new JPanel(new GridLayout(1, 3));
 
@@ -79,10 +127,21 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelVehiculeBtn.add(this.btnAjoutVehicule);
         this.panelVehiculeBtn.add(this.btnSupprVehicule);
         this.panelVehiculeBtn.add(new JLabel());
+        
+        this.panelVisuCarte.add(this.btnCarteRecto);
+        this.panelVisuCarte.add(this.btnCarteVerso);
+        this.panelVisuCarte.add(new JLabel("Nombre Carte Joker :", SwingConstants.RIGHT));
+        this.panelVisuCarte.add(this.nbrJoker);
+        this.panelVisuCarte.add(this.btnCarteJoker);
+        this.panelVisuCarte.add(this.btnCarteVerso2);
 
-        this.panelTable.add(this.panelNomVehicule, BorderLayout.NORTH);
-        this.panelTable.add(spTabVehicule, BorderLayout.CENTER);
-        this.panelTable.add(this.panelVehiculeBtn, BorderLayout.SOUTH);
+        //this.panelTable.add(this.panelNomVehicule, BorderLayout.NORTH);
+        this.panelTable.add(jTabVehicule, BorderLayout.CENTER);
+        //this.panelTable.add(this.panelVisuCarte, BorderLayout.SOUTH);
+        //this.panelTable.add(this.panelVehiculeBtn, BorderLayout.SOUTH);
+
+        this.panelCarte.add(this.panelTable);
+        this.panelCarte.add(this.panelVisuCarte);
 
         this.panelValidation.add(this.btnRetour);
         this.panelValidation.add(new JLabel());
@@ -93,13 +152,36 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.btnSupprVehicule.addActionListener(this);
         this.btnRetour.addActionListener(this);
         this.btnSuivant.addActionListener(this);
+        this.btnCarteJoker.addActionListener(this);
+        this.btnCarteRecto.addActionListener(this);
+        this.btnCarteVerso.addActionListener(this);
+        this.btnCarteVerso2.addActionListener(this);
 
-        this.add(this.panelTable, BorderLayout.CENTER);
+
+        this.add(this.panelCarte, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
+
+
+        this.nbrJoker.addKeyListener(new KeyAdapter() {
+            public void keyTyped(KeyEvent e) {
+                System.out.println(e);
+                char c = e.getKeyChar();
+                if ( ((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)) {
+                    e.consume();  // ignorer l'événement
+                }
+            }
+        });
 
         this.setBackground(Color.PINK);
     }
 
+    public void traitementImage(JButton btn, Icon iconVerso2){   
+        Image img = ((ImageIcon) iconVerso2).getImage();
+        int btnH = (int) (btn.getHeight()*0.5);
+        Image newimg = img.getScaledInstance(btn.getWidth(),btn.getHeight()-btnH,  java.awt.Image.SCALE_SMOOTH);
+        iconVerso2 = new ImageIcon(newimg);
+        btn.setIcon(iconRecto);           
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -111,19 +193,92 @@ public class PanelVehicule extends JPanel implements ActionListener{
         if ( e.getSource() == this.btnSuivant) {
             this.ctrl.getIHM().changePanel("panelArrete");
         }
-        if(e.getSource() == this.CarteRecto){
+        if(e.getSource() == this.btnCarteRecto){
             try{
-				System.out.println("Ouvrir");
-				JFileChooser chooser = new JFileChooser(".");
-				
-				int res = chooser.showOpenDialog(this);
-				if (res == JFileChooser.APPROVE_OPTION)
-					this.ctrl.lireXML(chooser.getSelectedFile());
+				System.out.println("Catre recto");
+				JFileChooser file = new JFileChooser("./src/data/images");
+                //récupérer l'image choisi et l'afficher dans le bouton
+                	if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+					CarteRecto = ImageIO.read(file.getSelectedFile());
+					iconRecto = new ImageIcon(CarteRecto);
+					btnCarteRecto.setIcon(iconRecto);
+                    //si ce n'est pas l'image par défaut on enleeve le texte
+                    if(!file.getSelectedFile().getName().equals("carteRectoDefault.png")){
+                        btnCarteRecto.setText("");
+                        btnCarteRecto.setText("Carte Recto");
+                        Image img = ((ImageIcon) iconRecto).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteRecto.getWidth(),this.btnCarteRecto.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+                        iconRecto = new ImageIcon(newimg);
+                        
+                    }
+                    else{
+                        btnCarteRecto.setText("Carte Recto");
+                        Image img = ((ImageIcon) iconRecto).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteRecto.getWidth(),this.btnCarteRecto.getHeight()-30,  java.awt.Image.SCALE_SMOOTH);
+                        iconRecto = new ImageIcon(newimg);
+                        
+                    }
+                    btnCarteRecto.setIcon(iconRecto);    
+				}
 
             }catch(Exception erreur){erreur.printStackTrace();}
         }
-        
+
+        if(e.getSource() == this.btnCarteVerso || e.getSource() == this.btnCarteVerso2){
+            try{
+                System.out.println("Carte verso");
+                JFileChooser file = new JFileChooser("./src/data/images");
+                //récupérer l'image choisi et l'afficher dans le bouton
+                    if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+                    CarteVerso = ImageIO.read(file.getSelectedFile());
+                    iconVerso = new ImageIcon(CarteVerso);
+                    btnCarteVerso.setIcon(iconVerso);
+                    //si ce n'est pas l'image par défaut on enleeve le texte
+                    if(!file.getSelectedFile().getName().equals("carteVersoDefault.png")){
+                        btnCarteVerso.setText("");
+                        Image img = ((ImageIcon) iconVerso).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteRecto.getWidth(),this.btnCarteRecto.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+                        iconVerso = new ImageIcon(newimg);
+                    }
+                    else{
+                        Image img = ((ImageIcon) iconVerso).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteRecto.getWidth(),this.btnCarteRecto.getHeight()-30,  java.awt.Image.SCALE_SMOOTH);
+                        iconVerso = new ImageIcon(newimg);
+                    }   
+                    btnCarteVerso.setIcon(iconVerso);
+                    btnCarteVerso2.setIcon(iconVerso);           
+                }
+            }
+            catch(Exception erreur){erreur.printStackTrace();}
+        }
+        if(e.getSource() == this.btnCarteJoker){
+            try{
+				System.out.println("Carte Joker");
+				JFileChooser file = new JFileChooser("./src/data/images");
+                //récupérer l'image choisi et l'afficher dans le bouton
+                	if(file.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+					CarteJoker = ImageIO.read(file.getSelectedFile());
+					iconJoker = new ImageIcon(CarteJoker);
+					btnCarteJoker.setIcon(iconJoker);
+                    //si ce n'est pas l'image par défaut on enleeve le texte
+                    if(!file.getSelectedFile().getName().equals("loco.jpg")){
+                        btnCarteJoker.setText("");
+                        Image img = ((ImageIcon) iconJoker).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteJoker.getWidth(),this.btnCarteJoker.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+                        iconJoker = new ImageIcon(newimg);
+                    }
+                    else{
+                        btnCarteJoker.setText("Carte Joker");
+                        Image img = ((ImageIcon) iconJoker).getImage();
+                        Image newimg = img.getScaledInstance(this.btnCarteJoker.getWidth(),this.btnCarteJoker.getHeight()-30,  java.awt.Image.SCALE_SMOOTH);
+                        iconJoker = new ImageIcon(newimg);
+                    }   
+                    btnCarteJoker.setIcon(iconJoker);           
+				}
+
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
+
     }
-
-
+    
 }
