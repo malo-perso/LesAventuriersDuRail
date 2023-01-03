@@ -5,10 +5,14 @@ import src.metier.Noeud;
 import src.metier.Arete;
 import src.metier.FonctionAux;
 import src.ihm.grilles.GrillesAreteModel;
+import src.ihm.renderer.ColorCellRenderer;
+
+import java.awt.Color;
 
 import java.awt.event.*;
 
 import javax.swing.*;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
@@ -30,6 +34,8 @@ public class PanelAretes extends JPanel implements ActionListener {
 
     private Controleur ctrl;
 
+    private JButton btnType;
+
 
     public PanelAretes(Controleur ctrl) {
 
@@ -43,9 +49,11 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         this.model = new GrillesAreteModel(this.ctrl);
         this.tabAretes = new JTable(this.model);
+       
         this.tabAretes.setFillsViewportHeight(true);
         this.tabAretes.setEnabled(true);
 
+        this.tabAretes.setDefaultRenderer(Color.class, new ColorCellRenderer());
         JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
 
         this.btnClear = new JButton("Effacer");
@@ -54,11 +62,12 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnSuivant = new JButton("Suivant");
 
         Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
-        Vector<String> vType = new Vector<String>(this.ctrl.getTypes()); 
+        //Vector<String> vType = new Vector<String>(this.ctrl.getTypes()); 
 
         this.listNoeud1 = new JComboBox<>(vNoeud);
         this.listNoeud2 = new JComboBox<>(vNoeud);
-        this.listTypeArete = new JComboBox<>(vType);
+        this.btnType = new JButton("Type");
+        //this.listTypeArete = new JComboBox<>(vType);
         this.txtLongueurArete = new JTextField();
 
         this.listNoeud1.setSelectedItem(null);
@@ -88,7 +97,8 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelRemplissage.add(this.listNoeud1);
         this.panelRemplissage.add(this.listNoeud2);
         this.panelRemplissage.add(this.txtLongueurArete);
-        this.panelRemplissage.add(this.listTypeArete);
+        this.panelRemplissage.add(this.btnType);
+        //this.panelRemplissage.add(this.listTypeArete);
 
         this.panelClear.add(new JLabel());
         this.panelClear.add(this.btnClear);
@@ -117,6 +127,8 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
 
+        this.btnType.addActionListener(this);
+
         this.btnRetour.addActionListener(this);
         this.btnSuivant.addActionListener(this);
 
@@ -132,7 +144,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.listNoeud1.setSelectedItem(null);
         this.listNoeud2.setSelectedItem(null);
         this.txtLongueurArete.setText("");
-        this.listTypeArete.setSelectedItem(null);
+        //this.listTypeArete.setSelectedItem(null);
 
         this.listNoeud1.addActionListener(this);
         this.listNoeud2.addActionListener(this);
@@ -173,14 +185,16 @@ public class PanelAretes extends JPanel implements ActionListener {
             if(this.listNoeud1.getSelectedItem() != null    &&
                this.listNoeud2.getSelectedItem() != null    &&
                FonctionAux.isInteger(this.txtLongueurArete.getText())  &&
-               this.listTypeArete.getSelectedItem() != null
+               this.btnType.getBackground() != null
+               //this.listTypeArete.getSelectedItem() != null
               )
             {
                 this.ctrl.ajouterArete(
                     this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
                     this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
                     Integer.parseInt(this.txtLongueurArete.getText()),
-                    (String)this.listTypeArete.getSelectedItem()
+                    this.btnType.getBackground()
+                    //(String)this.listTypeArete.getSelectedItem()
                 );
                 this.removePanelRemplissage();
             }
@@ -218,6 +232,13 @@ public class PanelAretes extends JPanel implements ActionListener {
             if (this.listNoeud2.getSelectedItem() == this.listNoeud1.getSelectedItem()) {
                 this.listNoeud1.setSelectedItem(null);
             }
+        }
+
+        if (e.getSource() == this.btnType) {
+            //choose color and set it to the backgrounf of the button
+            Color c = JColorChooser.showDialog(this, "Choose a color", this.btnType.getBackground());
+            this.btnType.setBackground(c);
+            
         }
 
     }

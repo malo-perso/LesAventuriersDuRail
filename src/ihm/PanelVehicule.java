@@ -108,7 +108,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
         //Creation des layouts
         this.setLayout(new BorderLayout());
         this.panelNomVehicule = new JPanel(new GridLayout(1, 3));
-        this.panelTable = new JPanel(new BorderLayout());
+        this.panelTable = new JPanel();
         this.panelCarte = new JPanel(new GridLayout(2,1));
         this.panelVisuCarte = new JPanel(new GridLayout(4, 2));
 
@@ -124,12 +124,12 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelVisuCarte.add(this.nbrJoker);
         this.panelVisuCarte.add(this.btnCarteJoker);
         this.panelVisuCarte.add(this.btnCarteVerso2);
+        this.panelVisuCarte.add(new JLabel());
 
         this.panelTable.add(jTabVehicule, BorderLayout.CENTER);
 
-
-        this.panelCarte.add(this.panelTable);
-        this.panelCarte.add(this.panelVisuCarte);
+        this.panelCarte.add(this.panelTable , BorderLayout.NORTH);
+        this.panelCarte.add(this.panelVisuCarte, BorderLayout.CENTER );
 
         this.panelValidation.add(this.btnRetour);
         this.panelValidation.add(new JLabel());

@@ -3,12 +3,25 @@ package src.ihm.grilles;
 import javax.swing.table.AbstractTableModel;
 
 import src.Controleur;
+import src.metier.Arete;
 import src.metier.CarteVehicule;
+import src.metier.Type;
 
 import java.awt.Color;
 
 import java.util.ArrayList;
-import java.util.HashMap; 
+import java.util.HashMap;
+import java.util.List; 
+
+/*
+ *     ArrayList<Arete>   lstArete;
+
+    public GrillesAreteModel(Controleur ctrl) {
+        this.ctrl = ctrl;
+
+        Arete a;
+        this.lstArete = this.ctrl.getLstAretes();
+ */
 
 public class GrillesVehiculeModel extends AbstractTableModel
 {
@@ -17,11 +30,13 @@ public class GrillesVehiculeModel extends AbstractTableModel
 	private String[]   tabEntetes;
     //private HashMap<Integer, Color> hashVehicules;
     private Object[][] tabVehicules;
+    private List<Type> lstType;
 
     public GrillesVehiculeModel(Controleur ctrl)
     {
         super();
         this.ctrl = ctrl;
+        this.ctrl.getTypes();
         //hashVehicules = this.ctrl.getHashVehicules();
         
         /*
@@ -37,6 +52,8 @@ public class GrillesVehiculeModel extends AbstractTableModel
         */
 
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
+        //this.lstType = this.ctrl.getLstType();
+
 
         this.tabVehicules = new Object[][]{
             {"12", Color.WHITE},
@@ -46,7 +63,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
             {"12", Color.BLACK},
             {"12", Color.RED},
             {"12", Color.GREEN},
-            {"14", Color.PINK}
+            {"12", Color.PINK}
         };
         
     }
@@ -55,6 +72,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
     {
         return tabVehicules.length;
         //return hashVehicules.size();
+        //return this.lstType.size();
     }
 
     public int getColumnCount() 
@@ -83,10 +101,10 @@ public class GrillesVehiculeModel extends AbstractTableModel
     public Class getColumnClass(int columnIndex)
     {
         switch(columnIndex){
-            case 1:
+            case 4:
                 return Color.class;
             default:
-                return String.class;
+                return Color.class;
         }
     }
 

@@ -13,7 +13,10 @@ public class ColorCellRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
  
-        Color color = (Color) value;
+        System.out.println("Value : " + value);
+        
+        Color color = new Color((int)value);
+
  
         setText("");
         setBackground(color);

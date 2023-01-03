@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -70,7 +71,7 @@ public class Controleur{
     }
 
     //retourne la liste des types de cartes
-    public ArrayList<String> getTypes() {
+    public ArrayList<Color> getTypes() {
         return Type.getCouleurs();
     }
 
@@ -119,8 +120,8 @@ public class Controleur{
     /*     Arete     */
     /*****************/
 
-    public void ajouterArete(Noeud n1, Noeud n2, int n, String s) {
-        this.gererXML.ajouterArete(n1,n2,n,s);
+    public void ajouterArete(Noeud n1, Noeud n2, int n, Color c) {
+        this.gererXML.ajouterArete(n1,n2,n,c);
         this.majIHM();
         this.majArete();
     }
@@ -134,6 +135,10 @@ public class Controleur{
     public void majArete()
     {
         this.IHM.majArete();
+    }
+
+    public List<Type> getLstType(){
+        return this.gererXML.getLstType();
     }
 
     /*****************/
@@ -201,10 +206,11 @@ public class Controleur{
     public ArrayList<Arete> lstAreteXMLtoIHM() {
         //test
         ArrayList<Arete> lstArete = new ArrayList<Arete>();
-        lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, Type.creerType("orange")));
+        //lstArete.add(new Arete( this.getLstNoeuds().get(0) , this.getLstNoeuds().get(1)  ,  10, Type.creerType("orange")));
         
         return lstArete;
     }
+
 
     public ArrayList<CarteObjectif> lstObjectifXMLtoIHM() {
         //test

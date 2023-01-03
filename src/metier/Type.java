@@ -4,84 +4,42 @@ import java.util.ArrayList;
 import java.awt.Color;
 
 public class Type {
+    private static ArrayList<Color> listeCouleurs = new ArrayList();
+	private Color couleurActuelle;
 
-	private String couleurActuelle;
-
-	private Type(String couleur){
-		this.couleurActuelle = couleur;
+	private Type(Color couleur){
+		this.couleurActuelle = ajouterCouleur(couleur);
 	}
 
-	public static Type creerType (String couleur) {
-		if (!Type.getCouleurs().contains(couleur)) {
-			return null;
+	private static Color ajouterCouleur(Color c) {
+        for( Color coul : listeCouleurs) {
+			if( coul == c ) {
+				return coul;
+			}
 		}
-		else{
-			return new Type(couleur);
-		}
-	}
-
-	public static ArrayList<String> getCouleurs(){
-		ArrayList<String> couleurs = new ArrayList<String>();
-		couleurs.add("violet");
-		couleurs.add("rouge");
-		couleurs.add("marron");
-		couleurs.add("blanc");
-		couleurs.add("bleu");
-		couleurs.add("jaune");
-		couleurs.add("vert");
-		couleurs.add("noir");
-		couleurs.add("multicolore");
-		return couleurs;
-	}
-
-     public Color getColor()
-    {
-        switch (this.couleurActuelle)
-        {
-            case "violet":
-                return Color.decode("#8B00FF");
-            case "rouge":
-                return Color.decode("#FF0000");
-            case "marron":
-                return Color.decode("#8B4513");
-            case "blanc":
-                return Color.decode("#FFFFFF");
-            case "bleu":
-                return Color.decode("#0000FF");
-            case "jaune":
-                return Color.decode("#FFFF00");
-            case "vert":
-                return Color.decode("#00FF00");
-            case "noir":
-                return Color.decode("#000000");
-            case "multicolore":
-                return Color.decode("#FF00FF");
-            default:
-                return Color.decode("#000000");
-        }
+		listeCouleurs.add(c);
+        return c;
     }
 
-	public String getCouleurActuelle(){
+	public static Type creerType (Color couleur) {
+		
+        return new Type(couleur);
+
+	}
+
+	public Color getColor(){
+		return this.couleurActuelle;
+	}
+
+	public static ArrayList<Color> getCouleurs(){
+		return listeCouleurs;
+	}
+
+	public Color getCouleurActuelle(){
 		return this.couleurActuelle;
 	}
 
 	public String toString(){
-		return this.couleurActuelle;
+		return String.valueOf(this.couleurActuelle.getRGB());
 	}
 }
-
-/*
- * public class Type {
-    private static List<Color> listeCouleurs = new ArrayList() {{
-        add(null);
-    }};
-
-    private static boolean ajouterCouleur(Color c) {
-        if( listeCouleurs.contains(c) ) return false;
-
-        listeCouleurs.add(c);
-
-        return true;
-    }
-}
- */

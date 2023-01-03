@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.awt.image.WritableRaster;
+import java.awt.Color;
 
 import javax.imageio.ImageIO;
 
@@ -56,13 +57,13 @@ public class GererXML {
 		
 		this.hashVehicules = new HashMap<Integer, Color>();
 
-		Type marron = Type.creerType("marron");
-		Type rouge = Type.creerType("rouge");
+		Type marron = Type.creerType(Color.ORANGE);
+		Type rouge = Type.creerType(Color.RED);
 
 		ArrayList<CarteVehicule> lstCarteMarron = new ArrayList<CarteVehicule>();
-		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
-		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
-		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
+		lstCarteMarron.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
+		lstCarteMarron.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
+		lstCarteMarron.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
 		//(12 de chaque type : violet, blanc, bleu, jaune, orange, noir, rouge et vert et 14 locomotives)
 		this.hashVehicules.put(12, Color.PINK);
 		this.hashVehicules.put(12, Color.WHITE);
@@ -77,12 +78,12 @@ public class GererXML {
 
 
 		ArrayList<CarteVehicule> lstCarteRouge = new ArrayList<CarteVehicule>();
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
-		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
+		lstCarteRouge.add(new CarteVehicule(Type.creerType(Color.RED)));
 
 		this.hashMapCarteVehicules.put(marron, lstCarteMarron);
 
@@ -93,9 +94,9 @@ public class GererXML {
 
 		this.lstAretes = new ArrayList<Arete>();
 
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
-		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType(Color.ORANGE)));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType(Color.RED)));
+		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType(Color.BLUE)));
 
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
@@ -182,6 +183,7 @@ public class GererXML {
 	/*****************/
     /* CarteVehicule */
     /*****************/
+
 	public HashMap<Integer, Color> getHashVehicules() {
 		return this.hashVehicules;
 	}
@@ -193,11 +195,20 @@ public class GererXML {
 		//TO DO
 	}
 
+	public List<Type> getLstType() {
+		//parcourir la listArrte et recuperer les types des aretes
+		List<Color> listeType = new ArrayList();
+		for (Arete arete : this.lstAretes)
+		{
+			listeType.add(arete.getType().getColor());
+		}
+		return null;
+	}
 	/*****************/
     /*     Arete     */
     /*****************/
 
-	public void ajouterArete(Noeud n1, Noeud n2, int longueur, String coulType){
+	public void ajouterArete(Noeud n1, Noeud n2, int longueur, Color coulType){
 		this.lstAretes.add(new Arete(n1, n2, longueur, Type.creerType(coulType)));
 	}
 
@@ -292,7 +303,7 @@ public class GererXML {
 						   "\t\t\t<noeud1>" + a.getNoeud1().getNom() + "</noeud1>" + "\n" +
 						   "\t\t\t<noeud2>" + a.getNoeud2().getNom() + "</noeud2>" + "\n" +
 						   "\t\t\t<longueur>" + a.getLongueur() + "</longueur>" + "\n" +
-						   "\t\t\t<type>" + a.getType() + "</type>" + "\n" + 
+						   "\t\t\t<type>" + a.getType().toString() + "</type>" + "\n" + 
 						   "\t\t\t<orientation>" + a.getOrientation() + "</orientation>" + "\n" +
 						"    \t</arete>\n");
 			}
@@ -355,7 +366,9 @@ public class GererXML {
 				String nomNoeud1 = courant.getChildText("noeud1");
 				String nomNoeud2 = courant.getChildText("noeud2");
 				int    longueur  = Integer.parseInt(courant.getChildText("longueur"));
-				String nomType      = courant.getChildText("type");
+				Color  type      = new Color(Integer.parseInt(courant.getChildText("type")));
+				System.out.println("couleur : "+type.getRGB());
+				
 				boolean orientation = Boolean.parseBoolean(courant.getChildText("orientation"));
 
 				for(Noeud n : this.lstNoeuds)
@@ -366,7 +379,7 @@ public class GererXML {
 						{
 							if(m.getNom().equals(nomNoeud2))
 							{
-								this.lstAretes.add(new Arete(n, m, longueur, Type.creerType(nomType), orientation));
+								this.lstAretes.add(new Arete(n, m, longueur, Type.creerType(type), orientation));
 							}
 						}
 					}
@@ -402,13 +415,13 @@ public class GererXML {
 			while(l.hasNext()){
 				Element courant = (Element)l.next();
 				int 	nbCarte = Integer.parseInt(courant.getChildText("type"));
-				String  nomType = courant.getChildText("nombre");
+				Color   type = new Color(Integer.parseInt(courant.getChildText("nombre")));
 
 				for(int m=0; m < nbCarte; m++){
-					this.lstCarteVehicules.add(new CarteVehicule(Type.creerType(nomType)));
+					this.lstCarteVehicules.add(new CarteVehicule(Type.creerType(type)));
 				}
 
-				this.hashMapCarteVehicules.put(Type.creerType(nomType), this.lstCarteVehicules);
+				this.hashMapCarteVehicules.put(Type.creerType(type), this.lstCarteVehicules);
 			}
 
 

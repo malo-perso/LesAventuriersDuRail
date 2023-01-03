@@ -42,7 +42,18 @@ public class GrillesAreteModel extends AbstractTableModel {
         
     }
 
-    public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
+    //public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
+
+    @Override
+    public Class getColumnClass(int columnIndex)
+    {
+        switch(columnIndex){
+            case 3:
+                return String.class;
+            default:
+                return String.class;
+        }
+    }
 
     public void majTable(ArrayList<Arete> lstArete) {   
         this.lstArete = lstArete;
@@ -56,7 +67,7 @@ public class GrillesAreteModel extends AbstractTableModel {
     public void setValueAt(Object value, int row, int col) {
         switch(col){
             case 2 : this.lstArete.get(row).setLongueur((int)value);break;
-            case 3 : Type t = Type.creerType((String)value); if (t != null){ this.lstArete.get(row).setType(t); }break;
+            //case 3 : Type t = Type.creerType((String)value); if (t != null){ this.lstArete.get(row).setType(t); }break;
             case 4 : this.lstArete.get(row).inverserOrientation();break;
             default : break;
         }

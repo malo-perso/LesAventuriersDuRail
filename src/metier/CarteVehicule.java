@@ -7,8 +7,8 @@ public class CarteVehicule {
         this.type = type;
     }
 
-    public String getType() {
-        return this.type.toString();
+    public Type getType() {
+        return this.type;
     }
 }
 
