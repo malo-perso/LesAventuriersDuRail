@@ -251,7 +251,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         if(e.getSource() == this.menuOuvrir){
             try{
 				System.out.println("Ouvrir");
-				JFileChooser chooser = new JFileChooser();
+				JFileChooser chooser = new JFileChooser("./src/data/mappe/");
 
                 FileFilter filtre = new FileNameExtensionFilter("XML (*.xml)", "xml");
                 chooser.setFileFilter(filtre);

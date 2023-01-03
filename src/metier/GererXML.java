@@ -409,9 +409,7 @@ public class GererXML {
 				String nomNoeud1 = courant.getChildText("noeud1");
 				String nomNoeud2 = courant.getChildText("noeud2");
 				int    longueur  = Integer.parseInt(courant.getChildText("longueur"));
-				Color  type      = new Color(Integer.parseInt(courant.getChildText("type")));
-				System.out.println("couleur : "+type.getRGB());
-				
+				Color  type      = new Color(Integer.parseInt(courant.getChildText("type")));				
 				boolean orientation = Boolean.parseBoolean(courant.getChildText("orientation"));
 
 				for(Noeud n : this.lstNoeuds)
