@@ -32,6 +32,7 @@ public class PanelResume extends JPanel implements ActionListener{
     private JLabel lblDoubleMin;
     private JLabel lblVehicule;
     private JLabel lblFin;
+    private JLabel lblCheminLong;
 
     private JTable jTabNoeud;
     private JTable jTabArrete;
@@ -45,6 +46,7 @@ public class PanelResume extends JPanel implements ActionListener{
     private int DoubleVoie;
     private int nbWagonJoueur;
     private int nbWagonFin;
+    private int nbPointCheminLong;
 
     private Controleur ctrl;
 
@@ -87,19 +89,25 @@ public class PanelResume extends JPanel implements ActionListener{
         this.DoubleVoie = this.panelRegleJeu.getDoubleVoie();
         this.nbWagonJoueur = this.panelRegleJeu.getNbWagonJoueur();
         this.nbWagonFin    = this.panelRegleJeu.getNbWagonFin();
+        this.nbPointCheminLong = this.panelRegleJeu.getNbPointCheminLong();
 
         this.lblJMin = new JLabel("Joueur Min : " + this.nbJoueurMin);
         this.lblJMax = new JLabel("Joueur Max : " + this.nbJoueurMax);
         this.lblVehicule = new JLabel("Vehicule par joueur : " + this.nbWagonJoueur);
         this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.DoubleVoie );
         this.lblFin = new JLabel("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin); 
+        if(this.nbPointCheminLong < 1){
+            this.lblCheminLong = new JLabel("Règle du chemin le plus long : Désactivée");
+        }else{
+            this.lblCheminLong = new JLabel("Points pour le chemin le plus long : " + this.nbPointCheminLong );
+        }
 
         this.btnRetour = new JButton("Retour");
         this.btnEnregistrer = new JButton("Enregistrer");
         
         this.setLayout(new BorderLayout());
         this.panelAll.setLayout(new GridLayout(4,1));
-        this.panelJoueur.setLayout(new GridLayout(5,1));
+        this.panelJoueur.setLayout(new GridLayout(6,1));
         this.panelNoeud.setLayout(new BorderLayout());
         this.panelArrete.setLayout(new BorderLayout());
         this.panelObjectif.setLayout(new BorderLayout());
@@ -111,6 +119,7 @@ public class PanelResume extends JPanel implements ActionListener{
         this.panelJoueur.add(this.lblVehicule);
         this.panelJoueur.add(this.lblDoubleMin);
         this.panelJoueur.add(this.lblFin);
+        this.panelJoueur.add(this.lblCheminLong);
 
         this.panelNoeud.add(spTabNoeud);
         this.panelArrete.add(spTabArrete);

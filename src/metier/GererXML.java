@@ -28,6 +28,7 @@ public class GererXML {
 	private int  nbrJoueurMiniDoubleRoute;
 	private int  nbWagonJoueur;
 	private int  nbWagonFinPartie;
+	private int  nbPointCheminLong; //si < 0 (=-1) alors il n y a pas la regle du chemin le plus long
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
@@ -42,6 +43,7 @@ public class GererXML {
 		this.nbrJoueurMiniDoubleRoute = 3;
 		this.nbWagonJoueur = 45;
 		this.nbWagonFinPartie = 2;
+		this.nbPointCheminLong = -1;
 
 		this.ctrl = ctrl;
 
@@ -149,6 +151,14 @@ public class GererXML {
 
 	public int setNbWagonFinPartie(int nbWagonFinPartie){
 		return this.nbWagonFinPartie = nbWagonFinPartie;
+	}
+
+	public int getNbPointCheminLong(){
+		return this.nbPointCheminLong;
+	}
+
+	public int setNbPointCheminLong(int nbPointCheminLong){
+		return this.nbPointCheminLong = nbPointCheminLong;
 	}
 
 	/*****************/
@@ -268,6 +278,7 @@ public class GererXML {
 					 "\t\t<nombreJoueurMinimum>" + this.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
 					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
 					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
+					 "\t\t<nombrePointCheminLong>" + this.getNbPointCheminLong() + "</nombrePointCheminLong>\n" +
 					 "\t</regles>\n");
 
 			bw.write("\t<lstNoeuds>"                         		 + "\n");
@@ -339,6 +350,7 @@ public class GererXML {
 			this.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
 			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
 			this.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
+			this.setNbPointCheminLong(Integer.parseInt(regles.getChildText("nombrePointCheminLong")));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
 			Iterator i = listNoeud.iterator();
