@@ -44,14 +44,15 @@ public class GrillesVehiculeModel extends AbstractTableModel
 
 
         this.tabVehicules = new Object[][]{
-            {"12", Color.WHITE},
-            {"12", Color.BLUE},
-            {"12", Color.YELLOW},
-            {"12", Color.ORANGE},
-            {"12", Color.BLACK},
-            {"12", Color.RED},
-            {"12", Color.GREEN},
-            {"12", Color.PINK}
+            {"12", Color.white},
+            {"12", Color.blue},
+            {"12", Color.yellow},
+            {"12", Color.orange},
+            {"12", Color.black},
+            {"12", Color.red},
+            {"12", Color.green},
+            {"14", Color.pink}
+
         };
         Font font = new Font("Arial", Font.PLAIN, 15);
         UIManager.put("Table.font", font);
@@ -75,6 +76,11 @@ public class GrillesVehiculeModel extends AbstractTableModel
         return tabEntetes[columnIndex];
     }
     
+    public Color couleurBAckground(int rowIndex, int columnIndex) 
+    {
+        return (Color)  tabVehicules[rowIndex][columnIndex];
+    }
+
     public Object getValueAt(int rowIndex, int columnIndex) 
     {
         return tabVehicules[rowIndex][columnIndex];
@@ -88,14 +94,9 @@ public class GrillesVehiculeModel extends AbstractTableModel
     }
     
     @Override
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
-        switch(columnIndex){
-            case 4:
-                return Color.class;
-            default:
-                return Color.class;
-        }
+        return getValueAt(0, columnIndex).getClass();
     }
 
     @Override

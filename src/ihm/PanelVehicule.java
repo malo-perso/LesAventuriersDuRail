@@ -62,8 +62,11 @@ public class PanelVehicule extends JPanel implements ActionListener{
         //(12 de chaque type : violet, blanc, bleu, jaune, orange, noir, rouge et vert et 14 locomotives)
 
         jTabVehicule = new JTable(this.model);
-    
         jTabVehicule.setDefaultRenderer(Color.class, new ColorCellRenderer());
+
+        this.jTabVehicule.getColumnModel().getColumn(1).setCellRenderer(new ColorCellRenderer());
+
+
         JScrollPane spTabVehicule = new JScrollPane(this.jTabVehicule);
 
         this.nbrJoker = new JTextField("14");
