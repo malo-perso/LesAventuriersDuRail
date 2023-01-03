@@ -163,12 +163,12 @@ public class Controleur{
         this.gererXML.ecrireXML(this.imagePlateau, path);
     }
     /*****************/
-    /* CarteVehicule */
+    /* CarteVehicule */ 
     /*****************/
     public HashMap<Integer, Color> getHashVehicules()
     {
         return this.gererXML.getHashVehicules();
-    }
+    } 
 
     public void setNbCarte (int nbCarte) {
 		//TO DO
