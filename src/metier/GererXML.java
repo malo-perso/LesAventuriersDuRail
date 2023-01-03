@@ -325,6 +325,7 @@ public class GererXML {
 						   "\t\t\t<noeud2>" + a.getNoeud2().getNom() + "</noeud2>" + "\n" +
 						   "\t\t\t<longueur>" + a.getLongueur() + "</longueur>" + "\n" +
 						   "\t\t\t<type>" + a.getType() + "</type>" + "\n" + 
+						   "\t\t\t<orientation>" + a.getOrientation() + "</orientation>" + "\n" +
 						"    \t</arete>\n");
 			}
 			bw.write("\t</lstAretes>\n");
@@ -387,6 +388,7 @@ public class GererXML {
 				String nomNoeud2 = courant.getChildText("noeud2");
 				int    longueur  = Integer.parseInt(courant.getChildText("longueur"));
 				String nomType      = courant.getChildText("type");
+				boolean orientation = Boolean.parseBoolean(courant.getChildText("orientation"));
 
 				for(Noeud n : this.lstNoeuds)
 				{
@@ -396,7 +398,7 @@ public class GererXML {
 						{
 							if(m.getNom().equals(nomNoeud2))
 							{
-								this.lstAretes.add(new Arete(n, m, longueur, Type.creerType(nomType)));
+								this.lstAretes.add(new Arete(n, m, longueur, Type.creerType(nomType), orientation));
 							}
 						}
 					}

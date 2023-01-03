@@ -1,5 +1,8 @@
 package src;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 import src.ihm.*;
 import src.metier.*;
 
@@ -10,9 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatLightLaf;
 
 public class Controleur{
 
@@ -166,7 +166,7 @@ public class Controleur{
         this.gererXML.ecrireXML(this.imagePlateau, path);
     }
     /*****************/
-    /* CarteVehicule */ 
+    /* CarteVehicule */
     /*****************/
     /*
     public HashMap<Integer, Color> getHashVehicules()
@@ -234,9 +234,7 @@ public class Controleur{
     /*****************/
 
     public static void main(String[] args) {
-        
         FlatLightLaf.setup();
-        
         Controleur controleur = new Controleur();
     }
     

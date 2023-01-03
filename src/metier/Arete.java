@@ -15,6 +15,14 @@ public class Arete {
         this.orientation = true;
     }
 
+    public Arete(Noeud noeud1, Noeud noeud2, int longueur, Type type, boolean orientation) {
+        this.noeud1    = noeud1;
+        this.noeud2    = noeud2;
+        this.longueur  = longueur;
+        this.type      = type;
+        this.orientation = orientation;
+    }    
+
     public Noeud getNoeud1() {
         return this.noeud1;
     }
