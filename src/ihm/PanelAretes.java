@@ -199,11 +199,11 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelVehicule");
+            this.ctrl.getIHM().changePanel("panelRegleJeu");
         }
 
         if ( e.getSource() == this.btnSuivant) {
-            this.ctrl.getIHM().changePanel("panelListeObjectif");
+            this.ctrl.getIHM().changePanel("panelVehicule");
         }
 
         if(e.getSource() == this.listNoeud1){

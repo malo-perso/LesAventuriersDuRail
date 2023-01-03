@@ -86,9 +86,9 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.iconRecto     = new ImageIcon("./src/data/images/Cartes_Vehicules/wagonblanc.jpg");
         this.iconJoker     = new ImageIcon("./src/data/images/Cartes_Vehicules/loco.jpg");
 
-        this.btnCarteJoker = new JButton("Carte Joker",iconJoker);
-        this.btnCarteRecto = new JButton("Carte Recto",iconRecto);
-        this.btnCarteVerso = new JButton("Carte Verso",iconVerso);
+        this.btnCarteJoker  = new JButton("Carte Joker",iconJoker);
+        this.btnCarteRecto  = new JButton("Carte Recto",iconRecto);
+        this.btnCarteVerso  = new JButton("Carte Verso",iconVerso);
         this.btnCarteVerso2 = new JButton("Carte Verso2",iconVerso);
         
         this.btnCarteJoker.setPreferredSize(new Dimension(100, 100));
@@ -179,11 +179,11 @@ public class PanelVehicule extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelRegleJeu");
+            this.ctrl.getIHM().changePanel("panelArrete");
         }
 
         if ( e.getSource() == this.btnSuivant) {
-            this.ctrl.getIHM().changePanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelListeObjectif");
         }
         if(e.getSource() == this.btnCarteRecto){
             try{

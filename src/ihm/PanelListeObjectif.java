@@ -193,7 +193,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
         }
         
         if(e.getSource() == this.btnRetour){
-            this.ctrl.getIHM().changePanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelVehicule");
         }
 
         if(e.getSource() == this.btnSuivant){
