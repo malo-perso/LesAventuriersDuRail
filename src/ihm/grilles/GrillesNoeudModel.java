@@ -11,7 +11,7 @@ public class GrillesNoeudModel extends AbstractTableModel
 {
     private Controleur ctrl;
 
-	private String[]   tabEntetes;
+	private String[] tabEntetes;
     ArrayList<Noeud> lstNoeuds;
 
     public GrillesNoeudModel(Controleur ctrl)
@@ -26,7 +26,7 @@ public class GrillesNoeudModel extends AbstractTableModel
 
     
     public int    getColumnCount()                 { return this.tabEntetes.length;      }
-	public int    getRowCount   ()                 { return this.lstNoeuds.size();      }
+	public int    getRowCount   ()                 { return this.lstNoeuds.size();       }
 	public String getColumnName (int col)          { return this.tabEntetes[col];        }
 	
 

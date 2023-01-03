@@ -117,7 +117,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelRegle.add(this.panelSaisie);
         
 
-        this.panelRemplissage.add(new JLabel("Nom :", SwingConstants.CENTER));
+        /*this.panelRemplissage.add(new JLabel("Nom :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("X :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Y :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("NomX :", SwingConstants.CENTER));
@@ -136,7 +136,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());
         this.panelRemplissage.add(new JLabel());    
-        this.panelRemplissage.add(new JLabel());
+        this.panelRemplissage.add(new JLabel());*/
 
         this.panelNoeud.add(this.panelRegle, BorderLayout.NORTH);
         this.panelNoeud.add(this.panelRemplissage, BorderLayout.CENTER);
