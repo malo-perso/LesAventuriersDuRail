@@ -24,12 +24,12 @@ public class Controleur{
 
     public Controleur() {
         //this.imagePlateau = this.getClass().getResource("./data/images/USA.png").getPath();
-        try {
+        /*try {
             this.imagePlateau = ImageIO.read(new File(this.getClass().getResource("./data/images/USA.png").getPath()));
         } catch (Exception e) {
             this.imagePlateau = null;
             e.printStackTrace();
-        }
+        }*/
         this.gererXML       = new GererXML(this);
         this.IHM            = new FramePrincipale(this);
     }

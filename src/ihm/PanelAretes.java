@@ -15,7 +15,7 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class PanelAretes extends JPanel implements ActionListener {
+public class PanelAretes extends JPanel implements ActionListener,AdjustmentListener {
 
     private GrillesAreteModel model;
 
@@ -25,6 +25,7 @@ public class PanelAretes extends JPanel implements ActionListener {
 
     private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
     private JComboBox<String> listNoeud1, listNoeud2, listTypeArete;
+    private JScrollBar  sbLongueur, sbHauteur, sbEspacement;
 
     private JTextField txtLongueurArete;
 
@@ -48,6 +49,10 @@ public class PanelAretes extends JPanel implements ActionListener {
 
         JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
 
+        this.sbEspacement = new JScrollBar(JScrollBar.HORIZONTAL, 15, 1, 5, 25);
+        this.sbLongueur = new JScrollBar(JScrollBar.HORIZONTAL, 20, 1, 10, 40);
+        this.sbHauteur = new JScrollBar(JScrollBar.HORIZONTAL, 10, 1, 5, 20);
+
         this.btnClear = new JButton("Effacer");
         this.btnAjoutArete = new JButton("Ajouter +");
         this.btnSupprArete = new JButton("Supprimer -");
@@ -69,7 +74,7 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable       = new JPanel(new BorderLayout());
         this.panelArete       = new JPanel(new BorderLayout());
         this.panelAreteBtn    = new JPanel(new GridLayout(2,2));
-        this.panelValidation  = new JPanel(new GridLayout(1,3));
+        this.panelValidation  = new JPanel(new GridLayout(4,3));
         this.panelRemplissage = new JPanel(new GridLayout(2,4));
         this.panelClear       = new JPanel(new GridLayout(2,3));
 
@@ -79,6 +84,10 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.btnClear.addActionListener(this);
         this.btnSuivant.addActionListener(this);
         this.btnRetour.addActionListener(this);
+        this.sbEspacement.addAdjustmentListener(this);
+        this.sbLongueur.addAdjustmentListener(this);
+        this.sbHauteur.addAdjustmentListener(this);
+
 
         // ajout des composants
         this.panelRemplissage.add(new JLabel("Noeud1 :", SwingConstants.CENTER));
@@ -109,6 +118,15 @@ public class PanelAretes extends JPanel implements ActionListener {
         this.panelTable.add(spTabAretes, BorderLayout.CENTER);
         this.panelTable.add(this.panelAreteBtn, BorderLayout.SOUTH);
         
+        this.panelValidation.add(new JLabel("Hauteur Wagon", SwingConstants.CENTER));
+        this.panelValidation.add(new JLabel("Longueur Wagon", SwingConstants.CENTER));
+        this.panelValidation.add(new JLabel("Espacement", SwingConstants.CENTER));
+        this.panelValidation.add(this.sbHauteur);
+        this.panelValidation.add(this.sbLongueur);
+        this.panelValidation.add(this.sbEspacement);
+        this.panelValidation.add(new JLabel());
+        this.panelValidation.add(new JLabel());
+        this.panelValidation.add(new JLabel());
         this.panelValidation.add(this.btnRetour);
         this.panelValidation.add(new JLabel());
         this.panelValidation.add(this.btnSuivant);
@@ -221,5 +239,13 @@ public class PanelAretes extends JPanel implements ActionListener {
         }
 
     }
+
+    public void adjustmentValueChanged ( AdjustmentEvent e )
+	{
+        this.ctrl.getMetier().setHauteurWagon(this.sbHauteur.getValue());
+        this.ctrl.getMetier().setLongueurWagon(this.sbLongueur.getValue());
+        this.ctrl.getMetier().setEspacementWagon(((double)this.sbEspacement.getValue())/10);
+		this.ctrl.majIHM();
+	}
     
 }

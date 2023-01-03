@@ -29,12 +29,16 @@ public class GererXML {
 	private int  nbWagonJoueur;
 	private int  nbWagonFinPartie;
 	private int  nbPointCheminLong; //si < 0 (=-1) alors il n y a pas la regle du chemin le plus long
+    private int  longueurWagon;
+    private int  hauteurWagon;
+    private double espacementWagon;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
 	private ArrayList<CarteVehicule> lstCarteVehicules;
 	private HashMap<Type, ArrayList<CarteVehicule>> hashMapCarteVehicules;
 	private HashMap<Integer, Color> hashVehicules;
+     
 
 	public GererXML(Controleur ctrl){
 
@@ -44,6 +48,9 @@ public class GererXML {
 		this.nbWagonJoueur = 45;
 		this.nbWagonFinPartie = 2;
 		this.nbPointCheminLong = -1;
+        this.longueurWagon = 25;
+        this.hauteurWagon = 10;
+        this.espacementWagon = 1.5;
 
 		this.ctrl = ctrl;
 
@@ -51,11 +58,11 @@ public class GererXML {
 
 		this.lstNoeuds = new ArrayList<Noeud>();
 		this.hashMapCarteVehicules = new HashMap<Type, ArrayList<CarteVehicule>>();
-
+		/* 
 		this.lstNoeuds.add(new Noeud("A", 200, 100, 220, 120));
 		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
 		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
-		
+		*/
 		this.hashVehicules = new HashMap<Integer, Color>();
 
 		Type marron = Type.creerType("marron");
@@ -94,15 +101,15 @@ public class GererXML {
 		this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
 		this.lstAretes = new ArrayList<Arete>();
-
+		/* 
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 4, Type.creerType("marron")));
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(1), this.lstNoeuds.get(2), 5, Type.creerType("rouge")));
 		this.lstAretes.add(new Arete(this.lstNoeuds.get(2), this.lstNoeuds.get(0), 7, Type.creerType("bleu")));
-
+		*/
 		this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
 
-		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
-		this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
+		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(0), lstNoeuds.get(1), 5));
+		//this.lstCarteObjectifs.add(new CarteObjectif(lstNoeuds.get(1), lstNoeuds.get(2), 3));
 	}
 
 	public int getDiametre(){
@@ -160,6 +167,30 @@ public class GererXML {
 	public int setNbPointCheminLong(int nbPointCheminLong){
 		return this.nbPointCheminLong = nbPointCheminLong;
 	}
+    public int getLongueurWagon(){
+        return this.longueurWagon;
+    }
+
+    public int setLongueurWagon(int longueurWagon){
+        return this.longueurWagon = longueurWagon;
+    }
+
+    public int getHauteurWagon(){
+        return this.hauteurWagon;
+    }
+
+    public int setHauteurWagon(int hauteurWagon){
+        return this.hauteurWagon = hauteurWagon;
+    }
+
+    public double getEspacementWagon(){
+        return this.espacementWagon;
+    }
+
+    public double setEspacementWagon(double espacementWagon){
+        return this.espacementWagon = espacementWagon;
+    }
+    
 
 	/*****************/
     /*     NOEUD     */
@@ -460,7 +491,7 @@ public class GererXML {
 		this.lstNoeuds.clear();
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 
 		Controleur ctrl = new Controleur();
 		GererXML g = new GererXML(ctrl);
@@ -479,5 +510,5 @@ public class GererXML {
 
 	public void ajouterArete(Noeud n1, Noeud n2, int n) {
 		//TO DO
-	}
+	}*/
 }

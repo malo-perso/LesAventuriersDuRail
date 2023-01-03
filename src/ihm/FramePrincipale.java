@@ -22,6 +22,8 @@ public class FramePrincipale extends JFrame implements ActionListener
 {
     private JPanel panelFormulaire;
 
+    private JPanel panelVide,panelBase;
+
     private PanelPlateau panelPlateau;
 
     private PanelVehicule panelVehicule;
@@ -46,6 +48,8 @@ public class FramePrincipale extends JFrame implements ActionListener
 
     private JMenuItem menuRegles;
 
+    private JTextArea txtAide;
+
     CardLayout card;
 
     private File reglePDF;
@@ -64,6 +68,8 @@ public class FramePrincipale extends JFrame implements ActionListener
         Insets scnMax = kit.getScreenInsets(getGraphicsConfiguration());
         int tailleBarTache = scnMax.bottom;
 
+        this.panelVide = new JPanel(new GridBagLayout());
+        this.panelBase = new JPanel(new BorderLayout());
         this.panelFormulaire = new JPanel(new CardLayout());
         this.panelPlateau = new PanelPlateau(this.ctrl);
         this.panelVehicule = new PanelVehicule(this.ctrl);
@@ -75,6 +81,9 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setTitle("Concepteur de Plateau");
         this.setResizable(false);
         this.setUndecorated(false);
+
+        this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant");
+        this.txtAide.setEditable(false);
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
 		this.setIconImage(imgLogo);
@@ -90,6 +99,9 @@ public class FramePrincipale extends JFrame implements ActionListener
 
         this.menuRegles.setIcon(new ImageIcon(this.getClass().getResource("../data/images/Regles.png")));
         
+        this.panelVide.add(this.txtAide);
+        this.panelVide.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+
         this.panelFormulaire.add(this.panelRegleJeu,"panelRegleJeu");
         this.panelFormulaire.add(this.panelVehicule,"panelVehicule");
         this.panelFormulaire.add(this.panelArete,"panelArrete");
@@ -105,11 +117,13 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.menuBarre.add(this.menuFichier);
         this.menuBarre.add(this.menuAide);
 
-
-        this.add(this.panelPlateau, BorderLayout.CENTER);
+        
+        this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
         this.panelFormulaire.setPreferredSize(new Dimension(400, 200));
-        this.add(this.panelFormulaire, BorderLayout.EAST);
-
+        this.panelBase.add(this.panelFormulaire, BorderLayout.EAST);
+        
+        this.add(this.panelVide);
+        
 
         this.setJMenuBar(this.menuBarre);
 
@@ -132,9 +146,16 @@ public class FramePrincipale extends JFrame implements ActionListener
 
 		this.setVisible(true);
 
+        
+
+
 
     }
 
+    public void changePanel(){
+        this.setContentPane(panelBase);
+        this.revalidate();
+    }
     /*****************/
     /*     NOEUD     */
     /*****************/
@@ -223,6 +244,7 @@ public class FramePrincipale extends JFrame implements ActionListener
                     this.ctrl.supprimerAretes();
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();
+                    this.changePanel();
                 }
 			}catch(Exception erreur){erreur.printStackTrace();}
 		}
@@ -242,6 +264,7 @@ public class FramePrincipale extends JFrame implements ActionListener
                     this.ctrl.supprimerNoeuds();
                     this.ctrl.supprimerCartesObjectif();
 					this.ctrl.lireXML(chooser.getSelectedFile());
+                    this.changePanel();
                 }
 
             }catch(Exception erreur){erreur.printStackTrace();}
