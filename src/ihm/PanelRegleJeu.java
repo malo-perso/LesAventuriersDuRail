@@ -3,7 +3,6 @@ package src.ihm;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
-import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -45,8 +44,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.nbJoueurMax   = ctrl.getMetier().getNombreJoueurMaximum();
         this.nbJoueurMin   = ctrl.getMetier().getNombreJoueurMinimum();
         this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
-        this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
-        this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
+        this.nbWagonJoueur = ctrl.getMetier().getNbVehiculeJoueur();
+        this.nbWagonFin    = ctrl.getMetier().getNbVehiculeFinPartie();
         this.nbPointCheminLong = ctrl.getMetier().getNbPointCheminLong();
 
         this.model = new GrillesNoeudModel(this.ctrl);

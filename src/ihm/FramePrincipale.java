@@ -8,15 +8,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import src.Controleur;
 import src.metier.Noeud;
-import src.metier.Arete;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
-import java.util.ArrayList;
 
 public class FramePrincipale extends JFrame implements ActionListener
 {
@@ -250,7 +247,7 @@ public class FramePrincipale extends JFrame implements ActionListener
 			try{
 				JFileChooser chooser = new JFileChooser();
 
-                FileFilter filtre = new FileNameExtensionFilter("Image files", new String[]{"jpg","jpeg", "gif", "png"});
+                FileFilter filtre = new FileNameExtensionFilter("Image files", "png");
                 chooser.setFileFilter(filtre);
                 chooser.setAcceptAllFileFilterUsed(false);
 				
