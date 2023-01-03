@@ -43,8 +43,8 @@ public class PanelResume extends JPanel implements ActionListener{
     private int nbJoueurMin;
     private int nbJoueurMax;
     private int doubleVoie;
-    private int nbWagonJoueur;
-    private int nbWagonFin;
+    private int nbVehiculeJoueur;
+    private int nbVehiculeFin;
     private int nbPointCheminLong;
 
     private Controleur ctrl;
@@ -86,16 +86,16 @@ public class PanelResume extends JPanel implements ActionListener{
         this.nbJoueurMax   = ctrl.getMetier().getNombreJoueurMaximum();
         this.nbJoueurMin   = ctrl.getMetier().getNombreJoueurMinimum();
         this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
-        this.nbWagonJoueur = ctrl.getMetier().getNbWagonJoueur();
-        this.nbWagonFin    = ctrl.getMetier().getNbWagonFinPartie();
+        this.nbVehiculeJoueur = ctrl.getMetier().getNbVehiculeJoueur();
+        this.nbVehiculeFin    = ctrl.getMetier().getNbVehiculeFinPartie();
         this.nbPointCheminLong = ctrl.getMetier().getNbPointCheminLong();
 
 
         this.lblJMin = new JLabel("Joueur Min : " + this.nbJoueurMin);
         this.lblJMax = new JLabel("Joueur Max : " + this.nbJoueurMax);
-        this.lblVehicule = new JLabel("Vehicule par joueur : " + this.nbWagonJoueur);
+        this.lblVehicule = new JLabel("Vehicule par joueur : " + this.nbVehiculeJoueur);
         this.lblDoubleMin = new JLabel("Joueur Min pour double voies : " + this.doubleVoie );
-        this.lblFin = new JLabel("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin); 
+        this.lblFin = new JLabel("Nombres de vehicules pour finir la partie : " +  this.nbVehiculeFin); 
         if(this.nbPointCheminLong < 1){
             this.lblCheminLong = new JLabel("Règle du chemin le plus long : Désactivée");
         }else{
@@ -153,19 +153,19 @@ public class PanelResume extends JPanel implements ActionListener{
         this.modelO.majTable(lstCarteObjectif);
     }
 
-    public void majLabelResume(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+    public void majLabelResume(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbVehicule, int nbVehiculeFin, int nbPointCheminLong){
         this.nbJoueurMin = nbJoueurMin;
         this.nbJoueurMax = nbJoueurMax;
         this.doubleVoie = doubeVoie;
-        this.nbWagonJoueur = nbWagon;
-        this.nbWagonFin    = nbWagonFin;
+        this.nbVehiculeJoueur = nbVehicule;
+        this.nbVehiculeFin    = nbVehiculeFin;
         this.nbPointCheminLong = nbPointCheminLong;
         
         this.lblJMin.setText("Joueur Min : " + this.nbJoueurMin);
         this.lblJMax.setText("Joueur Max : " + this.nbJoueurMax);
-        this.lblVehicule.setText("Vehicule par joueur : " + this.nbWagonJoueur);
+        this.lblVehicule.setText("Vehicule par joueur : " + this.nbVehiculeJoueur);
         this.lblDoubleMin.setText("Joueur Min pour double voies : " + this.doubleVoie );
-        this.lblFin.setText("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin); 
+        this.lblFin.setText("Nombres de vehicules pour finir la partie : " +  this.nbVehiculeFin); 
         if(this.nbPointCheminLong < 1){
             this.lblCheminLong.setText("Règle du chemin le plus long : Désactivée");
         }else{
@@ -177,15 +177,15 @@ public class PanelResume extends JPanel implements ActionListener{
         this.nbJoueurMin = 2;
         this.nbJoueurMax = 5;
         this.doubleVoie = 3;
-        this.nbWagonJoueur = 45;
-        this.nbWagonFin    = 2;
+        this.nbVehiculeJoueur = 45;
+        this.nbVehiculeFin    = 2;
         this.nbPointCheminLong = -1;
 
         this.lblJMin.setText("Joueur Min : " + this.nbJoueurMin);
         this.lblJMax.setText("Joueur Max : " + this.nbJoueurMax);
-        this.lblVehicule.setText("Vehicule par joueur : " + this.nbWagonJoueur);
+        this.lblVehicule.setText("Vehicule par joueur : " + this.nbVehiculeJoueur);
         this.lblDoubleMin.setText("Joueur Min pour double voies : " + this.doubleVoie );
-        this.lblFin.setText("Nombres de vehicules pour finir la partie : " +  this.nbWagonFin);
+        this.lblFin.setText("Nombres de vehicules pour finir la partie : " +  this.nbVehiculeFin);
 
         if(this.nbPointCheminLong < 1){
             this.lblCheminLong.setText("Règle du chemin le plus long : Désactivée");

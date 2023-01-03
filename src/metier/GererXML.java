@@ -298,6 +298,7 @@ public class GererXML {
 			File file = new File(filePath);
 			ByteArrayOutputStream convert = new ByteArrayOutputStream();
 			ImageIO.write(image,"png",convert);
+			
 
 
 			byte[] bytes = convert.toByteArray();
@@ -315,9 +316,9 @@ public class GererXML {
 			bw.write("\t<regles>\n" + 
 					 "\t\t<nombreJoueurMinimum>" + this.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
 					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
-					 "\t\t<nombreWagonJoueur>" + this.getNbWagonJoueur() + "</nombreWagonJoueur>\n" +
+					 "\t\t<nombreVehiculeJoueur>" + this.getNbVehiculeJoueur() + "</nombreVehiculeJoueur>\n" +
 					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
-					 "\t\t<nombreWagonFin>" + this.getNbWagonFinPartie() + "</nombreWagonFin>\n" +
+					 "\t\t<nombreVehiculeFin>" + this.getNbVehiculeFinPartie() + "</nombreVehiculeFin>\n" +
 					 "\t\t<nombrePointCheminLong>" + this.getNbPointCheminLong() + "</nombrePointCheminLong>\n" +
 					 "\t\t<longueurVehicule>" + this.getLongueurVehicule() + "</longueurVehicule>\n" +
 					 "\t\t<largeurVehicule>" + this.getHauteurVehicule() + "</largeurVehicule>\n" +
@@ -392,9 +393,9 @@ public class GererXML {
 			Element regles = racine.getChild("regles");
 			this.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
 			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
-			this.setNbWagonJoueur(Integer.parseInt(regles.getChildText("nombreWagonJoueur")));
+			this.setNbVehiculeJoueur(Integer.parseInt(regles.getChildText("nombreVehiculeJoueur")));
 			this.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
-			this.setNbWagonFinPartie(Integer.parseInt(regles.getChildText("nombreWagonFin")));
+			this.setNbVehiculeFinPartie(Integer.parseInt(regles.getChildText("nombreVehiculeFin")));
 			this.setNbPointCheminLong(Integer.parseInt(regles.getChildText("nombrePointCheminLong")));
 			this.setLongueurVehicule(Integer.parseInt(regles.getChildText("longueurVehicule")));
 			this.setHauteurVehicule(Integer.parseInt(regles.getChildText("hauteurVehicule")));
@@ -479,8 +480,8 @@ public class GererXML {
 			ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
 			BufferedImage bImage2 = ImageIO.read(bis);
 			this.ctrl.setImagePlateau(bImage2);
-			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbWagonJoueur, this.nbrJoueurMiniDoubleRoute,this.nbWagonFinPartie, this.nbPointCheminLong);
-			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbWagonJoueur, this.nbrJoueurMiniDoubleRoute,this.nbWagonFinPartie, this.nbPointCheminLong);
+			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
+			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
 			System.out.println("modifier");
 			
 		}catch(Exception e){e.printStackTrace();} 

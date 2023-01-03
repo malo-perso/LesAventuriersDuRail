@@ -23,15 +23,15 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     
     private JButton btnSuivant,btnAjoutNoeud,btnSupprNoeud,btnClear;
     
-    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbWagonFin,txtNbWagonJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY,txtNbPointCheminLong;/*txtTailleNoeud*/
+    private JTextField txtNbJoueurMin,txtNbJoueurMax,txtDoubleVoie,txtNbVehiculeFin,txtNbVehiculeJoueur,txtNomNoeud,txtX,txtY,txtNomX,txtNomY,txtNbPointCheminLong;/*txtTailleNoeud*/
     
     private JCheckBox cbCheminLong;
 
     private int nbJoueurMin;
     private int nbJoueurMax;
     private int doubleVoie; 
-    private int nbWagonJoueur;
-    private int nbWagonFin;
+    private int nbVehiculeJoueur;
+    private int nbVehiculeFin;
     private int nbPointCheminLong;
 
     private Controleur ctrl;
@@ -44,8 +44,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.nbJoueurMax   = ctrl.getMetier().getNombreJoueurMaximum();
         this.nbJoueurMin   = ctrl.getMetier().getNombreJoueurMinimum();
         this.doubleVoie    = ctrl.getMetier().getNombreJoueurMiniDoubleRoute();
-        this.nbWagonJoueur = ctrl.getMetier().getNbVehiculeJoueur();
-        this.nbWagonFin    = ctrl.getMetier().getNbVehiculeFinPartie();
+        this.nbVehiculeJoueur = ctrl.getMetier().getNbVehiculeJoueur();
+        this.nbVehiculeFin    = ctrl.getMetier().getNbVehiculeFinPartie();
         this.nbPointCheminLong = ctrl.getMetier().getNbPointCheminLong();
 
         this.model = new GrillesNoeudModel(this.ctrl);
@@ -64,9 +64,9 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         
         this.txtNbJoueurMin   = new JTextField(this.nbJoueurMin+"");
         this.txtNbJoueurMax   = new JTextField(this.nbJoueurMax+"");
-        this.txtNbWagonJoueur = new JTextField(this.nbWagonJoueur+"");
+        this.txtNbVehiculeJoueur = new JTextField(this.nbVehiculeJoueur+"");
         this.txtDoubleVoie    = new JTextField(this.doubleVoie+"");
-        this.txtNbWagonFin    = new JTextField(this.nbWagonFin+"");
+        this.txtNbVehiculeFin    = new JTextField(this.nbVehiculeFin+"");
         this.txtNbPointCheminLong = new JTextField();
 
         if(this.nbPointCheminLong < 1 ){
@@ -102,8 +102,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.txtNbJoueurMin.addActionListener(this);
         this.txtNbJoueurMax.addActionListener(this);
         this.txtDoubleVoie.addActionListener(this);
-        this.txtNbWagonJoueur.addActionListener(this);
-        this.txtNbWagonFin.addActionListener(this);
+        this.txtNbVehiculeJoueur.addActionListener(this);
+        this.txtNbVehiculeFin.addActionListener(this);
         this.txtNbPointCheminLong.addActionListener(this);
         this.btnAjoutNoeud.addActionListener(this);
         this.btnSupprNoeud.addActionListener(this);
@@ -114,9 +114,9 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         //Positionnement des composants
         this.panelLabel.add(new JLabel("Joueur minimum :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur maximum :", SwingConstants.RIGHT));
-        this.panelLabel.add(new JLabel("Nombre de wagon par joueur :", SwingConstants.RIGHT));
+        this.panelLabel.add(new JLabel("Nombre de Vehicule par joueur :", SwingConstants.RIGHT));
         this.panelLabel.add(new JLabel("Joueur minimum pour les doubles voies :", SwingConstants.RIGHT));      
-        this.panelLabel.add(new JLabel("Nombre de wagon pour finir la partie :", SwingConstants.RIGHT));
+        this.panelLabel.add(new JLabel("Nombre de Vehicule pour finir la partie :", SwingConstants.RIGHT));
         //this.panelLabel.add(new JLabel("Taille des Noeuds :", SwingConstants.RIGHT));
         this.panelLabel.add(this.cbCheminLong);
 
@@ -124,11 +124,11 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbJoueurMax);
         this.panelSaisie.add(new JLabel());
-        this.panelSaisie.add(this.txtNbWagonJoueur);
+        this.panelSaisie.add(this.txtNbVehiculeJoueur);
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtDoubleVoie);
         this.panelSaisie.add(new JLabel());
-        this.panelSaisie.add(this.txtNbWagonFin);
+        this.panelSaisie.add(this.txtNbVehiculeFin);
         this.panelSaisie.add(new JLabel());
         this.panelSaisie.add(this.txtNbPointCheminLong);
         this.panelSaisie.add(new JLabel());
@@ -185,8 +185,8 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     public int getNbJoueurMin() {return this.nbJoueurMin;}
     public int getNbJoueurMax() {return this.nbJoueurMax;}
     public int getDoubleVoie() {return this.doubleVoie;}
-    public int getNbWagonJoueur() {return this.nbWagonJoueur;}
-    public int getNbWagonFin() {return this.nbWagonFin;}
+    public int getNbVehiculeJoueur() {return this.nbVehiculeJoueur;}
+    public int getNbVehiculeFin() {return this.nbVehiculeFin;}
     public int getNbPointCheminLong() {return this.nbPointCheminLong;}
 
 
@@ -196,19 +196,19 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
     // ai supprimé ajouterNoeud car le contenu de la table se cale uniquement sur le métier
     // si changement dans le métier il y a, appeler la méthode maJTable
     
-    public void majTxtRegleJeu(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbWagon, int nbWagonFin, int nbPointCheminLong){
+    public void majTxtRegleJeu(int nbJoueurMin, int nbJoueurMax, int doubeVoie, int nbVehicule, int nbVehiculeFin, int nbPointCheminLong){
         this.nbJoueurMin = nbJoueurMin;
         this.nbJoueurMax = nbJoueurMax;
         this.doubleVoie = doubeVoie;
-        this.nbWagonJoueur = nbWagon;
-        this.nbWagonFin    = nbWagonFin;
+        this.nbVehiculeJoueur = nbVehicule;
+        this.nbVehiculeFin    = nbVehiculeFin;
         this.nbPointCheminLong = nbPointCheminLong;
 
         this.txtNbJoueurMin.setText(nbJoueurMin +"");
         this.txtNbJoueurMax.setText(nbJoueurMax+"");
         this.txtDoubleVoie.setText(doubleVoie +"");
-        this.txtNbWagonJoueur.setText(nbWagon +"");
-        this.txtNbWagonFin.setText(nbWagonFin +"");
+        this.txtNbVehiculeJoueur.setText(nbVehicule +"");
+        this.txtNbVehiculeFin.setText(nbVehiculeFin +"");
 
         if(this.nbPointCheminLong < 1 ){
             this.cbCheminLong.setSelected(false);
@@ -226,15 +226,15 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
         this.nbJoueurMin = 2;
         this.nbJoueurMax = 5;
         this.doubleVoie = 3;
-        this.nbWagonJoueur = 45;
-        this.nbWagonFin    = 2;
+        this.nbVehiculeJoueur = 45;
+        this.nbVehiculeFin    = 2;
         this.nbPointCheminLong = -1;
 
         this.txtNbJoueurMin.setText(this.nbJoueurMin+"");
         this.txtNbJoueurMax.setText(this.nbJoueurMax+"");
-        this.txtNbWagonJoueur.setText(this.nbWagonJoueur+"");
+        this.txtNbVehiculeJoueur.setText(this.nbVehiculeJoueur+"");
         this.txtDoubleVoie.setText(this.doubleVoie+"");
-        this.txtNbWagonFin.setText(this.nbWagonFin+"");
+        this.txtNbVehiculeFin.setText(this.nbVehiculeFin+"");
 
         if(this.nbPointCheminLong < 1 ){
             this.cbCheminLong.setSelected(false);
@@ -269,17 +269,17 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
             this.doubleVoie = Integer.parseInt(this.txtDoubleVoie.getText());
             this.ctrl.getMetier().setNombreJoueurMiniDoubleRoute(this.doubleVoie);
         }
-        if (e.getSource() == this.txtNbWagonJoueur) {
-            if(!FonctionAux.isInteger(this.txtNbWagonJoueur.getText()))
-                    this.txtNbWagonJoueur.setText(" ");
-            this.nbWagonJoueur =Integer.parseInt(this.txtNbWagonJoueur.getText());
-            this.ctrl.getMetier().setNbWagonJoueur(this.nbWagonJoueur);
+        if (e.getSource() == this.txtNbVehiculeJoueur) {
+            if(!FonctionAux.isInteger(this.txtNbVehiculeJoueur.getText()))
+                    this.txtNbVehiculeJoueur.setText(" ");
+            this.nbVehiculeJoueur =Integer.parseInt(this.txtNbVehiculeJoueur.getText());
+            this.ctrl.getMetier().setNbVehiculeJoueur(this.nbVehiculeJoueur);
         }
-        if (e.getSource() == this.txtNbWagonFin) {
-            if(!FonctionAux.isInteger(this.txtNbWagonFin.getText()))
-                    this.txtNbWagonFin.setText(" ");
-            this.nbWagonFin= Integer.parseInt(this.txtNbWagonFin.getText());
-            this.ctrl.getMetier().setNbWagonFinPartie(this.nbWagonFin);
+        if (e.getSource() == this.txtNbVehiculeFin) {
+            if(!FonctionAux.isInteger(this.txtNbVehiculeFin.getText()))
+                    this.txtNbVehiculeFin.setText(" ");
+            this.nbVehiculeFin= Integer.parseInt(this.txtNbVehiculeFin.getText());
+            this.ctrl.getMetier().setNbVehiculeFinPartie(this.nbVehiculeFin);
         }
 
         if (e.getSource() == this.btnAjoutNoeud) {
@@ -337,14 +337,14 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
                 }
             }
 
-            //verif WagonJoueur
-            if(!FonctionAux.isInteger(this.txtNbWagonJoueur.getText())){
-                this.txtNbWagonJoueur.setText("45");
-                this.nbWagonJoueur = 45;
+            //verif VehiculeJoueur
+            if(!FonctionAux.isInteger(this.txtNbVehiculeJoueur.getText())){
+                this.txtNbVehiculeJoueur.setText("45");
+                this.nbVehiculeJoueur = 45;
             }else{
-                if(Integer.parseInt(this.txtNbWagonJoueur.getText()) < 1){
-                    this.txtNbWagonJoueur.setText("45");
-                    this.nbWagonJoueur = 45;
+                if(Integer.parseInt(this.txtNbVehiculeJoueur.getText()) < 1){
+                    this.txtNbVehiculeJoueur.setText("45");
+                    this.nbVehiculeJoueur = 45;
                 }
             }
 
@@ -359,14 +359,14 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
                 }
             }
 
-            //verif wagonFin
-            if(!FonctionAux.isInteger(this.txtNbWagonFin.getText())){
-                this.txtNbWagonFin.setText("2");
-                this.nbWagonFin = 2;
+            //verif VehiculeFin
+            if(!FonctionAux.isInteger(this.txtNbVehiculeFin.getText())){
+                this.txtNbVehiculeFin.setText("2");
+                this.nbVehiculeFin = 2;
             }else{
-                if(Integer.parseInt(this.txtNbWagonFin.getText()) < 1){
-                    this.txtNbWagonFin.setText("2");
-                    this.nbWagonFin = 2;
+                if(Integer.parseInt(this.txtNbVehiculeFin.getText()) < 1){
+                    this.txtNbVehiculeFin.setText("2");
+                    this.nbVehiculeFin = 2;
                 }
             }
 
@@ -376,7 +376,7 @@ public class PanelRegleJeu extends JPanel implements ActionListener{
                 this.nbPointCheminLong = 0;
             }
 
-            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbWagonJoueur, this.nbWagonFin, this.nbPointCheminLong);
+            this.ctrl.majLabelResume(this.nbJoueurMin, this.nbJoueurMax, this.doubleVoie, this.nbVehiculeJoueur, this.nbVehiculeFin, this.nbPointCheminLong);
         }
 
         if (e.getSource() == this.cbCheminLong){
