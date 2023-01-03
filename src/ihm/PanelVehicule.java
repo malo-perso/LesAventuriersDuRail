@@ -90,12 +90,12 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.btnCarteRecto = new JButton("Carte Recto",iconRecto);
         this.btnCarteVerso = new JButton("Carte Verso",iconVerso);
         this.btnCarteVerso2 = new JButton("Carte Verso2",iconVerso);
-//chaque bouton fait la moitié du panel
-        this.btnCarteJoker.setPreferredSize(new Dimension(150, 150));
-        this.btnCarteRecto.setPreferredSize(new Dimension(150, 150));
-        this.btnCarteVerso.setPreferredSize(new Dimension(150, 150));
-        this.btnCarteVerso2.setPreferredSize(new Dimension(150, 150));
-
+        
+        this.btnCarteJoker.setPreferredSize(new Dimension(100, 100));
+        this.btnCarteRecto.setPreferredSize(new Dimension(100, 100));
+        this.btnCarteVerso.setPreferredSize(new Dimension(100, 100));
+        this.btnCarteVerso2.setPreferredSize(new Dimension(100, 100));
+        
         btnCarteVerso.setVerticalTextPosition(SwingConstants.BOTTOM);
         btnCarteVerso.setHorizontalTextPosition(SwingConstants.CENTER);
         btnCarteRecto.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -173,14 +173,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         });
 
         this.setBackground(Color.PINK);
-    }
-
-    public void traitementImage(JButton btn, Icon iconVerso2){   
-        Image img = ((ImageIcon) iconVerso2).getImage();
-        int btnH = (int) (btn.getHeight()*0.5);
-        Image newimg = img.getScaledInstance(btn.getWidth(),btn.getHeight()-btnH,  java.awt.Image.SCALE_SMOOTH);
-        iconVerso2 = new ImageIcon(newimg);
-        btn.setIcon(iconRecto);           
     }
 
     @Override
