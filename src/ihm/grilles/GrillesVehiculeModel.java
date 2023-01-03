@@ -4,14 +4,10 @@ import javax.swing.UIManager;
 import javax.swing.table.AbstractTableModel;
 
 import src.Controleur;
-import src.metier.Arete;
-import src.metier.CarteVehicule;
 import src.metier.Type;
 
 import java.awt.Color;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.awt.Font;
 

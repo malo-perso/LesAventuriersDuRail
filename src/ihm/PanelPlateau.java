@@ -9,17 +9,13 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.lang.Math;
 
-import java.awt.geom.*;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
-import java.awt.event.*;
+
 import java.awt.Image;
-import java.awt.Font;
-import java.awt.FontMetrics;
+
 import java.awt.RenderingHints;
 
 public class PanelPlateau extends JPanel
@@ -96,8 +92,8 @@ public class PanelPlateau extends JPanel
 	
 	public void paint(Graphics g) {
 
-        int longueurWagon = this.ctrl.getMetier().getLongueurWagon();
-        double espacementWagon = this.ctrl.getMetier().getEspacementWagon();
+        int longueurWagon = this.ctrl.getMetier().getLongueurVehicule();
+        double espacementWagon = this.ctrl.getMetier().getEspacementVehicule();
 
 		super.paint(g);
 
@@ -208,8 +204,8 @@ public class PanelPlateau extends JPanel
 
     private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color) {
 
-        int hauteurWagon = this.ctrl.getMetier().getHauteurWagon();
-        int longueurWagon = this.ctrl.getMetier().getLongueurWagon();
+        int hauteurWagon = this.ctrl.getMetier().getHauteurVehicule();
+        int longueurWagon = this.ctrl.getMetier().getLongueurVehicule();
 
         double longueur = Math.sqrt(Math.pow(aX- bX, 2)	+ Math.pow(aY - bY, 2));
 

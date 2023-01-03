@@ -8,21 +8,13 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 import src.Controleur;
 import src.ihm.grilles.GrillesVehiculeModel;
 import src.ihm.renderer.ColorCellRenderer;
-import src.metier.FonctionAux;
-import src.metier.CarteVehicule;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.Color;
-import java.util.HashMap;
-
-import java.util.ArrayList;
 
 
 public class PanelVehicule extends JPanel implements ActionListener{
@@ -72,7 +64,6 @@ public class PanelVehicule extends JPanel implements ActionListener{
         jTabVehicule = new JTable(this.model);
     
         jTabVehicule.setDefaultRenderer(Color.class, new ColorCellRenderer());
-
         JScrollPane spTabVehicule = new JScrollPane(this.jTabVehicule);
 
         this.nbrJoker = new JTextField("14");
@@ -165,7 +156,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         if ( e.getSource() == this.btnRetour) {
-            this.ctrl.getIHM().changePanel("panelArrete");
+            this.ctrl.getIHM().changePanel("panelArete");
         }
 
         if ( e.getSource() == this.btnSuivant) {

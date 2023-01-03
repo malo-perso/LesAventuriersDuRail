@@ -5,7 +5,6 @@ import src.metier.Noeud;
 import src.metier.Arete;
 import src.metier.FonctionAux;
 import src.ihm.grilles.GrillesAreteModel;
-import src.ihm.renderer.ColorCellRenderer;
 
 import java.awt.Color;
 
@@ -54,7 +53,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.tabAretes.setFillsViewportHeight(true);
         this.tabAretes.setEnabled(true);
 
-        this.tabAretes.setDefaultRenderer(Color.class, new ColorCellRenderer());
+        //this.tabAretes.setDefaultRenderer(Color.class, new ColorCellRenderer());
         JScrollPane spTabAretes = new JScrollPane(this.tabAretes);
 
         this.sbEspacement = new JScrollBar(JScrollBar.HORIZONTAL, 15, 1, 5, 25);
@@ -263,9 +262,9 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
 
     public void adjustmentValueChanged ( AdjustmentEvent e )
 	{
-        this.ctrl.getMetier().setHauteurWagon(this.sbHauteur.getValue());
-        this.ctrl.getMetier().setLongueurWagon(this.sbLongueur.getValue());
-        this.ctrl.getMetier().setEspacementWagon(((double)this.sbEspacement.getValue())/10);
+        this.ctrl.getMetier().setHauteurVehicule(this.sbHauteur.getValue());
+        this.ctrl.getMetier().setLongueurVehicule(this.sbLongueur.getValue());
+        this.ctrl.getMetier().setEspacementVehicule(((double)this.sbEspacement.getValue())/10);
 		this.ctrl.majIHM();
 	}
     

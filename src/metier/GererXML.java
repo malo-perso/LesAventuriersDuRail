@@ -9,14 +9,11 @@ import org.jdom2.*;
 import org.jdom2.input.*;
 
 import java.util.ArrayList;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.awt.image.WritableRaster;
-import java.awt.Color;
+
 
 import javax.imageio.ImageIO;
 
@@ -27,12 +24,12 @@ public class GererXML {
 	private int  nbrJoueurMinimum;
 	private int  nbrJoueurMaximum;
 	private int  nbrJoueurMiniDoubleRoute;
-	private int  nbWagonJoueur;
-	private int  nbWagonFinPartie;
+	private int  nbVehiculeJoueur;
+	private int  nbVehiculeFinPartie;
 	private int  nbPointCheminLong; //si < 0 (=-1) alors il n y a pas la regle du chemin le plus long
-    private int  longueurWagon;
-    private int  hauteurWagon;
-    private double espacementWagon;
+    private int  longueurVehicule;
+    private int  hauteurVehicule;
+    private double espacementVehicule;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
@@ -46,12 +43,12 @@ public class GererXML {
 		this.nbrJoueurMaximum = 5;
 		this.nbrJoueurMinimum = 2;
 		this.nbrJoueurMiniDoubleRoute = 3;
-		this.nbWagonJoueur = 45;
-		this.nbWagonFinPartie = 2;
+		this.nbVehiculeJoueur = 45;
+		this.nbVehiculeFinPartie = 2;
 		this.nbPointCheminLong = -1;
-        this.longueurWagon = 25;
-        this.hauteurWagon = 10;
-        this.espacementWagon = 1.5;
+        this.longueurVehicule = 25;
+        this.hauteurVehicule = 10;
+        this.espacementVehicule = 1.5;
 
 		this.ctrl = ctrl;
 
@@ -82,8 +79,6 @@ public class GererXML {
 		this.hashVehicules.put(12, Color.BLACK);
 		this.hashVehicules.put(12, Color.GREEN);
 		this.hashVehicules.put(12, Color.RED);
-		//
-		//this.hashVehicules.put(14, Color.MULTICOLOR);
 
 
 		ArrayList<CarteVehicule> lstCarteRouge = new ArrayList<CarteVehicule>();
@@ -145,20 +140,20 @@ public class GererXML {
 		return this.nbrJoueurMiniDoubleRoute = nbrJoueurMiniDoubleRoute;
 	}
 
-	public int getNbWagonJoueur(){
-		return this.nbWagonJoueur;
+	public int getNbVehiculeJoueur(){
+		return this.nbVehiculeJoueur;
 	}
 
-	public int setNbWagonJoueur(int nbWagonJoueur){
-		return this.nbWagonJoueur = nbWagonJoueur;
+	public int setNbVehiculeJoueur(int nbVehiculeJoueur){
+		return this.nbVehiculeJoueur = nbVehiculeJoueur;
 	}
 
-	public int getNbWagonFinPartie(){
-		return this.nbWagonFinPartie;
+	public int getNbVehiculeFinPartie(){
+		return this.nbVehiculeFinPartie;
 	}
 
-	public int setNbWagonFinPartie(int nbWagonFinPartie){
-		return this.nbWagonFinPartie = nbWagonFinPartie;
+	public int setNbVehiculeFinPartie(int nbVehiculeFinPartie){
+		return this.nbVehiculeFinPartie = nbVehiculeFinPartie;
 	}
 
 	public int getNbPointCheminLong(){
@@ -168,28 +163,28 @@ public class GererXML {
 	public int setNbPointCheminLong(int nbPointCheminLong){
 		return this.nbPointCheminLong = nbPointCheminLong;
 	}
-    public int getLongueurWagon(){
-        return this.longueurWagon;
+    public int getLongueurVehicule(){
+        return this.longueurVehicule;
     }
 
-    public int setLongueurWagon(int longueurWagon){
-        return this.longueurWagon = longueurWagon;
+    public int setLongueurVehicule(int longueurVehicule){
+        return this.longueurVehicule = longueurVehicule;
     }
 
-    public int getHauteurWagon(){
-        return this.hauteurWagon;
+    public int getHauteurVehicule(){
+        return this.hauteurVehicule;
     }
 
-    public int setHauteurWagon(int hauteurWagon){
-        return this.hauteurWagon = hauteurWagon;
+    public int setHauteurVehicule(int hauteurVehicule){
+        return this.hauteurVehicule = hauteurVehicule;
     }
 
-    public double getEspacementWagon(){
-        return this.espacementWagon;
+    public double getEspacementVehicule(){
+        return this.espacementVehicule;
     }
 
-    public double setEspacementWagon(double espacementWagon){
-        return this.espacementWagon = espacementWagon;
+    public double setEspacementVehicule(double espacementVehicule){
+        return this.espacementVehicule = espacementVehicule;
     }
     
 
@@ -321,6 +316,9 @@ public class GererXML {
 					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
 					 "\t\t<nombreJoueurMiniDoubleRoute >" + this.getNombreJoueurMiniDoubleRoute() + "</nombreJoueurMiniDoubleRoute>\n" +
 					 "\t\t<nombrePointCheminLong>" + this.getNbPointCheminLong() + "</nombrePointCheminLong>\n" +
+					 "\t\t<longueurVehicule>" + this.getLongueurVehicule() + "</longueurVehicule>\n" +
+					 "\t\t<largeurVehicule>" + this.getHauteurVehicule() + "</largeurVehicule>\n" +
+					 "\t\t<espacementVehicule>" + this.getEspacementVehicule() + "</espacementVehicule>\n" +
 					 "\t</regles>\n");
 
 			bw.write("\t<lstNoeuds>"                         		 + "\n");
@@ -393,6 +391,9 @@ public class GererXML {
 			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
 			this.setNombreJoueurMiniDoubleRoute(Integer.parseInt(regles.getChildText("nombreJoueurMiniDoubleRoute")));
 			this.setNbPointCheminLong(Integer.parseInt(regles.getChildText("nombrePointCheminLong")));
+			this.setLongueurVehicule(Integer.parseInt(regles.getChildText("longueurVehicule")));
+			this.setHauteurVehicule(Integer.parseInt(regles.getChildText("hauteurVehicule")));
+			this.setEspacementVehicule(Integer.parseInt(regles.getChildText("espacementVehicule")));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
 			Iterator i = listNoeud.iterator();

@@ -1,6 +1,4 @@
 package src;
-
-import com.formdev.flatlaf.FlatDarculaLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import src.ihm.*;
@@ -10,10 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.imageio.ImageIO;
 
 public class Controleur{
 

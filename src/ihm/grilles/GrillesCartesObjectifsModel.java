@@ -4,7 +4,6 @@ import javax.swing.table.AbstractTableModel;
 
 import src.Controleur;
 import src.metier.CarteObjectif;
-import src.metier.FonctionAux;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,6 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
     public GrillesCartesObjectifsModel(Controleur ctrl) {
         this.ctrl = ctrl;
 
-        CarteObjectif co;
         lstCarteObjectifs = this.ctrl.getLstObjectifs();
 
         this.tabEntetes = new String[] {"Noeud1","Noeud2","Points"};
