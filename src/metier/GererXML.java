@@ -2,6 +2,7 @@ package src.metier;
 
 import src.Controleur;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import org.jdom2.*;
@@ -32,6 +33,7 @@ public class GererXML {
 	private ArrayList<CarteObjectif> lstCarteObjectifs;
 	private ArrayList<CarteVehicule> lstCarteVehicules;
 	private HashMap<Type, ArrayList<CarteVehicule>> hashMapCarteVehicules;
+	private HashMap<Integer, Color> hashVehicules;
 
 	public GererXML(Controleur ctrl){
 
@@ -52,6 +54,7 @@ public class GererXML {
 		this.lstNoeuds.add(new Noeud("B", 1000, 200, 1100, 220));
 		this.lstNoeuds.add(new Noeud("C", 800, 90, 850, 100));
 		
+		this.hashVehicules = new HashMap<Integer, Color>();
 
 		Type marron = Type.creerType("marron");
 		Type rouge = Type.creerType("rouge");
@@ -60,6 +63,18 @@ public class GererXML {
 		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
 		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
 		lstCarteMarron.add(new CarteVehicule(Type.creerType("Marron")));
+		//(12 de chaque type : violet, blanc, bleu, jaune, orange, noir, rouge et vert et 14 locomotives)
+		this.hashVehicules.put(12, Color.PINK);
+		this.hashVehicules.put(12, Color.WHITE);
+		this.hashVehicules.put(12, Color.BLUE);
+		this.hashVehicules.put(12, Color.YELLOW);
+		this.hashVehicules.put(12, Color.ORANGE);
+		this.hashVehicules.put(12, Color.BLACK);
+		this.hashVehicules.put(12, Color.GREEN);
+		this.hashVehicules.put(12, Color.RED);
+		//
+		//this.hashVehicules.put(14, Color.MULTICOLOR);
+
 
 		ArrayList<CarteVehicule> lstCarteRouge = new ArrayList<CarteVehicule>();
 		lstCarteRouge.add(new CarteVehicule(Type.creerType("Rouge")));
@@ -162,6 +177,20 @@ public class GererXML {
 			}
 			this.ctrl.majNoeud();
 		}
+	}
+	    
+	/*****************/
+    /* CarteVehicule */
+    /*****************/
+	public HashMap<Integer, Color> getHashVehicules() {
+		return this.hashVehicules;
+	}
+
+	public void setNbCarte (int nbCarte) {
+		//TO DO
+	}
+	public void setCouleur (Color c) {
+		//TO DO
 	}
 
 	/*****************/
