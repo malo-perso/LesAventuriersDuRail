@@ -108,7 +108,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.panelNomVehicule = new JPanel(new GridLayout(1, 3));
         this.panelTable = new JPanel(new BorderLayout());
         this.panelCarte = new JPanel(new GridLayout(2,1));
-        this.panelVisuCarte = new JPanel(new GridLayout(2, 2));
+        this.panelVisuCarte = new JPanel(new GridLayout(4, 2));
 
         this.panelValidation = new JPanel(new GridLayout(1, 3));
 

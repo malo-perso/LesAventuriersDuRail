@@ -11,6 +11,9 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+
 public class Controleur{
 
     private BufferedImage imagePlateau;
@@ -231,6 +234,9 @@ public class Controleur{
     /*****************/
 
     public static void main(String[] args) {
+        
+        FlatLightLaf.setup();
+        
         Controleur controleur = new Controleur();
     }
     
