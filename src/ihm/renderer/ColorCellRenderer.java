@@ -3,6 +3,7 @@ package src.ihm.renderer;
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -25,6 +26,7 @@ public class ColorCellRenderer extends DefaultTableCellRenderer {
 
         Color tabCoul = model.couleurBAckground(row, column);
 
+        
         c.setBackground(tabCoul);
 
         return c;

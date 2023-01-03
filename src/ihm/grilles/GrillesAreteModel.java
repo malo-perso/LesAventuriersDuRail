@@ -2,7 +2,6 @@ package src.ihm.grilles;
 
 import javax.swing.table.AbstractTableModel;
 
-import javafx.scene.paint.Color;
 import src.Controleur;
 import src.metier.Noeud;
 import src.metier.Arete;
@@ -18,6 +17,7 @@ public class GrillesAreteModel extends AbstractTableModel {
     ArrayList<Arete>   lstArete;
 
     public GrillesAreteModel(Controleur ctrl) {
+        super();
         this.ctrl = ctrl;
         this.lstArete = this.ctrl.getLstAretes();
 
@@ -46,14 +46,9 @@ public class GrillesAreteModel extends AbstractTableModel {
     //public Class<?> getColumnClass(int c) { return getValueAt(0, c).getClass();}
 
     @Override
-    public Class getColumnClass(int columnIndex)
+    public Class<?> getColumnClass(int columnIndex)
     {
-        switch(columnIndex){
-            case 3:
-                return Color.class;
-            default:
-                return String.class;
-        }
+        return getValueAt(0, columnIndex).getClass();
     }
 
     public void majTable(ArrayList<Arete> lstArete) {   
