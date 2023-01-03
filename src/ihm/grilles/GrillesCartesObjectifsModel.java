@@ -18,7 +18,7 @@ public class GrillesCartesObjectifsModel extends AbstractTableModel {
 
         lstCarteObjectifs = this.ctrl.getLstObjectifs();
 
-        this.tabEntetes = new String[] {"Noeud1","Noeud2","Points"};
+        this.tabEntetes = new String[] {"Noeud 1","Noeud 2","Points"};
     }
 
     public int    getColumnCount()                 { return this.tabEntetes.length;       }

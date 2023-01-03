@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -140,7 +141,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
         this.btnCarteVerso.addActionListener(this);
         this.btnCarteVerso2.addActionListener(this);
 
-
+        this.add(new JLabel("Panel selection Vehicule",SwingConstants.CENTER),BorderLayout.NORTH);
         this.add(this.panelCarte, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
 
@@ -155,7 +156,7 @@ public class PanelVehicule extends JPanel implements ActionListener{
             }
         });
 
-        this.setBackground(Color.PINK);
+        //this.setBackground(Color.PINK);
     }
 
     public void majTableVehicule(List<Type> listType)

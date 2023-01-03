@@ -79,7 +79,7 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.setResizable(false);
         this.setUndecorated(false);
 
-        this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant");
+        this.txtAide = new JTextArea("Fichier nouveau : " + "\n" + "Pour ouvrir l'image du plateau de jeu" + "\n\n" + "Fichier ouvrir : " + "\n" + "Pour ouvrir  et modifier un plateau de jeu existant" + "\n\n" + "Aide Regles : " + "\n" + "Regles de base des Aventuriers du Rail");
         this.txtAide.setEditable(false);
 
         this.imgLogo = kit.getImage(this.getClass().getResource("../data/images/logo.png")) ;
