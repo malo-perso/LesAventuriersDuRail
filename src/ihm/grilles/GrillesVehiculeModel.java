@@ -8,65 +8,107 @@ import src.metier.CarteVehicule;
 import java.awt.Color;
 
 import java.util.ArrayList;
+import java.util.HashMap; 
 
 public class GrillesVehiculeModel extends AbstractTableModel
 {
     private Controleur ctrl;
 
 	private String[]   tabEntetes;
-    ArrayList<CarteVehicule> lstVehicules;
+    //private HashMap<Integer, Color> hashVehicules;
+    private Object[][] tabVehicules;
 
     public GrillesVehiculeModel(Controleur ctrl)
     {
+        super();
         this.ctrl = ctrl;
+        //hashVehicules = this.ctrl.getHashVehicules();
         
+        /*
+        this.hashVehicules = new HashMap<Integer, Color>();
+        this.hashVehicules.put(12, Color.WHITE);
+        this.hashVehicules.put(12, Color.BLUE);
+        this.hashVehicules.put(12, Color.YELLOW);
+        this.hashVehicules.put(12, Color.ORANGE);
+        this.hashVehicules.put(12, Color.BLACK);
+        this.hashVehicules.put(12, Color.RED);
+        this.hashVehicules.put(12, Color.GREEN);
+        this.hashVehicules.put(14, Color.PINK);
+        */
+
         this.tabEntetes = new String[] { "nombre Carte", "Couleur"};
+
+        this.tabVehicules = new Object[][]{
+            {"12", Color.WHITE},
+            {"12", Color.BLUE},
+            {"12", Color.YELLOW},
+            {"12", Color.ORANGE},
+            {"12", Color.BLACK},
+            {"12", Color.RED},
+            {"12", Color.GREEN},
+            {"14", Color.PINK}
+        };
+        
     }
 
+    public int getRowCount() 
+    {
+        return tabVehicules.length;
+        //return hashVehicules.size();
+    }
+
+    public int getColumnCount() 
+    {
+        return tabEntetes.length;
+    }
+
+    public String getColumnName(int columnIndex) 
+    {
+        return tabEntetes[columnIndex];
+    }
     
-    public int    getColumnCount()                 { return this.tabEntetes.length;      }
-	public String getColumnName (int col)          { return this.tabEntetes[col];        }
-	//public int    getRowCount   ()                 { return this.lstVehicules.size();      }
-    @Override
-    public int getRowCount() {
-        // TODO Auto-generated method stub
-        return 0;
+    public Object getValueAt(int rowIndex, int columnIndex) 
+    {
+        return tabVehicules[rowIndex][columnIndex];
+        /*
+        if (columnIndex == 0) {
+            return hashVehicules.keySet().toArray()[rowIndex];
+        } else {
+            return hashVehicules.get(rowIndex);
+        }
+        */
     }
     
     @Override
-    public Object getValueAt    (int row, int col) 
-    { 
-        switch(col)
-        {
-           // case 0: return (int) (this.lstVehicules.get(row);
-            //case 1 : return color (this.lstVehicules.get(row).getColor());
-            //case 1: return Color.decode(this.lstVehicules.get(row).getColor());
-            
-
-            default: return null;
+    public Class getColumnClass(int columnIndex)
+    {
+        switch(columnIndex){
+            case 1:
+                return Color.class;
+            default:
+                return String.class;
         }
     }
 
-   
-    /*
-	public Class  getColumnClass(int c)            { return getValueAt(0, c).getClass(); }
-
-    public void majTable(ArrayList<Noeud> lstVehicules)
-    {   
-        this.lstVehicules = lstVehicules; 
-        this.fireTableRowsInserted(0, this.lstVehicules.size() - 1);
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true; //Toutes les cellules éditables
     }
+    
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        //la valeur de chaque cellule doit etre un nombre sauf 0
+        if(aValue instanceof Integer && (Integer)aValue > 0){
+            tabVehicules[rowIndex][columnIndex] = aValue;
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
 
-    public void setValueAt(Object value, int row, int col)
-    {
-        boolean bRet;
+        //la valeur de chaque cellule ne peut pas être null, egal a zero ou vide
+        if(aValue != null && !aValue.equals("") && !aValue.equals(0)){
+            tabVehicules[rowIndex][columnIndex] = aValue;
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
     }
-    */
-
-
-
-
-
-
     
 }
