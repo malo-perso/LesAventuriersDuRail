@@ -1,5 +1,7 @@
 package src.ihm;
 
+import src.Controleur;
+
 import javax.swing.*;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -8,6 +10,8 @@ import java.awt.event.*;
 
 
 public class PanelMainJoueur extends JPanel implements ActionListener {
+
+    private Controleur ctrl;
 
     private JPanel panelCarteCoul;
     private JPanel panelCarteObjectif;
@@ -25,7 +29,9 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
     private ImageIcon imgV;
 
-    public PanelMainJoueur(){
+    public PanelMainJoueur(Controleur ctrl){
+
+        this.ctrl = ctrl;
 
         this.setSize(600,300);
         this.setLayout(new GridLayout(1,3));
@@ -71,12 +77,12 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         // TODO Auto-generated method stub
         
     }
-
+    /* 
     public static void main(String[] args){
         JFrame frame = new JFrame();
         frame.add(new PanelMainJoueur());
         frame.setSize(new Dimension(1200,200));
         frame.setVisible(true); 
-    }
+    }*/
     
 }
