@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import src.Controleur;
 import src.metier.CarteVehicule;
@@ -13,16 +14,16 @@ import src.metier.CarteObjectif;
 public class PanelPioche extends JPanel {
     
     Controleur ctrl;
-    ArrayList<CarteVehicule> piocheVehicule;
-    ArrayList<CarteObjectif> piocheObjectif;
+    List<CarteVehicule> piocheVehicule;
+    List<CarteObjectif> piocheObjectif;
     CarteVehicule[] piocheVehiculeVisible;
     JButton[] btnPiocheVehiculeVisible;
     
 
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
-        this.piocheVehicule = ctrl.getLstCartesVehicule();
-        this.piocheObjectif = ctrl.getLstCartesObjectif();
+        this.piocheVehicule = ctrl.getPioche().getLstCartesVehicule();
+        this.piocheObjectif = ctrl.getPioche().getLstCartesObjectif();
         this.piocheVehiculeVisible = this.getPiocheVehiculeVisible();
         this.btnPiocheVehiculeVisible = new JButton[5];
 
