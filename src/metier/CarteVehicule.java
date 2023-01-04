@@ -1,15 +1,11 @@
 package src.metier;
-public class CarteVehicule {
-    private Type type;
-    private int nbCarte;
-    
-    public CarteVehicule(Type type, int nbCarte) {
-        this.nbCarte = nbCarte;
-        this.type = type;
-    }
 
-    public int getNbCarte() {
-        return this.nbCarte;
+public class CarteVehicule {
+
+    private Type type;
+    
+    public CarteVehicule(Type type) {
+        this.type = type;
     }
 
     public Type getType() {

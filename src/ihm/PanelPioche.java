@@ -16,6 +16,7 @@ public class PanelPioche extends JPanel {
     ArrayList<CarteVehicule> piocheVehicule;
     ArrayList<CarteObjectif> piocheObjectif;
     CarteVehicule[] piocheVehiculeVisible;
+    JButton[] btnPiocheVehiculeVisible;
     
 
     public PanelPioche(Controleur ctrl) {
@@ -23,11 +24,15 @@ public class PanelPioche extends JPanel {
         this.piocheVehicule = ctrl.getLstCartesVehicule();
         this.piocheObjectif = ctrl.getLstCartesObjectif();
         this.piocheVehiculeVisible = this.getPiocheVehiculeVisible();
+        this.btnPiocheVehiculeVisible = new JButton[5];
 
-        this.setLayout(new GridLayout(1, 7));
+        this.setLayout(new GridLayout(7, 1));
 
         for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
-            this.add(new JLabel(this.piocheVehiculeVisible[i].getType().toString()));
+            this.btnPiocheVehiculeVisible[i] = new JButton(i+"");
+            this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+            this.add(this.btnPiocheVehiculeVisible[i]);
+
         }
         this.add(new JButton("Vehicules"));
         this.add(new JButton("Objectif"));
