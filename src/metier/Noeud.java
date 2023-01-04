@@ -1,4 +1,5 @@
-package metier;
+package src.metier;
+
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
