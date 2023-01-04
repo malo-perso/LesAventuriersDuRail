@@ -1,24 +1,47 @@
 package src.metier;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Collections;
+
 
 public class Pioche {
     
-    private ArrayList<CarteVehicule> lstCartesVehicule;
-    private ArrayList<CarteObjectif> lstCartesObjectif;
+    private List<CarteVehicule> lstCartesVehicule;
+    private List<CarteObjectif> lstCartesObjectif;
     
-    public Pioche() {
-        this.lstCartesVehicule = new ArrayList<CarteVehicule>();
-        this.lstCartesObjectif = new ArrayList<CarteObjectif>();
+    public Pioche(List<CarteVehicule> lstCartesVehicule, List<CarteObjectif> lstCartesObjectif) {
+        this.lstCartesVehicule = lstCartesVehicule;
+        this.lstCartesObjectif = lstCartesObjectif;
     }
 
-    public ArrayList<CarteVehicule> getLstCartesVehicule() {
+    public List<CarteVehicule> getLstCartesVehicule() {
         return this.lstCartesVehicule;
     }
 
-    public ArrayList<CarteObjectif> getLstCartesObjectif() {
+    public List<CarteObjectif> getLstCartesObjectif() {
         return this.lstCartesObjectif;
     }
-    
+
+    public CarteVehicule retirerCarteVehicule() {
+        CarteVehicule carteVehicule = this.lstCartesVehicule.get(0);
+        this.lstCartesVehicule.remove(0);
+            return carteVehicule;
+    }
+
+    public CarteObjectif retirerCarteObjectif() {
+        CarteObjectif carteObjectif = this.lstCartesObjectif.get(0);
+        this.lstCartesObjectif.remove(0);
+            return carteObjectif;
+    }
+
+    public void melangerCarteVehicule() {
+        Collections.shuffle(this.lstCartesVehicule);
+    }
+
+    public void melangerCarteObjectif() {
+        Collections.shuffle(this.lstCartesObjectif);
+    }
+
 
 }
