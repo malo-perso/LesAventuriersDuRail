@@ -6,7 +6,7 @@ import java.awt.Color;
 public class Joueur {
     
     private String nom;
-    private int nbCarte;
+    private int nbWagon;
     private ArrayList<CarteVehicule> cartesVehicule;
     private ArrayList<CarteObjectif> cartesObjectif;
     private Color couleur;
@@ -14,7 +14,7 @@ public class Joueur {
     public Joueur(String nom, Color couleur) {
         this.nom = nom;
         this.couleur = couleur;
-        this.nbCarte = 4;
+        this.nbWagon = 0;
         this.cartesVehicule = new ArrayList<CarteVehicule>();
         this.cartesObjectif = new ArrayList<CarteObjectif>();
     }
@@ -23,8 +23,8 @@ public class Joueur {
         return this.nom;
     }
 
-    public int getNbCarte() {
-        return this.nbCarte;
+    public int getNbWagon() {
+        return this.nbWagon;
     }
 
     public ArrayList<CarteVehicule> getCartesVehicule() {
