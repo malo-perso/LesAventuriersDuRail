@@ -1,24 +1,25 @@
 package src;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import src.metier.CarteObjectif;
-import src.metier.CarteVehicule;
+import src.metier.Joueur;
+import src.metier.Metier;
 import src.metier.Pioche;
 
 public class Controleur {
 
-    private Pioche pioche;
-
+    private Metier metier;
+    
     public Controleur() {
-        // TODO Auto-generated constructor stub
+        this.metier = new Metier(this);
     }
 
-    public ArrayList<CarteVehicule> getLstCartesVehicule() {
-        return this.pioche.getLstCartesVehicule();
+    public Pioche getPioche() {
+        return this.metier.getPioche();
     }
 
-    public ArrayList<CarteObjectif> getLstCartesObjectif() {
-        return this.pioche.getLstCartesObjectif();
+    public List<Joueur> getLstJoueurs() {
+        return this.metier.getLstJoueurs();
     }
+
 }
