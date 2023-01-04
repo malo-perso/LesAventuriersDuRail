@@ -1,6 +1,6 @@
 package src;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import src.ihm.FramePrincipale;
 import src.metier.CarteObjectif;
@@ -17,12 +17,12 @@ public class Controleur {
         this.ihm = new FramePrincipale(this);
     }
 
-    public ArrayList<CarteVehicule> getLstCartesVehicule() {
-        return this.pioche.getLstCartesVehicule();
+    public Pioche getPioche() {
+        return this.metier.getPioche();
     }
 
-    public ArrayList<CarteObjectif> getLstCartesObjectif() {
-        return this.pioche.getLstCartesObjectif();
+    public List<Joueur> getLstJoueurs() {
+        return this.metier.getLstJoueurs();
     }
 
     public static void main (String[] args) {
