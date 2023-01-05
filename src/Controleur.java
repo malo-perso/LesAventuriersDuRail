@@ -36,10 +36,15 @@ public class Controleur {
         this.ihm = new FramePrincipale(this);
         setImagePlateau(imagePlateau);
         this.ihm.setVisible(true);
+        this.majPioche();
     }
 
     public void majIHM() {
         this.ihm.majIHM();
+    }
+
+    public void resetMetier(){
+        this.metier.reset();
     }
 
     public Metier getMetier(){

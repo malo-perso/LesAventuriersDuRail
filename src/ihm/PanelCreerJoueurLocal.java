@@ -101,7 +101,9 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		}
 
 		if(e.getSource() == this.btnRetour){
+			this.ctrl.resetMetier();
 			this.ctrl.getIHMAcceuil().changePanel("panelJeu");
+
 		}
 
 		if(e.getSource() == this.btnLancerPartie){

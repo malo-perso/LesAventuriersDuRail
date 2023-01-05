@@ -211,6 +211,25 @@ public class Metier {
         this.lstJoueurs.remove(joueur);
     }
 
+    public void reset(){
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
+        this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+        this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
+        this.nbrJoueurMinimum = 0;
+        this.nbrJoueurMaximum = 0;
+        this.nbrJoueurMiniDoubleRoute = 0;
+        this.nbVehiculeJoueur = 0;
+        this.nbVehiculeFinPartie = 0;
+        this.longueurVehicule = 0;
+        this.hauteurVehicule = 0;
+        this.nombreJoker = 0;
+        this.espacementVehicule = 0.0;
+        this.lstNoeuds = new ArrayList<Noeud>();
+        this.lstAretes = new ArrayList<Arete>();
+        this.lstJoueurs = new ArrayList<Joueur>();
+        this.bImage = null;
+    }
+
     public void lireXML(File file){
 
         try{
