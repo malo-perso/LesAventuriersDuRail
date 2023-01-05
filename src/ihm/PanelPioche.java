@@ -3,6 +3,7 @@ package src.ihm;
 import javax.swing.*;
 
 import java.awt.GridLayout;
+import java.awt.event.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,44 +12,81 @@ import src.Controleur;
 import src.metier.CarteVehicule;
 import src.metier.CarteObjectif;
 
-public class PanelPioche extends JPanel {
+public class PanelPioche extends JPanel implements ActionListener{
     
-    Controleur ctrl;
-    List<CarteVehicule> piocheVehicule;
-    List<CarteObjectif> piocheObjectif;
-    CarteVehicule[] piocheVehiculeVisible;
-    JButton[] btnPiocheVehiculeVisible;
+    private Controleur ctrl;
+    private List<CarteVehicule> piocheVehicule;
+    private List<CarteObjectif> piocheObjectif;
+    private CarteVehicule[] piocheVehiculeVisible;
+
+    private JButton[] btnPiocheVehiculeVisible;
+    private JButton btnPiocheVehicule, btnPiocheObjectif;
     
 
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
         this.piocheVehicule = ctrl.getPioche().getLstCartesVehicule();
         this.piocheObjectif = ctrl.getPioche().getLstCartesObjectif();
-        this.piocheVehiculeVisible = this.getPiocheVehiculeVisible();
+        this.piocheVehiculeVisible = this.ctrl.getPioche().majPiocheVehiculeVisible();
         this.btnPiocheVehiculeVisible = new JButton[5];
 
         this.setLayout(new GridLayout(7, 1));
 
+        // création des composants
         for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
             this.btnPiocheVehiculeVisible[i] = new JButton(i+"");
-            this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+            //this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+        }
+        this.btnPiocheVehicule = new JButton("Pioche Vehicule");
+        this.btnPiocheObjectif = new JButton("Pioche Objectif");
+
+        // ajout des listeners
+        for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
+            this.btnPiocheVehiculeVisible[i].addActionListener(this);
+        }
+        this.btnPiocheVehicule.addActionListener(this);
+        this.btnPiocheObjectif.addActionListener(this);
+
+        // ajout des composants
+        for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
             this.add(this.btnPiocheVehiculeVisible[i]);
-
         }
-        this.add(new JButton("Vehicules"));
-        this.add(new JButton("Objectif"));
+        this.add(this.btnPiocheVehicule);
+        this.add(this.btnPiocheObjectif);
     }
 
-    public CarteVehicule[] getPiocheVehiculeVisible() {
-        CarteVehicule[] piocheVehiculeVisible = new CarteVehicule[5];
-        for (int i = 0; i < 5; i++) {
-            piocheVehiculeVisible[i] = this.piocheVehicule.get(i);
-        }
-        return piocheVehiculeVisible;
-    }
 
     public void majPiocheVehiculeVisible() {
-        this.piocheVehiculeVisible = getPiocheVehiculeVisible();
+        for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
+
+            this.piocheVehiculeVisible[i] = this.ctrl.getPioche().majPiocheVehiculeVisible()[i];
+
+            if (this.piocheVehiculeVisible[i] != null) {
+                this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+            } else {
+                this.btnPiocheVehiculeVisible[i].setBackground(null);
+                this.btnPiocheVehiculeVisible[i].setText("Y'a plus de cartes mon reuf");
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
+            if (e.getSource() == this.btnPiocheVehiculeVisible[i]) {
+                this.ctrl.piocherVehicule(i);
+            }
+        }
+
+        if (e.getSource() == this.btnPiocheVehicule) {
+            this.ctrl.piocherVehicule(6);
+        }
+
+        if (e.getSource() == this.btnPiocheObjectif) {
+            this.ctrl.getPioche().piocherObjectif();
+            System.out.println("Pioche Objectif");
+        }
     }
 
 

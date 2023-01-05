@@ -26,11 +26,21 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     private JButton         btnJouerLocal;
 
+    private JMenuBar menuBarre;
+
+    private JMenu menuAide;
+
+    private JMenuItem menuRegles;
+
+    private JScrollPane scrollPane;
+
+    private File reglePDF;
+
     private Controleur ctrl;
 
     public FramePrincipale(Controleur ctrl){
 
-        this.setTitle("Concepteur de Plateau");
+        this.setTitle("Les Cocaïnomanes");
         this.setResizable(true);
         this.setUndecorated(false);
 
@@ -43,35 +53,58 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelPlateau    = new PanelPlateau(this.ctrl);
         this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
 
+        this.scrollPane = new JScrollPane(this.panelPlateau);
+
+        this.menuBarre = new JMenuBar();
+
+        this.menuAide = new JMenu("Aide");
+        this.menuRegles = new JMenuItem("Regles");
+
+        this.menuRegles.setIcon(new ImageIcon("./src/data/images/Regles.png"));
+        this.reglePDF = new File("./src/data/PDF/Regles.pdf");
+
         //Action listener
 
         this.btnJouerLocal = new JButton("Jouer en local");
         this.btnJouerLocal.addActionListener(this);
+        this.menuRegles.addActionListener(this);
 
         //Positionnement des composants
-        this.panelMainJoueur.add(this.btnJouerLocal);
         this.setLayout(new BorderLayout());
 
-        this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
+        this.panelBase.add(this.scrollPane, BorderLayout.CENTER);
         this.panelBase.add(this.panelJoueurs, BorderLayout.NORTH);
+
+        this.menuAide.add(this.menuRegles);
+
+        this.menuBarre.add(this.menuAide);
+
+        this.setJMenuBar(this.menuBarre);
 
         this.add(this.panelBase, BorderLayout.CENTER);
         this.add(this.panelPioche, BorderLayout.EAST);
         this.add(this.panelMainJoueur, BorderLayout.SOUTH);
 
         //Parametre de la Frame
-
         Toolkit kit = Toolkit.getDefaultToolkit();
 
         Dimension tailleEcran = kit.getScreenSize();
         Insets scnMax = kit.getScreenInsets(getGraphicsConfiguration());
         int tailleBarTache = scnMax.bottom;
 
-        this.setTitle("Les Cocaïnomanes");
         this.setSize((int) tailleEcran.getWidth(), (int) tailleEcran.getHeight() - tailleBarTache);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+    }
+
+    public void majPioche() {
+        this.panelPioche.majPiocheVehiculeVisible();
+    }
+    
+    public void majIHM()
+    {
+        this.panelPlateau.majIHM();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -90,6 +123,11 @@ public class FramePrincipale extends JFrame implements ActionListener {
                     //this.changePanel();
                 }
 
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
+        if(e.getSource() == this.menuRegles){
+            try{
+                Desktop.getDesktop().open(reglePDF);
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }

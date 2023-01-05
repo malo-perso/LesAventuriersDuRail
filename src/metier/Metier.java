@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class Metier {
     
     private Pioche pioche;
-	private int  diametre;
+	private final int  DIAMETRE = 20;
 	private int  nbrJoueurMinimum;
 	private int  nbrJoueurMaximum;
 	private int  nbrJoueurMiniDoubleRoute;
@@ -44,8 +44,22 @@ public class Metier {
     private Controleur ctrl;
 
     public Metier(Controleur ctrl) {
-        this.pioche = new Pioche(this.lstCarteVehicules, this.lstCarteObjectifs);//a faire
-        this.diametre = 0;
+
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
+        this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+
+        //ajouter des cartes vehicules et objectifs dans les listes
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.YELLOW)));
+
+
+        this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;
         this.nbrJoueurMiniDoubleRoute = 0;
@@ -57,8 +71,7 @@ public class Metier {
         this.espacementVehicule = 0.0;
         this.lstNoeuds = new ArrayList<Noeud>();
         this.lstAretes = new ArrayList<Arete>();
-        this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
-        this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+
         this.lstJoueurs = new ArrayList<Joueur>();
         this.bImage = null;
 
@@ -67,6 +80,8 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Eragon7237", -52));
         this.lstJoueurs.add(new Joueur("Bou",  2500));
         this.lstJoueurs.add(new Joueur("erasmamael", 556));
+
+
     }
 
     public List<Joueur> getLstJoueurs() {
@@ -75,6 +90,70 @@ public class Metier {
 
     public Pioche getPioche() {
         return this.pioche;
+    }
+
+    public int getDiametre(){
+        return this.DIAMETRE;
+    }
+
+    public double getEspacementVehicule() {
+		return this.espacementVehicule;
+	} 
+    
+    public int getNbrJoueurMinimum(){
+        return this.nbrJoueurMinimum;
+    }
+
+    public int getNbrJoueurMaximum(){
+        return this.nbrJoueurMaximum;
+    }
+
+    public int getNbrJoueurMinimumDoubleRoute(){
+        return this.nbrJoueurMiniDoubleRoute;
+    }
+
+    public int getNbVehiculeJoueur(){
+        return this.nbVehiculeJoueur;
+    }
+
+    public int getNbVehiculeFinPartie(){
+        return this.nbVehiculeFinPartie;
+    }
+
+    public int getNbPointCheminLong(){
+        return this.nbPointCheminLong;
+    }
+
+    public int getLongueurVehicule() {
+        return this.longueurVehicule;
+    }
+
+    public int getHauteurVehicule() {
+        return this.hauteurVehicule;
+    }
+
+    public int getNbJoker(){
+        return this.nombreJoker;
+    }
+
+    public List<Noeud> getLstNoeuds(){
+        return this.lstNoeuds;
+    }
+
+    public List<Arete> getLstAretes(){
+        return this.lstAretes;
+    }
+
+    public List<CarteVehicule> getLstCartesVehicules(){
+        return this.lstCarteVehicules;
+    }
+
+    public List<CarteObjectif> getLstCartesObjectifs(){
+        return this.lstCarteObjectifs;
+    }
+
+    public BufferedImage getBImage(){
+        return this.bImage;
     }
 
     public void ajouterJoueur(Joueur joueur) {
@@ -210,10 +289,14 @@ public class Metier {
             byte[] bytes = Base64.getDecoder().decode(str);		
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             this.bImage = ImageIO.read(bis);
-
-            this.pioche = new Pioche(lstCarteVehicules,lstCarteObjectifs);
+            this.ctrl.setImagePlateau(bImage);
+            this.pioche = new Pioche(this.ctrl, lstCarteVehicules,lstCarteObjectifs);
+            this.pioche.melangerCarteVehicule();
+            this.pioche.melangerCarteObjectif();
 
         }catch(Exception e){e.printStackTrace();}
-    } 
+    }
+
+	
 
 }
