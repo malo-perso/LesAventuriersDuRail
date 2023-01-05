@@ -77,21 +77,38 @@ public class Metier {
         this.lstJoueurs.add(joueur);
     }
 
-    public Boolean Piocher(Joueur joueur) {
-        if (this.pioche.getLstCartesVehicule().size() > 0) {
-            joueur.getCartesVehicule().add(this.pioche.getLstCartesVehicule().get(0));
-            this.pioche.getLstCartesVehicule().remove(0);
-            return true;
-        }
-        return false;
-    }
-
     public void melangerPiocheCarteVehicule() {
         this.pioche.melangerCarteVehicule();
     }
 
     public void melangerPiocheCarteObjectif() {
         this.pioche.melangerCarteObjectif();
+    }
+
+    public CarteObjectif[] PiocheCarteObjectif(Joueur joueur)
+    {
+        CarteObjectif[] cartes = new CarteObjectif[3];
+        if (this.pioche.getLstCartesObjectif().size() > 3) {
+            cartes[0]=this.pioche.getLstCartesObjectif().get(0);
+            cartes[1]=this.pioche.getLstCartesObjectif().get(0);
+            cartes[2]=this.pioche.getLstCartesObjectif().get(0);
+            return cartes;
+        }
+        System.out.println("Pioche Carte Objectif : La pioche est vide");
+        return null;
+    }
+
+    public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
+        for (int i = 0; i < 3; i++) {
+            if (intCarte.contains(i)) 
+                joueur.ajouterCarteObjectif(this.pioche.retirerCarteObjectif(i));
+            else
+                this.pioche.ajouterCarteObjectif((this.pioche.retirerCarteObjectif(i)));   
+        }
+    }
+
+    public Boolean PiocherCarteVehicule(Joueur joueur) {
+        return false;
     }
 
     public void lireXML(File file){
