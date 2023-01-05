@@ -69,10 +69,21 @@ public class Controleur {
         this.joueurCourant.ajouterCarteObjectif(this.metier.getPioche().piocherObjectif());
     }
 
-
+    
+    //
      public void setImagePlateau(BufferedImage image) {
         this.imagePlateau = image; 
         this.ihm.majIHM();
+    }
+
+    public void ajouterJoueur(String nom, int RGB){
+        this.metier.ajouterJoueur(nom, RGB);
+        this.ihmAcceuil.MAJjoueur();
+    }
+
+    public void supprimerJoueur(Joueur joueur){
+        this.metier.supprimerJoueur(joueur);
+        this.ihmAcceuil.MAJjoueur();
     }
 
     public BufferedImage getImagePlateau() {
@@ -80,10 +91,10 @@ public class Controleur {
 	}
 
     public static void main (String[] args) {
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
-        ctrl.getMetier().lireXML(new File("./src/data/mappe/Europe.xml"));
-        ctrl.majIHM();
+        //ctrl.getMetier().lireXML(new File("./src/data/mappe/Europe.xml"));
+        //ctrl.majIHM();
     }
 
 	

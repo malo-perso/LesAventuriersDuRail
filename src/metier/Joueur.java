@@ -49,6 +49,10 @@ public class Joueur {
         this.cartesObjectif.add(carte);
     }
 
+    public void setNomJoueur(String nom){
+        this.nom =nom;
+    }
+
     public Color getCouleur() {
         return new Color(this.RGB);
     }

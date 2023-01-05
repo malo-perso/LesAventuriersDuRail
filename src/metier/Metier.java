@@ -134,7 +134,7 @@ public class Metier {
         return this.lstCarteObjectifs;
     }
 
-    public BufferedImage getBImage(){
+    public BufferedImage getImage(){
         return this.bImage;
     }
 
@@ -174,6 +174,14 @@ public class Metier {
 
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;
+    }
+
+    public void ajouterJoueur(String nom, int RGB) {
+        this.lstJoueurs.add(new Joueur(nom, RGB));
+    }
+
+    public void supprimerJoueur(Joueur joueur){
+        this.lstJoueurs.remove(joueur);
     }
 
     public void lireXML(File file){
@@ -271,7 +279,7 @@ public class Metier {
             byte[] bytes = Base64.getDecoder().decode(str);		
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             this.bImage = ImageIO.read(bis);
-            this.ctrl.setImagePlateau(bImage);
+            //§this.ctrl.setImagePlateau(bImage);
             this.pioche = new Pioche(this.ctrl, lstCarteVehicules,lstCarteObjectifs);
             this.pioche.melangerCarteVehicule();
             this.pioche.melangerCarteObjectif();
@@ -279,6 +287,7 @@ public class Metier {
         }catch(Exception e){e.printStackTrace();}
     }
 
+      
 	
 
 }

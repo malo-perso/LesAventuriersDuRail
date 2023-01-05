@@ -4,7 +4,9 @@ import src.Controleur;
 
 
 import javax.swing.*;
-
+import javax.imageio.ImageIO;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -50,7 +52,23 @@ public class PanelJeu extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnLocal ) {
-            System.out.println("Local");
+            try{
+				JFileChooser chooser = new JFileChooser("./src/data/mappe/");
+
+                FileFilter filtre = new FileNameExtensionFilter("XML (*.xml)", "xml");
+                chooser.setFileFilter(filtre);
+                chooser.setAcceptAllFileFilterUsed(false);
+				
+				int res = chooser.showOpenDialog(this);
+				if (res == JFileChooser.APPROVE_OPTION)
+                {
+					this.ctrl.getMetier().lireXML(chooser.getSelectedFile());
+                    //this.changePanel();
+                }
+
+            }catch(Exception erreur){erreur.printStackTrace();}
+            this.ctrl.getIHMAcceuil().changePanel("panelCreerJoueur");
+
         }
         else if ( e.getSource() == this.btnHebergerOnline ) {
             System.out.println("Heberger en ligne");

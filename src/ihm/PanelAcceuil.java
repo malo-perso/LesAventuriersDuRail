@@ -18,9 +18,7 @@ public class PanelAcceuil extends JPanel implements ActionListener{
     PanelAcceuil(Controleur ctrl){
         this.ctrl = ctrl;
         this.setLayout(new GridLayout(5, 3, 0, 50));
-        //this.setLayout(new FlowLayout());
-        //this.setLayout(new BoxLayout());
-        //this.setLayout(new VboxLayout());
+
 
         this.btnJouer   = new JButton("Jouer");
         this.btnRegles  = new JButton("Regles");

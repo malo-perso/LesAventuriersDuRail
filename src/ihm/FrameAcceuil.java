@@ -13,6 +13,7 @@ public class FrameAcceuil extends JFrame {
     private JPanel panelFormulaire;
     private PanelAcceuil panelAcceuil;
     private PanelJeu panelJeu;
+    private PanelCreerJoueurLocal panelCreerJoueur;
 
     CardLayout card;
 
@@ -22,11 +23,14 @@ public class FrameAcceuil extends JFrame {
         
         this.panelAcceuil = new PanelAcceuil(ctrl);
         this.panelJeu = new PanelJeu(ctrl);
+        this.panelCreerJoueur = new PanelCreerJoueurLocal(ctrl);
     
 
         
         this.panelFormulaire.add(this.panelAcceuil, "panelAcceuil");
         this.panelFormulaire.add(this.panelJeu,  "panelJeu");
+        this.panelFormulaire.add(this.panelCreerJoueur, "panelCreerJoueur");
+
 
         this.add(this.panelFormulaire);
 
@@ -45,6 +49,10 @@ public class FrameAcceuil extends JFrame {
     public void changePanel(String nomPanel){
         this.card = (CardLayout) this.panelFormulaire.getLayout();
         this.card.show(this.panelFormulaire,nomPanel);
+    }
+
+    public void MAJjoueur(){
+        this.panelCreerJoueur.majTable(this.ctrl.getLstJoueurs());
     }
 
     public static void main(String[] args) {

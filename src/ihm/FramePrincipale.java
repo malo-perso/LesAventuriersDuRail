@@ -108,23 +108,6 @@ public class FramePrincipale extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.btnJouerLocal){
-            try{
-				JFileChooser chooser = new JFileChooser("./src/data/mappe/");
-
-                FileFilter filtre = new FileNameExtensionFilter("XML (*.xml)", "xml");
-                chooser.setFileFilter(filtre);
-                chooser.setAcceptAllFileFilterUsed(false);
-				
-				int res = chooser.showOpenDialog(this);
-				if (res == JFileChooser.APPROVE_OPTION)
-                {
-					this.ctrl.getMetier().lireXML(chooser.getSelectedFile());
-                    //this.changePanel();
-                }
-
-            }catch(Exception erreur){erreur.printStackTrace();}
-        }
         if(e.getSource() == this.menuRegles){
             try{
                 Desktop.getDesktop().open(reglePDF);
