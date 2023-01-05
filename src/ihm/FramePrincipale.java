@@ -1,8 +1,8 @@
 package src.ihm;
 
 import src.Controleur;
-
-import src.Controleur;
+import src.metier.*;
+import src.ihm.*;
 
 import java.awt.Color;
 import javax.swing.*;
@@ -72,10 +72,6 @@ public class FramePrincipale extends JFrame implements ActionListener {
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-
-        this.panelPioche = new PanelPioche(ctrl);
-
-        this.add(this.panelPioche, BorderLayout.EAST);
     }
 
     public void actionPerformed(ActionEvent e) {
