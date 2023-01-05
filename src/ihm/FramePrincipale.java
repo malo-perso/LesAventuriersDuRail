@@ -26,6 +26,14 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     private JButton         btnJouerLocal;
 
+    private JMenuBar menuBarre;
+
+    private JMenu menuAide;
+
+    private JMenuItem menuRegles;
+
+    private File reglePDF;
+
     private Controleur ctrl;
 
     public FramePrincipale(Controleur ctrl){
@@ -43,10 +51,19 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelPlateau    = new PanelPlateau(this.ctrl);
         this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
 
+        this.menuBarre = new JMenuBar();
+
+        this.menuAide = new JMenu("Aide");
+        this.menuRegles = new JMenuItem("Regles");
+
+        this.menuRegles.setIcon(new ImageIcon("./src/data/images/Regles.png"));
+        this.reglePDF = new File("./src/data/PDF/Regles.pdf");
+
         //Action listener
 
         this.btnJouerLocal = new JButton("Jouer en local");
         this.btnJouerLocal.addActionListener(this);
+        this.menuRegles.addActionListener(this);
 
         //Positionnement des composants
         this.panelMainJoueur.add(this.btnJouerLocal);
@@ -54,6 +71,12 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
         this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
         this.panelBase.add(this.panelJoueurs, BorderLayout.NORTH);
+
+        this.menuAide.add(this.menuRegles);
+
+        this.menuBarre.add(this.menuAide);
+
+        this.setJMenuBar(this.menuBarre);
 
         this.add(this.panelBase, BorderLayout.CENTER);
         this.add(this.panelPioche, BorderLayout.EAST);
@@ -90,6 +113,11 @@ public class FramePrincipale extends JFrame implements ActionListener {
                     //this.changePanel();
                 }
 
+            }catch(Exception erreur){erreur.printStackTrace();}
+        }
+        if(e.getSource() == this.menuRegles){
+            try{
+                Desktop.getDesktop().open(reglePDF);
             }catch(Exception erreur){erreur.printStackTrace();}
         }
     }
