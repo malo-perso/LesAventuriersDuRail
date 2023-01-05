@@ -92,10 +92,10 @@ public class PanelJoueurs extends JPanel{
 
             this.lblNom = new JLabel(nom, SwingConstants.CENTER);
             this.lblNom.setFont(this.lblNom.getFont().deriveFont(20f));
-            this.lblPoint = new JLabel( String.format("%3d",point) +  " Point" + (point>1?"s":""));
-            this.lblNbWagon = new JLabel( String.format("%3d",nbWagon) + (nbWagon>1?" Wagons restants":" Wagon restant"));
-            this.lblNbCarteObjectif = new JLabel( String.format("%3d",nbCarteObjectif) + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif"));
-            this.lblNbCarteVehicule = new JLabel( String.format("%3d",nbCarteVehicule) + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule"));
+            this.lblPoint = new JLabel( String.format("%3d",point) +  " Point" + (point>1?"s":" "));
+            this.lblNbWagon = new JLabel( String.format("%3d",nbWagon) + (nbWagon>1?" Wagons restants":" Wagon restant  "));
+            this.lblNbCarteObjectif = new JLabel( String.format("%3d",nbCarteObjectif) + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif  "));
+            this.lblNbCarteVehicule = new JLabel( String.format("%3d",nbCarteVehicule) + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule  "));
 
             this.panelInfo = new JPanel();
             this.panelPoint = new JPanel();
@@ -131,10 +131,10 @@ public class PanelJoueurs extends JPanel{
             this.add(this.panelInfo, BorderLayout.CENTER);
         }
         
-        public void setPoint(int point) {this.lblPoint.setText(point +  " Point" + (point>1?"s":""));}
-        public void setNbWagon(int nbWagon) {this.lblNbWagon.setText(nbWagon + (nbWagon>1?" Wagons restants":" Wagon restant"));}
-        public void setlNbCarteObjectif(int nbCarteObjectif) {this.lblNbCarteObjectif.setText(nbCarteObjectif + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif"));}
-        public void setNbCarteVehicule(int nbCarteVehicule) {this.lblNbCarteVehicule.setText(nbCarteVehicule + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule"));}
+        public void setPoint(int point) {this.lblPoint.setText(String.format("%3d",point) +  " Point" + (point>1?"s":" "));}
+        public void setNbWagon(int nbWagon) {this.lblNbWagon.setText(String.format("%3d",nbWagon) + (nbWagon>1?" Wagons restants":" Wagon restant  "));}
+        public void setlNbCarteObjectif(int nbCarteObjectif) {this.lblNbCarteObjectif.setText(String.format("%3d",nbCarteObjectif) + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif  "));}
+        public void setNbCarteVehicule(int nbCarteVehicule) {this.lblNbCarteVehicule.setText(String.format("%3d",nbCarteVehicule) + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule  "));}
     }
 
     public void majInfoJoueur(){
