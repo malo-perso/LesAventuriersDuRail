@@ -1,5 +1,7 @@
 package src;
 
+import com.formdev.flatlaf.FlatLightLaf;
+
 import java.io.File;
 import java.util.List;
 import java.awt.Image;
@@ -51,6 +53,7 @@ public class Controleur {
 	}
 
     public static void main (String[] args) {
+        FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
         ctrl.getMetier().lireXML(new File("./src/data/mappe/Europe.xml"));
         ctrl.majIHM();
