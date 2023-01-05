@@ -2,8 +2,6 @@ package src.ihm;
 
 import src.Controleur;
 
-import src.Controleur;
-
 import java.awt.Color;
 import javax.swing.*;
 
@@ -28,7 +26,7 @@ public class FramePrincipale extends JFrame {
 
     public FramePrincipale(Controleur ctrl){
 
-        this.setTitle("Concepteur de Plateau");
+        this.setTitle("Les Cocaïnomanes");
         this.setResizable(true);
         this.setUndecorated(false);
 
@@ -53,14 +51,12 @@ public class FramePrincipale extends JFrame {
         this.add(this.panelMainJoueur, BorderLayout.SOUTH);
 
         //Parametre de la Frame
-
         Toolkit kit = Toolkit.getDefaultToolkit();
 
         Dimension tailleEcran = kit.getScreenSize();
         Insets scnMax = kit.getScreenInsets(getGraphicsConfiguration());
         int tailleBarTache = scnMax.bottom;
 
-        this.setTitle("Les Cocaïnomanes");
         this.setSize((int) tailleEcran.getWidth(), (int) tailleEcran.getHeight() - tailleBarTache);
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

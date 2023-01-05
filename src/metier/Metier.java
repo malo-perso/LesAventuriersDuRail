@@ -63,6 +63,8 @@ public class Metier {
         this.bImage = null;
 
         this.ctrl = ctrl;
+
+        
     }
 
     public List<Joueur> getLstJoueurs() {
