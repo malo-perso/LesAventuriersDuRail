@@ -3,6 +3,7 @@
         "lib/**/*.jar",
         "c:\\iut\\TP\\java\\paquetage_class\\jdom-2.0.6.jar",
         "c:\\Program Files\\Java\\paquetage_class\\jdom-2.0.6.jar",
-        "src/lib/jdom-2.0.6.jar"
+        "src/lib/jdom-2.0.6.jar",
+        "src/lib/flatlaf-2.6.jar"
     ]
 }

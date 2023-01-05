@@ -40,16 +40,20 @@ public class Pioche {
         //return this.lstCartesObjectif;
     }
 
-    public CarteVehicule retirerCarteVehicule() {
-        CarteVehicule carteVehicule = this.lstCartesVehicule.get(0);
-        this.lstCartesVehicule.remove(0);
-            return carteVehicule;
+    public CarteVehicule retirerCarteVehicule(int i) {
+        return  this.lstCartesVehicule.remove(i);
     }
 
-    public CarteObjectif retirerCarteObjectif() {
-        CarteObjectif carteObjectif = this.lstCartesObjectif.get(0);
-        this.lstCartesObjectif.remove(0);
-            return carteObjectif;
+    public CarteObjectif retirerCarteObjectif(int i) {
+        return this.lstCartesObjectif.remove(i);
+    }
+
+    public void ajouterCarteVehicule(CarteVehicule carte) {
+        this.lstCartesVehicule.add(carte);
+    }
+
+    public void ajouterCarteObjectif(CarteObjectif carte) {
+        this.lstCartesObjectif.add(carte);
     }
 
     public void melangerCarteVehicule() {
