@@ -20,6 +20,10 @@ public class Controleur {
         this.ihm = new FramePrincipale(this);
     }
 
+    public Metier getMetier(){
+        return this.metier;
+    }
+
     public Pioche getPioche() {
         return this.metier.getPioche();
     }
