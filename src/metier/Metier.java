@@ -44,7 +44,7 @@ public class Metier {
     private Controleur ctrl;
 
     public Metier(Controleur ctrl) {
-        this.pioche = null;//a faire
+        this.pioche = new Pioche(this.lstCarteVehicules, this.lstCarteObjectifs);//a faire
         this.diametre = 0;
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;

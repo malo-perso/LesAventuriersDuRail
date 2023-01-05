@@ -7,6 +7,7 @@ public class Joueur {
     
     private String nom;
     private int nbWagon;
+    private int nbPoint;
     private ArrayList<CarteVehicule> cartesVehicule;
     private ArrayList<CarteObjectif> cartesObjectif;
     private int RGB;
@@ -14,6 +15,7 @@ public class Joueur {
     public Joueur(String nom, int RGB) {
         this.nom = nom;
         this.nbWagon = 0;
+        this.nbPoint = 0;
         this.cartesVehicule = new ArrayList<CarteVehicule>();
         this.cartesObjectif = new ArrayList<CarteObjectif>();
         this.RGB = RGB;        
@@ -25,6 +27,10 @@ public class Joueur {
 
     public int getNbWagon() {
         return this.nbWagon;
+    }
+
+    public int getPoint(){
+        return this.nbPoint;
     }
 
     public ArrayList<CarteVehicule> getCartesVehicule() {
