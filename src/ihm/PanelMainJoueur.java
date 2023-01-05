@@ -19,6 +19,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
     private JPanel panelCarteCoul;
     private JPanel panelCarteObjectif;
+    private JPanel panelOrganisation;
     private JPanel panelInfo;
     private JButton btnPerso;
     private JButton btnParametre;
@@ -39,11 +40,14 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public PanelMainJoueur(Controleur ctrl){
 
         this.setSize(600,300);
-        this.setLayout(new GridLayout(1,3));
+        //this.setLayout(new GridLayout(1,3));
+        this.setLayout(new BorderLayout());
+        this.setBackground(Color.PINK);
 
         this.lstCarteVehicule = ctrl.getPioche().getLstCartesVehicule();
 
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
+        this.panelOrganisation = new JPanel(new BorderLayout());
         this.panelCarteCoul = new JPanel();
         this.panelCarteObjectif = new JPanel();
         this.panelInfo = new JPanel(new GridLayout(2,2));
@@ -54,23 +58,30 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             this.panelCarteCoul.add(this.btnCarteVehicule[i]);
         }
 
+        this.panelCarteObjectif.add(new JButton("btnObjectif"));
+        this.panelCarteObjectif.add(new JButton("btnObjectif"));
+
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
+        //scrollCarteObjectif 
         this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);
+
 
         this.imgV = new ImageIcon("./src/data/images/Engrennage.jpg");
 
-        Image img1 = imgV.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        Image img1 = imgV.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         
 
-        this.btnPerso = new JButton("Perso");
+        this.btnPerso = new JButton("MisterConfiture");
         this.btnParametre = new JButton(new ImageIcon(img1));
 
         this.btnParametre.setBorder(null);
 
-        this.lblNbVehicule = new JLabel("Nb Vehicule : ");
-        this.lblNbPoints = new JLabel("Nb Points : ");
+        this.lblNbVehicule = new JLabel("Nb Vehicule : 70");
+        this.lblNbPoints = new JLabel("Nb Points : 200");
 
         this.btnParametre.addActionListener(this);
+
+        
 
         this.panelInfo.add(this.btnPerso);
         this.panelInfo.add(this.lblNbVehicule);
@@ -79,7 +90,12 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         this.add(this.scrollCarteCoul);
         this.add(this.scrollCarteObjectif);
-        this.add(this.panelInfo);
+
+        this.panelOrganisation.add(this.scrollCarteCoul, BorderLayout.CENTER);
+        this.panelOrganisation.add(this.scrollCarteObjectif, BorderLayout.EAST);
+
+        this.add(this.panelOrganisation, BorderLayout.CENTER);
+        this.add(this.panelInfo, BorderLayout.EAST);
 
         this.setVisible(true);
     }

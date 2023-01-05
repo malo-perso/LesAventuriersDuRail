@@ -35,9 +35,8 @@ public class PanelPioche extends JPanel implements ActionListener{
         // création des composants
         for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
             this.btnPiocheVehiculeVisible[i] = new JButton(i+"");
-            this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+            //this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
         }
-
         this.btnPiocheVehicule = new JButton("Pioche Vehicule");
         this.btnPiocheObjectif = new JButton("Pioche Objectif");
 

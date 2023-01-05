@@ -28,7 +28,7 @@ public class Controleur {
     public Controleur() {
         this.metier = new Metier(this);
         this.ihmAcceuil = new FrameAcceuil(this);
-        //this.ihm = new FramePrincipale(this);
+        this.ihm = new FramePrincipale(this);
 
         this.joueurCourant = new Joueur("Pedrolito", 54786);
         //this.joueurCourant = this.metier.getLstJoueurs().get(0);
