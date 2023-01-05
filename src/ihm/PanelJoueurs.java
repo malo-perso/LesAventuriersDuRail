@@ -1,10 +1,14 @@
 package src.ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import src.metier.Joueur;
 import src.Controleur;
@@ -13,7 +17,7 @@ public class PanelJoueurs extends JPanel{
 
     private ArrayList<FicheJoueur> alPanelJoueur;
     private JPanel panelGrilleJoueur;
-    private JScrollPane sp;
+    private JPanel panelSp;
 
     private Controleur ctrl;
     
@@ -22,24 +26,45 @@ public class PanelJoueurs extends JPanel{
         //initialisation des composant
         this.ctrl = ctrl;
         this.panelGrilleJoueur = new JPanel();
-
-        this.sp = new JScrollPane(this.panelGrilleJoueur);
-
+        this.panelSp = new JPanel();
+        
         this.alPanelJoueur = new ArrayList<FicheJoueur>();
         
         for(Joueur joueur : this.ctrl.getLstJoueurs()){
-            this.alPanelJoueur.add(new FicheJoueur(joueur.getNom(), joueur.getPoint(), joueur.getNbWagon(), joueur.getCartesObjectif().size(), joueur.getCartesVehicule().size())); 
+            this.alPanelJoueur.add(new FicheJoueur(joueur)); 
         }
 
-        //Création des layout
-        this.panelGrilleJoueur.setLayout(new GridLayout(1,this.alPanelJoueur.size()-1));
+        //Création des layout et placement des éléments
+        this.setLayout(new BorderLayout());
+        this.panelSp.setLayout(new BorderLayout());
+        this.panelGrilleJoueur.setBackground(Color.WHITE);
 
+        if ( this.alPanelJoueur.size()-1 < 10){
+            this.panelGrilleJoueur.setLayout(new GridLayout(1,10, 4, 0 ));
+
+            //Remplissage du panelGrilleJoueur
+            for(FicheJoueur ficheJoueur : this.alPanelJoueur){
+                this.panelGrilleJoueur.add(ficheJoueur);
+            }
+            for(int i=this.alPanelJoueur.size()-1; i<9; i++){
+                this.panelGrilleJoueur.add(new JLabel());
+            }
+
+        }else{
+            this.panelGrilleJoueur.setLayout(new GridLayout(1,this.alPanelJoueur.size()-1, 4, 0));
+            
+            //Remplissage du panelGrilleJoueur
+            for(FicheJoueur ficheJoueur : this.alPanelJoueur){
+                this.panelGrilleJoueur.add(ficheJoueur);
+            }
+        }
         
-        //Placement des éléments
-        for(FicheJoueur ficheJoueur : this.alPanelJoueur){
-            this.panelGrilleJoueur.add(ficheJoueur);
-        }
-        this.add(this.sp);
+        this.panelSp.add(this.panelGrilleJoueur);
+
+        JScrollPane sp = new JScrollPane(this.panelSp);
+
+        //sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        this.add(sp, BorderLayout.CENTER);
 
     }
 
@@ -54,10 +79,16 @@ public class PanelJoueurs extends JPanel{
         private JPanel panelInfo;
         private JPanel panelPoint;
 
-        public FicheJoueur(String nom, int point, int nbWagon, int nbCarteObjectif, int nbCarteVehicule){
-            
-            this.lblNom = new JLabel(nom);
-            this.lblNom.setFont(this.lblNom.getFont().deriveFont(24f));
+        public FicheJoueur(Joueur joueur){
+            String nom = joueur.getNom();
+            int point = joueur.getPoint();
+            int nbWagon = joueur.getNbWagon();
+            int nbCarteObjectif = joueur.getCartesObjectif().size();
+            int nbCarteVehicule = joueur.getCartesVehicule().size();
+            Color couleur = joueur.getCouleur();
+
+            this.lblNom = new JLabel(nom, SwingConstants.CENTER);
+            this.lblNom.setFont(this.lblNom.getFont().deriveFont(20f));
             this.lblPoint = new JLabel( point +  " Point" + (point>1?"s":""));
             this.lblNbWagon = new JLabel( nbWagon + (nbWagon>1?" Wagons restants":" Wagon restant"));
             this.lblNbCarteObjectif = new JLabel( nbCarteObjectif + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif"));
@@ -65,12 +96,21 @@ public class PanelJoueurs extends JPanel{
 
             this.panelInfo = new JPanel();
             this.panelPoint = new JPanel();
+
+            this.setOpaque(false);
+            this.panelInfo.setOpaque(false);
+            this.panelPoint.setOpaque(false);
+
+            this.setBorder(BorderFactory.createMatteBorder(2, 2,2,2,couleur));
+            
             //Création du layout
             this.setLayout(new BorderLayout());
             this.panelInfo.setLayout(new GridLayout(3,1));
             this.panelPoint.setLayout(new GridLayout(2,1));
             //positionnement des composant
-            this.panelPoint.add(new JLabel("tete du joueur\navec sa couleur"));
+            
+            
+            //this.panelPoint.add();
             this.panelPoint.add(this.lblPoint);
 
             this.panelInfo.add(this.lblNbWagon);
@@ -91,4 +131,14 @@ public class PanelJoueurs extends JPanel{
     public void majInfoJoueur(){
         //TODO
     }
+
+    public void paintComponent (Graphics g)
+	{
+		super.paintComponent(g);
+		
+		
+		g.setColor(Color.BLACK);
+        g.drawOval(150, 150, 15, 15);
+
+	}
 }

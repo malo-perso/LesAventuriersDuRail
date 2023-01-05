@@ -63,6 +63,10 @@ public class Metier {
         this.bImage = null;
 
         this.ctrl = ctrl;
+        //TEMPORAIRE
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
     }
 
     public List<Joueur> getLstJoueurs() {
