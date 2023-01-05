@@ -44,7 +44,7 @@ public class Metier {
     private Controleur ctrl;
 
     public Metier(Controleur ctrl) {
-        this.pioche = new Pioche(this.lstCarteVehicules, this.lstCarteObjectifs);//a faire
+        this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);//a faire
         this.diametre = 0;
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;
@@ -207,7 +207,7 @@ public class Metier {
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             this.bImage = ImageIO.read(bis);
 
-            this.pioche = new Pioche(lstCarteVehicules,lstCarteObjectifs);
+            this.pioche = new Pioche(ctrl, lstCarteVehicules,lstCarteObjectifs);
 
         }catch(Exception e){e.printStackTrace();}
     } 

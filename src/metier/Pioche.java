@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Collection;
 import java.util.Collections;
 
+import src.Controleur;
 import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 import src.metier.Type;
@@ -15,22 +16,26 @@ public class Pioche {
     
     private List<CarteVehicule> lstCartesVehicule;
     private List<CarteObjectif> lstCartesObjectif;
+    private Controleur ctrl;
     
-    public Pioche(List<CarteVehicule> lstCartesVehicule, List<CarteObjectif> lstCartesObjectif) {
-        this.lstCartesVehicule = lstCartesVehicule;
+    public Pioche(Controleur ctrl, List<CarteVehicule> lstCartesVehicule, List<CarteObjectif> lstCartesObjectif) {
+
+        this.ctrl = ctrl;
+
+        this.lstCartesVehicule = new ArrayList<CarteVehicule>();
+        for (int i=0; i < 5; i++) {
+            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.RED)));
+            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.BLUE)));
+            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.GREEN)));
+            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.PINK)));
+            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
+        }
+
         this.lstCartesObjectif = lstCartesObjectif;
     }
 
-    public ArrayList<CarteVehicule> getLstCartesVehicule() {
-        ArrayList<CarteVehicule> lstVehi = new ArrayList<CarteVehicule>();
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.RED)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.BLUE)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.GREEN)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.PINK)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
-
-        return lstVehi;
-        // return this.lstCartesVehicule;
+    public List<CarteVehicule> getLstCartesVehicule() {
+        return this.lstCartesVehicule;
     }
 
     public ArrayList<CarteObjectif> getLstCartesObjectif() {
@@ -38,6 +43,18 @@ public class Pioche {
         lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
         return lstObj;
         //return this.lstCartesObjectif;
+    }
+
+    public CarteVehicule[] majPiocheVehiculeVisible() {
+        CarteVehicule[] piocheVehiculeVisible = new CarteVehicule[5];
+        List<CarteVehicule> lstVehi = this.getLstCartesVehicule();
+        for (int i = 0; i < 5; i++) {
+            if (i < lstVehi.size())
+                piocheVehiculeVisible[i] = lstVehi.get(i);
+            else
+                piocheVehiculeVisible[i] = null;
+        }
+        return piocheVehiculeVisible;
     }
 
     public CarteVehicule retirerCarteVehicule(int i) {
@@ -64,5 +81,17 @@ public class Pioche {
         Collections.shuffle(this.lstCartesObjectif);
     }
 
+    public CarteVehicule piocherVehicule(int i) {
+        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
+            CarteVehicule carteVehi = this.retirerCarteVehicule(i);
+            this.ctrl.majPioche();
+            return carteVehi;
+        }
+        this.ctrl.majPioche();
+        return null;
+    }
 
+    public CarteObjectif piocherObjectif() {
+        return this.retirerCarteObjectif(0);
+    }
 }

@@ -74,6 +74,10 @@ public class FramePrincipale extends JFrame implements ActionListener {
 		this.setVisible(true);
     }
 
+    public void majPioche() {
+        this.panelPioche.majPiocheVehiculeVisible();
+    }
+
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnJouerLocal){
             try{
