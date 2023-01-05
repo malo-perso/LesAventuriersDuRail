@@ -7,16 +7,18 @@ public class Joueur {
     
     private String nom;
     private int nbWagon;
+    private int nbPoint;
     private ArrayList<CarteVehicule> cartesVehicule;
     private ArrayList<CarteObjectif> cartesObjectif;
-    private Color couleur;
+    private int RGB;
 
-    public Joueur(String nom, Color couleur) {
+    public Joueur(String nom, int RGB) {
         this.nom = nom;
-        this.couleur = couleur;
         this.nbWagon = 0;
+        this.nbPoint = 0;
         this.cartesVehicule = new ArrayList<CarteVehicule>();
         this.cartesObjectif = new ArrayList<CarteObjectif>();
+        this.RGB = RGB;        
     }
 
     public String getNom() {
@@ -27,6 +29,10 @@ public class Joueur {
         return this.nbWagon;
     }
 
+    public int getPoint(){
+        return this.nbPoint;
+    }
+
     public ArrayList<CarteVehicule> getCartesVehicule() {
         return this.cartesVehicule;
     }
@@ -35,8 +41,16 @@ public class Joueur {
         return this.cartesObjectif;
     }
 
+    public void ajouterCarteVehicule(CarteVehicule carte) {
+        this.cartesVehicule.add(carte);
+    }
+
+    public void ajouterCarteObjectif(CarteObjectif carte) {
+        this.cartesObjectif.add(carte);
+    }
+
     public Color getCouleur() {
-        return this.couleur;
+        return new Color(this.RGB);
     }
 
 }

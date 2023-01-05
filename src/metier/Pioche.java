@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import src.Controleur;
 import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 import src.metier.Type;
@@ -14,22 +15,18 @@ public class Pioche {
     
     private List<CarteVehicule> lstCartesVehicule;
     private List<CarteObjectif> lstCartesObjectif;
+    private Controleur ctrl;
     
-    public Pioche(List<CarteVehicule> lstCartesVehicule, List<CarteObjectif> lstCartesObjectif) {
+    public Pioche(Controleur ctrl, List<CarteVehicule> lstCartesVehicule, List<CarteObjectif> lstCartesObjectif) {
+
+        this.ctrl = ctrl;
+
         this.lstCartesVehicule = lstCartesVehicule;
         this.lstCartesObjectif = lstCartesObjectif;
     }
 
-    public ArrayList<CarteVehicule> getLstCartesVehicule() {
-        ArrayList<CarteVehicule> lstVehi = new ArrayList<CarteVehicule>();
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.RED)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.BLUE)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.GREEN)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.PINK)));
-        lstVehi.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
-
-        return lstVehi;
-        // return this.lstCartesVehicule;
+    public List<CarteVehicule> getLstCartesVehicule() {
+        return this.lstCartesVehicule;
     }
 
     public ArrayList<CarteObjectif> getLstCartesObjectif() {
@@ -39,16 +36,31 @@ public class Pioche {
         //return this.lstCartesObjectif;
     }
 
-    public CarteVehicule retirerCarteVehicule() {
-        CarteVehicule carteVehicule = this.lstCartesVehicule.get(0);
-        this.lstCartesVehicule.remove(0);
-            return carteVehicule;
+    public CarteVehicule[] majPiocheVehiculeVisible() {
+        CarteVehicule[] piocheVehiculeVisible = new CarteVehicule[5];
+        for (int i = 0; i < 5; i++) {
+            if (i < this.lstCartesVehicule.size())
+                piocheVehiculeVisible[i] = this.lstCartesVehicule.get(i);
+            else
+                piocheVehiculeVisible[i] = null;
+        }
+        return piocheVehiculeVisible;
     }
 
-    public CarteObjectif retirerCarteObjectif() {
-        CarteObjectif carteObjectif = this.lstCartesObjectif.get(0);
-        this.lstCartesObjectif.remove(0);
-            return carteObjectif;
+    public CarteVehicule retirerCarteVehicule(int i) {
+        return  this.lstCartesVehicule.remove(i);
+    }
+
+    public CarteObjectif retirerCarteObjectif(int i) {
+        return this.lstCartesObjectif.remove(i);
+    }
+
+    public void ajouterCarteVehicule(CarteVehicule carte) {
+        this.lstCartesVehicule.add(carte);
+    }
+
+    public void ajouterCarteObjectif(CarteObjectif carte) {
+        this.lstCartesObjectif.add(carte);
     }
 
     public void melangerCarteVehicule() {
@@ -59,5 +71,17 @@ public class Pioche {
         Collections.shuffle(this.lstCartesObjectif);
     }
 
+    public CarteVehicule piocherVehicule(int i) {
+        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
+            CarteVehicule carteVehi = this.retirerCarteVehicule(i);
+            this.ctrl.majPioche();
+            return carteVehi;
+        }
+        this.ctrl.majPioche();
+        return null;
+    }
 
+    public CarteObjectif piocherObjectif() {
+        return this.retirerCarteObjectif(0);
+    }
 }

@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class Metier {
     
     private Pioche pioche;
-	private int  diametre;
+	private final int  DIAMETRE = 20;
 	private int  nbrJoueurMinimum;
 	private int  nbrJoueurMaximum;
 	private int  nbrJoueurMiniDoubleRoute;
@@ -44,8 +44,7 @@ public class Metier {
     private Controleur ctrl;
 
     public Metier(Controleur ctrl) {
-        this.pioche = null;//a faire
-        this.diametre = 0;
+        this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;
         this.nbrJoueurMiniDoubleRoute = 0;
@@ -75,17 +74,72 @@ public class Metier {
         return this.pioche;
     }
 
-    public void ajouterJoueur(Joueur joueur) {
-        this.lstJoueurs.add(joueur);
+    public int getDiametre(){
+        return this.DIAMETRE;
     }
 
-    public Boolean Piocher(Joueur joueur) {
-        if (this.pioche.getLstCartesVehicule().size() > 0) {
-            joueur.getCartesVehicule().add(this.pioche.getLstCartesVehicule().get(0));
-            this.pioche.getLstCartesVehicule().remove(0);
-            return true;
-        }
-        return false;
+    public double getEspacementVehicule() {
+		return this.espacementVehicule;
+	} 
+    
+    public int getNbrJoueurMinimum(){
+        return this.nbrJoueurMinimum;
+    }
+
+    public int getNbrJoueurMaximum(){
+        return this.nbrJoueurMaximum;
+    }
+
+    public int getNbrJoueurMinimumDoubleRoute(){
+        return this.nbrJoueurMiniDoubleRoute;
+    }
+
+    public int getNbVehiculeJoueur(){
+        return this.nbVehiculeJoueur;
+    }
+
+    public int getNbVehiculeFinPartie(){
+        return this.nbVehiculeFinPartie;
+    }
+
+    public int getNbPointCheminLong(){
+        return this.nbPointCheminLong;
+    }
+
+    public int getLongueurVehicule() {
+        return this.longueurVehicule;
+    }
+
+    public int getHauteurVehicule() {
+        return this.hauteurVehicule;
+    }
+
+    public int getNbJoker(){
+        return this.nombreJoker;
+    }
+
+    public List<Noeud> getLstNoeuds(){
+        return this.lstNoeuds;
+    }
+
+    public List<Arete> getLstAretes(){
+        return this.lstAretes;
+    }
+
+    public List<CarteVehicule> getLstCartesVehicules(){
+        return this.lstCarteVehicules;
+    }
+
+    public List<CarteObjectif> getLstCartesObjectifs(){
+        return this.lstCarteObjectifs;
+    }
+
+    public BufferedImage getBImage(){
+        return this.bImage;
+    }
+
+    public void ajouterJoueur(Joueur joueur) {
+        this.lstJoueurs.add(joueur);
     }
 
     public void melangerPiocheCarteVehicule() {
@@ -94,6 +148,32 @@ public class Metier {
 
     public void melangerPiocheCarteObjectif() {
         this.pioche.melangerCarteObjectif();
+    }
+
+    public CarteObjectif[] PiocheCarteObjectif(Joueur joueur)
+    {
+        CarteObjectif[] cartes = new CarteObjectif[3];
+        if (this.pioche.getLstCartesObjectif().size() > 3) {
+            cartes[0]=this.pioche.getLstCartesObjectif().get(0);
+            cartes[1]=this.pioche.getLstCartesObjectif().get(0);
+            cartes[2]=this.pioche.getLstCartesObjectif().get(0);
+            return cartes;
+        }
+        System.out.println("Pioche Carte Objectif : La pioche est vide");
+        return null;
+    }
+
+    public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
+        for (int i = 0; i < 3; i++) {
+            if (intCarte.contains(i)) 
+                joueur.ajouterCarteObjectif(this.pioche.retirerCarteObjectif(i));
+            else
+                this.pioche.ajouterCarteObjectif((this.pioche.retirerCarteObjectif(i)));   
+        }
+    }
+
+    public Boolean PiocherCarteVehicule(Joueur joueur) {
+        return false;
     }
 
     public void lireXML(File file){
@@ -191,10 +271,14 @@ public class Metier {
             byte[] bytes = Base64.getDecoder().decode(str);		
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             this.bImage = ImageIO.read(bis);
-
-            this.pioche = new Pioche(lstCarteVehicules,lstCarteObjectifs);
+            this.ctrl.setImagePlateau(bImage);
+            this.pioche = new Pioche(this.ctrl, lstCarteVehicules,lstCarteObjectifs);
+            this.pioche.melangerCarteVehicule();
+            this.pioche.melangerCarteObjectif();
 
         }catch(Exception e){e.printStackTrace();}
-    } 
+    }
+
+	
 
 }
