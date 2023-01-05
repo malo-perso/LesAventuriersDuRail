@@ -34,6 +34,7 @@ public class Controleur {
     public void lancerPartie() {
         this.ihmAcceuil.setVisible(false);
         this.ihm = new FramePrincipale(this);
+        setImagePlateau(imagePlateau);
         this.ihm.setVisible(true);
     }
 
@@ -76,7 +77,7 @@ public class Controleur {
     //
      public void setImagePlateau(BufferedImage image) {
         this.imagePlateau = image; 
-        this.ihm.majIHM();
+        //this.ihm.majIHM();
     }
 
     public void ajouterJoueur(String nom, int RGB){
@@ -94,10 +95,8 @@ public class Controleur {
 	}
 
     public static void main (String[] args) {
-        //FlatLightLaf.setup();
+        FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
-        //ctrl.getMetier().lireXML(new File("./src/data/mappe/Europe.xml"));
-        //ctrl.majIHM();
     }
 
 	
