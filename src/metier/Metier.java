@@ -44,6 +44,21 @@ public class Metier {
     private Controleur ctrl;
 
     public Metier(Controleur ctrl) {
+
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
+        this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+
+        //ajouter des cartes vehicules et objectifs dans les listes
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("oui", 0, 0, 0, 0), new Noeud("non", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("caca", 0, 0, 0, 0), new Noeud("pipi", 1, 1, 1, 1), 10));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.YELLOW)));
+
+
         this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;
@@ -56,14 +71,26 @@ public class Metier {
         this.espacementVehicule = 0.0;
         this.lstNoeuds = new ArrayList<Noeud>();
         this.lstAretes = new ArrayList<Arete>();
-        this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
-        this.lstCarteVehicules = new ArrayList<CarteVehicule>();
+
         this.lstJoueurs = new ArrayList<Joueur>();
         this.bImage = null;
 
         this.ctrl = ctrl;
+        //TEMPORAIRE
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
 
-        
+
     }
 
     public List<Joueur> getLstJoueurs() {

@@ -6,10 +6,13 @@ import javax.swing.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 
 public class PanelAcceuil extends JPanel implements ActionListener{
     
     private Controleur ctrl;
+
+    private File reglePDF;
 
     private JButton btnJouer;
     private JButton btnRegles;
@@ -23,6 +26,8 @@ public class PanelAcceuil extends JPanel implements ActionListener{
         this.btnJouer   = new JButton("Jouer");
         this.btnRegles  = new JButton("Regles");
         this.btnQuitter = new JButton("Quitter");
+
+        this.reglePDF = new File("./src/data/PDF/Regles.pdf");
     
         this.add(new JPanel());
         this.add(new JPanel());
@@ -49,14 +54,16 @@ public class PanelAcceuil extends JPanel implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnJouer ) {
-            System.out.println("Jouer");
             this.ctrl.getIHMAcceuil().changePanel("panelJeu");
         }
-        else if ( e.getSource() == this.btnRegles ) {
-            System.out.println("Regles");
+        if(e.getSource() == this.btnRegles){
+
+            try{
+                Desktop.getDesktop().open(reglePDF);
+            }catch(Exception erreur){erreur.printStackTrace();}
         }
         else if ( e.getSource() == this.btnQuitter ) {
-            System.out.println("Quitter");
+            System.exit(0);
         }
     }
 }

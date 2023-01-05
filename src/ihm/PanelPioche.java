@@ -11,10 +11,12 @@ import java.util.List;
 import src.Controleur;
 import src.metier.CarteVehicule;
 import src.metier.CarteObjectif;
+import src.ihm.AfficheCarteObjectif;
 
 public class PanelPioche extends JPanel implements ActionListener{
     
     private Controleur ctrl;
+    private AfficheCarteObjectif afficheCarteObjectif;
     private List<CarteVehicule> piocheVehicule;
     private List<CarteObjectif> piocheObjectif;
     private CarteVehicule[] piocheVehiculeVisible;
@@ -25,19 +27,20 @@ public class PanelPioche extends JPanel implements ActionListener{
 
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
+        this.afficheCarteObjectif = new AfficheCarteObjectif(this.ctrl);
         this.piocheVehicule = ctrl.getPioche().getLstCartesVehicule();
         this.piocheObjectif = ctrl.getPioche().getLstCartesObjectif();
         this.piocheVehiculeVisible = this.ctrl.getPioche().majPiocheVehiculeVisible();
         this.btnPiocheVehiculeVisible = new JButton[5];
+
 
         this.setLayout(new GridLayout(7, 1));
 
         // création des composants
         for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
             this.btnPiocheVehiculeVisible[i] = new JButton(i+"");
-            this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+            //this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
         }
-
         this.btnPiocheVehicule = new JButton("Pioche Vehicule");
         this.btnPiocheObjectif = new JButton("Pioche Objectif");
 
@@ -71,6 +74,10 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
     }
 
+    public List<CarteObjectif> getPiochCarteObjectifs(){
+        return this.piocheObjectif;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -87,6 +94,7 @@ public class PanelPioche extends JPanel implements ActionListener{
         if (e.getSource() == this.btnPiocheObjectif) {
             this.ctrl.getPioche().piocherObjectif();
             System.out.println("Pioche Objectif");
+            this.afficheCarteObjectif.setVisible(true);
         }
     }
 

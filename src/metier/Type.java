@@ -6,7 +6,7 @@ public class Type {
     private static ArrayList<Color> listeCouleurs = new ArrayList<Color>();
 	private Color couleurActuelle;
 
-	private Type(Color couleur){
+	Type(Color couleur){
 		this.couleurActuelle = ajouterCouleur(couleur);
 	}
 

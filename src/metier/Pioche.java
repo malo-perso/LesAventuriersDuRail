@@ -81,7 +81,12 @@ public class Pioche {
         return null;
     }
 
-    public CarteObjectif piocherObjectif() {
-        return this.retirerCarteObjectif(0);
+    public List<CarteObjectif> piocherObjectif() {
+        List<CarteObjectif> lstPiocheObjectif = new ArrayList<CarteObjectif>();
+
+        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
+        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
+        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
+        return lstPiocheObjectif;
     }
 }
