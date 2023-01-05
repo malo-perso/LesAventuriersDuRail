@@ -1,8 +1,8 @@
 package src.ihm;
 
 import src.Controleur;
-
-import src.Controleur;
+import src.metier.*;
+import src.ihm.*;
 
 import java.awt.Color;
 import javax.swing.*;
@@ -39,7 +39,7 @@ public class FramePrincipale extends JFrame {
         this.panelPioche     = new PanelPioche(this.ctrl);
         this.panelJoueurs    = new PanelJoueurs(this.ctrl);
         this.panelPlateau    = new PanelPlateau(this.ctrl);
-        //this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
+        this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
 
         //Action listener
         //Positionnement des composants
@@ -65,10 +65,6 @@ public class FramePrincipale extends JFrame {
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-
-        this.panelPioche = new PanelPioche(ctrl);
-
-        this.add(this.panelPioche, BorderLayout.EAST);
     }
     
 }
