@@ -108,6 +108,8 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 			if(this.model.getRowCount() < this.ctrl.getMetier().getNbrJoueurMinimum()){
 				JOptionPane.showMessageDialog(null,"Il faut plus de joueur");
 			}
+
+			this.ctrl.lancerPartie();
 		}
 	}
 

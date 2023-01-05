@@ -41,7 +41,7 @@ public class AfficheCarteObjectif extends JFrame implements ActionListener {
 
         this.panelObjectif = new JPanel(new GridLayout(1,3));
 
-        System.out.println(this.metier.getBImage());
+        System.out.println(this.metier.getImage());
         
         this.icon1 = new ImageIcon("./src/data/images/Europe.png");
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
