@@ -23,7 +23,7 @@ import javax.imageio.ImageIO;
 public class Metier {
     
     private Pioche pioche;
-	private int  diametre;
+	private final int  DIAMETRE = 20;
 	private int  nbrJoueurMinimum;
 	private int  nbrJoueurMaximum;
 	private int  nbrJoueurMiniDoubleRoute;
@@ -45,7 +45,6 @@ public class Metier {
 
     public Metier(Controleur ctrl) {
         this.pioche = new Pioche(this.lstCarteVehicules, this.lstCarteObjectifs);//a faire
-        this.diametre = 0;
         this.nbrJoueurMinimum = 0;
         this.nbrJoueurMaximum = 0;
         this.nbrJoueurMiniDoubleRoute = 0;
@@ -71,6 +70,70 @@ public class Metier {
 
     public Pioche getPioche() {
         return this.pioche;
+    }
+
+    public int getDiametre(){
+        return this.DIAMETRE;
+    }
+
+    public double getEspacementVehicule() {
+		return this.espacementVehicule;
+	} 
+    
+    public int getNbrJoueurMinimum(){
+        return this.nbrJoueurMinimum;
+    }
+
+    public int getNbrJoueurMaximum(){
+        return this.nbrJoueurMaximum;
+    }
+
+    public int getNbrJoueurMinimumDoubleRoute(){
+        return this.nbrJoueurMiniDoubleRoute;
+    }
+
+    public int getNbVehiculeJoueur(){
+        return this.nbVehiculeJoueur;
+    }
+
+    public int getNbVehiculeFinPartie(){
+        return this.nbVehiculeFinPartie;
+    }
+
+    public int getNbPointCheminLong(){
+        return this.nbPointCheminLong;
+    }
+
+    public int getLongueurVehicule() {
+        return this.longueurVehicule;
+    }
+
+    public int getHauteurVehicule() {
+        return this.hauteurVehicule;
+    }
+
+    public int getNbJoker(){
+        return this.nombreJoker;
+    }
+
+    public List<Noeud> getLstNoeuds(){
+        return this.lstNoeuds;
+    }
+
+    public List<Arete> getLstAretes(){
+        return this.lstAretes;
+    }
+
+    public List<CarteVehicule> getLstCartesVehicules(){
+        return this.lstCarteVehicules;
+    }
+
+    public List<CarteObjectif> getLstCartesObjectifs(){
+        return this.lstCarteObjectifs;
+    }
+
+    public BufferedImage getBImage(){
+        return this.bImage;
     }
 
     public void ajouterJoueur(Joueur joueur) {
@@ -206,10 +269,12 @@ public class Metier {
             byte[] bytes = Base64.getDecoder().decode(str);		
             ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
             this.bImage = ImageIO.read(bis);
-
+            this.ctrl.setImagePlateau(bImage);
             this.pioche = new Pioche(lstCarteVehicules,lstCarteObjectifs);
 
         }catch(Exception e){e.printStackTrace();}
-    } 
+    }
+
+	
 
 }

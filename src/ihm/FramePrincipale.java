@@ -49,7 +49,6 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.btnJouerLocal.addActionListener(this);
 
         //Positionnement des composants
-        this.panelMainJoueur.add(this.btnJouerLocal);
         this.setLayout(new BorderLayout());
 
         this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
@@ -72,6 +71,11 @@ public class FramePrincipale extends JFrame implements ActionListener {
 		this.setExtendedState(this.MAXIMIZED_BOTH);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+    }
+
+    public void majIHM()
+    {
+        this.panelPlateau.majIHM();
     }
 
     public void actionPerformed(ActionEvent e) {

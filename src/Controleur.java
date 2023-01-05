@@ -1,6 +1,9 @@
 package src;
 
+import java.io.File;
 import java.util.List;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 import src.ihm.FramePrincipale;
 import src.metier.CarteObjectif;
@@ -13,11 +16,17 @@ public class Controleur {
 
     private Metier metier;
     private FramePrincipale ihm;
+    private BufferedImage imagePlateau;
+
 
 
     public Controleur() {
         this.metier = new Metier(this);
         this.ihm = new FramePrincipale(this);
+    }
+
+    public void majIHM() {
+        this.ihm.majIHM();
     }
 
     public Metier getMetier(){
@@ -32,7 +41,20 @@ public class Controleur {
         return this.metier.getLstJoueurs();
     }
 
+     public void setImagePlateau(BufferedImage image) {
+        this.imagePlateau = image; 
+        this.ihm.majIHM();
+    }
+
+    public BufferedImage getImagePlateau() {
+		return this.imagePlateau;
+	}
+
     public static void main (String[] args) {
         Controleur ctrl = new Controleur();
+        ctrl.getMetier().lireXML(new File("./src/data/mappe/Europe.xml"));
+        ctrl.majIHM();
     }
+
+	
 }
