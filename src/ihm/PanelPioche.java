@@ -11,12 +11,12 @@ import java.util.List;
 import src.Controleur;
 import src.metier.CarteVehicule;
 import src.metier.CarteObjectif;
-import src.ihm.AfficheCarteObjectif;
+import src.ihm.FrameAfficheCarteObjectif;
 
 public class PanelPioche extends JPanel implements ActionListener{
     
     private Controleur ctrl;
-    private AfficheCarteObjectif afficheCarteObjectif;
+    private FrameAfficheCarteObjectif afficheCarteObjectif;
     private List<CarteVehicule> piocheVehicule;
     private List<CarteObjectif> piocheObjectif;
     private CarteVehicule[] piocheVehiculeVisible;
@@ -27,7 +27,7 @@ public class PanelPioche extends JPanel implements ActionListener{
 
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
-        this.afficheCarteObjectif = new AfficheCarteObjectif(this.ctrl);
+        this.afficheCarteObjectif = new FrameAfficheCarteObjectif(this.ctrl);
         this.piocheVehicule = ctrl.getPioche().getLstCartesVehicule();
         this.piocheObjectif = ctrl.getPioche().getLstCartesObjectif();
         this.piocheVehiculeVisible = this.ctrl.getPioche().majPiocheVehiculeVisible();
