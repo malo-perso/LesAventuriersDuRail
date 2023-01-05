@@ -65,9 +65,9 @@ public class Controleur {
         this.joueurCourant.ajouterCarteVehicule(this.metier.getPioche().piocherVehicule(i));
     }
 
-    public void piocherObjectif() {
-        this.joueurCourant.ajouterCarteObjectif(this.metier.getPioche().piocherObjectif());
-    }
+    // public void piocherObjectif() {
+    //     this.joueurCourant.ajouterCarteObjectif(this.metier.getPioche().piocherObjectif());
+    // }
 
 
      public void setImagePlateau(BufferedImage image) {
