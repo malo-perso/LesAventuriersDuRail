@@ -80,6 +80,15 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Eragon7237", -52));
         this.lstJoueurs.add(new Joueur("Bou",  2500));
         this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
+        this.lstJoueurs.add(new Joueur("Bou",  2500));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556));
 
 
     }
