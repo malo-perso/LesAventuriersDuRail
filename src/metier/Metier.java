@@ -271,6 +271,8 @@ public class Metier {
             this.bImage = ImageIO.read(bis);
             this.ctrl.setImagePlateau(bImage);
             this.pioche = new Pioche(this.ctrl, lstCarteVehicules,lstCarteObjectifs);
+            this.pioche.melangerCarteVehicule();
+            this.pioche.melangerCarteObjectif();
 
         }catch(Exception e){e.printStackTrace();}
     }

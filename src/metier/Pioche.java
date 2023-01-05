@@ -22,15 +22,7 @@ public class Pioche {
 
         this.ctrl = ctrl;
 
-        this.lstCartesVehicule = new ArrayList<CarteVehicule>();
-        for (int i=0; i < 5; i++) {
-            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.RED)));
-            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.BLUE)));
-            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.GREEN)));
-            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.PINK)));
-            this.lstCartesVehicule.add(new CarteVehicule(Type.creerType(Color.ORANGE)));
-        }
-
+        this.lstCartesVehicule = lstCartesVehicule;
         this.lstCartesObjectif = lstCartesObjectif;
     }
 
@@ -47,10 +39,9 @@ public class Pioche {
 
     public CarteVehicule[] majPiocheVehiculeVisible() {
         CarteVehicule[] piocheVehiculeVisible = new CarteVehicule[5];
-        List<CarteVehicule> lstVehi = this.getLstCartesVehicule();
         for (int i = 0; i < 5; i++) {
-            if (i < lstVehi.size())
-                piocheVehiculeVisible[i] = lstVehi.get(i);
+            if (i < this.lstCartesVehicule.size())
+                piocheVehiculeVisible[i] = this.lstCartesVehicule.get(i);
             else
                 piocheVehiculeVisible[i] = null;
         }
