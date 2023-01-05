@@ -32,6 +32,8 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     private JMenuItem menuRegles;
 
+    private JScrollPane scrollPane;
+
     private File reglePDF;
 
     private Controleur ctrl;
@@ -51,6 +53,8 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelPlateau    = new PanelPlateau(this.ctrl);
         this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
 
+        this.scrollPane = new JScrollPane(this.panelPlateau);
+
         this.menuBarre = new JMenuBar();
 
         this.menuAide = new JMenu("Aide");
@@ -68,7 +72,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
         //Positionnement des composants
         this.setLayout(new BorderLayout());
 
-        this.panelBase.add(this.panelPlateau, BorderLayout.CENTER);
+        this.panelBase.add(this.scrollPane, BorderLayout.CENTER);
         this.panelBase.add(this.panelJoueurs, BorderLayout.NORTH);
 
         this.menuAide.add(this.menuRegles);

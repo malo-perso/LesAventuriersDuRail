@@ -26,6 +26,8 @@ public class PanelPlateau extends JPanel {
     PanelPlateau(Controleur ctrl) {
 
         this.ctrl = ctrl;
+
+        this.setPreferredSize(new Dimension(1571,918));
     }
 
     public void majIHM()
