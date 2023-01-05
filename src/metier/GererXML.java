@@ -216,9 +216,8 @@ public class GererXML {
 			trouve = false;
 
 			for (int i=0; i<listeType.size(); i++) {
-				if (arete.getType().getColor() == listeType.get(i).getColor()) {
+				if (arete.getType().getColor().equals(listeType.get(i).getColor())) {
 					trouve = true;
-					break;
 				}
 			}
 			if (!trouve) {
@@ -469,7 +468,9 @@ public class GererXML {
 			this.ctrl.setImagePlateau(bImage2);
 			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
 			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
-			
+			this.ctrl.majNoeud();
+			this.ctrl.majArete();
+			this.ctrl.majCarteObjectif();
 		}catch(Exception e){e.printStackTrace();} 
 	}
 

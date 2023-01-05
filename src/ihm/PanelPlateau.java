@@ -119,7 +119,7 @@ public class PanelPlateau extends JPanel
             double indexeArete=0;
             double indiceDecalage =0 ;
             for (Arete areteD : this.ctrl.getLstAretes()) 
-                if (arete.getNoeud1().equals(areteD.getNoeud1()) && arete.getNoeud2().equals(areteD.getNoeud2()) || arete.getNoeud1().equals(areteD.getNoeud2()) && arete.getNoeud2().equals(areteD.getNoeud1()))
+                if ( (arete.getNoeud1().equals(areteD.getNoeud1()) && arete.getNoeud2().equals(areteD.getNoeud2())) || (arete.getNoeud1().equals(areteD.getNoeud2()) && arete.getNoeud2().equals(areteD.getNoeud1())))
                     {
                         nbArete++;
                         if (arete.equals(areteD))

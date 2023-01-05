@@ -22,9 +22,7 @@ public class Type {
     }
 
 	public static Type creerType (Color couleur) {
-		
-        return new Type(couleur);
-
+        return new Type(Type.ajouterCouleur(couleur));
 	}
 
 	public Color getColor(){
