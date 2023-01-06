@@ -55,7 +55,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.setBackground(Color.PINK);
 
         this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
-        this.lstCarteVehicule = this.ctrl.getPioche().getLstCartesVehicule();
+        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
         this.carteObjectifChoisie = new ArrayList<Integer>(3);
         this.carteObjectifChoisie.add(0);
         this.carteObjectifChoisie.add(2);
@@ -66,6 +66,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.panelOrganisation = new JPanel(new BorderLayout());
         this.panelCarteObjectif = new JPanel();
         this.panelInfo = new JPanel(new GridLayout(2,2));
+        this.panelCarteCoul = new JPanel();
 
         this.imgPara = new ImageIcon("./src/data/images/Engrennage.jpg");
         this.imgObjectif = new ImageIcon("./src/data/images/map.jpg");
@@ -74,9 +75,10 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
+
         
         if(this.lstCarteVehicule.size()<10){
-            this.panelCarteCoul = new JPanel(new GridLayout(1,10,5,0));
+            this.panelCarteCoul.setLayout(new GridLayout(1,10,5,0));
 
             for(int i=0; i<this.lstCarteVehicule.size(); i++){
                 this.btnCarteVehicule[i] = new JButton();
@@ -84,16 +86,16 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
             }
-            for(int i=this.lstCarteVehicule.size(); i<15;i++){
+            for(int i=this.lstCarteVehicule.size(); i<10;i++){
                 this.panelCarteCoul.add(new JLabel());
             }
         }else{
-            this.panelCarteCoul = new JPanel(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
+            this.panelCarteCoul.setLayout(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
 
             for(int i=0; i<this.lstCarteVehicule.size(); i++){
                 this.btnCarteVehicule[i] = new JButton();
                 this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
-                this.btnCarteVehicule[i].setPreferredSize(new Dimension(40, 130));
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
             }
         }
@@ -160,11 +162,41 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
     
     public void majIHM() {
+        
+        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
+
+
         this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
 
-        System.out.println(this.carteObjectifChoisie);
+        this.panelCarteCoul.removeAll();
+
+        if(this.lstCarteVehicule.size()<10){
+            this.panelCarteCoul.setLayout(new GridLayout(1,10,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+            for(int i=this.lstCarteVehicule.size(); i<10;i++){
+                this.panelCarteCoul.add(new JLabel());
+            }
+        }else{
+            this.panelCarteCoul.setLayout(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+        }
+
+        
+
     }
 
     public void setInutilisable(){

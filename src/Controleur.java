@@ -41,12 +41,12 @@ public class Controleur {
 
     public void lancerPartie() {
         this.ihmAcceuil.setVisible(false);
+        this.joueurCourant = this.metier.getLstJoueurs().get(0);
         this.ihm = new FramePrincipale(this);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
         setImagePlateau(imagePlateau);
         this.ihm.setVisible(true);
         this.majPioche();
-        this.joueurCourant = this.metier.getLstJoueurs().get(0);
         this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction);
         this.ihm.majIHM();
 
