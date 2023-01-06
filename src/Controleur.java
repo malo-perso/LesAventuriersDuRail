@@ -22,7 +22,6 @@ public class Controleur {
     private FramePrincipale ihm;
     private BufferedImage imagePlateau;
 
-
     private Joueur joueurCourant;
 
     public Controleur() {
@@ -102,7 +101,5 @@ public class Controleur {
     public static void main (String[] args) {
         FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
-    }
-
-	
+    }	
 }
