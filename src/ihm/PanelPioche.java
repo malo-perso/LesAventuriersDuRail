@@ -11,6 +11,7 @@ import java.util.List;
 import src.Controleur;
 import src.metier.CarteVehicule;
 import src.metier.CarteObjectif;
+import src.ihm.FrameAfficheCarteObjectif;
 
 public class PanelPioche extends JPanel implements ActionListener{
     
@@ -91,6 +92,7 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
+            this.ctrl.getMetier().piocherObjectif();
             this.ctrl.getPioche().piocherObjectif();
             System.out.println("Pioche Objectif");
             this.afficheCarteObjectif.setVisible(true);

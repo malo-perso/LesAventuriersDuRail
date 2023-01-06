@@ -24,7 +24,6 @@ public class Controleur {
     private FramePrincipale ihm;
     private BufferedImage imagePlateau;
 
-
     private Joueur joueurCourant;
     private int nbWagon;
     private int actionEnCours; //1 = piocher Wagon, 2 = piocher Obejectif, 3 = poser Wagon
@@ -148,7 +147,5 @@ public class Controleur {
     public static void main (String[] args) {
         FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
-    }
-
-	
+    }	
 }
