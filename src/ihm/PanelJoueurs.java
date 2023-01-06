@@ -43,13 +43,13 @@ public class PanelJoueurs extends JPanel{
         this.panelGrilleJoueur.setBackground(Color.WHITE);
 
         if ( this.alPanelJoueur.size()-1 < 10){
-            this.panelGrilleJoueur.setLayout(new GridLayout(1,10, 4, 0 ));
+            this.panelGrilleJoueur.setLayout(new GridLayout(1,9, 4, 0 ));
 
             //Remplissage du panelGrilleJoueur
             for(FicheJoueur ficheJoueur : this.alPanelJoueur){
                 this.panelGrilleJoueur.add(ficheJoueur);
             }
-            for(int i=this.alPanelJoueur.size()-1; i<9; i++){
+            for(int i=this.alPanelJoueur.size()-1; i<8; i++){
                 this.panelGrilleJoueur.add(new JLabel());
             }
 
@@ -93,7 +93,7 @@ public class PanelJoueurs extends JPanel{
             this.lblNom = new JLabel(nom, SwingConstants.CENTER);
             this.lblNom.setFont(this.lblNom.getFont().deriveFont(20f));
             this.lblPoint = new JLabel( String.format("%3d",point) +  " Point" + (point>1?"s":" "));
-            this.lblNbWagon = new JLabel( String.format("%3d",nbWagon) + (nbWagon>1?" Wagons restants":" Wagon restant  "));
+            this.lblNbWagon = new JLabel( String.format("%3d",nbWagon) + (nbWagon>1?" Wagons restants ":" Wagon restant   "));
             this.lblNbCarteObjectif = new JLabel( String.format("%3d",nbCarteObjectif) + (nbCarteObjectif>1?" Cartes objectifs":" Carte objectif  "));
             this.lblNbCarteVehicule = new JLabel( String.format("%3d",nbCarteVehicule) + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule  "));
 

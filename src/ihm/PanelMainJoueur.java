@@ -4,6 +4,7 @@ import src.Controleur;
 import src.metier.CarteVehicule;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.plaf.DimensionUIResource;
 
 import src.Controleur;
@@ -49,20 +50,37 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.panelOrganisation = new JPanel(new BorderLayout());
-        this.panelCarteCoul = new JPanel();
         this.panelCarteObjectif = new JPanel();
         this.panelInfo = new JPanel(new GridLayout(2,2));
 
-        for(int i=0; i<this.lstCarteVehicule.size(); i++){
-            this.btnCarteVehicule[i] = new JButton("btn"+i);
-            //this.btnCarteCoul[i].setBackground(this.carteVehiculeJoueur.getType().getColor());
-            this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+        if(this.lstCarteVehicule.size()<10){
+            this.panelCarteCoul = new JPanel(new GridLayout(1,10,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+            for(int i=this.lstCarteVehicule.size(); i<15;i++){
+                this.panelCarteCoul.add(new JLabel());
+            }
+        }else{
+            this.panelCarteCoul = new JPanel(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(40, 130));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
         }
 
         this.panelCarteObjectif.add(new JButton("btnObjectif"));
         this.panelCarteObjectif.add(new JButton("btnObjectif"));
 
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
+        this.scrollCarteCoul.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollCarteObjectif 
         this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);
 
@@ -89,8 +107,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.panelInfo.add(this.lblNbPoints);
         this.panelInfo.add(this.btnParametre);
 
-        this.add(this.scrollCarteCoul);
-        this.add(this.scrollCarteObjectif);
+        //this.add(this.scrollCarteCoul);
+        //this.add(this.scrollCarteObjectif);
 
         this.panelOrganisation.add(this.scrollCarteCoul, BorderLayout.CENTER);
         this.panelOrganisation.add(this.scrollCarteObjectif, BorderLayout.EAST);
