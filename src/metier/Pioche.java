@@ -84,9 +84,9 @@ public class Pioche {
     public List<CarteObjectif> piocherObjectif() {
         List<CarteObjectif> lstPiocheObjectif = new ArrayList<CarteObjectif>();
 
-        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
-        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
-        lstPiocheObjectif.add(this.retirerCarteObjectif(0));
+        lstPiocheObjectif.add(this.lstCartesObjectif.get(0));
+        lstPiocheObjectif.add(this.lstCartesObjectif.get(1));
+        lstPiocheObjectif.add(this.lstCartesObjectif.get(2));
         return lstPiocheObjectif;
     }
 }
