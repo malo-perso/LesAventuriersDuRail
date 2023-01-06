@@ -58,7 +58,7 @@ public class Metier {
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.YELLOW)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(this.couleurJoker)));
 
 
         this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
@@ -308,6 +308,8 @@ public class Metier {
         return false;
     }
 
+    
+
     //Pas testée
     public boolean verifCarteJoker(CarteVehicule carteVehicule) {
         if(carteVehicule.getType().getColor().equals(this.couleurJoker)){
@@ -320,6 +322,13 @@ public class Metier {
         if(arete.getType().getColor().equals(this.couleurJoker)){
             return true;
         }
+        return false;
+    }
+
+    public boolean estPrenable(Arete arete, Joueur joueur, Color color)
+    {
+        if(joueur.getNbCarteWagon(color) +  joueur.getNbCarteWagon(this.couleurJoker)>= arete.getLongueur())
+            return true;
         return false;
     }
 

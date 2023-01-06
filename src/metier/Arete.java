@@ -54,7 +54,7 @@ public class Arete {
         return this.orientation;
     }
 
-    public Boolean estDisponible(Joueur joueur)
+    public Boolean estDisponible()
     {
         if (this.proprietaire == null)
             return true;

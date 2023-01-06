@@ -58,4 +58,36 @@ public class Joueur {
         return new Color(this.RGB);
     }
 
+    public int getNbCarteWagon(Color type)
+    {
+        int nb = 0;
+        for (CarteVehicule carte : this.cartesVehicule) {
+            if (carte.getType().getColor() == type) {
+                nb++;
+            }
+        }
+        return nb;
+    }
+
+    public void supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
+        int i;
+        for (i = 0; i < nb; i++) {
+            for (CarteVehicule carte : this.cartesVehicule) {
+                if (carte.getType().getColor() == color) {
+                    this.cartesVehicule.remove(carte);
+                    break;
+                }
+            }
+        }
+
+        for (int j =i ; j < nb; j++) {
+            for (CarteVehicule carte : this.cartesVehicule) {
+                if (carte.getType().getColor() == colorJoker) {
+                    this.cartesVehicule.remove(carte);
+                    break;
+                }
+            }
+        }
+    }
+
 }

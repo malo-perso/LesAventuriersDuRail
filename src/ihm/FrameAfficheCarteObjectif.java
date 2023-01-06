@@ -143,7 +143,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
                 this.ctrl.piocherObjectif(carteChoisie);
                 this.dispose();
                 clearCheckBox();
-                this.ctrl.getIHM().activerComposants();
+                this.ctrl.getIHM().activer();
                 this.ctrl.getIHM().setVisible(true);
             }
         }

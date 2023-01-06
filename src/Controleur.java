@@ -15,7 +15,9 @@ import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 import src.metier.Joueur;
 import src.metier.Metier;
+import src.metier.Noeud;
 import src.metier.Pioche;
+import src.metier.Type;
 
 public class Controleur {
 
@@ -26,7 +28,7 @@ public class Controleur {
 
     private Joueur joueurCourant;
     private int nbWagon;
-    private int actionEnCours; //1 = piocher Wagon, 2 = piocher Obejectif, 3 = poser Wagon
+    private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
 
     public Controleur() {
         this.metier = new Metier(this);
@@ -84,7 +86,7 @@ public class Controleur {
         return this.metier.verifFinDePartie();
     }
 
-    public void gestionTour() {
+    public void finDuTour() {
         //if (this.verifFinDePartie()) 
             //this.ihm.finDePartie();
         this.nbWagon = 0;
@@ -100,32 +102,76 @@ public class Controleur {
     public void piocherVehicule(int i) {
         this.actionEnCours = 1;
 
-        //verif joker à faire
         if (i<6 && this.metier.verifCarteJoker(this.getMetier().getLstCartesVehicules().get(i)))
+        {
             this.nbWagon=2;
-        else    
+            this.getIHM().activer();
+            this.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
+        }
+        else
             this.nbWagon++;
         
         this.joueurCourant.ajouterCarteVehicule(this.metier.getPioche().piocherVehicule(i));
         
         if(this.nbWagon==2)
-            gestionTour();
+            finDuTour();
     }
 
-    public void poserWagon(Arete arete) {
+    public boolean poserWagon(Noeud noeud1, Noeud noeud2) {
         this.actionEnCours = 0;
         
-        gestionTour();
+        ArrayList<Arete> aretesSelect = new ArrayList<Arete>();
+        Arete areteSelect = null;
+        Type type = null;
+
+        for (Arete arete : this.metier.getLstAretes()) {
+            if(arete.estAreteDe(noeud1, noeud2) && arete.estDisponible()){
+                aretesSelect.add(arete);
+            }
+        }
+
+        //verif s il a selectionne quelque chose 
+        if (aretesSelect.size()==0)
+            return false;
+        
+        /* si arete double , on demande à l'utilisateur de choisir entres les deux
+        if(aretesSelect.size()>1)
+            areteSelect = this.ihm.selectArete(aretesSelect);
+        else*/
+        areteSelect = aretesSelect.get(0);
+        
+        //si arete joker on demande à l'utilisateur de choisir le type de wagon qu il va poser
+        /* 
+        if(this.metier.verifVoieJoker(areteSelect));
+            //this.ihm.selectArete(areteSelect, joueurCourant);
+        else*/
+        type = areteSelect.getType();
+
+        //verif à assez de carte vehicule pour prendre l'arete
+        if (this.metier.estPrenable(areteSelect, this.joueurCourant, type.getColor()))
+            return false;
+
+
+        //verif si le joueur a assez de vehicule pour poser l'arete
+        if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur())
+            return false;
+
+        this.joueurCourant.supprimerCarteVehicule(type.getColor(), areteSelect.getLongueur(),this.metier.getCouleurJoker());
+        areteSelect.setProprietaire(this.joueurCourant);
+
+        
+        finDuTour();
+        return true;
     }
 
     public void piocherObjectif(ArrayList<Integer> carteChoisie) {
 
         this.actionEnCours = 2;
         this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisie);
-        gestionTour();
+        finDuTour();
     }
 
-     public void setImagePlateau(BufferedImage image) {
+    public void setImagePlateau(BufferedImage image) {
         this.imagePlateau = image; 
         //this.ihm.majIHM();
     }
