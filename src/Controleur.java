@@ -13,6 +13,7 @@ import src.ihm.FramePrincipale;
 import src.metier.Arete;
 import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
+import src.ihm.FrameAfficheCarteObjectif;
 import src.metier.Joueur;
 import src.metier.Metier;
 import src.metier.Noeud;
@@ -24,6 +25,7 @@ public class Controleur {
     private Metier metier;
     private FrameAcceuil ihmAcceuil;
     private FramePrincipale ihm;
+    private FrameAfficheCarteObjectif frameAfficheCarteObjectif;
     private BufferedImage imagePlateau;
 
     private Joueur joueurCourant;
@@ -40,6 +42,7 @@ public class Controleur {
     public void lancerPartie() {
         this.ihmAcceuil.setVisible(false);
         this.ihm = new FramePrincipale(this);
+        this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
         setImagePlateau(imagePlateau);
         this.ihm.setVisible(true);
         this.majPioche();
@@ -79,6 +82,10 @@ public class Controleur {
 
     public FrameAcceuil getIHMAcceuil(){
         return this.ihmAcceuil;
+    }
+
+    public ArrayList<Integer> getCarteobjectifChoisie(){
+        return this.frameAfficheCarteObjectif.getCarteObjectifChoisie();
     }
 
     public void majPioche() {

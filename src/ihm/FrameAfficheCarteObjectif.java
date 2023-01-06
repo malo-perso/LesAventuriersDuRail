@@ -34,7 +34,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
     private JCheckBox cbCarte3;
 
     private List<CarteObjectif> lstCarteObjectifs;
-
+    private ArrayList<Integer> carteChoisie;
     private ImageIcon icon1;
 
     private Image img1;
@@ -53,7 +53,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.panelCB = new JPanel(new GridLayout(1,3));
         this.panelValidation = new JPanel(new GridLayout(1,3));
         
-        this.icon1 = new ImageIcon("./src/data/images/Europe.png");
+        this.icon1 = new ImageIcon(this.ctrl.getImagePlateau());
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
 
         this.btnCarte1 = new JButton();
@@ -70,9 +70,9 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.cbCarte3.setHorizontalAlignment(SwingConstants.CENTER);
 
         ArrayList<CarteObjectif> lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
-        this.btnCarte1.setText(lstCartePioche.get(0).getNoeud1().getNom() + " " +  lstCartePioche.get(0).getNoeud2().getNom() + " " + lstCartePioche.get(0).getPoints());
-        this.btnCarte2.setText(lstCartePioche.get(1).getNoeud1().getNom() + " " +  lstCartePioche.get(1).getNoeud2().getNom() + " " + lstCartePioche.get(1).getPoints());
-        this.btnCarte3.setText(lstCartePioche.get(2).getNoeud1().getNom() + " " +  lstCartePioche.get(2).getNoeud2().getNom() + " " + lstCartePioche.get(2).getPoints());
+        this.btnCarte1.setText("De " + lstCartePioche.get(0).getNoeud1().getNom() + " à " +  lstCartePioche.get(0).getNoeud2().getNom() + " " + lstCartePioche.get(0).getPoints() + " points");
+        this.btnCarte2.setText("De " + lstCartePioche.get(1).getNoeud1().getNom() + " à " +  lstCartePioche.get(1).getNoeud2().getNom() + " " + lstCartePioche.get(1).getPoints() + " points");
+        this.btnCarte3.setText("De " + lstCartePioche.get(2).getNoeud1().getNom() + " à  " +  lstCartePioche.get(2).getNoeud2().getNom() + " " + lstCartePioche.get(2).getPoints() + " points" );
 
 
         this.btnCarte1.setIcon(new ImageIcon(img1));
@@ -95,13 +95,15 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.cbCarte2.addActionListener(this);
         this.cbCarte3.addActionListener(this);
 
+        //this.cbCarte1.setSelected(true);
+
         this.panelObjectif.add(this.btnCarte1);
         this.panelObjectif.add(this.btnCarte2);
         this.panelObjectif.add(this.btnCarte3);
 
-        this.panelCB.add(this.cbCarte1,SwingConstants.CENTER);
-        this.panelCB.add(this.cbCarte2, SwingConstants.CENTER);
         this.panelCB.add(this.cbCarte3,SwingConstants.CENTER);
+        this.panelCB.add(this.cbCarte2, SwingConstants.CENTER);
+        this.panelCB.add(this.cbCarte1,SwingConstants.CENTER);
        
         this.panelValidation.add(new JLabel());
         this.panelValidation.add(this.btnValider);
@@ -122,7 +124,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        ArrayList<Integer> carteChoisie = new ArrayList<Integer>();
+        this.carteChoisie = new ArrayList<Integer>();
         if(e.getSource() == this.btnValider){
 
             if ( this.cbCarte1.isSelected()){
@@ -140,7 +142,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
             if(carteChoisie.size() == 0){
                 JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
             }else{
-                this.ctrl.piocherObjectif(carteChoisie);
+                this.ctrl.piocherObjectif(this.carteChoisie);
                 this.dispose();
                 clearCheckBox();
                 this.ctrl.getIHM().activer();
@@ -148,6 +150,9 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
             }
         }
         
+    }
+    public ArrayList<Integer> getCarteObjectifChoisie(){
+        return this.carteChoisie;
     }
     
 }

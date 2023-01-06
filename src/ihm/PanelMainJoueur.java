@@ -1,16 +1,20 @@
 package src.ihm;
 
 import src.Controleur;
+import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.text.AttributeSet.FontAttribute;
 
 import src.Controleur;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PanelMainJoueur extends JPanel implements ActionListener {
@@ -32,45 +36,93 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
 
     private List<CarteVehicule> lstCarteVehicule;
+    private ArrayList<CarteObjectif> lstCarteObjectif;
+    private ArrayList<Integer> carteObjectifChoisie;
     private CarteVehicule[] carteVehiculeMainJoueur;
     private JButton[] btnCarteVehicule;
+    private JButton[] btnCarteObjectif;
 
-    private ImageIcon imgV;
+    private ImageIcon imgPara,imgObjectif,imgPlateau;;
+
+    private Image img2;
 
     public PanelMainJoueur(Controleur ctrl){
         this.ctrl = ctrl;
 
-        this.setSize(600,300);
+        this.setPreferredSize(new Dimension(600,130));
         //this.setLayout(new GridLayout(1,3));
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK);
 
-        this.lstCarteVehicule = ctrl.getPioche().getLstCartesVehicule();
+        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
+        this.lstCarteVehicule = this.ctrl.getPioche().getLstCartesVehicule();
+        this.carteObjectifChoisie = new ArrayList<Integer>(3);
+        this.carteObjectifChoisie.add(0);
+        this.carteObjectifChoisie.add(2);
+        this.carteObjectifChoisie.add(1);
 
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
+        this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
         this.panelOrganisation = new JPanel(new BorderLayout());
-        this.panelCarteCoul = new JPanel();
         this.panelCarteObjectif = new JPanel();
         this.panelInfo = new JPanel(new GridLayout(2,2));
 
-        for(int i=0; i<this.lstCarteVehicule.size(); i++){
-            this.btnCarteVehicule[i] = new JButton("btn"+i);
-            //this.btnCarteCoul[i].setBackground(this.carteVehiculeJoueur.getType().getColor());
-            this.panelCarteCoul.add(this.btnCarteVehicule[i]);
-        }
+        this.imgPara = new ImageIcon("./src/data/images/Engrennage.jpg");
+        this.imgObjectif = new ImageIcon("./src/data/images/map.jpg");
+        this.imgPlateau = new ImageIcon(this.ctrl.getImagePlateau());
+        this.img2 = imgPlateau.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
 
-        this.panelCarteObjectif.add(new JButton("btnObjectif"));
-        this.panelCarteObjectif.add(new JButton("btnObjectif"));
+        Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+        
+        if(this.lstCarteVehicule.size()<10){
+            this.panelCarteCoul = new JPanel(new GridLayout(1,10,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+            for(int i=this.lstCarteVehicule.size(); i<15;i++){
+                this.panelCarteCoul.add(new JLabel());
+            }
+        }else{
+            this.panelCarteCoul = new JPanel(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(40, 130));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+        }
+        if(this.carteObjectifChoisie != null){
+            this.panelCarteObjectif.setLayout(new GridLayout(this.carteObjectifChoisie.size(),1));
+            for(int i = 0; i< this.carteObjectifChoisie.size(); i++){
+                this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
+                this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
+                switch(this.carteObjectifChoisie.get(i)){
+                    case 0 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(0).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(0).getNoeud2().getNom() + " " + lstCarteObjectif.get(0).getPoints() + " points");
+                             break;
+                    case 1 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(1).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(1).getNoeud2().getNom() + " " + lstCarteObjectif.get(1).getPoints() + " points");
+                             break;
+                    case 2 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(2).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(2).getNoeud2().getNom() + " " + lstCarteObjectif.get(2).getPoints() + " points");
+                             break;
+                }
+                this.btnCarteObjectif[i].setPreferredSize(new Dimension(300,200));
+                this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.panelCarteObjectif.add(this.btnCarteObjectif[i]);
+            }
+        }
+        else
+            this.panelCarteObjectif.add(new JLabel("Pas de carte Objectif",SwingConstants.CENTER));
 
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
+        this.scrollCarteCoul.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollCarteObjectif 
-        this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);
-
-
-        this.imgV = new ImageIcon("./src/data/images/Engrennage.jpg");
-
-        Image img1 = imgV.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-        
+        this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);      
 
         this.btnPerso = new JButton("MisterConfiture");
         this.btnParametre = new JButton(new ImageIcon(img1));
@@ -89,8 +141,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.panelInfo.add(this.lblNbPoints);
         this.panelInfo.add(this.btnParametre);
 
-        this.add(this.scrollCarteCoul);
-        this.add(this.scrollCarteObjectif);
+        //this.add(this.scrollCarteCoul);
+        //this.add(this.scrollCarteObjectif);
 
         this.panelOrganisation.add(this.scrollCarteCoul, BorderLayout.CENTER);
         this.panelOrganisation.add(this.scrollCarteObjectif, BorderLayout.EAST);
@@ -111,6 +163,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
+
+        System.out.println(this.carteObjectifChoisie);
     }
 
     public void setInutilisable(){
