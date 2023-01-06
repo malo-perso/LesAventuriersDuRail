@@ -32,6 +32,7 @@ public class GererXML {
     private int  longueurVehicule;
     private int  hauteurVehicule;
 	private int nombreJoker;
+	private Color couleurJoker;
     private double espacementVehicule;
 	private ArrayList<Noeud> lstNoeuds;
 	private ArrayList<Arete> lstAretes;
@@ -53,6 +54,7 @@ public class GererXML {
         this.hauteurVehicule = 10;
         this.espacementVehicule = 1.5;
 		this.nombreJoker = 5;
+		this.couleurJoker = Color.LIGHT_GRAY;
 
 		this.ctrl = ctrl;
 
@@ -218,7 +220,7 @@ public class GererXML {
 			trouve = false;
 
 			for (int i=0; i<listeType.size(); i++) {
-				if (arete.getType().getColor().equals(listeType.get(i).getColor())) {
+				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker)) {
 					trouve = true;
 				}
 			}
@@ -226,8 +228,20 @@ public class GererXML {
 				listeType.add(arete.getType());
 			}
 		}
+
+		listeType.add(Type.creerType(this.couleurJoker));
+
 		return listeType;
 	}
+
+	public void setCouleurJoker (Color couleurJoker) {
+		this.couleurJoker = couleurJoker;
+	}
+
+	public Color getCouleurJoker () {
+		return this.couleurJoker;
+	}
+
 	/*****************/
     /*     Arete     */
     /*****************/
@@ -309,6 +323,7 @@ public class GererXML {
 					 "\t\t<longueurVehicule>" + this.getLongueurVehicule() + "</longueurVehicule>\n" +
 					 "\t\t<hauteurVehicule>" + this.getHauteurVehicule() + "</hauteurVehicule>\n" +
 					 "\t\t<espacementVehicule>" + this.getEspacementVehicule() + "</espacementVehicule>\n" +
+					 "\t\t<couleurJoker>" + this.getCouleurJoker().getRGB() + "</couleurJoker>\n" +
 					 "\t</regles>\n");
 
 			bw.write("\t<lstNoeuds>"                         		 + "\n");
@@ -388,6 +403,7 @@ public class GererXML {
 			this.setLongueurVehicule(Integer.parseInt(regles.getChildText("longueurVehicule")));
 			this.setHauteurVehicule(Integer.parseInt(regles.getChildText("hauteurVehicule")));
 			this.setEspacementVehicule(Double.parseDouble(regles.getChildText("espacementVehicule")));
+			this.setCouleurJoker(new Color(Integer.parseInt(regles.getChildText("couleurJoker"))));
 
 			List listNoeud = racine.getChild("lstNoeuds").getChildren("noeud");
 			Iterator i = listNoeud.iterator();
@@ -470,6 +486,7 @@ public class GererXML {
 			this.ctrl.setImagePlateau(bImage2);
 			this.ctrl.majLabelResume(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
 			this.ctrl.majTxtRegleJeu(this.nbrJoueurMinimum, this.nbrJoueurMaximum, this.nbVehiculeJoueur, this.nbrJoueurMiniDoubleRoute,this.nbVehiculeFinPartie, this.nbPointCheminLong);
+			this.ctrl.majCouleurJoker(this.couleurJoker);
 			this.ctrl.majNoeud();
 			this.ctrl.majArete();
 			this.ctrl.majCarteObjectif();

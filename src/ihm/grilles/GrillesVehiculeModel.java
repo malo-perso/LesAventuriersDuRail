@@ -49,7 +49,7 @@ public class GrillesVehiculeModel extends AbstractTableModel
                 this.tabVehicules[i][0] = 12;
                 this.tabVehicules[i][1] = this.ctrl.getLstType().get(i).getColor();
             }
-            System.out.println("oui");
+            
         }
 
         this.fireTableDataChanged();

@@ -27,9 +27,11 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
 
     private JPanel panelValidation, panelArete, panelAreteBtn, panelRemplissage, panelTable, panelClear;
 
-    private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear;
+    private JButton btnRetour, btnSuivant, btnAjoutArete, btnSupprArete, btnClear, btnCouleurJoker;
     private JComboBox<String> listNoeud1, listNoeud2;
     private JScrollBar  sbLongueur, sbHauteur, sbEspacement;
+
+    private Color couleurJoker;
 
     private JTextField txtLongueurArete;
 
@@ -67,7 +69,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.btnClear = new JButton("Effacer");
         this.btnAjoutArete = new JButton("Ajouter +");
         this.btnSupprArete = new JButton("Supprimer -");
-        this.btnSuivant = new JButton("Suivant");
+        this.btnCouleurJoker = new JButton("Couleur Joker");
 
         Vector<String> vNoeud = new Vector<String>(this.ctrl.getNomNoeuds());
 
@@ -87,6 +89,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.panelValidation  = new JPanel(new GridLayout(4,3));
         this.panelRemplissage = new JPanel(new GridLayout(2,4));
         this.panelClear       = new JPanel(new GridLayout(2,3));
+        JPanel panelCouleur   = new JPanel();
 
         // activation des composants
         this.btnAjoutArete.addActionListener(this);
@@ -94,12 +97,16 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.btnClear.addActionListener(this);
         this.btnSuivant.addActionListener(this);
         this.btnRetour.addActionListener(this);
+        this.btnCouleurJoker.addActionListener(this);
         this.sbEspacement.addAdjustmentListener(this);
         this.sbLongueur.addAdjustmentListener(this);
         this.sbHauteur.addAdjustmentListener(this);
 
 
         // ajout des composants
+        panelCouleur.add(new JLabel("Couleur Joker :", SwingConstants.CENTER));
+        panelCouleur.add(this.btnCouleurJoker);
+        
         this.panelRemplissage.add(new JLabel("Noeud 1 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Noeud 2 :", SwingConstants.CENTER));
         this.panelRemplissage.add(new JLabel("Longueur :", SwingConstants.CENTER));
@@ -116,7 +123,6 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.panelClear.add(new JLabel());
         this.panelClear.add(new JLabel());
         
-
         this.panelArete.add(this.panelClear, BorderLayout.SOUTH);
         this.panelArete.add(this.panelRemplissage, BorderLayout.CENTER);
 
@@ -142,6 +148,7 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
         this.panelValidation.add(this.btnSuivant);
 
         this.add(new JLabel("Création des arêtes", SwingConstants.CENTER), BorderLayout.NORTH);
+        this.add(panelCouleur, BorderLayout.NORTH);
         this.add(this.panelTable, BorderLayout.CENTER);
         this.add(this.panelValidation, BorderLayout.SOUTH);
 
@@ -192,10 +199,20 @@ public class PanelAretes extends JPanel implements ActionListener,AdjustmentList
     public void majArete(ArrayList<Arete> lstAretes) {
         this.model.majTable(lstAretes);
     }
+
+    public void majCouleurJoker(Color couleur) {
+        this.btnCouleurJoker.setBackground(couleur);
+    }
     
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnClear){
             this.removePanelRemplissage();
+        }
+
+        if(e.getSource() == this.btnCouleurJoker) {
+            Color c = JColorChooser.showDialog(this, "Choisissez la couleur Joker", this.btnCouleurJoker.getBackground());
+            this.btnCouleurJoker.setBackground(c);
+            this.ctrl.majCouleurJoker(c);
         }
 
         if(e.getSource() == this.btnAjoutArete){

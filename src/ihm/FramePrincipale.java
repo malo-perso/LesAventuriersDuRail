@@ -222,6 +222,12 @@ public class FramePrincipale extends JFrame implements ActionListener
         this.panelRegleJeu.majTxtRegleJeu(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
     }
 
+    public void majCouleurJoker(Color couleurJoker){
+        this.panelArete.majCouleurJoker(couleurJoker);
+        this.panelResume.majCouleurJoker(couleurJoker);
+        this.panelVehicule.majTableVehicule(this.ctrl.getLstType());
+    }
+
     public void supprimerRegleJeu(){
         this.panelRegleJeu.supprimerRegleJeu();
     }

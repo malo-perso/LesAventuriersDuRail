@@ -40,6 +40,7 @@ public class PanelResume extends JPanel implements ActionListener{
 
     private JButton btnRetour;
     private JButton btnEnregistrer;
+    private JButton btnCouleurJoker;
 
     private int nbJoueurMin;
     private int nbJoueurMax;
@@ -93,6 +94,7 @@ public class PanelResume extends JPanel implements ActionListener{
         this.nbVehiculeJoueur = ctrl.getMetier().getNbVehiculeJoueur();
         this.nbVehiculeFin    = ctrl.getMetier().getNbVehiculeFinPartie();
         this.nbPointCheminLong = ctrl.getMetier().getNbPointCheminLong();
+        this.btnCouleurJoker = new JButton("Couleur joker");
 
 
         this.lblJMin = new JLabel("Joueur Min : " + this.nbJoueurMin);
@@ -111,13 +113,13 @@ public class PanelResume extends JPanel implements ActionListener{
         
         this.setLayout(new BorderLayout());
         this.panelAll.setLayout(new GridLayout(4,1));
-        this.panelJoueur.setLayout(new GridLayout(6,1));
+        this.panelJoueur.setLayout(new GridLayout(7,1));
         this.panelNoeud.setLayout(new BorderLayout());
         this.panelArrete.setLayout(new BorderLayout());
         this.panelObjectif.setLayout(new BorderLayout());
         this.panelBtn.setLayout(new GridLayout(1,3));
-         
-
+        
+        this.panelJoueur.add(this.btnCouleurJoker);
         this.panelJoueur.add(this.lblJMin);
         this.panelJoueur.add(this.lblJMax);
         this.panelJoueur.add(this.lblVehicule);
@@ -143,6 +145,7 @@ public class PanelResume extends JPanel implements ActionListener{
         
         this.btnRetour.addActionListener(this);
         this.btnEnregistrer.addActionListener(this);
+        this.btnCouleurJoker.addActionListener(this);
     }
     
     public void majNoeud(ArrayList<Noeud> noeuds) {
@@ -177,6 +180,10 @@ public class PanelResume extends JPanel implements ActionListener{
         }
     }
 
+    public void majCouleurJoker(Color couleurJoker){
+        this.btnCouleurJoker.setBackground(couleurJoker);
+    }
+
     public void supprimerResume(){
         this.nbJoueurMin = 2;
         this.nbJoueurMax = 5;
@@ -201,6 +208,11 @@ public class PanelResume extends JPanel implements ActionListener{
     public void actionPerformed( ActionEvent e){
         if(e.getSource() == this.btnRetour){
             this.ctrl.getIHM().changePanel("panelListeObjectif");
+        }
+        if(e.getSource() == this.btnCouleurJoker) {
+            Color c = JColorChooser.showDialog(this, "Choisissez la couleur Joker", this.btnCouleurJoker.getBackground());
+            this.btnCouleurJoker.setBackground(c);
+            this.ctrl.majCouleurJoker(c);
         }
         if(e.getSource() == this.btnEnregistrer){
 

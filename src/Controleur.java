@@ -159,6 +159,11 @@ public class Controleur{
         this.IHM.majTxtRegleJeu(nbJoueurMin, nbJoueurMax, doubeVoie, nbWagon, nbWagonFin, nbPointCheminLong);
     }
 
+    public void majCouleurJoker(Color couleurJoker){
+        this.gererXML.setCouleurJoker(couleurJoker);
+        this.IHM.majCouleurJoker(couleurJoker);
+    }
+
     public void supprimerResume(){
         this.IHM.suppimerResume();
     }
