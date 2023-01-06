@@ -223,7 +223,7 @@
 			<NomY>221</NomY>
     	</noeud>
 		<noeud>
-			<nom>Montréal</nom>
+			<nom>MontrÃ©al</nom>
 			<x>1045.0</x>
 			<y>98.0</y>
 			<NomX>1065</NomX>
@@ -338,20 +338,20 @@
     	</arete>
 		<arete>
 			<noeud1>Toronto</noeud1>
-			<noeud2>Montréal</noeud2>
+			<noeud2>MontrÃ©al</noeud2>
 			<longueur>3</longueur>
 			<type>-3355444</type>
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>Montréal</noeud1>
+			<noeud1>MontrÃ©al</noeud1>
 			<noeud2>Boston</noeud2>
 			<longueur>2</longueur>
 			<type>-3355444</type>
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>Montréal</noeud1>
+			<noeud1>MontrÃ©al</noeud1>
 			<noeud2>Boston</noeud2>
 			<longueur>2</longueur>
 			<type>-3355444</type>
@@ -855,7 +855,7 @@
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>Montréal</noeud1>
+			<noeud1>MontrÃ©al</noeud1>
 			<noeud2>New York</noeud2>
 			<longueur>3</longueur>
 			<type>-16737793</type>
@@ -898,7 +898,7 @@
     	</arete>
 		<arete>
 			<noeud1>Sault St Marie</noeud1>
-			<noeud2>Montréal</noeud2>
+			<noeud2>MontrÃ©al</noeud2>
 			<longueur>5</longueur>
 			<type>-16777216</type>
 			<orientation>true</orientation>
@@ -960,7 +960,7 @@
 			<point>25</point>
     	</carteObjectif>
 		<carteObjectif>
-			<noeud1>Montréal</noeud1>
+			<noeud1>Montrï¿½al</noeud1>
 			<noeud2>Nashville</noeud2>
 			<point>25</point>
     	</carteObjectif>
