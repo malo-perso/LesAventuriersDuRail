@@ -116,6 +116,8 @@ public class PanelPioche extends JPanel implements ActionListener{
 
             this.ctrl.getPioche().piocherObjectif();
             this.afficheCarteObjectif.setVisible(true);
+
+            this.ctrl.getIHM().activer();
         }
     }
 
