@@ -2,6 +2,8 @@ package src.ihm;
 
 import javax.swing.*;
 
+import java.awt.Color;
+
 import java.awt.GridLayout;
 import java.awt.event.*;
 
@@ -78,6 +80,14 @@ public class PanelPioche extends JPanel implements ActionListener{
         return this.piocheObjectif;
     }
 
+    public void setTransparent(){
+        for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
+            this.btnPiocheVehiculeVisible[i].setOpaque(true);
+        }
+        this.btnPiocheVehicule.setOpaque(true);
+        this.btnPiocheObjectif.setOpaque(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -92,10 +102,11 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
-            this.ctrl.getMetier().piocherObjectif();
+            //this.ctrl.getMetier().piocherObjectif();
             this.ctrl.getPioche().piocherObjectif();
             System.out.println("Pioche Objectif");
             this.afficheCarteObjectif.setVisible(true);
+            this.ctrl.getIHM().griserComposants();
         }
     }
 

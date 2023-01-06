@@ -108,6 +108,14 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelMainJoueur.majIHM();
     }
 
+    public void griserComposants(){
+        this.setEnabled(false);
+    }
+
+    public void activerComposants(){
+        this.setEnabled(true);
+    }
+
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.menuRegles){
             try{

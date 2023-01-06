@@ -52,6 +52,10 @@ public class Controleur {
         this.metier.reset();
     }
 
+    public FramePrincipale getIHM(){
+        return this.ihm;
+    }
+
     public Metier getMetier(){
         return this.metier;
     }

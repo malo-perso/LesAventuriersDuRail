@@ -158,3 +158,4 @@ public class PanelJoueurs extends JPanel{
         return newImage;
     }
 }
+
