@@ -131,6 +131,28 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
     }
 
+    public void setInutilisable(){
+        this.panelCarteObjectif.setEnabled(false);
+        this.btnPerso.setEnabled(false);
+        this.btnParametre.setEnabled(false);
+        this.lblNbVehicule.setEnabled(false);
+        this.lblNbPoints.setEnabled(false);
+        for(int i=0; i<this.btnCarteVehicule.length; i++){
+            this.btnCarteVehicule[i].setEnabled(false);
+        }
+    }
+
+    public void setUtilisable(){
+        this.panelCarteObjectif.setEnabled(true);
+        this.btnPerso.setEnabled(true);
+        this.btnParametre.setEnabled(true);
+        this.lblNbVehicule.setEnabled(true);
+        this.lblNbPoints.setEnabled(true);
+        for(int i=0; i<this.btnCarteVehicule.length; i++){
+            this.btnCarteVehicule[i].setEnabled(true);
+        }
+    }
+
     /*
     public static void main(String[] args){
         JFrame frame = new JFrame();

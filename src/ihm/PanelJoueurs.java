@@ -157,5 +157,16 @@ public class PanelJoueurs extends JPanel{
     
         return newImage;
     }
+
+
+    public void setInutilisable(){
+        this.panelGrilleJoueur.setEnabled(false);
+        this.panelSp.setEnabled(false);
+    }
+
+    public void setUtilisable(){
+        this.panelGrilleJoueur.setEnabled(true);
+        this.panelSp.setEnabled(true);
+    }
 }
 
