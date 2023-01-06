@@ -38,6 +38,10 @@ public class AfficheCarteObjectif extends JFrame implements ActionListener {
         this.setSize(945,250);
         this.setLocation(500,200);
         this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setResizable(false);
+        //empecher la reduction de la fenetre
+        //this.setUndecorated(true);
 
         this.panelObjectif = new JPanel(new GridLayout(1,3));
 
