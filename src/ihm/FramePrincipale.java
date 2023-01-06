@@ -108,12 +108,30 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelMainJoueur.majIHM();
     }
 
-    public void griserComposants(){
+    public PanelPioche getPanelPioche() {
+        return this.panelPioche;
+    }
+
+    public void desactiver(){
         this.setEnabled(false);
     }
 
-    public void activerComposants(){
+    public void activer(){
         this.setEnabled(true);
+    }
+
+    public void griserComposants(){
+        this.panelBase.setEnabled(false);
+        this.panelJoueurs.setInutilisable();
+        this.panelPlateau.setInutilisable();
+        this.panelMainJoueur.setInutilisable();
+    }
+
+    public void activerComposants(){
+        this.panelBase.setEnabled(true);
+        this.panelJoueurs.setUtilisable();
+        this.panelPlateau.setUtilisable();
+        this.panelMainJoueur.setUtilisable();
     }
 
     public void actionPerformed(ActionEvent e) {

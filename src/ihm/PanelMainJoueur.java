@@ -5,6 +5,7 @@ import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.text.AttributeSet.FontAttribute;
 
@@ -63,7 +64,6 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
         this.panelOrganisation = new JPanel(new BorderLayout());
-        this.panelCarteCoul = new JPanel();
         this.panelCarteObjectif = new JPanel();
         this.panelInfo = new JPanel(new GridLayout(2,2));
 
@@ -74,10 +74,28 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
-        for(int i=0; i<this.lstCarteVehicule.size(); i++){
-            this.btnCarteVehicule[i] = new JButton("btn"+i);
-            //this.btnCarteVehicule[i].setBackground(this.carteVehiculeJoueur.getType().getColor());
-            this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+        
+        if(this.lstCarteVehicule.size()<10){
+            this.panelCarteCoul = new JPanel(new GridLayout(1,10,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
+            for(int i=this.lstCarteVehicule.size(); i<15;i++){
+                this.panelCarteCoul.add(new JLabel());
+            }
+        }else{
+            this.panelCarteCoul = new JPanel(new GridLayout(1,this.lstCarteVehicule.size()-1,5,0));
+
+            for(int i=0; i<this.lstCarteVehicule.size(); i++){
+                this.btnCarteVehicule[i] = new JButton();
+                this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+                this.btnCarteVehicule[i].setPreferredSize(new Dimension(40, 130));
+                this.panelCarteCoul.add(this.btnCarteVehicule[i]);
+            }
         }
         if(this.carteObjectifChoisie != null){
             this.panelCarteObjectif.setLayout(new GridLayout(this.carteObjectifChoisie.size(),1));
@@ -102,6 +120,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             this.panelCarteObjectif.add(new JLabel("Pas de carte Objectif",SwingConstants.CENTER));
 
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
+        this.scrollCarteCoul.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollCarteObjectif 
         this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);      
 
@@ -122,8 +141,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.panelInfo.add(this.lblNbPoints);
         this.panelInfo.add(this.btnParametre);
 
-        this.add(this.scrollCarteCoul);
-        this.add(this.scrollCarteObjectif);
+        //this.add(this.scrollCarteCoul);
+        //this.add(this.scrollCarteObjectif);
 
         this.panelOrganisation.add(this.scrollCarteCoul, BorderLayout.CENTER);
         this.panelOrganisation.add(this.scrollCarteObjectif, BorderLayout.EAST);
@@ -146,6 +165,28 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
 
         System.out.println(this.carteObjectifChoisie);
+    }
+
+    public void setInutilisable(){
+        this.panelCarteObjectif.setEnabled(false);
+        this.btnPerso.setEnabled(false);
+        this.btnParametre.setEnabled(false);
+        this.lblNbVehicule.setEnabled(false);
+        this.lblNbPoints.setEnabled(false);
+        for(int i=0; i<this.btnCarteVehicule.length; i++){
+            this.btnCarteVehicule[i].setEnabled(false);
+        }
+    }
+
+    public void setUtilisable(){
+        this.panelCarteObjectif.setEnabled(true);
+        this.btnPerso.setEnabled(true);
+        this.btnParametre.setEnabled(true);
+        this.lblNbVehicule.setEnabled(true);
+        this.lblNbPoints.setEnabled(true);
+        for(int i=0; i<this.btnCarteVehicule.length; i++){
+            this.btnCarteVehicule[i].setEnabled(true);
+        }
     }
 
     /*

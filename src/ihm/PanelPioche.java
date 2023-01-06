@@ -80,33 +80,42 @@ public class PanelPioche extends JPanel implements ActionListener{
         return this.piocheObjectif;
     }
 
-    public void setTransparent(){
-        for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
-            this.btnPiocheVehiculeVisible[i].setOpaque(true);
-        }
-        this.btnPiocheVehicule.setOpaque(true);
-        this.btnPiocheObjectif.setOpaque(true);
+    public void setBtnPiocheObjectifUtilisable(){
+        this.btnPiocheObjectif.setEnabled(true);
     }
 
+    public void setInutilisable(JButton btn) {
+        btn.setEnabled(false);
+    }
+
+    public void setUtilisable(JButton btn){
+        btn.setEnabled(true);
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
 
         for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
             if (e.getSource() == this.btnPiocheVehiculeVisible[i]) {
+                this.setInutilisable(btnPiocheObjectif);
+                this.ctrl.getIHM().griserComposants();
+
                 this.ctrl.piocherVehicule(i);
             }
         }
 
         if (e.getSource() == this.btnPiocheVehicule) {
+            this.setInutilisable(btnPiocheObjectif);
+            this.ctrl.getIHM().griserComposants();
+
             this.ctrl.piocherVehicule(6);
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
-            //this.ctrl.getMetier().piocherObjectif();
+            this.ctrl.getIHM().desactiver();
+
             this.ctrl.getPioche().piocherObjectif();
-            System.out.println("Pioche Objectif");
             this.afficheCarteObjectif.setVisible(true);
-            this.ctrl.getIHM().griserComposants();
         }
     }
 

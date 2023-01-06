@@ -23,12 +23,18 @@ public class PanelPlateau extends JPanel {
     
     private Controleur ctrl;
 	private final int HAUTEURLABEL = 15;
+    private Noeud noeudSelectionne1;
+    private Noeud noeudSelectionne2;
 
     PanelPlateau(Controleur ctrl) {
 
         this.ctrl = ctrl;
 
         this.setPreferredSize(new Dimension(1571,918));
+        this.addMouseListener(new GererSouris());
+
+        this.noeudSelectionne1 = null;
+        this.noeudSelectionne2 = null;
     }
 
     public void majIHM()
@@ -205,6 +211,14 @@ public class PanelPlateau extends JPanel {
 		
 	}
 
+    public void setInutilisable(){
+        this.setEnabled(false);
+    }
+
+    public void setUtilisable(){
+        this.setEnabled(true);
+    }
+
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
@@ -214,4 +228,51 @@ public class PanelPlateau extends JPanel {
 		g.drawImage(img, 0, 0, 1200 , 800 , this);
 
 	}
+
+    public Noeud sourisSurNoeud(int x, int y){
+        int diametre = this.ctrl.getMetier().getDiametre();
+		for (Noeud n : this.ctrl.getMetier().getLstNoeuds())
+		{
+			int xNoeud = (int) n.getX();
+			int yNoeud = (int) n.getY();
+			if (xNoeud-(diametre/2) <= x && x <= xNoeud+(diametre/2) && yNoeud-(diametre/2) <= y && y <= yNoeud+(diametre/2)) {
+				return n;
+			}
+		}
+		return null;
+	}
+
+    private class GererSouris extends MouseAdapter
+	{
+		public void mousePressed (MouseEvent e)
+		{
+			if (e.getButton() == MouseEvent.BUTTON3)
+			{
+				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
+                    if (PanelPlateau.this.noeudSelectionne1 == null) {
+                        PanelPlateau.this.noeudSelectionne1 = sourisSurNoeud(e.getX(), e.getY());
+                    }
+                    else {
+                        PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
+                        if (PanelPlateau.this.noeudSelectionne1 != PanelPlateau.this.noeudSelectionne2) {
+                            //PanelPlateau.this.ajouterArete(PanelPlateau.this.noeudSelectionne1, PanelPlateau.this.noeudSelectionne2);
+
+                            if(PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2))
+                                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
+
+                            PanelPlateau.this.noeudSelectionne1 = null;
+                            PanelPlateau.this.noeudSelectionne2 = null;
+                        }
+                    }
+
+
+					
+
+                }
+            }
+        }
+		
+	}
+
+
 }
