@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import java.nio.charset.StandardCharsets;
+
 
 import javax.imageio.ImageIO;
 
@@ -291,8 +293,8 @@ public class GererXML {
 			if(!file.exists()){
 				file.createNewFile();
 			}
-			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-			BufferedWriter bw = new BufferedWriter(fw);
+			OutputStreamWriter ow = new FileWriter(file.getAbsoluteFile(), StandardCharsets.UTF_8);
+			BufferedWriter bw = new BufferedWriter(ow);
 			bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "\n");
 
 			bw.write("<mappe>\n");
