@@ -69,25 +69,26 @@ public class Joueur {
         return nb;
     }
 
-    public void supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
+    public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
         int i;
+        List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
         for (i = 0; i < nb; i++) {
-            for (CarteVehicule carte : this.cartesVehicule) {
-                if (carte.getType().getColor() == color) {
-                    this.cartesVehicule.remove(carte);
+            for (int j = 0; j < cartesVehicule.size(); j++) {
+                if (this.cartesVehicule.get(0).getType().getColor() == color) {
+                    cartesDefausse.add(this.cartesVehicule.remove(j));
                     break;
                 }
             }
         }
 
-        for (int j =i ; j < nb; j++) {
-            for (CarteVehicule carte : this.cartesVehicule) {
-                if (carte.getType().getColor() == colorJoker) {
-                    this.cartesVehicule.remove(carte);
+        for (int j = 0; j < cartesVehicule.size(); j++) {
+            if (this.cartesVehicule.get(0).getType().getColor() == colorJoker) {
+                    cartesDefausse.add(this.cartesVehicule.remove(j));
                     break;
-                }
             }
         }
+
+        return cartesDefausse;
     }
 
 }

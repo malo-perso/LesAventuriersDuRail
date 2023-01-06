@@ -29,10 +29,12 @@ public class Controleur {
     private Joueur joueurCourant;
     private int nbWagon;
     private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
+    private int nbAction;
 
     public Controleur() {
         this.metier = new Metier(this);
         this.ihmAcceuil = new FrameAcceuil(this);
+        nbAction = 1;
     }
 
     public void lancerPartie() {
@@ -42,6 +44,7 @@ public class Controleur {
         this.ihm.setVisible(true);
         this.majPioche();
         this.joueurCourant = this.metier.getLstJoueurs().get(0);
+        this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction);
         this.ihm.majIHM();
 
     }
@@ -91,7 +94,10 @@ public class Controleur {
             //this.ihm.finDePartie();
         this.nbWagon = 0;
         this.joueurCourant = this.metier.getLstJoueurs().get((this.metier.getLstJoueurs().indexOf(this.joueurCourant)+1)%this.metier.getLstJoueurs().size());
+        nbAction++;
+        this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction/this.metier.getLstJoueurs().size());
         this.ihm.majIHM();
+        System.out.println(this.joueurCourant.getNom()+" " + this.joueurCourant.getCartesVehicule().size());
     }
 
     public void poserWehicule() {
@@ -104,6 +110,8 @@ public class Controleur {
 
         if (i<6 && this.metier.verifCarteJoker(this.getMetier().getLstCartesVehicules().get(i)))
         {
+            if(nbWagon==1)
+                return;
             this.nbWagon=2;
             this.getIHM().activer();
             this.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
@@ -123,6 +131,7 @@ public class Controleur {
         ArrayList<Arete> aretesSelect = new ArrayList<Arete>();
         Arete areteSelect = null;
         Type type = null;
+        ArrayList<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
 
         for (Arete arete : this.metier.getLstAretes()) {
             if(arete.estAreteDe(noeud1, noeud2) && arete.estDisponible()){
@@ -133,13 +142,15 @@ public class Controleur {
         //verif s il a selectionne quelque chose 
         if (aretesSelect.size()==0)
             return false;
-        
+
+        //TO DO 
         /* si arete double , on demande à l'utilisateur de choisir entres les deux
         if(aretesSelect.size()>1)
             areteSelect = this.ihm.selectArete(aretesSelect);
         else*/
         areteSelect = aretesSelect.get(0);
         
+        //TO DO
         //si arete joker on demande à l'utilisateur de choisir le type de wagon qu il va poser
         /* 
         if(this.metier.verifVoieJoker(areteSelect));
@@ -159,7 +170,6 @@ public class Controleur {
         this.joueurCourant.supprimerCarteVehicule(type.getColor(), areteSelect.getLongueur(),this.metier.getCouleurJoker());
         areteSelect.setProprietaire(this.joueurCourant);
 
-        
         finDuTour();
         return true;
     }

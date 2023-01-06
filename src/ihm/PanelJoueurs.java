@@ -137,6 +137,16 @@ public class PanelJoueurs extends JPanel{
         public void setNbCarteVehicule(int nbCarteVehicule) {this.lblNbCarteVehicule.setText(String.format("%3d",nbCarteVehicule) + (nbCarteVehicule>1?" Cartes vehicules":" Carte vehicule  "));}
     }
 
+    public void majPanelJoueur()
+    {
+        for(int cpt = 0; cpt < this.alPanelJoueur.size(); cpt++){
+            this.alPanelJoueur.get(cpt).setPoint(this.ctrl.getLstJoueurs().get(cpt).getPoint());
+            this.alPanelJoueur.get(cpt).setNbWagon(this.ctrl.getLstJoueurs().get(cpt).getNbWagon());
+            this.alPanelJoueur.get(cpt).setlNbCarteObjectif(this.ctrl.getLstJoueurs().get(cpt).getCartesObjectif().size());
+            this.alPanelJoueur.get(cpt).setNbCarteVehicule(this.ctrl.getLstJoueurs().get(cpt).getCartesVehicule().size());
+        }
+    }
+
     public static BufferedImage replace(BufferedImage image, int target, int preferred) {
         int width = image.getWidth();
         int height = image.getHeight();

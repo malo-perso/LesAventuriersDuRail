@@ -50,15 +50,7 @@ public class Metier {
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
         this.lstCarteVehicules = new ArrayList<CarteVehicule>();
 
-        //ajouter des cartes vehicules et objectifs dans les listes
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("oui", 0, 0, 0, 0), new Noeud("non", 1, 1, 1, 1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("caca", 0, 0, 0, 0), new Noeud("pipi", 1, 1, 1, 1), 10));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(this.couleurJoker)));
+        
 
 
         this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
@@ -84,7 +76,45 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Eragon7237", -52,45));
         this.lstJoueurs.add(new Joueur("Bou",  2500,45));
         this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
-    
+        //ajouter des cartes vehicules et objectifs dans les listes
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("oui", 0, 0, 0, 0), new Noeud("non", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("caca", 0, 0, 0, 0), new Noeud("pipi", 1, 1, 1, 1), 10));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
+        this.lstCarteVehicules.add(new CarteVehicule(new Type(this.couleurJoker)));
+
+
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(new Color(-3355444))));
+
 /*
         this.lstJoueurs.add(new Joueur("Eragon7237", -52));
         this.lstJoueurs.add(new Joueur("Bou",  2500));
@@ -341,6 +371,7 @@ public class Metier {
             racine = document.getRootElement();
 
             Element regles = racine.getChild("regles");
+            this.nombreJoker             = Integer.parseInt  (regles.getChildText("nombreJoker"                ));
             this.nbrJoueurMinimum         = Integer.parseInt  (regles.getChildText("nombreJoueurMinimum"        ));
             this.nbrJoueurMaximum         = Integer.parseInt  (regles.getChildText("nombreJoueurMaximum"        ));
             this.nbVehiculeJoueur         = Integer.parseInt  (regles.getChildText("nombreVehiculeJoueur"       ));
@@ -409,17 +440,21 @@ public class Metier {
             
             }
 
-            List listCarteVehicule = racine.getChildren("lstCarteVehicules");
+            List listCarteVehicule = racine.getChild("hashMapCarteVehicules").getChildren("lstCarteVehicule");
             Iterator l = listCarteVehicule.iterator();
             while(l.hasNext()){
                 Element courant = (Element)l.next();
-                int 	nbCarte = Integer.parseInt(courant.getChildText("type"));
-                Color   type = new Color(Integer.parseInt(courant.getChildText("nombre")));
+                int 	nbCarte = Integer.parseInt(courant.getChildText("nbCarte"));
+                Color   type = new Color(Integer.parseInt(courant.getChildText("type")));
 
                 for(int m=0; m < nbCarte; m++){
                     lstCarteVehicules.add(new CarteVehicule(Type.creerType(type)));
                 }
             }
+
+            for(int m=0; m < this.nombreJoker; m++)
+                    lstCarteVehicules.add(new CarteVehicule(Type.creerType(this.couleurJoker)));
+                
 
 
             Element imagePlateau = racine.getChild("imagePlateau");

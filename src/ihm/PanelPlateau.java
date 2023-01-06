@@ -199,7 +199,7 @@ public class PanelPlateau extends JPanel {
 
         if (proprietaire != null) {
             g1.setColor(proprietaire.getCouleur());
-            g1.setStroke(new BasicStroke(hauteurWagon-5));
+            g1.setStroke(new BasicStroke(hauteurWagon-4));
             for (int cpt = 0; cpt < nbWagon; cpt++) 
                 g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
                                 (int) (aY + ecY +  cpt * ( ecY + waY)),
@@ -255,7 +255,6 @@ public class PanelPlateau extends JPanel {
                     else {
                         PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
                         if (PanelPlateau.this.noeudSelectionne1 != PanelPlateau.this.noeudSelectionne2) {
-                            //PanelPlateau.this.ajouterArete(PanelPlateau.this.noeudSelectionne1, PanelPlateau.this.noeudSelectionne2);
 
                             if(PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2))
                                 JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -264,10 +263,6 @@ public class PanelPlateau extends JPanel {
                             PanelPlateau.this.noeudSelectionne2 = null;
                         }
                     }
-
-
-					
-
                 }
             }
         }

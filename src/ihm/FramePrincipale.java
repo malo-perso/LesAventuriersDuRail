@@ -101,11 +101,18 @@ public class FramePrincipale extends JFrame implements ActionListener {
     public void majPioche() {
         this.panelPioche.majPiocheVehiculeVisible();
     }
+
+    public void afficherJoueur(String nom, int tour)
+    {
+        JOptionPane.showMessageDialog(null, nom, "Tour" + tour, JOptionPane.INFORMATION_MESSAGE);
+    }
+
     
     public void majIHM()
     {
         this.panelPlateau.majIHM();
         this.panelMainJoueur.majIHM();
+        this.panelJoueurs.majPanelJoueur();
     }
 
     public PanelPioche getPanelPioche() {
