@@ -1,5 +1,6 @@
 package src.ihm;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.event.*;
@@ -12,12 +13,15 @@ import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 
 import java.awt.Image;
-
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.awt.RenderingHints;
 import src.Controleur;
 import src.metier.Joueur;
 import src.metier.Arete;
 import src.metier.Noeud;
+import java.awt.Toolkit;
+
 
 public class PanelPlateau extends JPanel {
     
@@ -25,6 +29,7 @@ public class PanelPlateau extends JPanel {
 	private final int HAUTEURLABEL = 15;
     private Noeud noeudSelectionne1;
     private Noeud noeudSelectionne2;
+    private Image reticule;
 
     PanelPlateau(Controleur ctrl) {
 
@@ -35,6 +40,9 @@ public class PanelPlateau extends JPanel {
 
         this.noeudSelectionne1 = null;
         this.noeudSelectionne2 = null;
+        this.reticule = new ImageIcon("./src/data/images/reticule1.gif").getImage();
+
+    
     }
 
     public void majIHM()
@@ -139,6 +147,11 @@ public class PanelPlateau extends JPanel {
 		}
 
 		g.setColor(Color.RED);
+        if (this.noeudSelectionne1 != null)
+            g.drawImage(reticule, (int) this.noeudSelectionne1.getX()-20, (int) this.noeudSelectionne1.getY()-20, 40, 40, this);
+        if (this.noeudSelectionne2 != null)
+            g.drawImage(reticule, (int) this.noeudSelectionne2.getX()-20, (int) this.noeudSelectionne2.getY()-20, 40, 40, this);
+
     }
 
     private double rotationX(double nX,double nY, double teta) {
@@ -222,11 +235,11 @@ public class PanelPlateau extends JPanel {
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
+        
 		super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, 1200 , 800 , this);
-
 	}
 
     public Noeud sourisSurNoeud(int x, int y){
@@ -251,6 +264,7 @@ public class PanelPlateau extends JPanel {
 				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
                     if (PanelPlateau.this.noeudSelectionne1 == null) {
                         PanelPlateau.this.noeudSelectionne1 = sourisSurNoeud(e.getX(), e.getY());
+                        
                     }
                     else {
                         PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
@@ -265,9 +279,8 @@ public class PanelPlateau extends JPanel {
                     }
                 }
             }
+            majIHM();
         }
 		
 	}
-
-
 }
