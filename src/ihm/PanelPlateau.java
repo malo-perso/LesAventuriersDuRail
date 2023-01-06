@@ -15,6 +15,7 @@ import java.awt.Image;
 
 import java.awt.RenderingHints;
 import src.Controleur;
+import src.metier.Joueur;
 import src.metier.Arete;
 import src.metier.Noeud;
 
@@ -105,7 +106,7 @@ public class PanelPlateau extends JPanel {
                     double x2XP = centreX +rotationX(wagon2X,wagon2Y,teta);
                     double y2YP = centreY +rotationY(wagon2X,wagon2Y,teta);
 
-                    tracerWagon( w1XP, y1YP, x2XP, y2YP,1,g1,arete.getType().getColor());
+                    tracerWagon( w1XP, y1YP, x2XP, y2YP,1,g1,arete.getType().getColor(), arete.getProprietaire());
                 }
             }
             else 
@@ -115,7 +116,7 @@ public class PanelPlateau extends JPanel {
                 
                     double decalageY = -indiceDecalage*Math.cos(teta);
                     double decalageX = -indiceDecalage*Math.sin(teta);
-                    tracerWagon(arete.getNoeud1().getX()+decalageX, arete.getNoeud1().getCenterY()+decalageY, arete.getNoeud2().getX()+decalageX, arete.getNoeud2().getY()+decalageY, arete.getLongueur(), g1,arete.getType().getColor());
+                    tracerWagon(arete.getNoeud1().getX()+decalageX, arete.getNoeud1().getCenterY()+decalageY, arete.getNoeud2().getX()+decalageX, arete.getNoeud2().getY()+decalageY, arete.getLongueur(), g1,arete.getType().getColor(), arete.getProprietaire());
                 }
 			} 
 
@@ -149,7 +150,7 @@ public class PanelPlateau extends JPanel {
         return y;
     }
 
-    private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color) {
+    private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color, Joueur proprietaire) {
 
         int hauteurWagon = this.ctrl.getMetier().getHauteurVehicule();
         int longueurWagon = this.ctrl.getMetier().getLongueurVehicule();
@@ -190,6 +191,15 @@ public class PanelPlateau extends JPanel {
 					        (int) (aX + (cpt+1) * ( ecX + waX)),
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
 
+        if (proprietaire != null) {
+            g1.setColor(proprietaire.getCouleur());
+            g1.setStroke(new BasicStroke(hauteurWagon-5));
+            for (int cpt = 0; cpt < nbWagon; cpt++) 
+                g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
+                                (int) (aY + ecY +  cpt * ( ecY + waY)),
+                                (int) (aX + (cpt+1) * ( ecX + waX)),
+                                (int) (aY + (cpt+1) * ( ecY + waY)));
+        }
         g1.setColor(Color.BLACK);
         g1.setStroke(new BasicStroke(2));  
 		

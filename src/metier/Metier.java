@@ -33,6 +33,7 @@ public class Metier {
     private int  longueurVehicule;
     private int  hauteurVehicule;
 	private int nombreJoker;
+    private Color couleurJoker;
     private double espacementVehicule;
 	private List<Noeud> lstNoeuds;
     private List<Arete> lstAretes;
@@ -69,6 +70,7 @@ public class Metier {
         this.hauteurVehicule = 0;
         this.nombreJoker = 0;
         this.espacementVehicule = 0.0;
+        this.couleurJoker = null;
         this.lstNoeuds = new ArrayList<Noeud>();
         this.lstAretes = new ArrayList<Arete>();
 
@@ -77,20 +79,10 @@ public class Metier {
 
         this.ctrl = ctrl;
         //TEMPORAIRE
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-
-
+        this.lstJoueurs.add(new Joueur("Eragon7237", -52,45));
+        this.lstJoueurs.add(new Joueur("Bou",  2500,45));
+        this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
+    
     }
 
     public List<Joueur> getLstJoueurs() {
@@ -145,6 +137,10 @@ public class Metier {
         return this.nombreJoker;
     }
 
+    public Color getCouleurJoker(){
+        return this.couleurJoker;
+    }
+
     public List<Noeud> getLstNoeuds(){
         return this.lstNoeuds;
     }
@@ -190,21 +186,12 @@ public class Metier {
         return null;
     }
 
-    public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
-        for (int i = 0; i < 3; i++) {
-            if (intCarte.contains(i)) 
-                joueur.ajouterCarteObjectif(this.pioche.retirerCarteObjectif(i));
-            else
-                this.pioche.ajouterCarteObjectif((this.pioche.retirerCarteObjectif(i)));   
-        }
-    }
-
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;
     }
 
     public void ajouterJoueur(String nom, int RGB) {
-        this.lstJoueurs.add(new Joueur(nom, RGB));
+        this.lstJoueurs.add(new Joueur(nom, RGB, this.nbVehiculeJoueur));
     }
 
     public void supprimerJoueur(Joueur joueur){
@@ -224,10 +211,35 @@ public class Metier {
         this.hauteurVehicule = 0;
         this.nombreJoker = 0;
         this.espacementVehicule = 0.0;
+        this.couleurJoker = null;
         this.lstNoeuds = new ArrayList<Noeud>();
         this.lstAretes = new ArrayList<Arete>();
         this.lstJoueurs = new ArrayList<Joueur>();
         this.bImage = null;
+    }
+
+    public Boolean verifFinDePartie() {
+        for (Joueur joueur : this.lstJoueurs) {
+            if (joueur.getNbWagon() <= this.nbVehiculeFinPartie) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Pas testée
+    public boolean verifCarteJoker(CarteVehicule carteVehicule) {
+        if(carteVehicule.getType().getColor().equals(this.couleurJoker)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verifVoieJoker(Arete arete) {
+        if(arete.getType().getColor().equals(this.couleurJoker)){
+            return true;
+        }
+        return false;
     }
 
     public void lireXML(File file){
@@ -248,6 +260,7 @@ public class Metier {
             this.longueurVehicule         = Integer.parseInt  (regles.getChildText("longueurVehicule"           ));
             this.hauteurVehicule          = Integer.parseInt  (regles.getChildText("hauteurVehicule"            ));
             this.espacementVehicule       = Double.parseDouble(regles.getChildText("espacementVehicule"         ));
+            this.couleurJoker             = new Color(Integer.parseInt(regles.getChildText("couleurJoker"      )));
 
             List listNoeuds = racine.getChild("lstNoeuds").getChildren("noeud");
             Iterator i = listNoeuds.iterator();
@@ -332,6 +345,8 @@ public class Metier {
 
         }catch(Exception e){e.printStackTrace();}
     }
+
+    
 
       
 	

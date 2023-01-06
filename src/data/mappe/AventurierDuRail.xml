@@ -10,6 +10,7 @@
 		<longueurVehicule>33</longueurVehicule>
 		<hauteurVehicule>12</hauteurVehicule>
 		<espacementVehicule>1.4</espacementVehicule>
+		<couleurJoker>-3355444</couleurJoker>
 	</regles>
 	<lstNoeuds>
 		<noeud>

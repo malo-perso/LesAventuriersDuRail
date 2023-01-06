@@ -46,6 +46,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.setSize(945,300);
         this.setLocation(500,200);
         this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         this.panelBase = new JPanel(new BorderLayout());
         this.panelObjectif = new JPanel(new GridLayout(1,3, 5, 0));
@@ -89,9 +90,6 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.btnCarte2.setBorder(null);
         this.btnCarte3.setBorder(null);
         
-        this.btnCarte1.addActionListener(this);
-        this.btnCarte2.addActionListener(this);
-        this.btnCarte3.addActionListener(this);
         this.btnValider.addActionListener(this);
         this.cbCarte1.addActionListener(this);
         this.cbCarte2.addActionListener(this);
@@ -114,18 +112,38 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.panelBase.add(this.panelValidation,BorderLayout.SOUTH);
         this.add(panelBase);
     }
+    
+    public void clearCheckBox(){
+        this.cbCarte1.setSelected(false);
+        this.cbCarte2.setSelected(false);
+        this.cbCarte3.setSelected(false);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        if(e.getSource() == this.btnCarte1){
 
-        }
-        if(e.getSource() == this.btnCarte2){
-            
-        }
-        if(e.getSource() == this.btnCarte3){
-            
+        ArrayList<Integer> carteChoisie = new ArrayList<Integer>();
+        if(e.getSource() == this.btnValider){
+
+            if ( this.cbCarte1.isSelected()){
+                carteChoisie.add(0);
+            }
+
+            if( this.cbCarte2.isSelected()){
+                carteChoisie.add(1);
+            }
+
+            if( this.cbCarte3.isSelected()){
+                carteChoisie.add(2);
+            }
+
+            if(carteChoisie.size() == 0){
+                JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
+            }else{
+                this.ctrl.piocherObjectif(carteChoisie);
+                this.dispose();
+                clearCheckBox();
+            }
         }
         
     }

@@ -38,6 +38,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     private ImageIcon imgV;
 
     public PanelMainJoueur(Controleur ctrl){
+        this.ctrl = ctrl;
 
         this.setSize(600,300);
         //this.setLayout(new GridLayout(1,3));
@@ -103,6 +104,13 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
+    }
+
+    
+    public void majIHM() {
+        this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
+        this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
+        this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
     }
 
     /*

@@ -89,4 +89,14 @@ public class Pioche {
         lstPiocheObjectif.add(this.lstCartesObjectif.get(2));
         return lstPiocheObjectif;
     }
+
+    public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
+        for (int i = 0; i < 3; i++) {
+            if (intCarte.contains(i)) 
+                joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(i));
+            else
+                this.lstCartesObjectif.add(this.lstCartesObjectif.remove(i));        
+            }
+    }
+    
 }

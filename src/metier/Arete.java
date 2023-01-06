@@ -24,7 +24,7 @@ public class Arete {
         this.type      = type;
         this.orientation = orientation;
     }    
-
+            
     public Noeud getNoeud1() {
         return this.noeud1;
     }
@@ -54,12 +54,18 @@ public class Arete {
         return this.orientation;
     }
 
-    public Boolean estPrenable(Joueur joueur)
+    public Boolean estDisponible(Joueur joueur)
     {
         if (this.proprietaire == null)
             return true;
         else
             return false;
+    }
+    
+    public boolean estAreteDe(Noeud noeud1, Noeud noeud2) {
+        if ( (noeud1.equals(this.noeud1) && noeud2.equals(this.noeud2)) || (noeud2.equals(this.noeud1) && noeud1.equals(this.noeud2)) )
+            return true;
+        return false;
     }
 
 }

@@ -105,6 +105,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
     public void majIHM()
     {
         this.panelPlateau.majIHM();
+        this.panelMainJoueur.majIHM();
     }
 
     public void actionPerformed(ActionEvent e) {
