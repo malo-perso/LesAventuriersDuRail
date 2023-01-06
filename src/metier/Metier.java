@@ -102,7 +102,7 @@ public class Metier {
         //game(this.ctrl);
     }
     
-
+/*
     public void game(Controleur ctrl){
         //tant que la condition n'est pas rempli jouer
         while(!win())
@@ -119,7 +119,7 @@ public class Metier {
     public void play(Joueur j, Controleur ctrl){
         while (this.action) {
                         
-        }
+        }*/
 
         
         /* 
@@ -139,7 +139,7 @@ public class Metier {
         prendre possession d'une voie 
             - si on a un nombre de carte véhicule de la couleur de la voie(ou joker), égal(ou plus) au nombre de section 
             - après, on remet celle(s) non choisies en dessous de la pioche  -> mélanger la pioche     
-        */
+        
         
     }
 
@@ -154,7 +154,7 @@ public class Metier {
     /**********************/
     /* Action des joueurs */
     /**********************/
-
+/*
     public void piocherObjectif(){
         //piocher 3 cartes objectifs
         //choisir 1 à 3
@@ -164,7 +164,7 @@ public class Metier {
 
 
 
-
+*/
 
     public List<Joueur> getLstJoueurs() {
         return this.lstJoueurs;
