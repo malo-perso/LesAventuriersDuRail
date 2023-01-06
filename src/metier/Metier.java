@@ -40,6 +40,7 @@ public class Metier {
     private List<CarteVehicule> lstCarteVehicules;
     private List<Joueur> lstJoueurs;
     private BufferedImage bImage;
+    private Boolean action;
     
     private Controleur ctrl;
 
@@ -74,6 +75,7 @@ public class Metier {
 
         this.lstJoueurs = new ArrayList<Joueur>();
         this.bImage = null;
+        this.action = false;
 
         this.ctrl = ctrl;
         //TEMPORAIRE
@@ -90,8 +92,72 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Bou",  2500));
         this.lstJoueurs.add(new Joueur("erasmamael", 556));
 
-
+        //game(this.ctrl);
     }
+    
+
+    public void game(Controleur ctrl){
+        //tant que la condition n'est pas rempli jouer
+        while(!win())
+        {   
+            //chaque joueur joue
+            for(Joueur j : this.lstJoueurs)
+            {
+                //tour d'un Joueur
+                play(j, ctrl);
+            }
+        }
+    }
+
+    public void play(Joueur j, Controleur ctrl){
+        while (this.action) {
+                        
+        }
+
+        
+        /* 
+        piocher une carte vehicule 
+            - visible
+                - si on a un joker -> on peut pas prendre une deuxième carte
+                - on peut en prendre une face cachée comme visible
+                - on ne peut pas prendre de Joker en deuxième carte dans tout les cas
+            - face cachée
+                - si on veut en prendre une visible ou une invisible après
+                    - si on choisit une visible, on peut pas prendre de Joker
+        piocher une carte objectif
+            - sélectionne 3
+            - il doit en garder 1 à 3
+            - celle qu'il défosse sont renvoyées en fin de pioche -> mélanger la pioche
+            - celle qu'il garde sont supprimées de la pioche
+        prendre possession d'une voie 
+            - si on a un nombre de carte véhicule de la couleur de la voie(ou joker), égal(ou plus) au nombre de section 
+            - après, on remet celle(s) non choisies en dessous de la pioche  -> mélanger la pioche     
+        */
+        
+    }
+
+
+
+    public boolean win(){
+        //vérifie si un joueur a 2 wagons ou moins
+        
+        return false;
+    }
+
+    /**********************/
+    /* Action des joueurs */
+    /**********************/
+
+    public void piocherObjectif(){
+        //piocher 3 cartes objectifs
+        //choisir 1 à 3
+        //les autres sont remises en fin de pioche
+    }
+
+
+
+
+
 
     public List<Joueur> getLstJoueurs() {
         return this.lstJoueurs;
