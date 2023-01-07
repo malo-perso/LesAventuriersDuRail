@@ -54,12 +54,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK);
 
-        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
+        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
         this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
-        this.carteObjectifChoisie = new ArrayList<Integer>(3);
-        this.carteObjectifChoisie.add(0);
-        this.carteObjectifChoisie.add(2);
-        this.carteObjectifChoisie.add(1);
 
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
@@ -68,10 +64,11 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.panelInfo = new JPanel(new GridLayout(2,2));
         this.panelCarteCoul = new JPanel();
 
+
         this.imgPara = new ImageIcon("./src/data/images/Engrennage.jpg");
         this.imgObjectif = new ImageIcon("./src/data/images/map.jpg");
         this.imgPlateau = new ImageIcon(this.ctrl.getImagePlateau());
-        this.img2 = imgPlateau.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+        this.img2 = imgPlateau.getImage().getScaledInstance(280, 180, Image.SCALE_SMOOTH);
 
         Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
@@ -99,20 +96,13 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
             }
         }
-        if(this.carteObjectifChoisie != null){
-            this.panelCarteObjectif.setLayout(new GridLayout(this.carteObjectifChoisie.size(),1));
-            for(int i = 0; i< this.carteObjectifChoisie.size(); i++){
+        if(this.lstCarteObjectif.size() < 10 ){
+            this.panelCarteObjectif.setLayout(new GridLayout(this.lstCarteObjectif.size(),1));
+            for(int i = 0; i< this.lstCarteObjectif.size(); i++){
                 this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
                 this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
-                switch(this.carteObjectifChoisie.get(i)){
-                    case 0 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(0).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(0).getNoeud2().getNom() + " " + lstCarteObjectif.get(0).getPoints() + " points");
-                             break;
-                    case 1 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(1).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(1).getNoeud2().getNom() + " " + lstCarteObjectif.get(1).getPoints() + " points");
-                             break;
-                    case 2 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(2).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(2).getNoeud2().getNom() + " " + lstCarteObjectif.get(2).getPoints() + " points");
-                             break;
-                }
-                this.btnCarteObjectif[i].setPreferredSize(new Dimension(300,200));
+                this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(i).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(i).getNoeud2().getNom() + " " + lstCarteObjectif.get(i).getPoints() + " points");
+                this.btnCarteObjectif[i].setPreferredSize(new Dimension(280,180));
                 this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
                 this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
                 this.panelCarteObjectif.add(this.btnCarteObjectif[i]);
@@ -124,7 +114,9 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
         this.scrollCarteCoul.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         //scrollCarteObjectif 
-        this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);      
+        this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);
+        this.scrollCarteObjectif.setPreferredSize(new Dimension(300,200));
+        this.scrollCarteObjectif.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);      
 
         this.btnPerso = new JButton("MisterConfiture");
         this.btnParametre = new JButton(new ImageIcon(img1));
@@ -164,7 +156,9 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public void majIHM() {
         
         this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
-
+        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
+        this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
+        this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
 
         this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
@@ -176,7 +170,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             this.panelCarteCoul.setLayout(new GridLayout(1,10,5,0));
 
             for(int i=0; i<this.lstCarteVehicule.size(); i++){
-                this.btnCarteVehicule[i] = new JButton();
+                //this.btnCarteVehicule[i] = new JButton(this.lstCarteVehicule.get(i).getType().getColor().getRGB() + "");
                 this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
                 this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
@@ -195,30 +189,47 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             }
         }
 
-        
+        this.panelCarteObjectif.removeAll();
 
+        if(this.lstCarteObjectif.size() != 0 ){
+            this.panelCarteObjectif.setLayout(new GridLayout(this.lstCarteObjectif.size(),1));
+            for(int i = 0; i< this.lstCarteObjectif.size(); i++){
+                this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
+                this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(i).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(i).getNoeud2().getNom() + " " + lstCarteObjectif.get(i).getPoints() + " points");
+                this.btnCarteObjectif[i].setPreferredSize(new Dimension(280,180));
+                this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.panelCarteObjectif.add(this.btnCarteObjectif[i]);
+            }
+        }
+        else
+            this.panelCarteObjectif.add(new JLabel("Pas de carte Objectif",SwingConstants.CENTER));
     }
 
     public void setInutilisable(){
+        this.panelInfo.setEnabled(false);
         this.panelCarteObjectif.setEnabled(false);
         this.btnPerso.setEnabled(false);
         this.btnParametre.setEnabled(false);
         this.lblNbVehicule.setEnabled(false);
         this.lblNbPoints.setEnabled(false);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(false);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(false);
+        //     this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+        // }
     }
 
     public void setUtilisable(){
+        this.panelInfo.setEnabled(true);
         this.panelCarteObjectif.setEnabled(true);
         this.btnPerso.setEnabled(true);
         this.btnParametre.setEnabled(true);
         this.lblNbVehicule.setEnabled(true);
         this.lblNbPoints.setEnabled(true);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(true);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(true);
+        // }
     }
 
     /*
