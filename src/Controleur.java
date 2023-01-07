@@ -190,6 +190,7 @@ public class Controleur {
         this.actionEnCours = 2;
         this.getIHM().activer();
         this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisie);
+        this.frameAfficheCarteObjectif.majIHM();
         finDuTour();
     }
 

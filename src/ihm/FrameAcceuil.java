@@ -37,6 +37,7 @@ public class FrameAcceuil extends JFrame {
         this.pack();
         this.setTitle("Concepteur de Plateau");
         this.setSize(500, 500);
+        this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
