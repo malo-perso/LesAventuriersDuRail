@@ -132,6 +132,15 @@ public class Controleur {
             finDuTour();
     }
 
+    public void verifCarteObjectif(Joueur joueur) {
+        ArrayList<CarteObjectif> carteObjectif = joueur.getCartesObjectif();
+        
+    }
+
+    public void finDePartie() {
+     //   this.ihm.finDePartie();
+    }
+
     public boolean poserWagon(Noeud noeud1, Noeud noeud2) {
         this.actionEnCours = 0;
         

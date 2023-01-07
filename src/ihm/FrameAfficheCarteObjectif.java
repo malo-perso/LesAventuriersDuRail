@@ -121,6 +121,36 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.cbCarte3.setSelected(false);
     }
 
+    public void paint(Graphics g){
+        super.paint(g);
+        Graphics2D g1 = (Graphics2D) g;
+
+        double rationW = this.ctrl.getImagePlateau().getWidth(null) /315 ;
+        double rationH = this.ctrl.getImagePlateau().getHeight(null)/215;
+
+        List<CarteObjectif> lstCartePioche = this.ctrl.getPioche().piocherObjectif();
+
+        System.out.println(rationW + " " + rationH);
+
+        System.out.println(lstCartePioche.get(0).getNoeud1().getCenterX());
+        System.out.println(lstCartePioche.get(0).getNoeud1().getCenterY());
+        
+        System.out.println((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW));
+        System.out.println((int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH));
+        
+        g.setColor(Color.BLACK);
+
+        g.fillOval((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW),(int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH), 10, 10);
+        g.fillOval((int)(lstCartePioche.get(0).getNoeud2().getCenterX()/rationW), (int)(lstCartePioche.get(0).getNoeud2().getCenterY()/rationH), 10, 10);
+
+        g.fillOval((int)(lstCartePioche.get(1).getNoeud1().getCenterX()/rationW+rationW),(int) (lstCartePioche.get(1).getNoeud1().getCenterY()/rationH), 10, 10);
+        g.fillOval((int)(lstCartePioche.get(1).getNoeud2().getCenterX()/rationW+rationW), (int)(lstCartePioche.get(1).getNoeud2().getCenterY()/rationH), 10, 10);
+
+        g.fillOval((int)(lstCartePioche.get(2).getNoeud1().getCenterX()/rationW+rationW*2),(int) (lstCartePioche.get(2).getNoeud1().getCenterY()/rationH), 10, 10);
+        g.fillOval((int)(lstCartePioche.get(2).getNoeud2().getCenterX()/rationW+rationW*2), (int)(lstCartePioche.get(2).getNoeud2().getCenterY()/rationH), 10, 10);
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -141,12 +171,13 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
 
             if(carteChoisie.size() == 0){
                 JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
-            }else{
-                this.ctrl.piocherObjectif(this.carteChoisie);
+            }
+            else{
                 this.dispose();
                 clearCheckBox();
                 this.ctrl.getIHM().activer();
                 this.ctrl.getIHM().setVisible(true);
+                this.ctrl.piocherObjectif(this.carteChoisie);    
             }
         }
         

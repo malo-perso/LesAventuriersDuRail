@@ -146,11 +146,16 @@ public class PanelPlateau extends JPanel {
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
-		g.setColor(Color.RED);
-        if (this.noeudSelectionne1 != null)
+        g.setColor(Color.GREEN);
+        if (this.noeudSelectionne1 != null){
+            g.fillOval((int) this.noeudSelectionne1.getX() - (diametre-3) / 2, (int) this.noeudSelectionne1.getY() - (diametre-3) / 2, diametre-3, diametre-3);
             g.drawImage(reticule, (int) this.noeudSelectionne1.getX()-20, (int) this.noeudSelectionne1.getY()-20, 40, 40, this);
-        if (this.noeudSelectionne2 != null)
+        }
+        if (this.noeudSelectionne2 != null){
+            g.fillOval((int) this.noeudSelectionne2.getX() - (diametre-3) / 2, (int) this.noeudSelectionne2.getY() - (diametre-3) / 2, diametre-3, diametre-3);
             g.drawImage(reticule, (int) this.noeudSelectionne2.getX()-20, (int) this.noeudSelectionne2.getY()-20, 40, 40, this);
+        }
+        g.setColor(Color.RED);
 
     }
 
