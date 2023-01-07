@@ -44,7 +44,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.metier = new Metier(this.ctrl);
         this.setTitle("Selection Carte Objectif");
         this.setSize(945,300);
-        this.setLocation(500,200);
+        this.setLocationRelativeTo(null);;
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
@@ -74,6 +74,9 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.btnCarte2.setText("De " + lstCartePioche.get(1).getNoeud1().getNom() + " à " +  lstCartePioche.get(1).getNoeud2().getNom() + " " + lstCartePioche.get(1).getPoints() + " points");
         this.btnCarte3.setText("De " + lstCartePioche.get(2).getNoeud1().getNom() + " à  " +  lstCartePioche.get(2).getNoeud2().getNom() + " " + lstCartePioche.get(2).getPoints() + " points" );
 
+        this.btnCarte1.setFont(new Font("Calibri",Font.BOLD,14));
+        this.btnCarte2.setFont(new Font("Calibri",Font.BOLD,14));
+        this.btnCarte3.setFont(new Font("Calibri",Font.BOLD,14));
 
         this.btnCarte1.setIcon(new ImageIcon(img1));
         this.btnCarte2.setIcon(new ImageIcon(img1));
