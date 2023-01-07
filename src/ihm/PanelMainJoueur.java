@@ -200,6 +200,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     }
 
     public void setInutilisable(){
+        this.panelInfo.setEnabled(false);
         this.panelCarteObjectif.setEnabled(false);
         this.btnPerso.setEnabled(false);
         this.btnParametre.setEnabled(false);
@@ -211,6 +212,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     }
 
     public void setUtilisable(){
+        this.panelInfo.setEnabled(true);
         this.panelCarteObjectif.setEnabled(true);
         this.btnPerso.setEnabled(true);
         this.btnParametre.setEnabled(true);

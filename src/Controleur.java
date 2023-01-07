@@ -120,16 +120,20 @@ public class Controleur {
             if(nbWagon==1)
                 return;
             this.nbWagon=2;
-            this.getIHM().activer();
-            this.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
         }
         else
+        {
             this.nbWagon++;
+        }
         
         this.joueurCourant.ajouterCarteVehicule(this.metier.getPioche().piocherVehicule(i));
         
         if(this.nbWagon==2)
+        {
+            this.getIHM().activerComposants();
+            this.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
             finDuTour();
+        }
     }
 
     public boolean poserWagon(Noeud noeud1, Noeud noeud2) {
@@ -184,6 +188,7 @@ public class Controleur {
     public void piocherObjectif(ArrayList<Integer> carteChoisie) {
 
         this.actionEnCours = 2;
+        this.getIHM().activer();
         this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisie);
         finDuTour();
     }
