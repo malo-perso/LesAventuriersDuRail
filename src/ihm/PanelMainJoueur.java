@@ -214,9 +214,10 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.btnParametre.setEnabled(false);
         this.lblNbVehicule.setEnabled(false);
         this.lblNbPoints.setEnabled(false);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(false);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(false);
+        //     this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+        // }
     }
 
     public void setUtilisable(){
@@ -226,9 +227,9 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.btnParametre.setEnabled(true);
         this.lblNbVehicule.setEnabled(true);
         this.lblNbPoints.setEnabled(true);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(true);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(true);
+        // }
     }
 
     /*

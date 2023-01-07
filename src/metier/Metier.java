@@ -79,7 +79,7 @@ public class Metier {
         //ajouter des cartes vehicules et objectifs dans les listes
         this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
         this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("oui", 0, 0, 0, 0), new Noeud("non", 1, 1, 1, 1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("caca", 0, 0, 0, 0), new Noeud("pipi", 1, 1, 1, 1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("non", 0, 0, 0, 0), new Noeud("oui", 1, 1, 1, 1), 10));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
@@ -115,20 +115,6 @@ public class Metier {
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(new Color(-3355444))));
 
-/*
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-*/
         //game(this.ctrl);
     }
     
