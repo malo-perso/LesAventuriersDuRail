@@ -76,6 +76,10 @@ public class Controleur {
         return this.metier.getLstJoueurs();
     }
 
+    public List<Type> getLstTypes() {
+        return this.metier.getLstTypes();
+    }
+
     public Joueur getJoueurCourant() {
         return this.joueurCourant;
     }

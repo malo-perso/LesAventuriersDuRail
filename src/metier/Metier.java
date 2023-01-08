@@ -260,6 +260,28 @@ public class Metier {
         return this.lstAretes;
     }
 
+    public List<Type> getLstTypes(){
+        ArrayList<Type> listeType = new ArrayList();
+		boolean trouve;
+		for (Arete arete : this.lstAretes)
+		{
+			trouve = false;
+
+			for (int i=0; i<listeType.size(); i++) {
+				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker)) {
+					trouve = true;
+				}
+			}
+			if (!trouve) {
+				listeType.add(arete.getType());
+			}
+		}
+
+		listeType.add(Type.creerType(this.couleurJoker));
+
+		return listeType;
+    }
+
     public List<CarteVehicule> getLstCartesVehicules(){
         return this.lstCarteVehicules;
     }

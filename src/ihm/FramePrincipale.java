@@ -40,7 +40,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     public FramePrincipale(Controleur ctrl){
 
-        this.setTitle("Les Cocaïnomanes");
+        this.setTitle("Les Aventuriers du Rail");
         this.setResizable(true);
         this.setUndecorated(false);
 
