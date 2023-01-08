@@ -240,12 +240,16 @@ public class PanelPlateau extends JPanel {
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
-        
 		super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, 1200 , 800 , this);
 	}
+
+    public void resetNoeudSelect(){
+        this.noeudSelectionne1 = null;
+        this.noeudSelectionne2 = null;
+    }
 
     public Noeud sourisSurNoeud(int x, int y){
         int diametre = this.ctrl.getMetier().getDiametre();
@@ -275,8 +279,8 @@ public class PanelPlateau extends JPanel {
                         PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
                         if (PanelPlateau.this.noeudSelectionne1 != PanelPlateau.this.noeudSelectionne2) {
 
-                            if(PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2))
-                                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2);
+                            //    JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
 
                             PanelPlateau.this.noeudSelectionne1 = null;
                             PanelPlateau.this.noeudSelectionne2 = null;

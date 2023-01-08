@@ -141,6 +141,14 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelMainJoueur.setUtilisable();
     }
 
+    public void resetNoeudSelect(){
+        this.panelPlateau.resetNoeudSelect();
+    }
+
+    public void afficherMsgErreur(String msg){
+        JOptionPane.showMessageDialog(null, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
+    }
+
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.menuRegles){
             try{

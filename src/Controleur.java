@@ -19,6 +19,7 @@ import src.metier.Metier;
 import src.metier.Noeud;
 import src.metier.Pioche;
 import src.metier.Type;
+import src.metier.point;
 
 public class Controleur {
 
@@ -40,6 +41,7 @@ public class Controleur {
     }
 
     public void lancerPartie() {
+    nbWagon = 0;
         this.ihmAcceuil.setVisible(false);
         this.joueurCourant = this.metier.getLstJoueurs().get(0);
         this.ihm = new FramePrincipale(this);
@@ -48,7 +50,12 @@ public class Controleur {
         this.ihm.setVisible(true);
         this.majPioche();
         this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction);
+            
+        //provisoire
+        this.metier.ajouterCartePourTest();
+
         this.ihm.majIHM();
+    
 
     }
 
@@ -99,12 +106,15 @@ public class Controleur {
     public void finDuTour() {
         //if (this.verifFinDePartie()) 
             //this.ihm.finDePartie();
+        System.out.println("le chemin le plus long de " + this.getJoueurCourant().getNom() +" est de : " + point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant));
+
+        verifCarteObjectif();
         this.nbWagon = 0;
+        this.ihm.resetNoeudSelect();
         this.joueurCourant = this.metier.getLstJoueurs().get((this.metier.getLstJoueurs().indexOf(this.joueurCourant)+1)%this.metier.getLstJoueurs().size());
         nbAction++;
         this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction/this.metier.getLstJoueurs().size());
         this.ihm.majIHM();
-        System.out.println(this.joueurCourant.getNom()+" " + this.joueurCourant.getCartesVehicule().size());
     }
 
     public void poserWehicule() {
@@ -114,15 +124,13 @@ public class Controleur {
 
     public void piocherVehicule(int i) {
         this.actionEnCours = 1;
-
-        if (i<6 && this.metier.verifCarteJoker(this.getMetier().getLstCartesVehicules().get(i)))
-        {
+        System.out.println(nbWagon);
+        if (i<6 && this.metier.verifCarteJoker(this.getMetier().getLstCartesVehicules().get(i))){
             if(nbWagon==1)
                 return;
             this.nbWagon=2;
         }
-        else
-        {
+        else{
             this.nbWagon++;
         }
         
@@ -136,11 +144,6 @@ public class Controleur {
         }
     }
 
-    public void verifCarteObjectif(Joueur joueur) {
-        ArrayList<CarteObjectif> carteObjectif = joueur.getCartesObjectif();
-        
-    }
-
     public void finDePartie() {
      //   this.ihm.finDePartie();
     }
@@ -151,7 +154,7 @@ public class Controleur {
         ArrayList<Arete> aretesSelect = new ArrayList<Arete>();
         Arete areteSelect = null;
         Type type = null;
-        ArrayList<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
+        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
 
         for (Arete arete : this.metier.getLstAretes()) {
             if(arete.estAreteDe(noeud1, noeud2) && arete.estDisponible()){
@@ -179,19 +182,37 @@ public class Controleur {
         type = areteSelect.getType();
 
         //verif à assez de carte vehicule pour prendre l'arete
-        if (this.metier.estPrenable(areteSelect, this.joueurCourant, type.getColor()))
+        if (!this.metier.estPrenable(areteSelect, this.joueurCourant, type.getColor())){
+            this.ihm.afficherMsgErreur("Vous n'avez pas assez de carte pour poser cette arete");
             return false;
+        }
 
 
         //verif si le joueur a assez de vehicule pour poser l'arete
-        if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur())
+        if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur()){
+            this.ihm.afficherMsgErreur("Vous n'avez pas assez de wagon pour poser cette arete");
             return false;
+        }
 
-        this.joueurCourant.supprimerCarteVehicule(type.getColor(), areteSelect.getLongueur(),this.metier.getCouleurJoker());
+        cateDefausse = this.joueurCourant.supprimerCarteVehicule(type.getColor(), areteSelect.getLongueur(),this.metier.getCouleurJoker());
         areteSelect.setProprietaire(this.joueurCourant);
 
+        this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
+        this.joueurCourant.ajouterPoint(areteSelect.getLongueur());
+        this.metier.getPioche().ajouterCartePioche(cateDefausse);
         finDuTour();
         return true;
+    }
+
+    public void verifCarteObjectif() {
+        if (this.joueurCourant.getCartesObjectif().size() == 0)
+            return;
+        for (CarteObjectif carteObjectif : this.joueurCourant.getCartesObjectif()) 
+            if (!carteObjectif.getEstReussi() && point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant, carteObjectif)){
+                this.joueurCourant.ajouterPoint(carteObjectif.getPoints());
+                carteObjectif.setEstReussi(true);
+                System.out.println("Carte Objectif reussi de "+ carteObjectif.getNoeud1().getNom() + " à " + carteObjectif.getNoeud2().getNom());
+            }
     }
 
     public void piocherObjectif(ArrayList<Integer> carteChoisie) {

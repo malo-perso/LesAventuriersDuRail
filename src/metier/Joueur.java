@@ -34,6 +34,10 @@ public class Joueur {
         return this.nbPoint;
     }
 
+    public void ajouterPoint(int nbPoint){
+        this.nbPoint += nbPoint;
+    }
+
     public ArrayList<CarteVehicule> getCartesVehicule() {
         return this.cartesVehicule;
     }
@@ -73,22 +77,24 @@ public class Joueur {
         int i;
         List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
         for (i = 0; i < nb; i++) {
-            for (int j = 0; j < cartesVehicule.size(); j++) {
-                if (this.cartesVehicule.get(0).getType().getColor() == color) {
+            for (int j = 0; j < this.cartesVehicule.size(); j++) {
+                if (this.cartesVehicule.get(0).getType().getColor() == color) 
                     cartesDefausse.add(this.cartesVehicule.remove(j));
-                    break;
-                }
+                
             }
         }
 
-        for (int j = 0; j < cartesVehicule.size(); j++) {
-            if (this.cartesVehicule.get(0).getType().getColor() == colorJoker) {
+        for (int j = 0; j < this.cartesVehicule.size(); j++) {
+            if (this.cartesVehicule.get(0).getType().getColor() == colorJoker)
                     cartesDefausse.add(this.cartesVehicule.remove(j));
-                    break;
-            }
+            
         }
 
         return cartesDefausse;
+    }
+
+    public void supprimerWagon(int longueur) {
+        this.nbWagon -= longueur;
     }
 
 }
