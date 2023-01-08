@@ -77,58 +77,11 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Bou",  2500,45));
         this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
         //ajouter des cartes vehicules et objectifs dans les listes
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("oui", 0, 0, 0, 0), new Noeud("non", 1, 1, 1, 1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(new Noeud("caca", 0, 0, 0, 0), new Noeud("pipi", 1, 1, 1, 1), 10));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
         this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(this.couleurJoker)));
 
-
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
-        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(new Color(-3355444))));
-
-/*
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52));
-        this.lstJoueurs.add(new Joueur("Bou",  2500));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556));
-*/
         //game(this.ctrl);
     }
     
@@ -331,6 +284,8 @@ public class Metier {
         this.lstJoueurs.remove(joueur);
     }
 
+
+
     public void reset(){
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
         this.lstCarteVehicules = new ArrayList<CarteVehicule>();
@@ -493,9 +448,48 @@ public class Metier {
         }catch(Exception e){e.printStackTrace();}
     }
 
+    public void ajouterCartePourTest(){
     
 
-      
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(2), this.lstNoeuds.get(3), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(4), this.lstNoeuds.get(5), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(6), this.lstNoeuds.get(7), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(8), this.lstNoeuds.get(9), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(10), this.lstNoeuds.get(11), 10));
+        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(12), this.lstNoeuds.get(13), 10));
+        
+
+        this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));
+    }      
 	
 
 }

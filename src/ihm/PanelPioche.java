@@ -84,10 +84,6 @@ public class PanelPioche extends JPanel implements ActionListener{
         this.btnPiocheObjectif.setEnabled(true);
     }
 
-    public void setInutilisable(JButton btn) {
-        btn.setEnabled(false);
-    }
-
     public void setUtilisable(JButton btn){
         btn.setEnabled(true);
     }
@@ -97,7 +93,7 @@ public class PanelPioche extends JPanel implements ActionListener{
 
         for (int i = 0; i < this.btnPiocheVehiculeVisible.length; i++) {
             if (e.getSource() == this.btnPiocheVehiculeVisible[i]) {
-                this.setInutilisable(btnPiocheObjectif);
+                this.btnPiocheObjectif.setEnabled(false);
                 this.ctrl.getIHM().griserComposants();
 
                 this.ctrl.piocherVehicule(i);
@@ -105,7 +101,7 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == this.btnPiocheVehicule) {
-            this.setInutilisable(btnPiocheObjectif);
+            this.btnPiocheObjectif.setEnabled(false);
             this.ctrl.getIHM().griserComposants();
 
             this.ctrl.piocherVehicule(6);
@@ -116,8 +112,6 @@ public class PanelPioche extends JPanel implements ActionListener{
 
             this.ctrl.getPioche().piocherObjectif();
             this.afficheCarteObjectif.setVisible(true);
-
-            this.ctrl.getIHM().activer();
         }
     }
 

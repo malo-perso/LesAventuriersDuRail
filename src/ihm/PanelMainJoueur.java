@@ -68,7 +68,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.imgPara = new ImageIcon("./src/data/images/Engrennage.jpg");
         this.imgObjectif = new ImageIcon("./src/data/images/map.jpg");
         this.imgPlateau = new ImageIcon(this.ctrl.getImagePlateau());
-        this.img2 = imgPlateau.getImage().getScaledInstance(300, 200, Image.SCALE_SMOOTH);
+        this.img2 = imgPlateau.getImage().getScaledInstance(280, 180, Image.SCALE_SMOOTH);
 
         Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
@@ -102,15 +102,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
                 this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
                 this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(i).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(i).getNoeud2().getNom() + " " + lstCarteObjectif.get(i).getPoints() + " points");
-                /*switch(this.carteObjectifChoisie.get(i)){
-                    case 0 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(0).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(0).getNoeud2().getNom() + " " + lstCarteObjectif.get(0).getPoints() + " points");
-                             break;
-                    case 1 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(1).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(1).getNoeud2().getNom() + " " + lstCarteObjectif.get(1).getPoints() + " points");
-                             break;
-                    case 2 : this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(2).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(2).getNoeud2().getNom() + " " + lstCarteObjectif.get(2).getPoints() + " points");
-                             break;
-                }*/
-                this.btnCarteObjectif[i].setPreferredSize(new Dimension(300,200));
+                this.btnCarteObjectif[i].setPreferredSize(new Dimension(280,180));
                 this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
                 this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
                 this.panelCarteObjectif.add(this.btnCarteObjectif[i]);
@@ -205,7 +197,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
                 this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
                 this.btnCarteObjectif[i].setText("De " + lstCarteObjectif.get(i).getNoeud1().getNom() + " à " +  lstCarteObjectif.get(i).getNoeud2().getNom() + " " + lstCarteObjectif.get(i).getPoints() + " points");
-                this.btnCarteObjectif[i].setPreferredSize(new Dimension(300,200));
+                this.btnCarteObjectif[i].setPreferredSize(new Dimension(280,180));
                 this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
                 this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
                 this.panelCarteObjectif.add(this.btnCarteObjectif[i]);
@@ -213,31 +205,31 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         }
         else
             this.panelCarteObjectif.add(new JLabel("Pas de carte Objectif",SwingConstants.CENTER));
-
-        
-
     }
 
     public void setInutilisable(){
+        this.panelInfo.setEnabled(false);
         this.panelCarteObjectif.setEnabled(false);
         this.btnPerso.setEnabled(false);
         this.btnParametre.setEnabled(false);
         this.lblNbVehicule.setEnabled(false);
         this.lblNbPoints.setEnabled(false);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(false);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(false);
+        //     this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
+        // }
     }
 
     public void setUtilisable(){
+        this.panelInfo.setEnabled(true);
         this.panelCarteObjectif.setEnabled(true);
         this.btnPerso.setEnabled(true);
         this.btnParametre.setEnabled(true);
         this.lblNbVehicule.setEnabled(true);
         this.lblNbPoints.setEnabled(true);
-        for(int i=0; i<this.btnCarteVehicule.length; i++){
-            this.btnCarteVehicule[i].setEnabled(true);
-        }
+        // for(int i=0; i<this.btnCarteVehicule.length; i++){
+        //     this.btnCarteVehicule[i].setEnabled(true);
+        // }
     }
 
     /*

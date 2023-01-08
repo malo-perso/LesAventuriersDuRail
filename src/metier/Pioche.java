@@ -98,5 +98,9 @@ public class Pioche {
                 this.lstCartesObjectif.add(this.lstCartesObjectif.remove(i));        
             }
     }
+
+    public void ajouterCartePioche(List<CarteVehicule> cateDefausse) {
+        this.lstCartesVehicule.addAll(cateDefausse);
+    }
     
 }

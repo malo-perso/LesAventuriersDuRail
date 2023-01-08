@@ -146,11 +146,16 @@ public class PanelPlateau extends JPanel {
 			g1.drawString(noeud.getNom(), noeud.getNomX(), noeud.getNomY());
 		}
 
-		g.setColor(Color.RED);
-        if (this.noeudSelectionne1 != null)
+        g.setColor(Color.GREEN);
+        if (this.noeudSelectionne1 != null){
+            g.fillOval((int) this.noeudSelectionne1.getX() - (diametre-3) / 2, (int) this.noeudSelectionne1.getY() - (diametre-3) / 2, diametre-3, diametre-3);
             g.drawImage(reticule, (int) this.noeudSelectionne1.getX()-20, (int) this.noeudSelectionne1.getY()-20, 40, 40, this);
-        if (this.noeudSelectionne2 != null)
+        }
+        if (this.noeudSelectionne2 != null){
+            g.fillOval((int) this.noeudSelectionne2.getX() - (diametre-3) / 2, (int) this.noeudSelectionne2.getY() - (diametre-3) / 2, diametre-3, diametre-3);
             g.drawImage(reticule, (int) this.noeudSelectionne2.getX()-20, (int) this.noeudSelectionne2.getY()-20, 40, 40, this);
+        }
+        g.setColor(Color.RED);
 
     }
 
@@ -235,12 +240,16 @@ public class PanelPlateau extends JPanel {
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
-        
 		super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, 1200 , 800 , this);
 	}
+
+    public void resetNoeudSelect(){
+        this.noeudSelectionne1 = null;
+        this.noeudSelectionne2 = null;
+    }
 
     public Noeud sourisSurNoeud(int x, int y){
         int diametre = this.ctrl.getMetier().getDiametre();
@@ -270,8 +279,8 @@ public class PanelPlateau extends JPanel {
                         PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
                         if (PanelPlateau.this.noeudSelectionne1 != PanelPlateau.this.noeudSelectionne2) {
 
-                            if(PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2))
-                                JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
+                            PanelPlateau.this.ctrl.poserWagon(noeudSelectionne1, noeudSelectionne2);
+                            //    JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
 
                             PanelPlateau.this.noeudSelectionne1 = null;
                             PanelPlateau.this.noeudSelectionne2 = null;
