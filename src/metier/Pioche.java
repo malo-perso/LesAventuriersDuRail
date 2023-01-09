@@ -31,7 +31,7 @@ public class Pioche {
 
     public ArrayList<CarteObjectif> getLstCartesObjectif() {
         ArrayList<CarteObjectif> lstObj = new ArrayList<CarteObjectif>();
-        lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        //lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
         return lstObj;
         //return this.lstCartesObjectif;
     }

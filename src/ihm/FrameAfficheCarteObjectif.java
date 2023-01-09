@@ -155,15 +155,26 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
                 System.out.println("carte 2" + this.carteChoisie);
             }
 
-            if(carteChoisie.size() == 0){
-                JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
-            }
-            else{
-                this.dispose();
-                clearCheckBox();
-                this.ctrl.getIHM().activer();
-                this.ctrl.getIHM().setVisible(true);
-                this.ctrl.piocherObjectif(this.carteChoisie);    
+            if(this.ctrl.getNbActionJoueur()<1){
+                if(this.carteChoisie.size() < 2){
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir au moins 2 cartes");
+                }else{
+                    this.dispose();
+                    clearCheckBox();
+                    this.ctrl.getIHM().activer();
+                    this.ctrl.getIHM().setVisible(true);
+                    this.ctrl.piocherObjectif(this.carteChoisie);
+                }
+            }else{
+                if(carteChoisie.size() == 0){
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
+                }else{
+                    this.dispose();
+                    clearCheckBox();
+                    this.ctrl.getIHM().activer();
+                    this.ctrl.getIHM().setVisible(true);
+                    this.ctrl.piocherObjectif(this.carteChoisie);    
+                }
             }
         }
         

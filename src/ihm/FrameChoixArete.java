@@ -2,6 +2,7 @@ package src.ihm;
 
 import src.Controleur;
 import src.metier.Type;
+import src.metier.Arete;
 
 import javax.swing.*;
 
@@ -11,16 +12,15 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrameChoixWagon extends JFrame implements ActionListener {
+public class FrameChoixArete extends JFrame implements ActionListener {
 
     private Controleur ctrl;
-    private ArrayList<JRadioButton> lstCBTypeWagon;
+    private ArrayList<JRadioButton> lstCBArete;
     private JPanel panelHaut, panelBas;
-    private JScrollPane spHaut;
     private JButton btnValider;
 
-    public FrameChoixWagon(Controleur ctrl, ArrayList<src.metier.Type> lstTypeJoueur) {
-        this.setTitle("Choix du wagon");
+    public FrameChoixArete(Controleur ctrl, ArrayList<Arete> lstArete) {
+        this.setTitle("Choix de l'arête");
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +33,6 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
         this.ctrl = ctrl;
         this.panelHaut = new JPanel();
         this.panelBas = new JPanel();
-        this.spHaut = new JScrollPane(this.panelHaut);
         this.btnValider = new JButton("Valider");
 
 
@@ -41,37 +40,37 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
         this.btnValider.addActionListener(this);
         this.btnValider.setEnabled(false);
 
-        this.lstCBTypeWagon = new ArrayList<JRadioButton>();
-        for (int i = 0; i < lstTypeJoueur.size(); i++) {
-            this.lstCBTypeWagon.add(new JRadioButton());
-            this.lstCBTypeWagon.get(i).setBackground(lstTypeJoueur.get(i).getColor());
-            this.lstCBTypeWagon.get(i).setOpaque(true);
-            this.lstCBTypeWagon.get(i).addActionListener(this);
+        this.lstCBArete = new ArrayList<JRadioButton>();
+        for (int i = 0; i < lstArete.size(); i++) {
+            this.lstCBArete.add(new JRadioButton());
+            this.lstCBArete.get(i).setBackground(lstArete.get(i).getType().getColor());
+            this.lstCBArete.get(i).setOpaque(true);
+            this.lstCBArete.get(i).addActionListener(this);
         }
 
-
+        
         // ajout des composants
-        for (int i = 0; i < this.lstCBTypeWagon.size(); i++) {
-            this.panelHaut.add(this.lstCBTypeWagon.get(i));
+        for (int i = 0; i < this.lstCBArete.size(); i++) {
+            this.panelHaut.add(this.lstCBArete.get(i));
         }
 
         this.panelBas.add(this.btnValider);
 
-        this.add(this.spHaut);
+        this.add(this.panelHaut);
         this.add(this.panelBas);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < this.lstCBTypeWagon.size(); i++) {
-            if (e.getSource() == this.lstCBTypeWagon.get(i)) {
+        for (int i = 0; i < this.lstCBArete.size(); i++) {
+            if (e.getSource() == this.lstCBArete.get(i)) {
                 this.btnValider.setEnabled(true);
             }
         }
         
         if (e.getSource() == this.btnValider) {
-            for (int i = 0; i < this.lstCBTypeWagon.size(); i++) {
-                if (this.lstCBTypeWagon.get(i).isSelected()) {
+            for (int i = 0; i < this.lstCBArete.size(); i++) {
+                if (this.lstCBArete.get(i).isSelected()) {
                     // faire quelque chose
                     this.dispose();
                 }

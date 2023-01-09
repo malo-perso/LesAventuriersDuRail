@@ -104,7 +104,11 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     public void afficherJoueur(String nom, int tour)
     {
-        JOptionPane.showMessageDialog(null, nom, "Tour" + tour, JOptionPane.INFORMATION_MESSAGE);
+        if( tour < 1 ){
+            JOptionPane.showMessageDialog(null, nom, "Tour de préparation" , JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, nom, "Tour" + tour, JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     

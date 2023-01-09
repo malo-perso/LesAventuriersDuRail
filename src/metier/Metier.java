@@ -77,10 +77,6 @@ public class Metier {
         this.lstJoueurs.add(new Joueur("Bou",  2500,45));
         this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
         //ajouter des cartes vehicules et objectifs dans les listes
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLACK)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.BLUE)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.RED)));
-        this.lstCarteVehicules.add(new CarteVehicule(new Type(Color.GREEN)));
 
         //game(this.ctrl);
     }
@@ -272,6 +268,7 @@ public class Metier {
         return null;
     }
 
+    // ???
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;
     }
@@ -446,6 +443,14 @@ public class Metier {
             this.pioche.melangerCarteObjectif();
 
         }catch(Exception e){e.printStackTrace();}
+    }
+
+    public void distribuerCarteVehicule(){
+        for( Joueur j : this.lstJoueurs){
+            for(int i=0; i<4; i++){
+                if(this.pioche.getLstCartesVehicule().size()> 0){j.ajouterCarteVehicule(this.pioche.retirerCarteVehicule(0));}
+            }
+        }
     }
 
     public void ajouterCartePourTest(){
