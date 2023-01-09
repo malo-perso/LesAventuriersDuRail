@@ -63,8 +63,6 @@ public class Controleur {
         this.majPioche();
         this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction);
         
-        //provisoire
-        this.metier.ajouterCartePourTest();
         grillePoint= this.metier.generGrillePoint();
 
         this.ihm.majIHM();

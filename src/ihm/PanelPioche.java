@@ -97,6 +97,7 @@ public class PanelPioche extends JPanel implements ActionListener{
                 this.ctrl.getIHM().griserComposants();
 
                 this.ctrl.piocherVehicule(i);
+                this.ctrl.getIHM().setVisible(true);
             }
         }
 
@@ -105,6 +106,7 @@ public class PanelPioche extends JPanel implements ActionListener{
             this.ctrl.getIHM().griserComposants();
 
             this.ctrl.piocherVehicule(6);
+            this.ctrl.getIHM().setVisible(true);
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
