@@ -217,7 +217,7 @@ public class PanelPlateau extends JPanel {
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
 
         if (proprietaire != null) {
-            if (proprietaire.getCouleur().getRGB() < Color.DARK_GRAY.getRGB() ) {
+            if (color.getRGB() < Color.DARK_GRAY.getRGB() ) {
                 g1.setColor(Color.WHITE);
             } else {
                 g1.setColor(Color.BLACK);
@@ -282,7 +282,7 @@ public class PanelPlateau extends JPanel {
 	{
 		public void mousePressed (MouseEvent e)
 		{
-			if (e.getButton() == MouseEvent.BUTTON3)
+			if (e.getButton() == MouseEvent.BUTTON3 || e.getButton() == MouseEvent.BUTTON1)
 			{
 				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
                     if (PanelPlateau.this.noeudSelectionne1 == null) {
