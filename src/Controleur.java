@@ -142,7 +142,6 @@ public class Controleur {
             //this.ihm.finDePartie();
         System.out.println("le chemin le plus long de " + this.getJoueurCourant().getNom() +" est de : " + point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant));
 
-        verifCarteObjectif();
         this.nbWagon = 0;
         this.ihm.resetNoeudSelect();
         this.joueurCourant = this.metier.getLstJoueurs().get((this.metier.getLstJoueurs().indexOf(this.joueurCourant)+1)%this.metier.getLstJoueurs().size());
@@ -188,6 +187,7 @@ public class Controleur {
     public void finDePartie() {
         this.ihm.desactiver();
         this.ihm.setVisible(false);
+        verifCarteObjectif();
         FrameFinPartie frameFinPartie = new FrameFinPartie(this);
     }
 
@@ -282,7 +282,9 @@ public class Controleur {
             if (!carteObjectif.getEstReussi() && point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant, carteObjectif)){
                 this.joueurCourant.ajouterPoint(carteObjectif.getPoints());
                 carteObjectif.setEstReussi(true);
-                System.out.println("Carte Objectif reussi de "+ carteObjectif.getNoeud1().getNom() + " à " + carteObjectif.getNoeud2().getNom());
+            }
+            else {
+                this.joueurCourant.ajouterPoint(-carteObjectif.getPoints());
             }
     }
 
