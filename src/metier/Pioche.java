@@ -72,7 +72,7 @@ public class Pioche {
     }
 
     public CarteVehicule piocherVehicule(int i) {
-        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
+        if (i >= 0 && i < 7 && i < this.lstCartesVehicule.size()) {
             CarteVehicule carteVehi = this.retirerCarteVehicule(i);
             this.ctrl.majPioche();
             return carteVehi;
@@ -99,11 +99,10 @@ public class Pioche {
 
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
         for (int i = 0; i < intCarte.size(); i++) {
-            if(this.lstCartesObjectif.size()==2)
+            if(this.lstCartesObjectif.size()==2 && i != 0)
                 i--;
             if (this.lstCartesObjectif.size() > i){
                 CarteObjectif remove = this.lstCartesObjectif.remove(i);
-                System.out.println("lstCartesObjectif.remove(i) : " + remove);
                 joueur.ajouterCarteObjectif(remove);
             }
         }     

@@ -5,7 +5,7 @@
 		<nombreJoueurMinimum>2</nombreJoueurMinimum>
 		<nombreJoueurMaximum >5</nombreJoueurMaximum>
 		<nombreVehiculeJoueur>45</nombreVehiculeJoueur>
-		<nombreJoueurMiniDoubleRoute >3</nombreJoueurMiniDoubleRoute>
+		<nombreJoueurMiniDoubleRoute>4</nombreJoueurMiniDoubleRoute>
 		<nombreVehiculeFin>2</nombreVehiculeFin>
 		<nombrePointCheminLong>-1</nombrePointCheminLong>
 		<longueurVehicule>33</longueurVehicule>
@@ -591,12 +591,19 @@
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>Los Angeles</noeud1>
-			<noeud2>San Fransisco</noeud2>
+			<noeud1>San Fransisco</noeud1>
+			<noeud2>Los Angeles</noeud2>
 			<longueur>3</longueur>
 			<type>-26113</type>
 			<orientation>true</orientation>
     	</arete>
+		<arete>
+			<noeud1>San Fransisco</noeud1>
+			<noeud2>Los Angeles</noeud2>
+			<longueur>3</longueur>
+			<type>-154</type>
+			<orientation>true</orientation>
+		</arete>
 		<arete>
 			<noeud1>San Fransisco</noeud1>
 			<noeud2>Portland</noeud2>
@@ -682,13 +689,6 @@
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>San Fransisco</noeud1>
-			<noeud2>Los Angeles</noeud2>
-			<longueur>3</longueur>
-			<type>-154</type>
-			<orientation>true</orientation>
-    	</arete>
-		<arete>
 			<noeud1>Seattle</noeud1>
 			<noeud2>Helena</noeud2>
 			<longueur>6</longueur>
@@ -717,8 +717,8 @@
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>New York</noeud1>
-			<noeud2>Boston</noeud2>
+			<noeud1>Boston</noeud1>
+			<noeud2>New York</noeud2>
 			<longueur>2</longueur>
 			<type>-65485</type>
 			<orientation>true</orientation>
@@ -755,9 +755,16 @@
 			<noeud1>Chicago</noeud1>
 			<noeud2>Pittsburgh</noeud2>
 			<longueur>3</longueur>
-			<type>-26317</type>
+			<type>-16777216</type>
 			<orientation>true</orientation>
     	</arete>
+		<arete>
+			<noeud1>Chicago</noeud1>
+			<noeud2>Pittsburgh</noeud2>
+			<longueur>3</longueur>
+			<type>-26317</type>
+			<orientation>true</orientation>
+		</arete>
 		<arete>
 			<noeud1>Washington</noeud1>
 			<noeud2>New York</noeud2>
@@ -937,7 +944,7 @@
 			<noeud1>Boston</noeud1>
 			<noeud2>New York</noeud2>
 			<longueur>2</longueur>
-			<type>-65536</type>
+			<type>-154</type>
 			<orientation>true</orientation>
     	</arete>
 		<arete>
@@ -948,8 +955,8 @@
 			<orientation>true</orientation>
     	</arete>
 		<arete>
-			<noeud1>Salt Lake City</noeud1>
-			<noeud2>Denver</noeud2>
+			<noeud1>Denver</noeud1>
+			<noeud2>Salt Lake City</noeud2>
 			<longueur>3</longueur>
 			<type>-154</type>
 			<orientation>true</orientation>
