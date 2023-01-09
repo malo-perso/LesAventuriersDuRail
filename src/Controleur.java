@@ -7,13 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.Color;
 
 import src.ihm.FrameAcceuil;
 import src.ihm.FramePrincipale;
+import src.ihm.grilles.ListDialog;
 import src.metier.Arete;
 import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 import src.ihm.FrameAfficheCarteObjectif;
+import src.ihm.FrameChoixArete;
+import src.ihm.FrameChoixWagon;
 import src.metier.Joueur;
 import src.metier.Metier;
 import src.metier.Noeud;
@@ -33,6 +37,7 @@ public class Controleur {
     private int nbWagon;
     private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
     private int nbAction;
+    private Color colorSelect;
 
     public Controleur() {
         this.metier = new Metier(this);
@@ -176,13 +181,11 @@ public class Controleur {
      //   this.ihm.finDePartie();
     }
 
-    public boolean poserWagon(Noeud noeud1, Noeud noeud2) {
+    public void verifAreteSelect(Noeud noeud1, Noeud noeud2){
         this.actionEnCours = 0;
         
         ArrayList<Arete> aretesSelect = new ArrayList<Arete>();
         Arete areteSelect = null;
-        Type type = null;
-        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
 
         for (Arete arete : this.metier.getLstAretes()) {
             if(arete.estAreteDe(noeud1, noeud2) && arete.estDisponible()){
@@ -192,44 +195,54 @@ public class Controleur {
 
         //verif s il a selectionne quelque chose 
         if (aretesSelect.size()==0)
-            return false;
-
-        //TO DO 
-        /* si arete double , on demande à l'utilisateur de choisir entres les deux
-        if(aretesSelect.size()>1)
-            areteSelect = this.ihm.selectArete(aretesSelect);
-        else*/
-        areteSelect = aretesSelect.get(0);
+            return ;
         
-        //TO DO
-        //si arete joker on demande à l'utilisateur de choisir le type de wagon qu il va poser
-        /* 
-        if(this.metier.verifVoieJoker(areteSelect));
-            //this.ihm.selectArete(areteSelect, joueurCourant);
-        else*/
-        type = areteSelect.getType();
+        // si arete double , on demande à l'utilisateur de choisir entres les deux
+        if(aretesSelect.size()>1)
+            new FrameChoixArete(this, aretesSelect);
+        else {
+            areteSelect = aretesSelect.get(0);
+            verifAreteMulti(areteSelect);
+        }
+    
+    }
+
+    public void verifAreteMulti(Arete areteSelect){
+        if(this.metier.verifVoieJoker(areteSelect)){
+            new FrameChoixWagon(this, areteSelect, this.joueurCourant.getListType());
+        }
+        else{
+            verifAreteWagon(areteSelect, areteSelect.getType().getColor());
+        }
+    }
+
+    public void verifAreteWagon(Arete areteSelect, Color couleurArete){
+        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
 
         //verif à assez de carte vehicule pour prendre l'arete
-        if (!this.metier.estPrenable(areteSelect, this.joueurCourant, type.getColor())){
+        if (!this.metier.estPrenable(areteSelect, this.joueurCourant, couleurArete)){
             this.ihm.afficherMsgErreur("Vous n'avez pas assez de carte pour poser cette arete");
-            return false;
+            return;
         }
 
 
         //verif si le joueur a assez de vehicule pour poser l'arete
         if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur()){
             this.ihm.afficherMsgErreur("Vous n'avez pas assez de wagon pour poser cette arete");
-            return false;
+            return;
         }
 
-        cateDefausse = this.joueurCourant.supprimerCarteVehicule(type.getColor(), areteSelect.getLongueur(),this.metier.getCouleurJoker());
+        cateDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.metier.getCouleurJoker());
         areteSelect.setProprietaire(this.joueurCourant);
 
         this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
         this.joueurCourant.ajouterPoint(areteSelect.getLongueur());
         this.metier.getPioche().ajouterCartePioche(cateDefausse);
         finDuTour();
-        return true;
+    }
+
+    public void setColorSelect(Color color){
+        this.colorSelect = color;
     }
 
     public void verifCarteObjectif() {

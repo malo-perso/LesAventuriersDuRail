@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-public class FrameAfficheCarteObjectif extends JFrame implements ActionListener {
+public class FrameAfficheCarteObjectif extends JDialog implements ActionListener {
 
     private Controleur ctrl;
     private PanelPioche panelPioche;
