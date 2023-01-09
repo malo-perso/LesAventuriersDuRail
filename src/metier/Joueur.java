@@ -2,6 +2,7 @@ package src.metier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import java.awt.Color;
 
 public class Joueur {
@@ -80,6 +81,18 @@ public class Joueur {
             }
         }
         return nb;
+    }
+
+    public HashMap<Color, Integer> getHashCouleur() {
+        HashMap<Color, Integer> hashCouleur = new HashMap<Color, Integer>();
+        for (CarteVehicule carte : this.cartesVehicule) {
+            if (hashCouleur.containsKey(carte.getType().getColor())) {
+                hashCouleur.put(carte.getType().getColor(), hashCouleur.get(carte.getType().getColor()) + 1);
+            } else {
+                hashCouleur.put(carte.getType().getColor(), 1);
+            }
+        }
+        return hashCouleur;
     }
 
     public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
