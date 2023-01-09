@@ -52,6 +52,9 @@ public class Controleur {
         nbWagon = 0;
         this.ihmAcceuil.setVisible(false);
         this.joueurCourant = this.metier.getLstJoueurs().get(0);
+        //provisoire
+        //this.metier.ajouterCartePourTest();
+        //
         this.metier.distribuerCarteVehicule();
         this.ihm = new FramePrincipale(this);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
