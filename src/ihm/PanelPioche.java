@@ -118,6 +118,7 @@ public class PanelPioche extends JPanel implements ActionListener{
 
                         this.ctrl.piocherObjectif();
                         this.afficheCarteObjectif.setVisible(true);
+                        this.ctrl.getIHM().setVisible(true);
                         break;
                 case 2 : JOptionPane.showMessageDialog(null, "Attention ! Il ne reste que deux cartes objectifs !");
                         
@@ -125,11 +126,13 @@ public class PanelPioche extends JPanel implements ActionListener{
 
                         this.ctrl.piocherObjectif();
                         this.afficheCarteObjectif.setVisible(true);
+                        this.ctrl.getIHM().setVisible(true);
                         break;
                 default:this.ctrl.getIHM().desactiver();
 
                         this.ctrl.piocherObjectif();
                         this.afficheCarteObjectif.setVisible(true);
+                        this.ctrl.getIHM().setVisible(true);
                         break;
             }
         }

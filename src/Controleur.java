@@ -35,6 +35,7 @@ public class Controleur {
     private BufferedImage imagePlateau;
 
     private Joueur joueurCourant;
+    private Joueur dernierJoueur;
     private int nbWagon;
     private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
     private int nbAction;
@@ -135,10 +136,15 @@ public class Controleur {
     }
 
     public void finDuTour() {
+        if (dernierJoueur != null && this.joueurCourant.equals(dernierJoueur)) {
+            this.ihm.afficherMsgErreur("C'est la fin de la partie!");
+            finDePartie();
+            return;
+        }
         for (Joueur joueur : this.metier.getLstJoueurs()) {
             if(joueur.getNbWagon() < this.metier.getNbVehiculeFinPartie() ){
-                finDePartie();
-                return;
+                this.dernierJoueur = joueur;
+                this.ihm.afficherMsgErreur(this.joueurCourant.getNom() + " a moins de de " + this.metier.getNbVehiculeFinPartie()+" wagons. C'est le dernier tour pour tout le monde");
             }
         }
             
@@ -177,7 +183,8 @@ public class Controleur {
         }
         
         this.joueurCourant.ajouterCarteVehicule(this.metier.getPioche().piocherVehicule(i));
-        
+        this.majIHM();
+        this.getIHM().setVisible(true);
         if(this.nbWagon==2)
         {
             this.getIHM().activerComposants();
@@ -195,7 +202,7 @@ public class Controleur {
         for (Joueur i : this.metier.getLstJoueurs()) {
                 verifCarteObjectif(i);
                 cheminLPLJ = point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), i);
-                System.out.println("le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
+                System.out.println("Le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
                 if (cheminLPLJ >cheminLPL) {
                     joueurCheminLPL = i;
                 }
@@ -312,6 +319,8 @@ public class Controleur {
         this.getIHM().activer();
         this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisies);
         this.frameAfficheCarteObjectif.majIHM();
+        this.majIHM();
+        this.getIHM().setVisible(true);
         finDuTour();
     }
 
