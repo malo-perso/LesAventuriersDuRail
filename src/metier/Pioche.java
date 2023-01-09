@@ -93,7 +93,7 @@ public class Pioche {
             //     for(int j=0; j<this.lstCartesObjectif.size(); j++)
             //         lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
             // }
-            // else{
+            // else
                 lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
             
         }
