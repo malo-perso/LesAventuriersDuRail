@@ -98,19 +98,13 @@ public class Joueur {
     public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
         int i;
         List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
-        for (i = 0; i < nb; i++) {
-            for (int j = 0; j < this.cartesVehicule.size(); j++) {
-                if (this.cartesVehicule.get(0).getType().getColor() == color) 
-                    cartesDefausse.add(this.cartesVehicule.remove(j));
-                
+        HashMap<Color, Integer> hashCouleur = getHashCouleur();
+        for (Integer carteVehicule : hashCouleur.get(color)) {
+            if (i<nb){
+                this.cartesVehicule.get(i)
             }
-        }
-
-        for (int j = 0; j < this.cartesVehicule.size(); j++) {
-            if (this.cartesVehicule.get(0).getType().getColor() == colorJoker)
-                    cartesDefausse.add(this.cartesVehicule.remove(j));
             
-        }
+         }
 
         return cartesDefausse;
     }
