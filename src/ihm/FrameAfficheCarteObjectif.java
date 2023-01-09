@@ -61,27 +61,25 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
 
         this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
 
-        if(this.lstCarteObjectifs.size() > 3)
-            tmp = 3;
-        else
-            tmp = this.lstCarteObjectifs.size();
+        this.cbCarte1 = new JCheckBox();
+        this.cbCarte2 = new JCheckBox();
+        this.cbCarte3 = new JCheckBox();
 
-        this.btnCarteObjectif = new JButton[tmp];
         this.panelObjectif.removeAll();
 
-        if(this.lstCarteObjectifs.size() < 3){
-            this.panelObjectif.setLayout(new GridLayout(1,this.lstCarteObjectifs.size(), 5, 0));
+        if(this.lstCartePioche.size() < 3){
+            this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
             this.panelCB.removeAll();
-            this.panelCB.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
             this.panelCB.add(this.cbCarte1);
             this.panelCB.add(this.cbCarte2);
             this.panelValidation.removeAll();
-            this.panelValidation.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
             this.panelValidation.add(new JLabel());
             this.panelValidation.add(this.btnValider);
         }
 
-        for(int i= 0; i < tmp; i++){
+        for(int i= 0; i < this.lstCartePioche.size(); i++){
 
             this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
             this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
@@ -95,10 +93,6 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         }
 
         this.btnValider = new JButton("Valider");
-        
-        this.cbCarte1 = new JCheckBox();
-        this.cbCarte2 = new JCheckBox();
-        this.cbCarte3 = new JCheckBox();
 
         this.cbCarte1.setHorizontalAlignment(SwingConstants.CENTER);
         this.cbCarte2.setHorizontalAlignment(SwingConstants.CENTER);

@@ -274,6 +274,23 @@ public class Metier {
         return false;
     }
 
+    public int[] generGrillePoint(){
+        int longueurMax = 0;
+        for (Arete arete : lstAretes) 
+            if (arete.getLongueur() > longueurMax) 
+                longueurMax = arete.getLongueur();
+        int[] grillePoint = new int[longueurMax+1];
+        grillePoint[0] = 1;
+        for (int cpt =1; cpt<grillePoint.length; cpt++) {
+            grillePoint[cpt] = grillePoint[cpt-1]+cpt-1;
+            if(cpt == 5)
+                grillePoint[cpt] = 10;
+
+        }
+            
+        return grillePoint;
+    }
+
     // ???
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;

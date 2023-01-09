@@ -39,6 +39,7 @@ public class Controleur {
     private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
     private int nbAction;
     private Color colorSelect;
+    private int[] grillePoint;
 
     public Controleur() {
         this.metier = new Metier(this);
@@ -61,9 +62,12 @@ public class Controleur {
         
         //provisoire
         this.metier.ajouterCartePourTest();
+        grillePoint= this.metier.generGrillePoint();
 
         this.ihm.majIHM();
 
+
+    
         this.ihm.desactiver();
         this.getPioche().piocherObjectif();
         this.frameAfficheCarteObjectif.setVisible(true);
@@ -259,7 +263,7 @@ public class Controleur {
         areteSelect.setProprietaire(this.joueurCourant);
 
         this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
-        this.joueurCourant.ajouterPoint(areteSelect.getLongueur());
+        this.joueurCourant.ajouterPoint(grillePoint[ areteSelect.getLongueur()]);
         this.metier.getPioche().ajouterCartePioche(cateDefausse);
         finDuTour();
     }
