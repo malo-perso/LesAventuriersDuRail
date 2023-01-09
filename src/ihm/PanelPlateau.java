@@ -217,7 +217,7 @@ public class PanelPlateau extends JPanel {
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
 
         if (proprietaire != null) {
-            if (color.getRGB() < Color.DARK_GRAY.getRGB() ) {
+            if (color.getRGB() < Color.DARK_GRAY.getRGB() && proprietaire.getCouleur().getRGB() < Color.DARK_GRAY.getRGB()) {
                 g1.setColor(Color.WHITE);
             } else {
                 g1.setColor(Color.BLACK);
