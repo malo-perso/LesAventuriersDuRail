@@ -219,11 +219,16 @@ public class Controleur {
             }
     }
 
-    public void piocherObjectif(ArrayList<Integer> carteChoisie) {
+    public void piocherObjectif(){
+        this.metier.getPioche().piocherObjectif();
+        this.frameAfficheCarteObjectif.majIHM();
+    }
+
+    public void piocherObjectif(ArrayList<Integer> carteChoisies) {
 
         this.actionEnCours = 2;
         this.getIHM().activer();
-        this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisie);
+        this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisies);
         this.frameAfficheCarteObjectif.majIHM();
         finDuTour();
     }
@@ -252,7 +257,7 @@ public class Controleur {
     }
 
     public static void main (String[] args) {
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
     }	
 }

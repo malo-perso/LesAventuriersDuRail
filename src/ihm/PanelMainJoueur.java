@@ -96,7 +96,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
             }
         }
-        if(this.lstCarteObjectif.size() < 10 ){
+        if(this.lstCarteObjectif.size()!=0){
             this.panelCarteObjectif.setLayout(new GridLayout(this.lstCarteObjectif.size(),1));
             for(int i = 0; i< this.lstCarteObjectif.size(); i++){
                 this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));

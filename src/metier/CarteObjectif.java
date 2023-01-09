@@ -34,4 +34,8 @@ public class CarteObjectif {
         this.estReussi = estReussi;
     }
 
+
+    public String toString(){
+        return "Carte Objectif : " + this.noeud1.getNom() + " - " + this.noeud2.getNom() + " (" + this.points + " points)";
+    }
 }

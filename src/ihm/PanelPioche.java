@@ -108,10 +108,29 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
-            this.ctrl.getIHM().desactiver();
+            System.out.println("piuoche "+this.ctrl.getMetier().getLstCartesObjectifs().size());
+            switch(this.ctrl.getMetier().getLstCartesObjectifs().size()){
+                case 0 : JOptionPane.showMessageDialog(null, "Vous avez déjà pioché toutes les cartes objectifs", "Erreur", JOptionPane.ERROR_MESSAGE);break;
+                case 1 : JOptionPane.showMessageDialog(null, "Attention ! Il ne reste qu'une carte objectif !");
+                        
+                        this.ctrl.getIHM().desactiver();
 
-            this.ctrl.getPioche().piocherObjectif();
-            this.afficheCarteObjectif.setVisible(true);
+                        this.ctrl.piocherObjectif();
+                        this.afficheCarteObjectif.setVisible(true);
+                        break;
+                case 2 : JOptionPane.showMessageDialog(null, "Attention ! Il ne reste que deux cartes objectifs !");
+                        
+                        this.ctrl.getIHM().desactiver();
+
+                        this.ctrl.piocherObjectif();
+                        this.afficheCarteObjectif.setVisible(true);
+                        break;
+                default:this.ctrl.getIHM().desactiver();
+
+                        this.ctrl.piocherObjectif();
+                        this.afficheCarteObjectif.setVisible(true);
+                        break;
+            }
         }
     }
 
