@@ -178,7 +178,8 @@ public class Controleur {
         }
         
         this.joueurCourant.ajouterCarteVehicule(this.metier.getPioche().piocherVehicule(i));
-        
+        this.majIHM();
+        this.getIHM().setVisible(true);
         if(this.nbWagon==2)
         {
             this.getIHM().activerComposants();
@@ -313,6 +314,8 @@ public class Controleur {
         this.getIHM().activer();
         this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisies);
         this.frameAfficheCarteObjectif.majIHM();
+        this.majIHM();
+        this.getIHM().setVisible(true);
         finDuTour();
     }
 
