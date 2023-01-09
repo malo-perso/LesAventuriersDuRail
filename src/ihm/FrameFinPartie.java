@@ -30,10 +30,12 @@ public class FrameFinPartie extends JFrame{
 	private JPanel panelSp;
 
 	public FrameFinPartie(Controleur ctrl){
+		this.setTitle("Fin de partie");
+		this.setLayout(new BorderLayout());
+		this.setLocationRelativeTo(null);
 		this.ctrl = ctrl;
 		this.panelGrilleResultat = new JPanel();
 		this.panelSp = new JPanel();
-		this.setLayout(new BorderLayout());
 		// this.mapScore = new HashMap<Joueur, Integer>();
 		// this.lstScore = new ArrayList<Integer>();
 
@@ -86,5 +88,6 @@ public class FrameFinPartie extends JFrame{
 
 		this.btnContinuer = new JButton("Continuer");
 		this.setVisible(true);
+		this.pack();
 	}
 }
