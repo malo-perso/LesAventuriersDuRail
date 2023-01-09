@@ -54,7 +54,6 @@ public class Controleur {
         this.joueurCourant = this.metier.getLstJoueurs().get(0);
         //provisoire
         //this.metier.ajouterCartePourTest();
-        //
         this.metier.distribuerCarteVehicule();
         this.ihm = new FramePrincipale(this);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
@@ -70,7 +69,7 @@ public class Controleur {
 
     
         this.ihm.desactiver();
-        this.getPioche().piocherObjectif();
+        this.piocherObjectif();
         this.frameAfficheCarteObjectif.setVisible(true);
     
         

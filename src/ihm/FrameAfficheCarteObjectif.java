@@ -61,22 +61,31 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
 
         this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
 
-        this.cbCarte1 = new JCheckBox();
-        this.cbCarte2 = new JCheckBox();
-        this.cbCarte3 = new JCheckBox();
-
         this.panelObjectif.removeAll();
 
         if(this.lstCartePioche.size() < 3){
-            this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-            this.panelCB.removeAll();
-            this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-            this.panelCB.add(this.cbCarte1);
-            this.panelCB.add(this.cbCarte2);
-            this.panelValidation.removeAll();
-            this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-            this.panelValidation.add(new JLabel());
-            this.panelValidation.add(this.btnValider);
+            switch(lstCartePioche.size()){
+                case 2 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+                         this.panelCB.removeAll();
+                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelCB.add(this.cbCarte1);
+                         this.panelCB.add(this.cbCarte2);
+                         this.panelValidation.removeAll();
+                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelValidation.add(new JLabel());
+                         this.panelValidation.add(this.btnValider);
+                         break;
+
+                case 1 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+                         this.panelCB.removeAll();
+                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelCB.add(this.cbCarte1);
+                         this.panelValidation.removeAll();
+                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelValidation.add(new JLabel());
+                         this.panelValidation.add(this.btnValider);
+                         break;
+            }
         }
 
         for(int i= 0; i < this.lstCartePioche.size(); i++){
@@ -93,6 +102,10 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         }
 
         this.btnValider = new JButton("Valider");
+        
+        this.cbCarte1 = new JCheckBox();
+        this.cbCarte2 = new JCheckBox();
+        this.cbCarte3 = new JCheckBox();
 
         this.cbCarte1.setHorizontalAlignment(SwingConstants.CENTER);
         this.cbCarte2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -159,20 +172,20 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == this.btnCarteObjectif[0]){
-            if(this.cbCarte1.isSelected()) this.cbCarte1.setSelected(false);
-            else this.cbCarte1.setSelected(true);
-        }
+        // if(e.getSource() == this.btnCarteObjectif[0]){
+        //     if(this.cbCarte1.isSelected()) this.cbCarte1.setSelected(false);
+        //     else this.cbCarte1.setSelected(true);
+        // }
 
-        if(e.getSource() == this.btnCarteObjectif[1]){
-            if(this.cbCarte2.isSelected()) this.cbCarte2.setSelected(false);
-            else this.cbCarte2.setSelected(true);
-        }
+        // if(e.getSource() == this.btnCarteObjectif[1]){
+        //     if(this.cbCarte2.isSelected()) this.cbCarte2.setSelected(false);
+        //     else this.cbCarte2.setSelected(true);
+        // }
 
-        if(e.getSource() == this.btnCarteObjectif[2]){
-            if(this.cbCarte3.isSelected()) this.cbCarte3.setSelected(false);
-            else this.cbCarte3.setSelected(true);
-        }
+        // if(e.getSource() == this.btnCarteObjectif[2]){
+        //     if(this.cbCarte3.isSelected()) this.cbCarte3.setSelected(false);
+        //     else this.cbCarte3.setSelected(true);
+        // }
 
         if(e.getSource() == this.btnValider){
             this.carteChoisie = new ArrayList<Integer>();
@@ -221,15 +234,28 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.panelObjectif.removeAll();
 
         if(this.lstCartePioche.size() < 3){
-            this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-            this.panelCB.removeAll();
-            this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-            this.panelCB.add(this.cbCarte1);
-            this.panelCB.add(this.cbCarte2);
-            this.panelValidation.removeAll();
-            this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-            this.panelValidation.add(new JLabel());
-            this.panelValidation.add(this.btnValider);
+            switch(lstCartePioche.size()){
+                case 2 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+                         this.panelCB.removeAll();
+                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelCB.add(this.cbCarte1);
+                         this.panelCB.add(this.cbCarte2);
+                         this.panelValidation.removeAll();
+                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelValidation.add(new JLabel());
+                         this.panelValidation.add(this.btnValider);
+                         break;
+
+                case 1 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+                         this.panelCB.removeAll();
+                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelCB.add(this.cbCarte1);
+                         this.panelValidation.removeAll();
+                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+                         this.panelValidation.add(new JLabel());
+                         this.panelValidation.add(this.btnValider);
+                         break;
+            }
         }
 
         for(int i= 0; i < this.lstCartePioche.size(); i++){
@@ -244,7 +270,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             this.btnCarteObjectif[i].addActionListener(this);
             
         }
-        System.out.println("lst carte piocher" + this.lstCartePioche);
+        System.out.println("lst carte piocher" + this.lstCarteObjectifs);
         this.panelObjectif.revalidate();
     }
 
