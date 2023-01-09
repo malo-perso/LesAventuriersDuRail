@@ -138,9 +138,14 @@ public class Controleur {
     }
 
     public void finDuTour() {
-        //if (this.verifFinDePartie()) 
-            //this.ihm.finDePartie();
-        System.out.println("le chemin le plus long de " + this.getJoueurCourant().getNom() +" est de : " + point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant));
+        for (Joueur joueur : this.metier.getLstJoueurs()) {
+            if(joueur.getNbWagon() < this.metier.getNbVehiculeFinPartie() ){
+                finDePartie();
+                return;
+            }
+        }
+            
+        
 
         this.nbWagon = 0;
         this.ihm.resetNoeudSelect();
@@ -187,7 +192,18 @@ public class Controleur {
     public void finDePartie() {
         this.ihm.desactiver();
         this.ihm.setVisible(false);
-        verifCarteObjectif();
+        Joueur joueurCheminLPL=null;
+        int cheminLPL = 0;
+        int cheminLPLJ =0;
+        for (Joueur i : this.metier.getLstJoueurs()) {
+                verifCarteObjectif(i);
+                cheminLPLJ = point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), i);
+                System.out.println("le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
+                if (cheminLPLJ >cheminLPL) {
+                    joueurCheminLPL = i;
+                }
+        }
+        joueurCheminLPL.ajouterPoint(10);
         FrameFinPartie frameFinPartie = new FrameFinPartie(this);
     }
 
@@ -275,16 +291,16 @@ public class Controleur {
         this.colorSelect = color;
     }
 
-    public void verifCarteObjectif() {
-        if (this.joueurCourant.getCartesObjectif().size() == 0)
+    public void verifCarteObjectif(Joueur joueur) {
+        if (joueur.getCartesObjectif().size() == 0)
             return;
-        for (CarteObjectif carteObjectif : this.joueurCourant.getCartesObjectif()) 
-            if (!carteObjectif.getEstReussi() && point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueurCourant, carteObjectif)){
-                this.joueurCourant.ajouterPoint(carteObjectif.getPoints());
+        for (CarteObjectif carteObjectif : joueur.getCartesObjectif()) 
+            if (!carteObjectif.getEstReussi() && point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueur, carteObjectif)){
+                joueur.ajouterPoint(carteObjectif.getPoints());
                 carteObjectif.setEstReussi(true);
             }
             else {
-                this.joueurCourant.ajouterPoint(-carteObjectif.getPoints());
+                joueur.ajouterPoint(-carteObjectif.getPoints());
             }
     }
 
