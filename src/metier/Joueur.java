@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.HashMap;
 import java.awt.Color;
 
-public class Joueur {
+public class Joueur implements Comparable<Joueur>{
     
     private String nom;
     private int nbWagon;
@@ -119,6 +119,11 @@ public class Joueur {
 
     public void supprimerWagon(int longueur) {
         this.nbWagon -= longueur;
+    }
+
+    @Override
+    public int compareTo(Joueur autreJoueur) {
+        return this.nbPoint - autreJoueur.nbPoint;
     }
 
 }
