@@ -74,7 +74,11 @@ public class PanelJeu extends JPanel implements ActionListener {
             System.out.println("Heberger en ligne");
         }
         else if ( e.getSource() == this.btnRejoindreOnline ) {
-            System.out.println("Rejoindre en ligne");
+            
+            String codeServ = JOptionPane.showInputDialog(this,
+                    "Code de connexion", null);
+                    
+            System.out.println("Rejoindre le serv :" + codeServ);
         }
         else if ( e.getSource() == this.btnRetour ) {
             System.out.println("Retour");
