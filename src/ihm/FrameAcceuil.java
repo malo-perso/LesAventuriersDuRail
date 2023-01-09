@@ -35,7 +35,7 @@ public class FrameAcceuil extends JFrame {
         this.add(this.panelFormulaire);
 
         this.pack();
-        this.setTitle("Concepteur de Plateau");
+        this.setTitle("Accueil les aventuriers du rail");
         this.setSize(500, 500);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,9 +54,5 @@ public class FrameAcceuil extends JFrame {
 
     public void MAJjoueur(){
         this.panelCreerJoueur.majTable(this.ctrl.getLstJoueurs());
-    }
-
-    public static void main(String[] args) {
-        new FrameAcceuil(null);
     }
 }
