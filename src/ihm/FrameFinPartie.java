@@ -4,6 +4,7 @@ import src.Controleur;
 import src.ihm.grilles.GrillesJoueurModel;
 import src.ihm.grilles.GrillesResultatsModel;
 import src.metier.Resultat;
+import src.metier.CarteObjectif;
 import src.metier.Joueur;
 
 import java.util.*;
@@ -57,12 +58,14 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNom(),i,1);
 			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getPoint(),i,2);
 			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNbWagon(),i,3);
-			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getCartesObjectif().size(),i,4);
-		}
-		for(int i=this.lstJoueurs.size()-1; i<5; i++){
-			this.panelGrilleResultat.add(new JLabel());
+			int nbObj = 0;
+			for(CarteObjectif co : this.lstJoueurs.get(i).getCartesObjectif())
+				if(co.getEstReussi())
+					nbObj++;
+			this.modelResultats.setValueAt(nbObj,i,4);
 		}
 
+		
 		this.panelBase.setLayout(new GridLayout(1,5));
 		this.panelBase.add(new JLabel());
 		this.panelBase.add(new JLabel());
@@ -78,6 +81,7 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 
 		this.panelSp.add(this.panelGrilleResultat);
+
 
 		JScrollPane sp = new JScrollPane(this.panelSp);
 
