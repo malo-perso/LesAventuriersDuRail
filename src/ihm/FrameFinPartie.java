@@ -85,5 +85,6 @@ public class FrameFinPartie extends JFrame{
 		this.add(sp, BorderLayout.CENTER);
 
 		this.btnContinuer = new JButton("Continuer");
+		this.setVisible(true);
 	}
 }
