@@ -172,20 +172,20 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        // if(e.getSource() == this.btnCarteObjectif[0]){
-        //     if(this.cbCarte1.isSelected()) this.cbCarte1.setSelected(false);
-        //     else this.cbCarte1.setSelected(true);
-        // }
+        if(e.getSource() == this.btnCarteObjectif[0]){
+            if(this.cbCarte1.isSelected()) this.cbCarte1.setSelected(false);
+            else this.cbCarte1.setSelected(true);
+        }
 
-        // if(e.getSource() == this.btnCarteObjectif[1]){
-        //     if(this.cbCarte2.isSelected()) this.cbCarte2.setSelected(false);
-        //     else this.cbCarte2.setSelected(true);
-        // }
+        if(e.getSource() == this.btnCarteObjectif[1]){
+            if(this.cbCarte2.isSelected()) this.cbCarte2.setSelected(false);
+            else this.cbCarte2.setSelected(true);
+        }
 
-        // if(e.getSource() == this.btnCarteObjectif[2]){
-        //     if(this.cbCarte3.isSelected()) this.cbCarte3.setSelected(false);
-        //     else this.cbCarte3.setSelected(true);
-        // }
+        if(e.getSource() == this.btnCarteObjectif[2]){
+            if(this.cbCarte3.isSelected()) this.cbCarte3.setSelected(false);
+            else this.cbCarte3.setSelected(true);
+        }
 
         if(e.getSource() == this.btnValider){
             this.carteChoisie = new ArrayList<Integer>();

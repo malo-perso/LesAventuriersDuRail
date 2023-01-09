@@ -993,6 +993,36 @@
 			<noeud2>Sault St Marie</noeud2>
 			<point>20</point>
     	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Calcary</noeud1>
+			<noeud2>Boston</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Helena</noeud1>
+			<noeud2>El Paso</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Portland</noeud1>
+			<noeud2>Kansas City</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Saint Louis</noeud1>
+			<noeud2>Miami</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Sante Fe</noeud1>
+			<noeud2>Atlanta</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>New York</noeud1>
+			<noeud2>Oklahoma City</noeud2>
+			<point>20</point>
+    	</carteObjectif>
 	</lstCarteObjectifs>
 	<hashMapCarteVehicules>
 		<lstCarteVehicule>
