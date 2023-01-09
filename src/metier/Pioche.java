@@ -31,7 +31,7 @@ public class Pioche {
 
     public ArrayList<CarteObjectif> getLstCartesObjectif() {
         ArrayList<CarteObjectif> lstObj = new ArrayList<CarteObjectif>();
-        lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
+        //lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
         return lstObj;
         //return this.lstCartesObjectif;
     }
@@ -83,20 +83,30 @@ public class Pioche {
 
     public List<CarteObjectif> piocherObjectif() {
         List<CarteObjectif> lstPiocheObjectif = new ArrayList<CarteObjectif>();
-
-        lstPiocheObjectif.add(this.lstCartesObjectif.get(0));
-        lstPiocheObjectif.add(this.lstCartesObjectif.get(1));
-        lstPiocheObjectif.add(this.lstCartesObjectif.get(2));
+        for(int i=0; i<3; i++)
+        {
+            if(this.lstCartesObjectif.size()<=3)
+            {
+                for(int j=0; j<this.lstCartesObjectif.size(); j++)
+                    lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
+            }
+            else{
+                lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
+            }
+        }
         return lstPiocheObjectif;
     }
 
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
-        for (int i = 0; i < 3; i++) {
-            if (intCarte.contains(i)) 
-                joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(i));
-            else
-                this.lstCartesObjectif.add(this.lstCartesObjectif.remove(i));        
+        for (int i = 0; i < intCarte.size(); i++) {
+            if(this.lstCartesObjectif.size()==2)
+                i--;
+            if (this.lstCartesObjectif.size() > i){
+                CarteObjectif remove = this.lstCartesObjectif.remove(i);
+                System.out.println("lstCartesObjectif.remove(i) : " + remove);
+                joueur.ajouterCarteObjectif(remove);
             }
+        }     
     }
 
     public void ajouterCartePioche(List<CarteVehicule> cateDefausse) {

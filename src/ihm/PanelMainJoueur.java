@@ -15,6 +15,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PanelMainJoueur extends JPanel implements ActionListener {
@@ -72,6 +73,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         Image img1 = imgPara.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
+        Collections.sort(this.lstCarteVehicule);
 
         
         if(this.lstCarteVehicule.size()<10){
@@ -96,7 +98,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
             }
         }
-        if(this.lstCarteObjectif.size() < 10 ){
+        if(this.lstCarteObjectif.size()!=0){
             this.panelCarteObjectif.setLayout(new GridLayout(this.lstCarteObjectif.size(),1));
             for(int i = 0; i< this.lstCarteObjectif.size(); i++){
                 this.btnCarteObjectif[i] = new JButton(new ImageIcon(img2));
@@ -156,9 +158,12 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public void majIHM() {
         
         this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
+        //System.out.println(this.ctrl.getJoueurCourant().getCartesVehicule().size());
         this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
+
+        Collections.sort(this.lstCarteVehicule);
 
         this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());

@@ -42,26 +42,38 @@ public class Controleur {
     public Controleur() {
         this.metier = new Metier(this);
         this.ihmAcceuil = new FrameAcceuil(this);
-        nbAction = 1;
+        this.nbAction = 0;
     }
 
+    
     public void lancerPartie() {
-    nbWagon = 0;
+        nbWagon = 0;
         this.ihmAcceuil.setVisible(false);
         this.joueurCourant = this.metier.getLstJoueurs().get(0);
+        this.metier.distribuerCarteVehicule();
         this.ihm = new FramePrincipale(this);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
         setImagePlateau(imagePlateau);
         this.ihm.setVisible(true);
         this.majPioche();
         this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction);
-            
+        
         //provisoire
         this.metier.ajouterCartePourTest();
 
         this.ihm.majIHM();
-    
 
+        this.ihm.desactiver();
+        this.getPioche().piocherObjectif();
+        this.frameAfficheCarteObjectif.setVisible(true);
+    
+        
+    }
+
+    public int getNbActionJoueur() {
+        if(this.metier.getLstJoueurs().size()>0)
+            return nbAction/this.metier.getLstJoueurs().size();
+        return nbAction;
     }
 
     public void majIHM() {
@@ -71,7 +83,7 @@ public class Controleur {
     public void resetMetier(){
         this.metier.reset();
     }
-
+    
     public FramePrincipale getIHM(){
         return this.ihm;
     }
@@ -121,9 +133,16 @@ public class Controleur {
         this.nbWagon = 0;
         this.ihm.resetNoeudSelect();
         this.joueurCourant = this.metier.getLstJoueurs().get((this.metier.getLstJoueurs().indexOf(this.joueurCourant)+1)%this.metier.getLstJoueurs().size());
-        nbAction++;
-        this.ihm.afficherJoueur(this.joueurCourant.getNom(), nbAction/this.metier.getLstJoueurs().size());
+        this.nbAction++;
+        this.ihm.afficherJoueur(this.joueurCourant.getNom(), this.nbAction/this.metier.getLstJoueurs().size());
         this.ihm.majIHM();
+
+        if(this.nbAction/this.metier.getLstJoueurs().size()<1){
+            this.ihm.desactiver();
+
+            this.getPioche().piocherObjectif();
+            this.frameAfficheCarteObjectif.setVisible(true);
+        }
     }
 
     public void poserWehicule() {
@@ -232,11 +251,16 @@ public class Controleur {
             }
     }
 
-    public void piocherObjectif(ArrayList<Integer> carteChoisie) {
+    public void piocherObjectif(){
+        this.metier.getPioche().piocherObjectif();
+        this.frameAfficheCarteObjectif.majIHM();
+    }
+
+    public void piocherObjectif(ArrayList<Integer> carteChoisies) {
 
         this.actionEnCours = 2;
         this.getIHM().activer();
-        this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisie);
+        this.metier.getPioche().deffausserCarteObjectif(joueurCourant, carteChoisies);
         this.frameAfficheCarteObjectif.majIHM();
         finDuTour();
     }
@@ -265,7 +289,7 @@ public class Controleur {
     }
 
     public static void main (String[] args) {
-        FlatLightLaf.setup();
+        //FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
     }	
 }

@@ -141,26 +141,40 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         if(e.getSource() == this.btnValider){
 
             if ( this.cbCarte1.isSelected()){
-                carteChoisie.add(0);
+                this.carteChoisie.add(0);
+                System.out.println("carte 0" + this.carteChoisie);
             }
 
             if( this.cbCarte2.isSelected()){
-                carteChoisie.add(1);
+                this.carteChoisie.add(1);
+                System.out.println("carte 1" + this.carteChoisie);
             }
 
             if( this.cbCarte3.isSelected()){
-                carteChoisie.add(2);
+                this.carteChoisie.add(2);
+                System.out.println("carte 2" + this.carteChoisie);
             }
 
-            if(carteChoisie.size() == 0){
-                JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
-            }
-            else{
-                this.dispose();
-                clearCheckBox();
-                this.ctrl.getIHM().activer();
-                this.ctrl.getIHM().setVisible(true);
-                this.ctrl.piocherObjectif(this.carteChoisie);    
+            if(this.ctrl.getNbActionJoueur()<1){
+                if(this.carteChoisie.size() < 2){
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir au moins 2 cartes");
+                }else{
+                    this.dispose();
+                    clearCheckBox();
+                    this.ctrl.getIHM().activer();
+                    this.ctrl.getIHM().setVisible(true);
+                    this.ctrl.piocherObjectif(this.carteChoisie);
+                }
+            }else{
+                if(carteChoisie.size() == 0){
+                    JOptionPane.showMessageDialog(null, "Vous devez choisir une carte");
+                }else{
+                    this.dispose();
+                    clearCheckBox();
+                    this.ctrl.getIHM().activer();
+                    this.ctrl.getIHM().setVisible(true);
+                    this.ctrl.piocherObjectif(this.carteChoisie);    
+                }
             }
         }
         
