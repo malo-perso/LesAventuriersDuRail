@@ -83,14 +83,13 @@ public class Joueur {
         return nb;
     }
 
-    public HashMap<Color, Integer> getHashCouleur() {
-        HashMap<Color, Integer> hashCouleur = new HashMap<Color, Integer>();
-        for (CarteVehicule carte : this.cartesVehicule) {
-            if (hashCouleur.containsKey(carte.getType().getColor())) {
-                hashCouleur.put(carte.getType().getColor(), hashCouleur.get(carte.getType().getColor()) + 1);
-            } else {
-                hashCouleur.put(carte.getType().getColor(), 1);
+    public HashMap<Color, ArrayList<Integer>> getHashCouleur() {
+        HashMap<Color, ArrayList<Integer>> hashCouleur = new HashMap<Color, ArrayList<Integer>>();
+        for (int i=0; i< this.cartesVehicule.size(); i++) {
+            if (!hashCouleur.containsKey(this.cartesVehicule.get(i).getType().getColor())) {
+                hashCouleur.put(this.cartesVehicule.get(i).getType().getColor(), new ArrayList<Integer>());
             }
+            hashCouleur.get(this.cartesVehicule.get(i).getType().getColor()).add(i);
         }
         return hashCouleur;
     }
