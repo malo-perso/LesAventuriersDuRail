@@ -170,7 +170,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             this.panelCarteCoul.setLayout(new GridLayout(1,10,5,0));
 
             for(int i=0; i<this.lstCarteVehicule.size(); i++){
-                //this.btnCarteVehicule[i] = new JButton(this.lstCarteVehicule.get(i).getType().getColor().getRGB() + "");
+                this.btnCarteVehicule[i] = new JButton();
                 this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
                 this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
