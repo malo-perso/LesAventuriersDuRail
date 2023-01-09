@@ -72,7 +72,7 @@ public class Pioche {
     }
 
     public CarteVehicule piocherVehicule(int i) {
-        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
+        if (i >= 0 && i < 7 && i < this.lstCartesVehicule.size()) {
             CarteVehicule carteVehi = this.retirerCarteVehicule(i);
             this.ctrl.majPioche();
             return carteVehi;

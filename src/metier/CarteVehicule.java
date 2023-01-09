@@ -14,6 +14,9 @@ public class CarteVehicule implements Comparable<CarteVehicule>{
 
     @Override
     public int compareTo(CarteVehicule o) {
+        if( this.getType().getColor() == null){
+            return 0;
+        }
         return this.type.getColor().getRGB() - o.getType().getColor().getRGB();
     }
 }
