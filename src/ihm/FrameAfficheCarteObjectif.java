@@ -108,6 +108,9 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.cbCarte1.addActionListener(this);
         this.cbCarte2.addActionListener(this);
         this.cbCarte3.addActionListener(this);
+        this.btnCarteObjectif[0].addActionListener(this);
+        this.btnCarteObjectif[1].addActionListener(this);
+        this.btnCarteObjectif[2].addActionListener(this);
 
         this.panelCB.add(this.cbCarte3,SwingConstants.CENTER);
         this.panelCB.add(this.cbCarte2, SwingConstants.CENTER);
@@ -162,8 +165,23 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        this.carteChoisie = new ArrayList<Integer>();
+        if(e.getSource() == this.btnCarteObjectif[0]){
+            if(this.cbCarte1.isSelected()) this.cbCarte1.setSelected(false);
+            else this.cbCarte1.setSelected(true);
+        }
+
+        if(e.getSource() == this.btnCarteObjectif[1]){
+            if(this.cbCarte2.isSelected()) this.cbCarte2.setSelected(false);
+            else this.cbCarte2.setSelected(true);
+        }
+
+        if(e.getSource() == this.btnCarteObjectif[2]){
+            if(this.cbCarte3.isSelected()) this.cbCarte3.setSelected(false);
+            else this.cbCarte3.setSelected(true);
+        }
+
         if(e.getSource() == this.btnValider){
+            this.carteChoisie = new ArrayList<Integer>();
 
             if ( this.cbCarte1.isSelected()){
                 this.carteChoisie.add(0);
@@ -238,7 +256,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
             this.btnCarteObjectif[i].setBorder(null);
             this.panelObjectif.add(this.btnCarteObjectif[i]);
-
+            this.btnCarteObjectif[i].addActionListener(this);
             
         }
         System.out.println("lst carte piocher" + this.lstCarteObjectifs.size());
