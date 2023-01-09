@@ -282,7 +282,7 @@ public class PanelPlateau extends JPanel {
 	{
 		public void mousePressed (MouseEvent e)
 		{
-			if (e.getButton() == MouseEvent.BUTTON3)
+			if (e.getButton() == MouseEvent.BUTTON3 || e.getButton() == MouseEvent.BUTTON1)
 			{
 				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
                     if (PanelPlateau.this.noeudSelectionne1 == null) {
