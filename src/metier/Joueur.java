@@ -96,24 +96,29 @@ public class Joueur implements Comparable<Joueur>{
         int i=0;
         List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
         HashMap<Color, ArrayList<Integer>> hashCouleur = getHashCouleur();
-        if (hashCouleur.containsKey(color))
+        if (hashCouleur.containsKey(color)) {
             for (Integer indexe : hashCouleur.get(color)) {
                 if (i<nb){
-                    this.cartesVehicule.remove((int)indexe);
+                    cartesDefausse.add(this.cartesVehicule.get((int)indexe));
                     i++;
-                }
-                else 
-                    return cartesDefausse;    
+                }   
             }
-        for (Integer indexe : hashCouleur.get(colorJoker)) {
-            if (i<nb){
-                this.cartesVehicule.remove((int)indexe);
-                i++;
-            }    
-            else 
-                break;
         }
 
+        if (hashCouleur.containsKey(colorJoker)) {
+            for (Integer indexe : hashCouleur.get(colorJoker)) {
+                if (i<nb){
+                    cartesDefausse.add(this.cartesVehicule.get((int)indexe));
+                    i++;
+                }  
+                else 
+                    break;
+            }
+        }
+        for (CarteVehicule carteVehicule : cartesDefausse) 
+            this.cartesVehicule.remove(carteVehicule);
+            
+        
         return cartesDefausse;
     }
 
