@@ -188,8 +188,26 @@ public class Controleur {
         Arete areteSelect = null;
 
         for (Arete arete : this.metier.getLstAretes()) {
-            if(arete.estAreteDe(noeud1, noeud2) && arete.estDisponible()){
+            if(arete.estAreteDe(noeud1, noeud2)){
                 aretesSelect.add(arete);
+            }
+        }
+
+        for (Arete arete : aretesSelect) {
+            if (!arete.estDisponible() && !this.metier.areteDoubleActive()){
+                this.ihm.afficherMsgErreur("vous ne pouvez pas prendre cette arete");
+                return;
+            }
+            if (arete.estDisponible() && arete.getProprietaire() == this.joueurCourant){
+                this.ihm.afficherMsgErreur("Vous possedez deja cette arete");
+                return;
+            }
+
+        }
+
+        for (Arete arete : aretesSelect) {
+            if (!arete.estDisponible()){
+                aretesSelect.remove(arete);
             }
         }
 
@@ -208,12 +226,12 @@ public class Controleur {
     }
 
     public void verifAreteMulti(Arete areteSelect){
-        if(this.metier.verifVoieJoker(areteSelect)){
+        if(this.metier.verifVoieJoker(areteSelect))
             new FrameChoixWagon(this, areteSelect, this.joueurCourant.getListType());
-        }
-        else{
+        
+        else
             verifAreteWagon(areteSelect, areteSelect.getType().getColor());
-        }
+        
     }
 
     public void verifAreteWagon(Arete areteSelect, Color couleurArete){
@@ -222,6 +240,7 @@ public class Controleur {
         //verif à assez de carte vehicule pour prendre l'arete
         if (!this.metier.estPrenable(areteSelect, this.joueurCourant, couleurArete)){
             this.ihm.afficherMsgErreur("Vous n'avez pas assez de carte pour poser cette arete");
+            this.ihm.resetNoeudSelect();
             return;
         }
 
@@ -229,6 +248,7 @@ public class Controleur {
         //verif si le joueur a assez de vehicule pour poser l'arete
         if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur()){
             this.ihm.afficherMsgErreur("Vous n'avez pas assez de wagon pour poser cette arete");
+            this.ihm.resetNoeudSelect();
             return;
         }
 

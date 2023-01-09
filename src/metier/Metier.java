@@ -211,20 +211,19 @@ public class Metier {
     }
 
     public List<Type> getLstTypes(){
-        ArrayList<Type> listeType = new ArrayList();
+        ArrayList<Type> listeType = new ArrayList<Type>();
 		boolean trouve;
 		for (Arete arete : this.lstAretes)
 		{
 			trouve = false;
 
-			for (int i=0; i<listeType.size(); i++) {
-				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker)) {
+			for (int i=0; i<listeType.size(); i++) 
+				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker))
 					trouve = true;
-				}
-			}
-			if (!trouve) {
+				
+			
+			if (!trouve) 
 				listeType.add(arete.getType());
-			}
 		}
 
 		listeType.add(Type.creerType(this.couleurJoker));
@@ -267,6 +266,12 @@ public class Metier {
         }
         JOptionPane.showMessageDialog(null,"Pioche Carte Objectif : La pioche est vide");
         return null;
+    }
+
+    public Boolean areteDoubleActive(){
+        if(this.lstJoueurs.size()> this.nbrJoueurMiniDoubleRoute)
+            return true;
+        return false;
     }
 
     // ???
@@ -346,7 +351,7 @@ public class Metier {
             racine = document.getRootElement();
 
             Element regles = racine.getChild("regles");
-            this.nombreJoker             = Integer.parseInt  (regles.getChildText("nombreJoker"                ));
+            this.nombreJoker             = Integer.parseInt   (regles.getChildText("nombreJoker"                ));
             this.nbrJoueurMinimum         = Integer.parseInt  (regles.getChildText("nombreJoueurMinimum"        ));
             this.nbrJoueurMaximum         = Integer.parseInt  (regles.getChildText("nombreJoueurMaximum"        ));
             this.nbVehiculeJoueur         = Integer.parseInt  (regles.getChildText("nombreVehiculeJoueur"       ));
@@ -394,7 +399,7 @@ public class Metier {
             List listCarteObjectif = racine.getChild("lstCarteObjectifs").getChildren("carteObjectif");
             Iterator k = listCarteObjectif.iterator();
             while(k.hasNext()){
-                Element courant = (Element)k.next();
+                Element courant  = (Element)k.next();
                 String nomNoeud1 = courant.getChildText("noeud1");
                 String nomNoeud2 = courant.getChildText("noeud2");
                 int    points    = Integer.parseInt(courant.getChildText("point"));

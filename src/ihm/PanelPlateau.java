@@ -217,13 +217,26 @@ public class PanelPlateau extends JPanel {
 					        (int) (aY + (cpt+1) * ( ecY + waY)));
 
         if (proprietaire != null) {
-            g1.setColor(proprietaire.getCouleur());
+            if (color.getRGB() < Color.DARK_GRAY.getRGB() ) {
+                g1.setColor(Color.WHITE);
+            } else {
+                g1.setColor(Color.BLACK);
+            }
             g1.setStroke(new BasicStroke(hauteurWagon-4));
-            for (int cpt = 0; cpt < nbWagon; cpt++) 
+            for (int cpt = 0; cpt < nbWagon; cpt++) {
                 g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
                                 (int) (aY + ecY +  cpt * ( ecY + waY)),
                                 (int) (aX + (cpt+1) * ( ecX + waX)),
                                 (int) (aY + (cpt+1) * ( ecY + waY)));
+            }
+            g1.setColor(proprietaire.getCouleur());
+            g1.setStroke(new BasicStroke(hauteurWagon-6));
+            for (int cpt = 0; cpt < nbWagon; cpt++) {
+                g1.drawLine(    (int) (aX + ecX + cpt * ( ecX + waX)),
+                                (int) (aY + ecY +  cpt * ( ecY + waY)),
+                                (int) (aX + (cpt+1) * ( ecX + waX)),
+                                (int) (aY + (cpt+1) * ( ecY + waY)));
+            }
         }
         g1.setColor(Color.BLACK);
         g1.setStroke(new BasicStroke(2));  
@@ -269,7 +282,7 @@ public class PanelPlateau extends JPanel {
 	{
 		public void mousePressed (MouseEvent e)
 		{
-			if (e.getButton() == MouseEvent.BUTTON3)
+			if (e.getButton() == MouseEvent.BUTTON3 || e.getButton() == MouseEvent.BUTTON1)
 			{
 				if (sourisSurNoeud(e.getX(), e.getY())!= null) {
                     if (PanelPlateau.this.noeudSelectionne1 == null) {

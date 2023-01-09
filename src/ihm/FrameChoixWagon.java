@@ -21,14 +21,15 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
     private JPanel panelHaut, panelBas;
     private JScrollPane spHaut;
     private JButton btnValider;
+    private ButtonGroup bg;
     private ArrayList<Color> lstTypeJoueur;
     private Arete areteSelect;
 
     public FrameChoixWagon(Controleur ctrl, Arete areteSelect , ArrayList<Color> lstTypeJoueur) {
         this.setTitle("Choix du wagon");
-        this.setSize(500, 500);
+        this.setSize(300, 300);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
@@ -41,6 +42,7 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
         this.panelHaut = new JPanel();
         this.panelBas = new JPanel();
         this.spHaut = new JScrollPane(this.panelHaut);
+        this.bg = new ButtonGroup();
         this.btnValider = new JButton("Valider");
 
 
@@ -54,6 +56,8 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
             this.lstCBTypeWagon.get(i).setBackground(lstTypeJoueur.get(i));
             this.lstCBTypeWagon.get(i).setOpaque(true);
             this.lstCBTypeWagon.get(i).addActionListener(this);
+            this.lstCBTypeWagon.get(i).setSize(20,20);
+            this.bg.add(this.lstCBTypeWagon.get(i));
         }
 
 
