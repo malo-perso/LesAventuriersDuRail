@@ -82,18 +82,22 @@ public class Pioche {
     }
 
     public List<CarteObjectif> piocherObjectif() {
+        int tmp = 3;
         List<CarteObjectif> lstPiocheObjectif = new ArrayList<CarteObjectif>();
-        for(int i=0; i<3; i++)
+        if(this.lstCartesObjectif.size()<=3)
+            tmp = this.lstCartesObjectif.size();
+        for(int i=0; i<tmp; i++)
         {
-            if(this.lstCartesObjectif.size()<=3)
-            {
-                for(int j=0; j<this.lstCartesObjectif.size(); j++)
-                    lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
-            }
-            else{
+            // if(this.lstCartesObjectif.size()<=3)
+            // {
+            //     for(int j=0; j<this.lstCartesObjectif.size(); j++)
+            //         lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
+            // }
+            // else{
                 lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
-            }
+            
         }
+        System.out.println(lstPiocheObjectif);
         return lstPiocheObjectif;
     }
 

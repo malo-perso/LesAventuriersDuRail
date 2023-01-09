@@ -2,9 +2,10 @@ package src.metier;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
 import java.awt.Color;
 
-public class Joueur {
+public class Joueur implements Comparable<Joueur>{
     
     private String nom;
     private int nbWagon;
@@ -72,31 +73,45 @@ public class Joueur {
     }
 
     public int getNbCarteWagon(Color type)
-    {
+    {   
         int nb = 0;
-        for (CarteVehicule carte : this.cartesVehicule) {
-            if (carte.getType().getColor() == type) {
-                nb++;
-            }
-        }
+        HashMap<Color, ArrayList<Integer>> hashCouleur = getHashCouleur();
+            if (hashCouleur.containsKey(type))
+                nb= hashCouleur.get(type).size();
         return nb;
     }
 
-    public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
-        int i;
-        List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
-        for (i = 0; i < nb; i++) {
-            for (int j = 0; j < this.cartesVehicule.size(); j++) {
-                if (this.cartesVehicule.get(0).getType().getColor() == color) 
-                    cartesDefausse.add(this.cartesVehicule.remove(j));
-                
+    public HashMap<Color, ArrayList<Integer>> getHashCouleur() {
+        HashMap<Color, ArrayList<Integer>> hashCouleur = new HashMap<Color, ArrayList<Integer>>();
+        for (int i=0; i< this.cartesVehicule.size(); i++) {
+            if (!hashCouleur.containsKey(this.cartesVehicule.get(i).getType().getColor())) {
+                hashCouleur.put(this.cartesVehicule.get(i).getType().getColor(), new ArrayList<Integer>());
             }
+            hashCouleur.get(this.cartesVehicule.get(i).getType().getColor()).add(i);
         }
+        return hashCouleur;
+    }
 
-        for (int j = 0; j < this.cartesVehicule.size(); j++) {
-            if (this.cartesVehicule.get(0).getType().getColor() == colorJoker)
-                    cartesDefausse.add(this.cartesVehicule.remove(j));
-            
+    public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
+        int i=0;
+        List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
+        HashMap<Color, ArrayList<Integer>> hashCouleur = getHashCouleur();
+        if (hashCouleur.containsKey(color))
+            for (Integer indexe : hashCouleur.get(color)) {
+                if (i<nb){
+                    this.cartesVehicule.remove((int)indexe);
+                    i++;
+                }
+                else 
+                    return cartesDefausse;    
+            }
+        for (Integer indexe : hashCouleur.get(colorJoker)) {
+            if (i<nb){
+                this.cartesVehicule.remove((int)indexe);
+                i++;
+            }    
+            else 
+                break;
         }
 
         return cartesDefausse;
@@ -104,6 +119,11 @@ public class Joueur {
 
     public void supprimerWagon(int longueur) {
         this.nbWagon -= longueur;
+    }
+
+    @Override
+    public int compareTo(Joueur autreJoueur) {
+        return this.nbPoint - autreJoueur.nbPoint;
     }
 
 }

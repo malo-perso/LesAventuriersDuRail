@@ -132,35 +132,35 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.cbCarte3.setSelected(false);
     }
 
-    public void paint(Graphics g){
-        super.paint(g);
-        Graphics2D g1 = (Graphics2D) g;
+    // public void paint(Graphics g){
+    //     super.paint(g);
+    //     Graphics2D g1 = (Graphics2D) g;
 
-        double rationW = this.ctrl.getImagePlateau().getWidth(null) /315 ;
-        double rationH = this.ctrl.getImagePlateau().getHeight(null)/215;
+    //     double rationW = this.ctrl.getImagePlateau().getWidth(null) /315 ;
+    //     double rationH = this.ctrl.getImagePlateau().getHeight(null)/215;
 
-        List<CarteObjectif> lstCartePioche = this.ctrl.getPioche().piocherObjectif();
+    //     List<CarteObjectif> lstCartePioche = this.ctrl.getPioche().piocherObjectif();
 
-        // System.out.println(rationW + " " + rationH);
+    //     // System.out.println(rationW + " " + rationH);
 
-        // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterX());
-        // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterY());
+    //     // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterX());
+    //     // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterY());
         
-        // System.out.println((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW));
-        // System.out.println((int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH));
+    //     // System.out.println((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW));
+    //     // System.out.println((int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH));
         
-        g.setColor(Color.BLACK);
+    //     g.setColor(Color.BLACK);
 
-        g.fillOval((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW),(int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH), 10, 10);
-        g.fillOval((int)(lstCartePioche.get(0).getNoeud2().getCenterX()/rationW), (int)(lstCartePioche.get(0).getNoeud2().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW),(int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(0).getNoeud2().getCenterX()/rationW), (int)(lstCartePioche.get(0).getNoeud2().getCenterY()/rationH), 10, 10);
 
-        g.fillOval((int)(lstCartePioche.get(1).getNoeud1().getCenterX()/rationW+rationW),(int) (lstCartePioche.get(1).getNoeud1().getCenterY()/rationH), 10, 10);
-        g.fillOval((int)(lstCartePioche.get(1).getNoeud2().getCenterX()/rationW+rationW), (int)(lstCartePioche.get(1).getNoeud2().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(1).getNoeud1().getCenterX()/rationW+rationW),(int) (lstCartePioche.get(1).getNoeud1().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(1).getNoeud2().getCenterX()/rationW+rationW), (int)(lstCartePioche.get(1).getNoeud2().getCenterY()/rationH), 10, 10);
 
-        g.fillOval((int)(lstCartePioche.get(2).getNoeud1().getCenterX()/rationW+rationW*2),(int) (lstCartePioche.get(2).getNoeud1().getCenterY()/rationH), 10, 10);
-        g.fillOval((int)(lstCartePioche.get(2).getNoeud2().getCenterX()/rationW+rationW*2), (int)(lstCartePioche.get(2).getNoeud2().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(2).getNoeud1().getCenterX()/rationW+rationW*2),(int) (lstCartePioche.get(2).getNoeud1().getCenterY()/rationH), 10, 10);
+    //     g.fillOval((int)(lstCartePioche.get(2).getNoeud2().getCenterX()/rationW+rationW*2), (int)(lstCartePioche.get(2).getNoeud2().getCenterY()/rationH), 10, 10);
 
-    }
+    // }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -220,31 +220,25 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         
     }
     public void majIHM(){
-        int tmp = 0;
         this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
 
-        if(this.lstCarteObjectifs.size() > 3)
-            tmp = 3;
-        else
-            tmp = this.lstCarteObjectifs.size();
-
-        this.btnCarteObjectif = new JButton[tmp];
+        this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
         this.panelObjectif.removeAll();
 
-        if(this.lstCarteObjectifs.size() < 3){
-            this.panelObjectif.setLayout(new GridLayout(1,this.lstCarteObjectifs.size(), 5, 0));
+        if(this.lstCartePioche.size() < 3){
+            this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
             this.panelCB.removeAll();
-            this.panelCB.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
             this.panelCB.add(this.cbCarte1);
             this.panelCB.add(this.cbCarte2);
             this.panelValidation.removeAll();
-            this.panelValidation.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
             this.panelValidation.add(new JLabel());
             this.panelValidation.add(this.btnValider);
         }
 
-        for(int i= 0; i < tmp; i++){
+        for(int i= 0; i < this.lstCartePioche.size(); i++){
 
             this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
             this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
@@ -256,7 +250,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             this.btnCarteObjectif[i].addActionListener(this);
             
         }
-        System.out.println("lst carte piocher" + this.lstCarteObjectifs.size());
+        System.out.println("lst carte piocher" + this.lstCartePioche);
         this.panelObjectif.revalidate();
     }
 
