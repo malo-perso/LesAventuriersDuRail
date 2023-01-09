@@ -276,7 +276,7 @@ public class Controleur {
     }
 
     public static void main (String[] args) {
-        //FlatLightLaf.setup();
+        FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
     }	
 }
