@@ -203,8 +203,10 @@ public class Controleur {
                     joueurCheminLPL = i;
                 }
         }
-        joueurCheminLPL.ajouterPoint(10);
+        if (joueurCheminLPL != null)
+            joueurCheminLPL.ajouterPoint(10);
         FrameFinPartie frameFinPartie = new FrameFinPartie(this);
+        frameFinPartie.setVisible(true);
     }
 
     public void verifAreteSelect(Noeud noeud1, Noeud noeud2){
@@ -339,6 +341,12 @@ public class Controleur {
 
     public int getAction() {
         return this.actionEnCours;
+    }
+
+    public void dispose(){
+        this.ihmAcceuil.dispose();
+        this.ihm.dispose();
+        this.ihmAcceuil.dispose();
     }
 
     public static void main (String[] args) {

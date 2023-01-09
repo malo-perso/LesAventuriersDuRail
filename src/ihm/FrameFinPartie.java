@@ -1,9 +1,7 @@
 package src.ihm;
 
 import src.Controleur;
-import src.ihm.grilles.GrillesJoueurModel;
-import src.ihm.grilles.GrillesResultatsModel;
-import src.metier.Resultat;
+import src.ihm.renderer.ColorCellRendererResultat;
 import src.metier.CarteObjectif;
 import src.metier.Joueur;
 
@@ -16,16 +14,16 @@ import java.awt.GridLayout;
 import java.awt.Color;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class FrameFinPartie extends JFrame implements ActionListener{
 
 	private Controleur ctrl;
-	private GrillesResultatsModel modelResultats;
+	private DefaultTableModel modelResultats;
 	private JTable tabResultats;
 	private List<Joueur> lstJoueurs;
 	private JButton btnQuitter;
 	private JPanel panelGrilleResultat;
-	private JPanel panelSp;
 	private JPanel panelBase;
 
 	public FrameFinPartie(Controleur ctrl){
@@ -36,12 +34,14 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 		this.setSize(500,500);
 
 		this.ctrl = ctrl;
-		this.panelGrilleResultat = new JPanel(new GridLayout(1,3));
-		this.panelSp = new JPanel();
+		this.panelGrilleResultat = new JPanel();
 		this.panelBase = new JPanel();
 
-		this.modelResultats = new GrillesResultatsModel(this.ctrl);
+		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Nom", "Points", "Nb wagons", "Nb objectifs"}, 5);
+
 		this.tabResultats = new JTable(this.modelResultats);
+		this.tabResultats.setFillsViewportHeight(true);
+		this.tabResultats.setEnabled(true);
 
 		this.lstJoueurs = this.ctrl.getMetier().getLstJoueurs();
 
@@ -49,23 +49,30 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 		Collections.sort(this.lstJoueurs);
 		//Création des layout et placements des éléments
-		this.panelSp.setLayout(new BorderLayout());
 		this.panelGrilleResultat.setBackground(Color.WHITE);
+
+
 
 		//Remplissage du panelGrilleJoueur
 		for(int i=0; i<this.lstJoueurs.size(); i++){
-			this.modelResultats.setValueAt(i,i,0);
-			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNom(),i,1);
-			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getPoint(),i,2);
-			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNbWagon(),i,3);
+		
 			int nbObj = 0;
 			for(CarteObjectif co : this.lstJoueurs.get(i).getCartesObjectif())
 				if(co.getEstReussi())
 					nbObj++;
-			this.modelResultats.setValueAt(nbObj,i,4);
+			
+			this.modelResultats.insertRow(i, new Object[]{i+1,
+														  this.lstJoueurs.get(i).getNom(),
+														  this.lstJoueurs.get(i).getCouleur(),
+														  this.lstJoueurs.get(i).getPoint(),
+														  this.lstJoueurs.get(i).getNbWagon(),
+														  nbObj});
 		}
+		this.tabResultats = new JTable(this.modelResultats);
 
-		
+		this.tabResultats.getColumnModel().getColumn(2).setCellRenderer(new ColorCellRendererResultat());
+
+		// Ajout des composants
 		this.panelBase.setLayout(new GridLayout(1,5));
 		this.panelBase.add(new JLabel());
 		this.panelBase.add(new JLabel());
@@ -75,18 +82,9 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 		this.btnQuitter.addActionListener(this);
 
-		this.panelGrilleResultat.add(new JLabel());
-		this.panelGrilleResultat.add(this.tabResultats);
-		this.panelGrilleResultat.add(new JLabel());
-
-
-		this.panelSp.add(this.panelGrilleResultat);
-
-
-		JScrollPane sp = new JScrollPane(this.panelSp);
-
-		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		this.add(sp, BorderLayout.CENTER);
+		this.panelGrilleResultat.add(this.tabResultats.getTableHeader(), BorderLayout.NORTH);
+		this.panelGrilleResultat.add(this.tabResultats, BorderLayout.CENTER);
+		this.add(this.panelGrilleResultat, BorderLayout.CENTER);
 		this.add(this.panelBase, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
@@ -94,6 +92,7 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnQuitter){
+			this.ctrl.dispose();
 			this.dispose();
 		}
 		
