@@ -156,6 +156,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public void majIHM() {
         
         this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
+        //System.out.println(this.ctrl.getJoueurCourant().getCartesVehicule().size());
         this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
@@ -170,7 +171,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
             this.panelCarteCoul.setLayout(new GridLayout(1,10,5,0));
 
             for(int i=0; i<this.lstCarteVehicule.size(); i++){
-                //this.btnCarteVehicule[i] = new JButton(this.lstCarteVehicule.get(i).getType().getColor().getRGB() + "");
+                this.btnCarteVehicule[i] = new JButton();
                 this.btnCarteVehicule[i].setBackground(this.lstCarteVehicule.get(i).getType().getColor());
                 this.btnCarteVehicule[i].setPreferredSize(new Dimension(100, 50));
                 this.panelCarteCoul.add(this.btnCarteVehicule[i]);
