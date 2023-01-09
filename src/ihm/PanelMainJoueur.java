@@ -115,10 +115,12 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         this.scrollCarteCoul = new JScrollPane(this.panelCarteCoul);
         this.scrollCarteCoul.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        this.scrollCarteCoul.getHorizontalScrollBar().setUnitIncrement(16);
         //scrollCarteObjectif 
         this.scrollCarteObjectif = new JScrollPane(this.panelCarteObjectif);
         this.scrollCarteObjectif.setPreferredSize(new Dimension(300,200));
-        this.scrollCarteObjectif.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);      
+        this.scrollCarteObjectif.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollCarteObjectif.getVerticalScrollBar().setUnitIncrement(16);
 
         this.btnPerso = new JButton("MisterConfiture");
         this.btnParametre = new JButton(new ImageIcon(img1));

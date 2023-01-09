@@ -351,7 +351,7 @@ public class Metier {
             racine = document.getRootElement();
 
             Element regles = racine.getChild("regles");
-            this.nombreJoker             = Integer.parseInt  (regles.getChildText("nombreJoker"                ));
+            this.nombreJoker             = Integer.parseInt   (regles.getChildText("nombreJoker"                ));
             this.nbrJoueurMinimum         = Integer.parseInt  (regles.getChildText("nombreJoueurMinimum"        ));
             this.nbrJoueurMaximum         = Integer.parseInt  (regles.getChildText("nombreJoueurMaximum"        ));
             this.nbVehiculeJoueur         = Integer.parseInt  (regles.getChildText("nombreVehiculeJoueur"       ));
@@ -399,7 +399,7 @@ public class Metier {
             List listCarteObjectif = racine.getChild("lstCarteObjectifs").getChildren("carteObjectif");
             Iterator k = listCarteObjectif.iterator();
             while(k.hasNext()){
-                Element courant = (Element)k.next();
+                Element courant  = (Element)k.next();
                 String nomNoeud1 = courant.getChildText("noeud1");
                 String nomNoeud2 = courant.getChildText("noeud2");
                 int    points    = Integer.parseInt(courant.getChildText("point"));

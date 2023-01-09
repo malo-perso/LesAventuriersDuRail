@@ -18,13 +18,14 @@ public class FrameChoixArete extends JFrame implements ActionListener {
     private ArrayList<JRadioButton> lstCBArete;
     private JPanel panelHaut, panelBas;
     private JButton btnValider;
+    private ButtonGroup bg;
     private ArrayList<Arete> lstArete;
 
     public FrameChoixArete(Controleur ctrl, ArrayList<Arete> lstArete) {
         this.setTitle("Choix de l'arête");
-        this.setSize(500, 500);
+        this.setSize(300, 300);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setResizable(false);
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
@@ -35,6 +36,7 @@ public class FrameChoixArete extends JFrame implements ActionListener {
         this.ctrl = ctrl;
         this.panelHaut = new JPanel();
         this.panelBas = new JPanel();
+        this.bg = new ButtonGroup();
         this.btnValider = new JButton("Valider");
 
 
@@ -48,6 +50,8 @@ public class FrameChoixArete extends JFrame implements ActionListener {
             this.lstCBArete.get(i).setBackground(lstArete.get(i).getType().getColor());
             this.lstCBArete.get(i).setOpaque(true);
             this.lstCBArete.get(i).addActionListener(this);
+            this.lstCBArete.get(i).setSize(20,20);
+            this.bg.add(this.lstCBArete.get(i));
         }
 
         

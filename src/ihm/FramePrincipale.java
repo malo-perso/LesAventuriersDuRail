@@ -54,6 +54,8 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelMainJoueur = new PanelMainJoueur(this.ctrl);
 
         this.scrollPane = new JScrollPane(this.panelPlateau);
+        this.scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        this.scrollPane.getHorizontalScrollBar().setUnitIncrement(16);
 
         this.menuBarre = new JMenuBar();
 

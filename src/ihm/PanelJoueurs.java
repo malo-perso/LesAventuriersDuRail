@@ -67,6 +67,7 @@ public class PanelJoueurs extends JPanel{
         JScrollPane sp = new JScrollPane(this.panelSp);
 
         sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        sp.getHorizontalScrollBar().setUnitIncrement(16);
         this.add(sp, BorderLayout.CENTER);
 
     }
