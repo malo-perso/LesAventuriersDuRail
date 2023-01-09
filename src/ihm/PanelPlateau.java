@@ -166,6 +166,7 @@ public class PanelPlateau extends JPanel {
         double x = xM*Math.cos(teta)-yM*Math.sin(teta);
         return x;
     }
+    
     private double rotationY(double nX,double nY, double teta) {
         double xM = nX;
         double yM = nY;
