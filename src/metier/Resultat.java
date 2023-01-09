@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
-public class Resultat extends JPanel{
+public class Resultat{
 	private int    rang;
 	private String nomJoueur;
 	private int    score;
