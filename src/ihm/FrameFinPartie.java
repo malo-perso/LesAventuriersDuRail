@@ -1,93 +1,97 @@
 package src.ihm;
 
 import src.Controleur;
+import src.ihm.grilles.GrillesJoueurModel;
+import src.ihm.grilles.GrillesResultatsModel;
 import src.metier.Resultat;
 import src.metier.Joueur;
 
-import java.util.List;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Color;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
-public class FrameFinPartie extends JFrame{
+public class FrameFinPartie extends JFrame implements ActionListener{
 
 	private Controleur ctrl;
-	// private HashMap<Joueur, Integer> mapScore;
-	// private ArrayList<Integer>  lstScore;
+	private GrillesResultatsModel modelResultats;
+	private JTable tabResultats;
 	private List<Joueur> lstJoueurs;
-	private JButton btnContinuer;
+	private JButton btnQuitter;
 	private JPanel panelGrilleResultat;
 	private JPanel panelSp;
+	private JPanel panelBase;
 
 	public FrameFinPartie(Controleur ctrl){
 		this.setTitle("Fin de partie");
 		this.setLayout(new BorderLayout());
 		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setSize(500,500);
+
 		this.ctrl = ctrl;
-		this.panelGrilleResultat = new JPanel();
+		this.panelGrilleResultat = new JPanel(new GridLayout(1,3));
 		this.panelSp = new JPanel();
-		// this.mapScore = new HashMap<Joueur, Integer>();
-		// this.lstScore = new ArrayList<Integer>();
+		this.panelBase = new JPanel();
+
+		this.modelResultats = new GrillesResultatsModel(this.ctrl);
+		this.tabResultats = new JTable(this.modelResultats);
 
 		this.lstJoueurs = this.ctrl.getMetier().getLstJoueurs();
+
+		this.btnQuitter = new JButton("Quitter");
 
 		Collections.sort(this.lstJoueurs);
 		//Création des layout et placements des éléments
 		this.panelSp.setLayout(new BorderLayout());
 		this.panelGrilleResultat.setBackground(Color.WHITE);
 
-		//A revoir, faire des tests pour savoir jusqu'à combien de jouers ça devient illisible
-		if ( this.lstJoueurs.size()-1 < 10){
-			this.panelGrilleResultat.setLayout(new GridLayout(1,9, 4, 0 ));
-
-			//Remplissage du panelGrilleJoueur
-			for(int i=0; i<this.lstJoueurs.size(); i++){
-				this.panelGrilleResultat.add(new Resultat(
-					i,
-					this.lstJoueurs.get(i).getNom(),
-					this.lstJoueurs.get(i).getPoint(),
-					this.lstJoueurs.get(i).getNbWagon(),
-					this.lstJoueurs.get(i).getCartesObjectif().size()
-				));
-			}
-			for(int i=this.lstJoueurs.size()-1; i<5; i++){
-				this.panelGrilleResultat.add(new JLabel());
-			}
+		//Remplissage du panelGrilleJoueur
+		for(int i=0; i<this.lstJoueurs.size(); i++){
+			this.modelResultats.setValueAt(i,i,0);
+			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNom(),i,1);
+			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getPoint(),i,2);
+			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getNbWagon(),i,3);
+			this.modelResultats.setValueAt(this.lstJoueurs.get(i).getCartesObjectif().size(),i,4);
 		}
-		else{
-			this.panelGrilleResultat.setLayout(new GridLayout(1,this.lstJoueurs.size()-1, 4, 0));
-
-			//Remplissage du panelGrilleResultat
-			for(int i=0; i<this.lstJoueurs.size(); i++){
-				this.panelGrilleResultat.add(new Resultat(
-					i,
-					this.lstJoueurs.get(i).getNom(),
-					this.lstJoueurs.get(i).getPoint(),
-					this.lstJoueurs.get(i).getNbWagon(),
-					this.lstJoueurs.get(i).getCartesObjectif().size()
-				));
-			}
+		for(int i=this.lstJoueurs.size()-1; i<5; i++){
+			this.panelGrilleResultat.add(new JLabel());
 		}
+
+		this.panelBase.setLayout(new GridLayout(1,5));
+		this.panelBase.add(new JLabel());
+		this.panelBase.add(new JLabel());
+		this.panelBase.add(this.btnQuitter);
+		this.panelBase.add(new JLabel());
+		this.panelBase.add(new JLabel());
+
+		this.btnQuitter.addActionListener(this);
+
+		this.panelGrilleResultat.add(new JLabel());
+		this.panelGrilleResultat.add(this.tabResultats);
+		this.panelGrilleResultat.add(new JLabel());
+
 
 		this.panelSp.add(this.panelGrilleResultat);
 
 		JScrollPane sp = new JScrollPane(this.panelSp);
 
-		sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		this.add(sp, BorderLayout.CENTER);
-
-		this.btnContinuer = new JButton("Continuer");
+		this.add(this.panelBase, BorderLayout.SOUTH);
 		this.setVisible(true);
-		this.pack();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.btnQuitter){
+			this.dispose();
+		}
+		
 	}
 }
