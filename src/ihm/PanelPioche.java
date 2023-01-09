@@ -108,7 +108,6 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
-            System.out.println("piuoche "+this.ctrl.getMetier().getLstCartesObjectifs().size());
             switch(this.ctrl.getMetier().getLstCartesObjectifs().size()){
                 case 0 : JOptionPane.showMessageDialog(null, "Vous avez déjà pioché toutes les cartes objectifs", "Erreur", JOptionPane.ERROR_MESSAGE);break;
                 case 1 : JOptionPane.showMessageDialog(null, "Attention ! Il ne reste qu'une carte objectif !");

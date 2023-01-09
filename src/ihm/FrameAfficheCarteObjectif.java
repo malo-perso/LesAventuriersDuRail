@@ -141,13 +141,13 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
 
         List<CarteObjectif> lstCartePioche = this.ctrl.getPioche().piocherObjectif();
 
-        System.out.println(rationW + " " + rationH);
+        // System.out.println(rationW + " " + rationH);
 
-        System.out.println(lstCartePioche.get(0).getNoeud1().getCenterX());
-        System.out.println(lstCartePioche.get(0).getNoeud1().getCenterY());
+        // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterX());
+        // System.out.println(lstCartePioche.get(0).getNoeud1().getCenterY());
         
-        System.out.println((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW));
-        System.out.println((int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH));
+        // System.out.println((int)(lstCartePioche.get(0).getNoeud1().getCenterX()/rationW));
+        // System.out.println((int) (lstCartePioche.get(0).getNoeud1().getCenterY()/rationH));
         
         g.setColor(Color.BLACK);
 
@@ -185,17 +185,14 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
 
             if ( this.cbCarte1.isSelected()){
                 this.carteChoisie.add(0);
-                System.out.println("carte 0" + this.carteChoisie);
             }
 
             if( this.cbCarte2.isSelected()){
                 this.carteChoisie.add(1);
-                System.out.println("carte 1" + this.carteChoisie);
             }
 
             if( this.cbCarte3.isSelected()){
                 this.carteChoisie.add(2);
-                System.out.println("carte 2" + this.carteChoisie);
             }
 
             if(this.ctrl.getNbActionJoueur()<1){

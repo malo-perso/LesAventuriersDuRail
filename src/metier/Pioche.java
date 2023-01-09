@@ -103,7 +103,6 @@ public class Pioche {
                 i--;
             if (this.lstCartesObjectif.size() > i){
                 CarteObjectif remove = this.lstCartesObjectif.remove(i);
-                System.out.println("lstCartesObjectif.remove(i) : " + remove);
                 joueur.ajouterCarteObjectif(remove);
             }
         }     
