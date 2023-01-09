@@ -210,20 +210,19 @@ public class Metier {
     }
 
     public List<Type> getLstTypes(){
-        ArrayList<Type> listeType = new ArrayList();
+        ArrayList<Type> listeType = new ArrayList<Type>();
 		boolean trouve;
 		for (Arete arete : this.lstAretes)
 		{
 			trouve = false;
 
-			for (int i=0; i<listeType.size(); i++) {
-				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker)) {
+			for (int i=0; i<listeType.size(); i++) 
+				if (arete.getType().getColor().equals(listeType.get(i).getColor()) || arete.getType().getColor().equals(this.couleurJoker))
 					trouve = true;
-				}
-			}
-			if (!trouve) {
+				
+			
+			if (!trouve) 
 				listeType.add(arete.getType());
-			}
 		}
 
 		listeType.add(Type.creerType(this.couleurJoker));
@@ -266,6 +265,12 @@ public class Metier {
         }
         System.out.println("Pioche Carte Objectif : La pioche est vide");
         return null;
+    }
+
+    public Boolean areteDoubleActive(){
+        if(this.lstJoueurs.size()> this.nbrJoueurMiniDoubleRoute)
+            return true;
+        return false;
     }
 
     // ???
