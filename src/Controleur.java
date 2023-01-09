@@ -18,6 +18,7 @@ import src.metier.CarteVehicule;
 import src.ihm.FrameAfficheCarteObjectif;
 import src.ihm.FrameChoixArete;
 import src.ihm.FrameChoixWagon;
+import src.ihm.FrameFinPartie;
 import src.metier.Joueur;
 import src.metier.Metier;
 import src.metier.Noeud;
@@ -178,7 +179,9 @@ public class Controleur {
     }
 
     public void finDePartie() {
-     //   this.ihm.finDePartie();
+        this.ihm.desactiver();
+        this.ihm.setVisible(false);
+        FrameFinPartie frameFinPartie = new FrameFinPartie(this);
     }
 
     public void verifAreteSelect(Noeud noeud1, Noeud noeud2){
