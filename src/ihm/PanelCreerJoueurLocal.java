@@ -14,25 +14,24 @@ import java.util.List;
 public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 
     private Controleur  ctrl;
-	private JTextField  txtNomPartie, txtNomJoueur;
+	private JTextField  txtNomJoueur;
 	private JButton     btnAjouterJoueur, btnSupprJoueur,btnCouleurJoueur,btnLancerPartie;
 	private JButton     btnRetour;
 	private JTable      tabJoueur;
-	private JPanel 		panelTitreJeu, panelBoutonHaut, panelBoutonSuivant, panelCentre;
+	private JPanel 		panelBoutonHaut, panelBoutonSuivant, panelCentre;
 	private Color       c;
 
     private GrillesJoueurModel model;
 	
 	public PanelCreerJoueurLocal(Controleur ctrl)  {
 		this.ctrl = ctrl;
+
         this.setLayout(new BorderLayout(10,10));
 		
-		this.panelTitreJeu	  	= new JPanel(new GridLayout(1,3,10,10));
 		this.panelBoutonSuivant = new JPanel(new GridLayout(1,3,10,10));
 		this.panelCentre        = new JPanel(new BorderLayout(10,10));
 		this.panelBoutonHaut    = new JPanel(new GridLayout(2,3,10,10));
 
-        this.txtNomPartie  		= new JTextField ("Nom de la partie");
 		this.txtNomJoueur 		= new JTextField ();
 		this.btnAjouterJoueur 	= new JButton("Ajouter");
 		this.btnSupprJoueur 	= new JButton("Suppr");
@@ -45,7 +44,6 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		this.tabJoueur = new JTable(this.model);
 		this.tabJoueur.setFillsViewportHeight(true);
 		this.tabJoueur.setEnabled(true);
-		this.txtNomPartie.setHorizontalAlignment(SwingConstants.CENTER);
 
 		this.panelBoutonSuivant.add(this.btnRetour);
 		this.panelBoutonSuivant.add(new JLabel());
@@ -68,11 +66,12 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		this.panelBoutonHaut.add(this.btnAjouterJoueur);
 		this.panelBoutonHaut.add(new JLabel());
 		this.panelBoutonHaut.add(this.btnSupprJoueur);
+
+		JScrollPane sp = new JScrollPane(this.tabJoueur);
 		
 		this.panelCentre.add(this.panelBoutonHaut, BorderLayout.NORTH);
-		this.panelCentre.add(this.tabJoueur, BorderLayout.CENTER);
+		this.panelCentre.add(sp, BorderLayout.CENTER);
 
-		this.add(this.txtNomPartie, BorderLayout.NORTH);
 		this.add(this.panelCentre, BorderLayout.CENTER);
 		this.add(this.panelBoutonSuivant, BorderLayout.SOUTH);
 	}
@@ -90,18 +89,31 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		}
 
 		if (e.getSource() == this.btnAjouterJoueur ){
-			if (this.c != null && this.txtNomJoueur.getText() != ""){
-				this.ctrl.getMetier().ajouterJoueur(this.txtNomJoueur.getText(), this.c.getRGB());
-				this.majTable(this.ctrl.getLstJoueurs());
+			if (this.c != null && !this.txtNomJoueur.getText().equals("") && this.ctrl.getLstJoueurs().size()<this.ctrl.getMetier().getNbrJoueurMaximum()){
+				boolean joueurExistePas = true;
+
+				for(Joueur j : this.ctrl.getLstJoueurs()){
+					if(j.getNom().equals(this.txtNomJoueur.getText()) || j.getCouleur().getRGB() == this.c.getRGB()) joueurExistePas=false;
+				}
+
+				if(joueurExistePas){
+					this.ctrl.getMetier().ajouterJoueur(this.txtNomJoueur.getText(), this.c.getRGB());
+					this.majTable(this.ctrl.getLstJoueurs());
+					this.txtNomJoueur.setText("");
+					this.c = null;
+				}
 			}
 		}
 		
 		if(e.getSource() == this.btnSupprJoueur){
-			this.ctrl.supprimerJoueur(this.ctrl.getLstJoueurs().get(this.tabJoueur.getSelectedRow()));
+			if (this.tabJoueur.getSelectedRow() >=0 ){
+				this.ctrl.supprimerJoueur(this.ctrl.getLstJoueurs().get(this.tabJoueur.getSelectedRow()));
+			}
 		}
 
 		if(e.getSource() == this.btnRetour){
 			this.ctrl.resetMetier();
+			this.majTable(this.ctrl.getLstJoueurs());
 			this.ctrl.getIHMAcceuil().changePanel("panelJeu");
 
 		}
@@ -109,10 +121,11 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		if(e.getSource() == this.btnLancerPartie){
 			if(this.model.getRowCount() < this.ctrl.getMetier().getNbrJoueurMinimum()){
 				JOptionPane.showMessageDialog(null,"Il faut plus de joueur");
+			}else{
+				this.ctrl.lancerPartie();
 			}
 
-			this.ctrl.lancerPartie();
 		}
 	}
-
+	
 }
