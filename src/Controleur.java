@@ -99,6 +99,11 @@ public class Controleur {
         return this.metier.getLstTypes();
     }
 
+    public ArrayList<CarteObjectif> getLstCarteObjectifs(){
+        ArrayList<CarteObjectif> carteObjectifs = new ArrayList<CarteObjectif>(this.metier.getLstCartesObjectifs());
+        return carteObjectifs;
+    }
+
     public Joueur getJoueurCourant() {
         return this.joueurCourant;
     }
@@ -276,7 +281,7 @@ public class Controleur {
     }
 
     public static void main (String[] args) {
-        //FlatLightLaf.setup();
+        FlatLightLaf.setup();
         Controleur ctrl = new Controleur();
     }	
 }

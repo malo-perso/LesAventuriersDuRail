@@ -31,7 +31,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
     private JCheckBox cbCarte2;
     private JCheckBox cbCarte3;
 
-    private List<CarteObjectif> lstCarteObjectifs;
+    private ArrayList<CarteObjectif> lstCarteObjectifs;
     private ArrayList<CarteObjectif> lstCartePioche;
     private ArrayList<Integer> carteChoisie;
     private ImageIcon icon1;
@@ -39,6 +39,7 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
     private Image img1;
 
     public FrameAfficheCarteObjectif(Controleur ctrl){
+        int tmp = 0;
         this.ctrl = ctrl;
         this.metier = new Metier(this.ctrl);
         this.setTitle("Selection Carte Objectif");
@@ -53,13 +54,35 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         this.panelValidation = new JPanel(new GridLayout(1,3));
 
         this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
         
         this.icon1 = new ImageIcon(this.ctrl.getImagePlateau());
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
 
         this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
 
-        for(int i= 0; i < this.lstCartePioche.size(); i++){
+        if(this.lstCarteObjectifs.size() > 3)
+            tmp = 3;
+        else
+            tmp = this.lstCarteObjectifs.size();
+
+        this.btnCarteObjectif = new JButton[tmp];
+        this.panelObjectif.removeAll();
+
+        if(this.lstCarteObjectifs.size() < 3){
+            this.panelObjectif.setLayout(new GridLayout(1,this.lstCarteObjectifs.size(), 5, 0));
+            this.panelCB.removeAll();
+            this.panelCB.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelCB.add(this.cbCarte1);
+            this.panelCB.add(this.cbCarte2);
+            this.panelValidation.removeAll();
+            this.panelValidation.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelValidation.add(new JLabel());
+            this.panelValidation.add(this.btnValider);
+        }
+
+        for(int i= 0; i < tmp; i++){
+
             this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
             this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
             this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
@@ -67,6 +90,8 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
             this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
             this.btnCarteObjectif[i].setBorder(null);
             this.panelObjectif.add(this.btnCarteObjectif[i]);
+
+            
         }
 
         this.btnValider = new JButton("Valider");
@@ -180,12 +205,32 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
         
     }
     public void majIHM(){
+        int tmp = 0;
         this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
-        this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
 
+        if(this.lstCarteObjectifs.size() > 3)
+            tmp = 3;
+        else
+            tmp = this.lstCarteObjectifs.size();
+
+        this.btnCarteObjectif = new JButton[tmp];
         this.panelObjectif.removeAll();
 
-        for(int i= 0; i < this.lstCartePioche.size(); i++){
+        if(this.lstCarteObjectifs.size() < 3){
+            this.panelObjectif.setLayout(new GridLayout(1,this.lstCarteObjectifs.size(), 5, 0));
+            this.panelCB.removeAll();
+            this.panelCB.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelCB.add(this.cbCarte1);
+            this.panelCB.add(this.cbCarte2);
+            this.panelValidation.removeAll();
+            this.panelValidation.setLayout(new GridLayout(1,this.lstCarteObjectifs.size()));
+            this.panelValidation.add(new JLabel());
+            this.panelValidation.add(this.btnValider);
+        }
+
+        for(int i= 0; i < tmp; i++){
+
             this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
             this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
             this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
@@ -193,8 +238,11 @@ public class FrameAfficheCarteObjectif extends JFrame implements ActionListener 
             this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
             this.btnCarteObjectif[i].setBorder(null);
             this.panelObjectif.add(this.btnCarteObjectif[i]);
+
+            
         }
-        System.out.println(this.lstCartePioche);
+        System.out.println("lst carte piocher" + this.lstCarteObjectifs.size());
+        this.panelObjectif.revalidate();
     }
 
     public ArrayList<Integer> getCarteObjectifChoisie(){
