@@ -38,6 +38,15 @@ public class Joueur {
         this.nbPoint += nbPoint;
     }
 
+    public ArrayList<Color> getListType(){
+        ArrayList<Color> lstType = new ArrayList<Color>();
+        for (CarteVehicule carteVehicule : this.cartesVehicule) {
+            if (!lstType.contains(carteVehicule.getType().getColor()))
+                lstType.add(carteVehicule.getType().getColor());
+        }
+        return lstType;
+    }
+
     public ArrayList<CarteVehicule> getCartesVehicule() {
         return this.cartesVehicule;
     }

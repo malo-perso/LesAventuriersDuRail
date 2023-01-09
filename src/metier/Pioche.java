@@ -99,7 +99,7 @@ public class Pioche {
 
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
         for (int i = 0; i < intCarte.size(); i++) {
-            if(this.lstCartesObjectif.size()==2)
+            if(this.lstCartesObjectif.size()==2 && i != 0)
                 i--;
             if (this.lstCartesObjectif.size() > i){
                 CarteObjectif remove = this.lstCartesObjectif.remove(i);
