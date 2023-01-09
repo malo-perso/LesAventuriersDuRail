@@ -73,13 +73,11 @@ public class Joueur implements Comparable<Joueur>{
     }
 
     public int getNbCarteWagon(Color type)
-    {
+    {   
         int nb = 0;
-        for (CarteVehicule carte : this.cartesVehicule) {
-            if (carte.getType().getColor() == type) {
-                nb++;
-            }
-        }
+        HashMap<Color, ArrayList<Integer>> hashCouleur = getHashCouleur();
+            if (hashCouleur.containsKey(type))
+                nb= hashCouleur.get(type).size();
         return nb;
     }
 
