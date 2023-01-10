@@ -172,6 +172,11 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         Collections.sort(this.lstCarteVehicule);
 
         this.lblPerso.setText(this.ctrl.getMetier().getJoueurCourant().getNom());
+        this.lblPerso.setHorizontalAlignment(SwingConstants.CENTER);
+        this.lblPerso.setFont(new Font("Calibri",Font.BOLD,14));
+        this.lblPerso.setBackground(this.ctrl.getMetier().getJoueurCourant().getCouleur());
+        this.lblPerso.setForeground(new Color(Color.WHITE.getRGB() - this.ctrl.getMetier().getJoueurCourant().getCouleur().getRGB()));
+        this.lblPerso.setOpaque(true);
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getMetier().getJoueurCourant().getNbWagon());
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getMetier().getJoueurCourant().getPoint());
 
