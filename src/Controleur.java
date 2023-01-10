@@ -100,7 +100,7 @@ public class Controleur {
      * @param lstArete
      */
     public void creerFrameChoixArete(ArrayList<Arete> lstArete){
-        FrameChoixArete frameChoixArete = new FrameChoixArete(this, lstArete);
+        new FrameChoixArete(this, lstArete);
     }
 
     
