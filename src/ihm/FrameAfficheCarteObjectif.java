@@ -61,6 +61,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
 
         this.btnCarteObjectif = new JButton[3];
+        this.carteChoisie = new ArrayList<Integer>();
 
         this.panelObjectif.removeAll();
 
@@ -103,6 +104,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         }
 
         this.btnValider = new JButton("Valider");
+        this.btnValider.setEnabled(false);
         
         this.cbCarte1 = new JCheckBox();
         this.cbCarte2 = new JCheckBox();
@@ -138,6 +140,27 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.cbCarte1.setSelected(false);
         this.cbCarte2.setSelected(false);
         this.cbCarte3.setSelected(false);
+    }
+
+    public void majBouton(){
+        this.carteChoisie.clear();
+        if(this.cbCarte1.isSelected()){
+            this.carteChoisie.add(0);
+        }
+        if(this.cbCarte2.isSelected()){
+            this.carteChoisie.add(1);
+        }
+        if(this.cbCarte3.isSelected()){
+            this.carteChoisie.add(2);
+        }
+
+        int val = this.ctrl.getMetier().getNbActionJoueur()<1 ? 2 : 1;
+        if(this.carteChoisie.size() < val){
+            this.btnValider.setEnabled(false);
+        }
+        else {
+            this.btnValider.setEnabled(true);
+        }
     }
 
     // public void paint(Graphics g){
@@ -189,19 +212,6 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         }
 
         if(e.getSource() == this.btnValider){
-            this.carteChoisie = new ArrayList<Integer>();
-
-            if ( this.cbCarte1.isSelected()){
-                this.carteChoisie.add(0);
-            }
-
-            if( this.cbCarte2.isSelected()){
-                this.carteChoisie.add(1);
-            }
-
-            if( this.cbCarte3.isSelected()){
-                this.carteChoisie.add(2);
-            }
 
             if(this.ctrl.getMetier().getNbActionJoueur()<1){
                 if(this.carteChoisie.size() < 2){
@@ -226,7 +236,9 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             }
         }
         
+        this.majBouton();
     }
+
     public void majIHM(){
         this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getLstCarteObjectifs());
