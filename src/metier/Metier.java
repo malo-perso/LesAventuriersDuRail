@@ -904,7 +904,62 @@ public class Metier {
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));        
 
         this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));
-    }      
+    }    
+
+    public void scenario3(){
+        this.lstAretes.get(0).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(1).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(2).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(3).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(4).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(5).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(6).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(7).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(63).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(64).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(65).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(66).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(42).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(43).setProprietaire(this.lstJoueurs.get(0));
+
+        this.lstAretes.get(8).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(9).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(10).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(34).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(35).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(36).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(37).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(38).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(44).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(45).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(46).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(51).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(69).setProprietaire(this.lstJoueurs.get(1));
+
+        this.lstAretes.get(11).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(12).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(13).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(39).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(40).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(41).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(62).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(67).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(68).setProprietaire(this.lstJoueurs.get(2));
+        this.lstAretes.get(70).setProprietaire(this.lstJoueurs.get(2));
+        
+
+        this.lstJoueurs.get(0).supprimerWagon(40);
+        this.lstJoueurs.get(1).supprimerWagon(37);
+        this.lstJoueurs.get(2).supprimerWagon(26);
+
+        this.lstJoueurs.get(0).ajouterPoint(67);
+        this.lstJoueurs.get(1).ajouterPoint(53);
+        this.lstJoueurs.get(2).ajouterPoint(33);
+
+
+        this.ctrl.majIHM();
+        
+    }
 	
 
 }
