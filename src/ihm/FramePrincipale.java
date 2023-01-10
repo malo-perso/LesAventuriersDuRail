@@ -21,10 +21,8 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
     private JMenuBar menuBarre;
 
-    private JMenu menuAide;
     private JMenu menuPresentation;
 
-    private JMenuItem menuRegles;
     private JMenuItem menuFinDePartie;
 
     private JScrollPane scrollPane;
@@ -54,22 +52,17 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
         this.menuBarre = new JMenuBar();
 
-        this.menuAide = new JMenu("Aide");
-        
-        this.menuRegles = new JMenuItem("Regles");
+        //this.menuAide = new JMenu("Aide");
 
         this.menuPresentation = new JMenu("Presentation");
         this.menuFinDePartie = new JMenuItem("Fin de Partie");
 
-
-        this.menuRegles.setIcon(new ImageIcon("./src/data/images/Regles.png"));
         this.reglePDF = new File("./src/data/PDF/Regles.pdf");
 
         //Action listener
 
         this.btnJouerLocal = new JButton("Jouer en local");
         this.btnJouerLocal.addActionListener(this);
-        this.menuRegles.addActionListener(this);
         this.menuFinDePartie.addActionListener(this);
 
         //Positionnement des composants
@@ -77,10 +70,6 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
         this.panelBase.add(this.scrollPane, BorderLayout.CENTER);
         this.panelBase.add(this.panelJoueurs, BorderLayout.NORTH);
-
-        this.menuAide.add(this.menuRegles);
-
-        this.menuBarre.add(this.menuAide);
 
         this.menuPresentation.add(this.menuFinDePartie);
 
@@ -186,11 +175,6 @@ public class FramePrincipale extends JFrame implements ActionListener {
      * @param e
      */
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.menuRegles){
-            try{
-                Desktop.getDesktop().open(reglePDF);
-            }catch(Exception erreur){erreur.printStackTrace();}
-        }
         if(e.getSource() == this.menuFinDePartie)
             this.ctrl.getMetier().finDePartie();
     }
