@@ -17,7 +17,7 @@ public class GrillesJoueurModel extends AbstractTableModel {
     public GrillesJoueurModel(Controleur ctrl){
         super();
         this.ctrl=ctrl;
-        this.lstJoueur = this.ctrl.getLstJoueurs();
+        this.lstJoueur = this.ctrl.getMetier().getLstJoueurs();
         this.tabEntetes = new String[] { "Pseudo", "Couleur du Joueur"};
 
         majTable(this.lstJoueur);

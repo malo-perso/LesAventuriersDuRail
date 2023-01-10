@@ -43,6 +43,14 @@ public class Metier {
     private List<Joueur> lstJoueurs;
     private BufferedImage bImage;
     private Boolean action;
+
+    private Joueur joueurCourant;
+    private Joueur dernierJoueur;
+    private int nbWagon;
+    private int actionEnCours; //1 = piocher Wagon, 2 = piocher Objectif, 3 = poser Wagon
+    private int nbAction;
+    private Color colorSelect;
+    private int[] grillePoint;
     
     private Controleur ctrl;
 
@@ -50,9 +58,6 @@ public class Metier {
 
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
         this.lstCarteVehicules = new ArrayList<CarteVehicule>();
-
-        
-
 
         this.pioche = new Pioche(ctrl, this.lstCarteVehicules, this.lstCarteObjectifs);
         this.nbrJoueurMinimum = 0;
@@ -72,80 +77,20 @@ public class Metier {
         this.bImage = null;
         this.action = false;
 
+        this.nbAction = 0;
+
+
         this.ctrl = ctrl;
         //TEMPORAIRE
         this.lstJoueurs.add(new Joueur("Eragon7237", -52,45));
         this.lstJoueurs.add(new Joueur("Bou",  2500,45));
         this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
-        //ajouter des cartes vehicules et objectifs dans les listes
+        
+        
+        this.nbAction = 0;
 
-        //game(this.ctrl);
     }
     
-/*
-    public void game(Controleur ctrl){
-        //tant que la condition n'est pas rempli jouer
-        while(!win())
-        {   
-            //chaque joueur joue
-            for(Joueur j : this.lstJoueurs)
-            {
-                //tour d'un Joueur
-                play(j, ctrl);
-            }
-        }
-    }
-
-    public void play(Joueur j, Controleur ctrl){
-        while (this.action) {
-                        
-        }*/
-
-        
-        /* 
-        piocher une carte vehicule 
-            - visible
-                - si on a un joker -> on peut pas prendre une deuxième carte
-                - on peut en prendre une face cachée comme visible
-                - on ne peut pas prendre de Joker en deuxième carte dans tout les cas
-            - face cachée
-                - si on veut en prendre une visible ou une invisible après
-                    - si on choisit une visible, on peut pas prendre de Joker
-        piocher une carte objectif
-            - sélectionne 3
-            - il doit en garder 1 à 3
-            - celle qu'il défosse sont renvoyées en fin de pioche -> mélanger la pioche
-            - celle qu'il garde sont supprimées de la pioche
-        prendre possession d'une voie 
-            - si on a un nombre de carte véhicule de la couleur de la voie(ou joker), égal(ou plus) au nombre de section 
-            - après, on remet celle(s) non choisies en dessous de la pioche  -> mélanger la pioche     
-        
-        
-    }
-
-
-
-    public boolean win(){
-        //vérifie si un joueur a 2 wagons ou moins
-        
-        return false;
-    }
-
-    /**********************/
-    /* Action des joueurs */
-    /**********************/
-/*
-    public void piocherObjectif(){
-        //piocher 3 cartes objectifs
-        //choisir 1 à 3
-        //les autres sont remises en fin de pioche
-    }
-
-
-
-
-*/
-
     public List<Joueur> getLstJoueurs() {
         return this.lstJoueurs;
     }
@@ -202,6 +147,31 @@ public class Metier {
         return this.couleurJoker;
     }
 
+    public Joueur getDernierJoueur() {
+        return this.dernierJoueur;
+    }
+
+    public int getNbWagon() {
+        return this.nbWagon;
+    }
+
+    public int getActionEnCours() {
+        return this.actionEnCours;
+    }
+
+    public int getNbAction() {
+        return this.nbAction;
+    }
+
+    public Color getColorSelect() {
+        return this.colorSelect;
+    }
+
+    public int[] getGrillePoint() {
+        return this.grillePoint;
+    }
+
+
     public List<Noeud> getLstNoeuds(){
         return this.lstNoeuds;
     }
@@ -231,11 +201,11 @@ public class Metier {
 		return listeType;
     }
 
-    public List<CarteVehicule> getLstCartesVehicules(){
+    public List<CarteVehicule> getLstCarteVehicules(){
         return this.lstCarteVehicules;
     }
 
-    public List<CarteObjectif> getLstCartesObjectifs(){
+    public List<CarteObjectif> getLstCarteObjectifs(){
         return this.lstCarteObjectifs;
     }
 
@@ -258,10 +228,10 @@ public class Metier {
     public CarteObjectif[] PiocheCarteObjectif(Joueur joueur)
     {
         CarteObjectif[] cartes = new CarteObjectif[3];
-        if (this.pioche.getLstCartesObjectif().size() > 3) {
-            cartes[0]=this.pioche.getLstCartesObjectif().get(0);
-            cartes[1]=this.pioche.getLstCartesObjectif().get(0);
-            cartes[2]=this.pioche.getLstCartesObjectif().get(0);
+        if (this.pioche.getLstCarteObjectif().size() > 3) {
+            cartes[0]=this.pioche.getLstCarteObjectif().get(0);
+            cartes[1]=this.pioche.getLstCarteObjectif().get(0);
+            cartes[2]=this.pioche.getLstCarteObjectif().get(0);
             return cartes;
         }
         JOptionPane.showMessageDialog(null,"Pioche Carte Objectif : La pioche est vide");
@@ -291,7 +261,6 @@ public class Metier {
         return grillePoint;
     }
 
-    // ???
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;
     }
@@ -303,8 +272,6 @@ public class Metier {
     public void supprimerJoueur(Joueur joueur){
         this.lstJoueurs.remove(joueur);
     }
-
-
 
     public void reset(){
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>();
@@ -335,9 +302,6 @@ public class Metier {
         return false;
     }
 
-    
-
-    //Pas testée
     public boolean verifCarteJoker(CarteVehicule carteVehicule) {
         if(carteVehicule.getType().getColor().equals(this.couleurJoker)){
             return true;
@@ -357,6 +321,218 @@ public class Metier {
         if(joueur.getNbCarteWagon(color) +  joueur.getNbCarteWagon(this.couleurJoker)>= arete.getLongueur())
             return true;
         return false;
+    }
+
+    public void lancerPartie() {
+        nbWagon = 0;
+        this.joueurCourant = this.lstJoueurs.get(0);
+        
+        distribuerCarteVehicule();
+        this.ctrl.initPartie();
+        this.ctrl.getIHM().setVisible(true);
+        this.ctrl.majPioche();
+        this.ctrl.getIHM().afficherJoueur(this.joueurCourant.getNom(), nbAction);
+        
+        grillePoint= this.generGrillePoint();
+
+        this.ctrl.majIHM();
+
+
+        this.ctrl.getIHM().desactiver();
+        this.getPioche().piocherObjectif();
+        this.ctrl.getFrameAfficheCarteObjectif().setVisible(true);
+    }
+
+    public int getNbActionJoueur() {
+        if(this.lstJoueurs.size()>0)
+            return nbAction/this.lstJoueurs.size();
+        return nbAction;
+    }
+
+    public Joueur getJoueurCourant() {
+        return this.joueurCourant;
+    }
+
+    public void finDuTour() {
+        if (dernierJoueur != null && this.joueurCourant.equals(dernierJoueur)) {
+            this.ctrl.getIHM().afficherMsgErreur("C'est la fin de la partie!");
+            finDePartie();
+            return;
+        }
+        for (Joueur joueur : this.lstJoueurs) {
+            if(joueur.getNbWagon() < this.nbVehiculeFinPartie){
+                this.dernierJoueur = joueur;
+                this.ctrl.getIHM().afficherMsgErreur(this.joueurCourant.getNom() + " a moins de de " + this.nbVehiculeFinPartie+" wagons. C'est le dernier tour pour tout le monde");
+            }
+        }
+    
+        this.nbWagon = 0;
+        this.ctrl.getIHM().resetNoeudSelect();
+        this.joueurCourant = this.lstJoueurs.get((this.lstJoueurs.indexOf(this.joueurCourant)+1)%this.lstJoueurs.size());
+        this.nbAction++;
+        this.ctrl.getIHM().afficherJoueur(this.joueurCourant.getNom(), this.nbAction/this.lstJoueurs.size());
+        this.ctrl.getIHM().majIHM();
+
+        if(this.nbAction/this.lstJoueurs.size()<1){
+            this.ctrl.getIHM().desactiver();
+
+            this.getPioche().piocherObjectif();
+            this.ctrl.getFrameAfficheCarteObjectif().setVisible(true);
+        }
+    }
+
+    public void poserVehicule() {
+        this.actionEnCours = 3;
+    }
+
+    public void piocherVehicule(int i) {
+        this.actionEnCours = 1;
+        System.out.println(nbWagon);
+        if (i<6 && this.verifCarteJoker(this.lstCarteVehicules.get(i))){
+            if(nbWagon==1)
+                return;
+            this.nbWagon=2;
+        }
+        else{
+            this.nbWagon++;
+        }
+        
+        this.joueurCourant.ajouterCarteVehicule(this.getPioche().piocherVehicule(i));
+        this.ctrl.majIHM();
+        this.ctrl.getIHM().setVisible(true);
+        if(this.nbWagon==2)
+        {
+            this.ctrl.getIHM().activerComposants();
+            this.ctrl.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
+            finDuTour();
+        }
+    }
+
+    public void finDePartie() {
+        this.ctrl.getIHM().desactiver();
+        this.ctrl.getIHM().setVisible(false);
+        Joueur joueurCheminLPL=null;
+        int cheminLPL = 0;
+        int cheminLPLJ =0;
+        for (Joueur i : this.lstJoueurs) {
+                verifCarteObjectif(i);
+                cheminLPLJ = CalculPoint.cheminLePlusLong(this.lstAretes, this.lstNoeuds, i);
+                System.out.println("Le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
+                if (cheminLPLJ >cheminLPL) {
+                    joueurCheminLPL = i;
+                }
+        }
+        if (joueurCheminLPL != null)
+            joueurCheminLPL.ajouterPoint(10);
+        this.ctrl.creerFrameFinPartie();
+    }
+
+    public void verifAreteSelect(Noeud noeud1, Noeud noeud2){
+        this.actionEnCours = 0;
+        
+        ArrayList<Arete> aretesSelect = new ArrayList<Arete>();
+        Arete areteSelect = null;
+
+        for (Arete arete : this.getLstAretes()) {
+            if(arete.estAreteDe(noeud1, noeud2)){
+                aretesSelect.add(arete);
+            }
+        }
+
+        for (Arete arete : aretesSelect) {
+            if (!arete.estDisponible() && !this.areteDoubleActive()){
+                this.ctrl.getIHM().afficherMsgErreur("vous ne pouvez pas prendre cette arete");
+                return;
+            }
+            if (arete.estDisponible() && arete.getProprietaire() == this.joueurCourant){
+                this.ctrl.getIHM().afficherMsgErreur("Vous possedez deja cette arete");
+                return;
+            }
+
+        }
+
+        for (Arete arete : aretesSelect) {
+            if (!arete.estDisponible()){
+                aretesSelect.remove(arete);
+            }
+        }
+
+        //verif s il a selectionne quelque chose 
+        if (aretesSelect.size()==0)
+            return ;
+        
+        // si arete double , on demande à l'utilisateur de choisir entres les deux
+        if(aretesSelect.size()>1)
+            this.ctrl.creerFrameChoixArete(aretesSelect);
+        else {
+            areteSelect = aretesSelect.get(0);
+            verifAreteMulti(areteSelect);
+        }
+    
+    }
+
+    public void verifAreteWagon(Arete areteSelect, Color couleurArete){
+        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
+
+        //verif à assez de carte vehicule pour prendre l'arete
+        if (!this.estPrenable(areteSelect, this.joueurCourant, couleurArete)){
+            this.ctrl.getIHM().afficherMsgErreur("Vous n'avez pas assez de carte pour poser cette arete");
+            this.ctrl.getIHM().resetNoeudSelect();
+            return;
+        }
+
+
+        //verif si le joueur a assez de vehicule pour poser l'arete
+        if (this.joueurCourant.getNbWagon()<areteSelect.getLongueur()){
+            this.ctrl.getIHM().afficherMsgErreur("Vous n'avez pas assez de wagon pour poser cette arete");
+            this.ctrl.getIHM().resetNoeudSelect();
+            return;
+        }
+
+        cateDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.getCouleurJoker());
+        areteSelect.setProprietaire(this.joueurCourant);
+
+        this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
+        this.joueurCourant.ajouterPoint(grillePoint[ areteSelect.getLongueur()]);
+        this.getPioche().ajouterCartePioche(cateDefausse);
+        finDuTour();
+    }
+
+    public void setColorSelect(Color color){
+        this.colorSelect = color;
+    }
+
+    public void verifCarteObjectif(Joueur joueur) {
+        if (joueur.getCartesObjectif().size() == 0)
+            return;
+        for (CarteObjectif carteObjectif : joueur.getCartesObjectif()) 
+            if (!carteObjectif.getEstReussi() && CalculPoint.aReussitDestination(this.lstAretes, this.lstNoeuds, joueur, carteObjectif)){
+                joueur.ajouterPoint(carteObjectif.getPoints());
+                carteObjectif.setEstReussi(true);
+            }
+            else {
+                joueur.ajouterPoint(-carteObjectif.getPoints());
+            }
+    }
+
+    public void verifAreteMulti(Arete areteSelect){
+        if(verifVoieJoker(areteSelect))
+            this.ctrl.creerFrameChoixWagon(areteSelect);
+        
+        else
+            verifAreteWagon(areteSelect, areteSelect.getType().getColor());
+        
+    }
+
+    public void piocherObjectif(ArrayList<Integer> carteChoisies) {
+
+        this.actionEnCours = 2;
+        this.ctrl.getIHM().activer();
+        this.pioche.deffausserCarteObjectif(joueurCourant, carteChoisies);
+        this.ctrl.getFrameAfficheCarteObjectif().majIHM();
+        this.ctrl.majIHM();
+        this.ctrl.getIHM().setVisible(true);
+        finDuTour();
     }
 
     public void lireXML(File file){
@@ -471,7 +647,7 @@ public class Metier {
     public void distribuerCarteVehicule(){
         for( Joueur j : this.lstJoueurs){
             for(int i=0; i<4; i++){
-                if(this.pioche.getLstCartesVehicule().size()> 0){j.ajouterCarteVehicule(this.pioche.retirerCarteVehicule(0));}
+                if(this.pioche.getLstCarteVehicule().size()> 0){j.ajouterCarteVehicule(this.pioche.retirerCarteVehicule(0));}
             }
         }
     }

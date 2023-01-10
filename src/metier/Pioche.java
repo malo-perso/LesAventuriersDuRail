@@ -25,11 +25,11 @@ public class Pioche {
         this.lstCartesObjectif = lstCartesObjectif;
     }
 
-    public List<CarteVehicule> getLstCartesVehicule() {
+    public List<CarteVehicule> getLstCarteVehicule() {
         return this.lstCartesVehicule;
     }
 
-    public ArrayList<CarteObjectif> getLstCartesObjectif() {
+    public ArrayList<CarteObjectif> getLstCarteObjectif() {
         ArrayList<CarteObjectif> lstObj = new ArrayList<CarteObjectif>();
         //lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
         return lstObj;
@@ -52,7 +52,7 @@ public class Pioche {
         }
 
         if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3) {
-            //this.ctrl.afficherMessage("Il y a plus de 3 jokers dans la pioche visible, la pioche a été remélangée.");
+            this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
             Collections.shuffle(this.lstCartesVehicule);
             return this.majPiocheVehiculeVisible();
         }

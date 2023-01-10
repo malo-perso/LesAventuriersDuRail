@@ -53,8 +53,8 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.panelCB = new JPanel(new GridLayout(1,3));
         this.panelValidation = new JPanel(new GridLayout(1,3));
 
-        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
-        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
+        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getLstCarteObjectifs());
         
         this.icon1 = new ImageIcon(this.ctrl.getImagePlateau());
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
@@ -202,7 +202,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                 this.carteChoisie.add(2);
             }
 
-            if(this.ctrl.getNbActionJoueur()<1){
+            if(this.ctrl.getMetier().getNbActionJoueur()<1){
                 if(this.carteChoisie.size() < 2){
                     JOptionPane.showMessageDialog(null, "Vous devez choisir au moins 2 cartes");
                 }else{
@@ -210,7 +210,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     clearCheckBox();
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
-                    this.ctrl.piocherObjectif(this.carteChoisie);
+                    this.ctrl.getMetier().piocherObjectif(this.carteChoisie);
                 }
             }else{
                 if(carteChoisie.size() == 0){
@@ -220,15 +220,15 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     clearCheckBox();
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
-                    this.ctrl.piocherObjectif(this.carteChoisie);    
+                    this.ctrl.getMetier().piocherObjectif(this.carteChoisie);    
                 }
             }
         }
         
     }
     public void majIHM(){
-        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
-        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
+        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
+        this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getLstCarteObjectifs());
 
         this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
         this.panelObjectif.removeAll();

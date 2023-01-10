@@ -30,9 +30,9 @@ public class PanelPioche extends JPanel implements ActionListener{
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
         this.afficheCarteObjectif = new FrameAfficheCarteObjectif(this.ctrl);
-        this.piocheVehicule = ctrl.getPioche().getLstCartesVehicule();
-        this.piocheObjectif = ctrl.getPioche().getLstCartesObjectif();
-        this.piocheVehiculeVisible = this.ctrl.getPioche().majPiocheVehiculeVisible();
+        this.piocheVehicule = ctrl.getMetier().getPioche().getLstCarteVehicule();
+        this.piocheObjectif = ctrl.getMetier().getPioche().getLstCarteObjectif();
+        this.piocheVehiculeVisible = this.ctrl.getMetier().getPioche().majPiocheVehiculeVisible();
         this.btnPiocheVehiculeVisible = new JButton[5];
 
 
@@ -65,7 +65,7 @@ public class PanelPioche extends JPanel implements ActionListener{
     public void majPiocheVehiculeVisible() {
         for (int i = 0; i < this.piocheVehiculeVisible.length; i++) {
 
-            this.piocheVehiculeVisible[i] = this.ctrl.getPioche().majPiocheVehiculeVisible()[i];
+            this.piocheVehiculeVisible[i] = this.ctrl.getMetier().getPioche().majPiocheVehiculeVisible()[i];
 
             if (this.piocheVehiculeVisible[i] != null) {
                 this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
@@ -96,7 +96,7 @@ public class PanelPioche extends JPanel implements ActionListener{
                 this.btnPiocheObjectif.setEnabled(false);
                 this.ctrl.getIHM().griserComposants();
 
-                this.ctrl.piocherVehicule(i);
+                this.ctrl.getMetier().piocherVehicule(i);
                 this.ctrl.getIHM().setVisible(true);
             }
         }
@@ -105,12 +105,12 @@ public class PanelPioche extends JPanel implements ActionListener{
             this.btnPiocheObjectif.setEnabled(false);
             this.ctrl.getIHM().griserComposants();
 
-            this.ctrl.piocherVehicule(6);
+            this.ctrl.getMetier().piocherVehicule(6);
             this.ctrl.getIHM().setVisible(true);
         }
 
         if (e.getSource() == this.btnPiocheObjectif) {
-            switch(this.ctrl.getMetier().getLstCartesObjectifs().size()){
+            switch(this.ctrl.getMetier().getLstCarteObjectifs().size()){
                 case 0 : JOptionPane.showMessageDialog(null, "Vous avez déjà pioché toutes les cartes objectifs", "Erreur", JOptionPane.ERROR_MESSAGE);break;
                 case 1 : JOptionPane.showMessageDialog(null, "Attention ! Il ne reste qu'une carte objectif !");
                         

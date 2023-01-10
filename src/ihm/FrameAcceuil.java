@@ -53,6 +53,6 @@ public class FrameAcceuil extends JFrame {
     }
 
     public void MAJjoueur(){
-        this.panelCreerJoueur.majTable(this.ctrl.getLstJoueurs());
+        this.panelCreerJoueur.majTable(this.ctrl.getMetier().getLstJoueurs());
     }
 }

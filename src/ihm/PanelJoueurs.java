@@ -33,7 +33,7 @@ public class PanelJoueurs extends JPanel{
         
         this.alPanelJoueur = new ArrayList<FicheJoueur>();
         
-        for(Joueur joueur : this.ctrl.getLstJoueurs()){
+        for(Joueur joueur : this.ctrl.getMetier().getLstJoueurs()){
             this.alPanelJoueur.add(new FicheJoueur(joueur)); 
         }
 
@@ -141,10 +141,10 @@ public class PanelJoueurs extends JPanel{
     public void majPanelJoueur()
     {
         for(int cpt = 0; cpt < this.alPanelJoueur.size(); cpt++){
-            this.alPanelJoueur.get(cpt).setPoint(this.ctrl.getLstJoueurs().get(cpt).getPoint());
-            this.alPanelJoueur.get(cpt).setNbWagon(this.ctrl.getLstJoueurs().get(cpt).getNbWagon());
-            this.alPanelJoueur.get(cpt).setlNbCarteObjectif(this.ctrl.getLstJoueurs().get(cpt).getCartesObjectif().size());
-            this.alPanelJoueur.get(cpt).setNbCarteVehicule(this.ctrl.getLstJoueurs().get(cpt).getCartesVehicule().size());
+            this.alPanelJoueur.get(cpt).setPoint(this.ctrl.getMetier().getLstJoueurs().get(cpt).getPoint());
+            this.alPanelJoueur.get(cpt).setNbWagon(this.ctrl.getMetier().getLstJoueurs().get(cpt).getNbWagon());
+            this.alPanelJoueur.get(cpt).setlNbCarteObjectif(this.ctrl.getMetier().getLstJoueurs().get(cpt).getCartesObjectif().size());
+            this.alPanelJoueur.get(cpt).setNbCarteVehicule(this.ctrl.getMetier().getLstJoueurs().get(cpt).getCartesVehicule().size());
         }
     }
 

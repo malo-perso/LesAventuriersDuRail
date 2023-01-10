@@ -167,6 +167,10 @@ public class FramePrincipale extends JFrame implements ActionListener {
         JOptionPane.showMessageDialog(null, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
     }
 
+    public void afficherMsgInfo(String msg){
+        JOptionPane.showMessageDialog(null, msg, "Information", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.menuRegles){
             try{
@@ -174,7 +178,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
             }catch(Exception erreur){erreur.printStackTrace();}
         }
         if(e.getSource() == this.menuFinDePartie)
-            this.ctrl.finDePartie();
+            this.ctrl.getMetier().finDePartie();
     }
     
 }

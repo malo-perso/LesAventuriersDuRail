@@ -293,7 +293,7 @@ public class PanelPlateau extends JPanel {
                         PanelPlateau.this.noeudSelectionne2 = sourisSurNoeud(e.getX(), e.getY());
                         if (PanelPlateau.this.noeudSelectionne1 != PanelPlateau.this.noeudSelectionne2) {
 
-                            PanelPlateau.this.ctrl.verifAreteSelect(noeudSelectionne1, noeudSelectionne2);
+                            PanelPlateau.this.ctrl.getMetier().verifAreteSelect(noeudSelectionne1, noeudSelectionne2);
                             //    JOptionPane.showMessageDialog(null, "Vous ne pouvez pas prendre cette arete", "Erreur", JOptionPane.ERROR_MESSAGE);
 
                             PanelPlateau.this.noeudSelectionne1 = null;

@@ -55,8 +55,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.setLayout(new BorderLayout());
         this.setBackground(Color.PINK);
 
-        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
-        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
+        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getJoueurCourant().getCartesObjectif());
+        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getMetier().getJoueurCourant().getCartesVehicule());
 
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
@@ -159,17 +159,17 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     
     public void majIHM() {
         
-        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getJoueurCourant().getCartesVehicule());
+        this.lstCarteVehicule = new ArrayList<CarteVehicule>(this.ctrl.getMetier().getJoueurCourant().getCartesVehicule());
         //System.out.println(this.ctrl.getJoueurCourant().getCartesVehicule().size());
-        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getJoueurCourant().getCartesObjectif());
+        this.lstCarteObjectif = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getJoueurCourant().getCartesObjectif());
         this.btnCarteVehicule = new JButton[this.lstCarteVehicule.size()];
         this.btnCarteObjectif = new JButton[this.lstCarteObjectif.size()];
 
         Collections.sort(this.lstCarteVehicule);
 
-        this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
-        this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
-        this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
+        this.btnPerso.setText(this.ctrl.getMetier().getJoueurCourant().getNom());
+        this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getMetier().getJoueurCourant().getNbWagon());
+        this.lblNbPoints.setText("Nb Points : "+this.ctrl.getMetier().getJoueurCourant().getPoint());
 
         this.panelCarteCoul.removeAll();
 

@@ -89,16 +89,16 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		}
 
 		if (e.getSource() == this.btnAjouterJoueur ){
-			if (this.c != null && !this.txtNomJoueur.getText().equals("") && this.ctrl.getLstJoueurs().size()<this.ctrl.getMetier().getNbrJoueurMaximum()){
+			if (this.c != null && !this.txtNomJoueur.getText().equals("") && this.ctrl.getMetier().getLstJoueurs().size()<this.ctrl.getMetier().getNbrJoueurMaximum()){
 				boolean joueurExistePas = true;
 
-				for(Joueur j : this.ctrl.getLstJoueurs()){
+				for(Joueur j : this.ctrl.getMetier().getLstJoueurs()){
 					if(j.getNom().equals(this.txtNomJoueur.getText()) || j.getCouleur().getRGB() == this.c.getRGB()) joueurExistePas=false;
 				}
 
 				if(joueurExistePas){
 					this.ctrl.getMetier().ajouterJoueur(this.txtNomJoueur.getText(), this.c.getRGB());
-					this.majTable(this.ctrl.getLstJoueurs());
+					this.majTable(this.ctrl.getMetier().getLstJoueurs());
 					this.txtNomJoueur.setText("");
 					this.c = null;
 				}
@@ -107,13 +107,13 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		
 		if(e.getSource() == this.btnSupprJoueur){
 			if (this.tabJoueur.getSelectedRow() >=0 ){
-				this.ctrl.supprimerJoueur(this.ctrl.getLstJoueurs().get(this.tabJoueur.getSelectedRow()));
+				this.ctrl.supprimerJoueur(this.ctrl.getMetier().getLstJoueurs().get(this.tabJoueur.getSelectedRow()));
 			}
 		}
 
 		if(e.getSource() == this.btnRetour){
 			this.ctrl.resetMetier();
-			this.majTable(this.ctrl.getLstJoueurs());
+			this.majTable(this.ctrl.getMetier().getLstJoueurs());
 			this.ctrl.getIHMAcceuil().changePanel("panelJeu");
 
 		}

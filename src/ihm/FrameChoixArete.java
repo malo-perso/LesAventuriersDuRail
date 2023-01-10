@@ -77,7 +77,7 @@ public class FrameChoixArete extends JFrame implements ActionListener {
         if (e.getSource() == this.btnValider) {
             for (int i = 0; i < this.lstCBArete.size(); i++) {
                 if (this.lstCBArete.get(i).isSelected()) {
-                    ctrl.verifAreteMulti(lstArete.get(i));
+                    ctrl.getMetier().verifAreteMulti(lstArete.get(i));
                     this.dispose();
                 }
             }

@@ -83,7 +83,7 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
         if (e.getSource() == this.btnValider) {
             for (int i = 0; i < this.lstCBTypeWagon.size(); i++) {
                 if (this.lstCBTypeWagon.get(i).isSelected()) {
-                    this.ctrl.verifAreteWagon(this.areteSelect, this.lstTypeJoueur.get(i));
+                    this.ctrl.getMetier().verifAreteWagon(this.areteSelect, this.lstTypeJoueur.get(i));
                     this.dispose();
                 }
             }
