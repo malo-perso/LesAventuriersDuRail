@@ -5,15 +5,9 @@ import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.plaf.DimensionUIResource;
-import javax.swing.text.AttributeSet.FontAttribute;
-
-import src.Controleur;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -38,14 +32,12 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
     private List<CarteVehicule> lstCarteVehicule;
     private ArrayList<CarteObjectif> lstCarteObjectif;
-    private ArrayList<Integer> carteObjectifChoisie;
-    private CarteVehicule[] carteVehiculeMainJoueur;
     private JButton[] btnCarteVehicule;
     private JButton[] btnCarteObjectif;
     
 
 
-    private ImageIcon imgPara,imgObjectif,imgPlateau;;
+    private ImageIcon imgPara,imgPlateau;;
 
     private Image img2;
 
@@ -69,7 +61,6 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
 
         this.imgPara = new ImageIcon("./src/data/images/Engrennage.jpg");
-        this.imgObjectif = new ImageIcon("./src/data/images/map.jpg");
         this.imgPlateau = new ImageIcon(this.ctrl.getImagePlateau());
         this.img2 = imgPlateau.getImage().getScaledInstance(280, 180, Image.SCALE_SMOOTH);
 

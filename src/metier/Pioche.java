@@ -1,15 +1,10 @@
 package src.metier;
 
-import java.awt.Color;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import src.Controleur;
-import src.metier.CarteObjectif;
-import src.metier.CarteVehicule;
-import src.metier.Type;
 
 public class Pioche {
     
@@ -168,13 +163,8 @@ public class Pioche {
      * @param intCarte
      */
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
-        for (int i = 0; i < intCarte.size(); i++) {
-            if(this.lstCartesObjectif.size()==2 && i != 0)
-                i--;
-            if (this.lstCartesObjectif.size() > i){
-                CarteObjectif remove = this.lstCartesObjectif.remove(i);
-                joueur.ajouterCarteObjectif(remove);
-            }
+        for (int i = intCarte.size() - 1; i >=0; i--) {
+            joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(i));
         }     
     }
 

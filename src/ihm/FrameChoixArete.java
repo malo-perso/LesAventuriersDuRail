@@ -1,7 +1,6 @@
 package src.ihm;
 
 import src.Controleur;
-import src.metier.Type;
 import src.metier.Arete;
 
 import javax.swing.*;
@@ -10,7 +9,6 @@ import java.awt.event.*;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FrameChoixArete extends JFrame implements ActionListener {
 

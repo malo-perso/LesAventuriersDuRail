@@ -1,6 +1,5 @@
 package src.metier;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -107,7 +106,6 @@ public class CalculPoint {
      */
     public static Vector<Integer> constructionCheminh(int u,int v,int[][] matriceTrajet,int[][] parcours){
 
-        int distance = 0;
         if (parcours[u][v] == -1)
             return null;
     
@@ -116,7 +114,6 @@ public class CalculPoint {
         
         while (u != v)
         {
-            distance += matriceTrajet[u][parcours[u][v]];
             u = parcours[u][v];
             path.add(u);
         }
