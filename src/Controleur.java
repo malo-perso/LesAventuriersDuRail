@@ -159,7 +159,7 @@ public class Controleur {
         if(this.nbAction/this.metier.getLstJoueurs().size()<1){
             this.ihm.desactiver();
 
-            this.getPioche().piocherObjectif();
+            this.piocherObjectif();
             this.frameAfficheCarteObjectif.setVisible(true);
         }
     }

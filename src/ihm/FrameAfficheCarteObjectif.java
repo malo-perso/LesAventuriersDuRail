@@ -44,8 +44,9 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.metier = new Metier(this.ctrl);
         this.setTitle("Selection Carte Objectif");
         this.setSize(945,300);
-        this.setLocationRelativeTo(null);;
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         this.panelBase = new JPanel(new BorderLayout());
@@ -211,7 +212,6 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
                     this.ctrl.piocherObjectif(this.carteChoisie);
-                    System.out.println(this.carteChoisie);
                 }
             }else{
                 if(carteChoisie.size() == 0){
@@ -222,7 +222,6 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
                     this.ctrl.piocherObjectif(this.carteChoisie);    
-                    System.out.println(this.carteChoisie);
                 }
             }
         }
