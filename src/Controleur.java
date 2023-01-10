@@ -41,6 +41,7 @@ public class Controleur {
     }
 
     public void initPartie(){
+        this.ihmAcceuil.dispose();
         this.ihm = new FramePrincipale(this);
         this.setImagePlateau(this.imagePlateau);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
@@ -90,8 +91,8 @@ public class Controleur {
         this.ihm.majPioche();
     }
 
-    public void creerFrameFinPartie(){
-        FrameFinPartie frameFinPartie = new FrameFinPartie(this);
+    public void creerFrameFinPartie(String nomGagnant){
+        FrameFinPartie frameFinPartie = new FrameFinPartie(this, nomGagnant);
         frameFinPartie.setVisible(true);
     }
 

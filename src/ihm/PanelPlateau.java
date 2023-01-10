@@ -26,13 +26,16 @@ public class PanelPlateau extends JPanel {
     private Noeud noeudSelectionne1;
     private Noeud noeudSelectionne2;
     private Image reticule;
+    private GererSouris gereSouris;
 
     PanelPlateau(Controleur ctrl) {
 
         this.ctrl = ctrl;
 
+        this.gereSouris = new GererSouris();
+
         this.setPreferredSize(new Dimension(1571,918));
-        this.addMouseListener(new GererSouris());
+        this.addMouseListener(this.gereSouris);
 
         this.noeudSelectionne1 = null;
         this.noeudSelectionne2 = null;
@@ -269,10 +272,12 @@ public class PanelPlateau extends JPanel {
 	}
 
     public void setInutilisable(){
+        removeMouseListener(this.gereSouris);
         this.setEnabled(false);
     }
 
     public void setUtilisable(){
+        addMouseListener(this.gereSouris);
         this.setEnabled(true);
     }
 
@@ -283,7 +288,7 @@ public class PanelPlateau extends JPanel {
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
-		super.paintComponent(g);
+        super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, 1200 , 800 , this);

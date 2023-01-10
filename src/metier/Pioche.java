@@ -54,13 +54,24 @@ public class Pioche {
 
         int nbJoker = 0;
         for (int i = 0; i < 5; i++) {
-            if (piocheVehiculeVisible[i].getType().getColor().equals(this.ctrl.getMetier().getCouleurJoker()))
-                nbJoker++;
+            if (i < this.lstCartesVehicule.size()){
+                if (piocheVehiculeVisible[i].getType().getColor().equals(this.ctrl.getMetier().getCouleurJoker()))
+                    nbJoker++;
+            }
         }
 
         if (nbJoker >= 3 && this.lstCartesVehicule.size() > 5) {
-            if (this.ctrl.getIHM() != null) {
-                this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
+            int nbJokerCarte = 0;
+            for (CarteVehicule carteVehicule : this.lstCartesVehicule) {
+                if (carteVehicule.getType().getColor().equals(this.ctrl.getMetier().getCouleurJoker()))
+                    nbJokerCarte++;
+            }
+            // if (this.ctrl.getIHM() != null) {
+            //     this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
+            // }
+
+            if (nbJokerCarte>this.lstCartesVehicule.size()-3){
+                return piocheVehiculeVisible;
             }
             Collections.shuffle(this.lstCartesVehicule);
             return this.majPiocheVehiculeVisible();
@@ -124,10 +135,17 @@ public class Pioche {
      * @return CarteVehicule
      */
     public CarteVehicule piocherVehicule(int i) {
-        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
-            CarteVehicule carteVehi = this.retirerCarteVehicule(i);
-            this.ctrl.majPioche();
-            return carteVehi;
+        if (i >= 0 && i < 7 && i <= this.lstCartesVehicule.size()) {
+            if (i == 6){
+                CarteVehicule carteVehi = this.retirerCarteVehicule(i-1);
+                this.ctrl.majPioche();
+                return carteVehi;
+            }else{
+                CarteVehicule carteVehi = this.retirerCarteVehicule(i);
+                this.ctrl.majPioche();
+                return carteVehi;
+            }
+            
         }
         this.ctrl.majPioche();
         return null;
@@ -174,6 +192,7 @@ public class Pioche {
      */
     public void ajouterCartePioche(List<CarteVehicule> cateDefausse) {
         this.lstCartesVehicule.addAll(cateDefausse);
+        this.ctrl.majPioche();
     }
     
 }

@@ -27,7 +27,9 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 	private JPanel panelGrilleResultat;
 	private JPanel panelBase;
 
-	public FrameFinPartie(Controleur ctrl){
+	private String nomGagnant;
+
+	public FrameFinPartie(Controleur ctrl, String nomGagnant){
 		this.setTitle("Fin de partie");
 		this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
@@ -38,18 +40,29 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 		this.ctrl = ctrl;
 		this.panelEnTete = new JPanel();
-		this.panelGrilleResultat = new JPanel();
+		this.panelGrilleResultat = new JPanel(new BorderLayout());
 		this.panelBase = new JPanel();
+		
+		this.lstJoueurs = this.ctrl.getMetier().getLstJoueurs();
 
-		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Pseudo", "Couleur","Score", "Nb Wagons", "Objectifs ✓"}, 5);
+		System.out.println("Taille lstJoueurs : " + this.lstJoueurs.size());
+
+		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Pseudo", "Couleur","Score", "Nb Wagons", "Objectifs ✓"},0){
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			};
+		};
 
 		this.tabResultats = new JTable(this.modelResultats);
 		this.tabResultats.setFillsViewportHeight(true);
 		this.tabResultats.setEnabled(true);
 
-		this.lstJoueurs = this.ctrl.getMetier().getLstJoueurs();
-
 		this.btnQuitter = new JButton("Quitter");
+
+		if(nomGagnant != null)
+			this.nomGagnant = nomGagnant + " ";
+		else
+			this.nomGagnant = "Personne n'";
 
 		Collections.sort(this.lstJoueurs);
 		//Création des layout et placements des éléments
@@ -86,8 +99,10 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 		this.btnQuitter.addActionListener(this);
 
-		this.panelEnTete.add(this.tabResultats.getTableHeader(), BorderLayout.NORTH);
+		this.panelEnTete.add(new JLabel("Le gagnant est "+ this.lstJoueurs.get(0).getNom(), SwingConstants.CENTER), BorderLayout.CENTER);
+		this.panelGrilleResultat.add(this.tabResultats.getTableHeader(), BorderLayout.NORTH);
 		this.panelGrilleResultat.add(this.tabResultats, BorderLayout.CENTER);
+		this.panelGrilleResultat.add(new JLabel(this.nomGagnant + "a le chemin le plus long", SwingConstants.CENTER), BorderLayout.SOUTH);
 		this.add(this.panelEnTete, BorderLayout.NORTH);
 		this.add(this.panelGrilleResultat, BorderLayout.CENTER);
 		this.add(this.panelBase, BorderLayout.SOUTH);

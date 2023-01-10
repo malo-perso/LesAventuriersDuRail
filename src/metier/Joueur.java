@@ -197,7 +197,7 @@ public class Joueur implements Comparable<Joueur>{
      */
     @Override
     public int compareTo(Joueur autreJoueur) {
-        return this.nbPoint - autreJoueur.nbPoint;
+        return Math.abs(this.nbPoint) - Math.abs(autreJoueur.nbPoint);
     }
 
 }

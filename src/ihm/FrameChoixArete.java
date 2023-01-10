@@ -32,9 +32,9 @@ public class FrameChoixArete extends JFrame implements ActionListener {
 
         // création des composants
         this.ctrl = ctrl;
-        this.panelHaut = new JPanel();
-        this.panelBas = new JPanel();
-        this.bg = new ButtonGroup();
+        this.panelHaut  = new JPanel();
+        this.panelBas   = new JPanel();
+        this.bg         = new ButtonGroup();
         this.btnValider = new JButton("Valider");
 
 

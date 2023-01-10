@@ -17,7 +17,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
     private JPanel panelCB;
     private JPanel panelValidation;
 
-    private JButton btnValider;
+    private JButton   btnValider;
     private JButton[] btnCarteObjectif;
 
     private JCheckBox cbCarte1;
@@ -40,19 +40,19 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.setAlwaysOnTop(true);
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
-        this.panelBase = new JPanel(new BorderLayout());
+        this.panelBase     = new JPanel(new BorderLayout());
         this.panelObjectif = new JPanel(new GridLayout(1,3, 5, 0));
-        this.panelCB = new JPanel(new GridLayout(1,3));
+        this.panelCB       = new JPanel(new GridLayout(1,3));
         this.panelValidation = new JPanel(new GridLayout(1,3));
 
-        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
+        this.lstCartePioche    = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getLstCarteObjectifs());
         
         this.icon1 = new ImageIcon(this.ctrl.getImagePlateau());
-        this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
+        this.img1  = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
 
         this.btnCarteObjectif = new JButton[3];
-        this.carteChoisie = new ArrayList<Integer>();
+        this.carteChoisie     = new ArrayList<Integer>();
 
         this.panelObjectif.removeAll();
 
@@ -258,7 +258,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
     }
 
     public void majIHM(){
-        this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
+        this.lstCartePioche    = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getPioche().piocherObjectif());
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getMetier().getLstCarteObjectifs());
 
         this.btnCarteObjectif = new JButton[3];
