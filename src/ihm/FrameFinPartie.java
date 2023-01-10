@@ -23,21 +23,25 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 	private JTable tabResultats;
 	private List<Joueur> lstJoueurs;
 	private JButton btnQuitter;
+	private JPanel panelEnTete;
 	private JPanel panelGrilleResultat;
 	private JPanel panelBase;
 
 	public FrameFinPartie(Controleur ctrl){
 		this.setTitle("Fin de partie");
 		this.setLayout(new BorderLayout());
-		this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(500,500);
+		this.setSize(800,500);
+		this.setResizable(false);
+
 
 		this.ctrl = ctrl;
+		this.panelEnTete = new JPanel();
 		this.panelGrilleResultat = new JPanel();
 		this.panelBase = new JPanel();
 
-		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Nom", "Points", "Nb wagons", "Nb objectifs"}, 5);
+		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Pseudo", "Couleur","Score", "Nb Wagons", "Objectifs ✓"}, 5);
 
 		this.tabResultats = new JTable(this.modelResultats);
 		this.tabResultats.setFillsViewportHeight(true);
@@ -82,8 +86,9 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 
 		this.btnQuitter.addActionListener(this);
 
-		this.panelGrilleResultat.add(this.tabResultats.getTableHeader(), BorderLayout.NORTH);
+		this.panelEnTete.add(this.tabResultats.getTableHeader(), BorderLayout.NORTH);
 		this.panelGrilleResultat.add(this.tabResultats, BorderLayout.CENTER);
+		this.add(this.panelEnTete, BorderLayout.NORTH);
 		this.add(this.panelGrilleResultat, BorderLayout.CENTER);
 		this.add(this.panelBase, BorderLayout.SOUTH);
 		this.setVisible(true);
