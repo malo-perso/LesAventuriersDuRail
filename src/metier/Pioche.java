@@ -51,8 +51,10 @@ public class Pioche {
                 nbJoker++;
         }
 
-        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3 && this.ctrl.getIHM() != null) {
-            this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
+        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3) {
+            if (this.ctrl.getIHM() != null) {
+                this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
+            }
             Collections.shuffle(this.lstCartesVehicule);
             return this.majPiocheVehiculeVisible();
         }
