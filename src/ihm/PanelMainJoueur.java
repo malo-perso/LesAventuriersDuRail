@@ -42,6 +42,8 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     private CarteVehicule[] carteVehiculeMainJoueur;
     private JButton[] btnCarteVehicule;
     private JButton[] btnCarteObjectif;
+    
+
 
     private ImageIcon imgPara,imgObjectif,imgPlateau;;
 
@@ -167,7 +169,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         Collections.sort(this.lstCarteVehicule);
 
-        this.btnPerso.setText(this.ctrl.getMetier().getJoueurCourant().getNom());
+        this.lblPerso.setText(this.ctrl.getMetier().getJoueurCourant().getNom());
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getMetier().getJoueurCourant().getNbWagon());
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getMetier().getJoueurCourant().getPoint());
 
