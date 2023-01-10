@@ -151,7 +151,6 @@ public class CalculPoint {
      */
     public static int cheminLePlusLong(List<Arete> aretes, List<Noeud> noeuds,Joueur joueur)
     {
-        //16 21 
         int max = 0;
         int longueur = 0;
         int[][] matriceTrajet = matriceTrajet(noeuds,aretes,joueur);
@@ -168,8 +167,5 @@ public class CalculPoint {
         
         return max;
     }
-
-
-
 
 }
