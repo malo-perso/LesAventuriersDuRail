@@ -100,7 +100,9 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener, Mou
 		}
 
 		if (e.getSource() == this.btnAjouterJoueur ){
-			if (this.c != null && !this.txtNomJoueur.getText().equals("") && this.ctrl.getMetier().getLstJoueurs().size()<this.ctrl.getMetier().getNbrJoueurMaximum()){
+			if (this.c != null && !this.txtNomJoueur.getText().equals("") && 
+			    !this.txtNomJoueur.getText().equals("Nom du joueur") &&
+			    this.ctrl.getMetier().getLstJoueurs().size()<this.ctrl.getMetier().getNbrJoueurMaximum()){
 				boolean joueurExistePas = true;
 
 				for(Joueur j : this.ctrl.getMetier().getLstJoueurs()){
