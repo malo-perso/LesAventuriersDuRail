@@ -8,10 +8,19 @@ public class CarteVehicule implements Comparable<CarteVehicule>{
         this.type = type;
     }
 
+    
+    /** 
+     * @return Type
+     */
     public Type getType() {
         return this.type;
     }
 
+    
+    /** 
+     * @param o
+     * @return int
+     */
     @Override
     public int compareTo(CarteVehicule o) {
         if( this.getType().getColor() == null){

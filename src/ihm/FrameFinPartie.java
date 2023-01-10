@@ -94,7 +94,11 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 		this.setVisible(true);
 	}
 
-	@Override
+	
+    /** 
+     * @param e
+     */
+    @Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnQuitter){
 			this.ctrl.dispose();

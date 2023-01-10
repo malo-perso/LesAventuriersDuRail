@@ -8,6 +8,14 @@ public class CalculPoint {
     
     private static int INF = (int) 1e7;
 
+    
+    /** 
+     * @param aretes
+     * @param noeuds
+     * @param joueur
+     * @param carteObjectif
+     * @return boolean
+     */
     public static boolean aReussitDestination(List<Arete> aretes, List<Noeud> noeuds,Joueur joueur, CarteObjectif carteObjectif) {
         int[][] matriceTrajet = matriceTrajet(noeuds,aretes,joueur);
         int[][] parcours = initParcours(noeuds, matriceTrajet);
@@ -21,6 +29,13 @@ public class CalculPoint {
             return true;
     }
 
+     
+     /** 
+      * @param noeuds
+      * @param aretes
+      * @param joueur
+      * @return int[][]
+      */
      public static int[][] matriceTrajet(List<Noeud> noeuds,List<Arete> aretes,Joueur joueur) {
         int[][] matrixe = new int[noeuds.size()][noeuds.size()];
         for (int i = 0; i < matrixe.length; i++) {
@@ -38,6 +53,12 @@ public class CalculPoint {
         return matrixe;
     }
 
+    
+    /** 
+     * @param noeuds
+     * @param matriceTrajet
+     * @return int[][]
+     */
     public static int[][] initParcours(List<Noeud> noeuds,int[][] matriceTrajet)
     {
         int [][] parcours = new int [noeuds.size()][noeuds.size()];
@@ -52,6 +73,12 @@ public class CalculPoint {
         return parcours;
     }
 
+    
+    /** 
+     * @param noeuds
+     * @param matriceTrajet
+     * @param parcours
+     */
     public static void floydWarshall(List<Noeud> noeuds,int[][] matriceTrajet,int[][] parcours)
     {
         int V=noeuds.size();
@@ -70,6 +97,14 @@ public class CalculPoint {
                 }
     }
 
+    
+    /** 
+     * @param u
+     * @param v
+     * @param matriceTrajet
+     * @param parcours
+     * @return Vector<Integer>
+     */
     public static Vector<Integer> constructionCheminh(int u,int v,int[][] matriceTrajet,int[][] parcours){
 
         int distance = 0;
@@ -88,6 +123,14 @@ public class CalculPoint {
         return path;
     }
 
+    
+    /** 
+     * @param u
+     * @param v
+     * @param matriceTrajet
+     * @param parcours
+     * @return int
+     */
     public static int longueurCheminh(int u,int v,int[][] matriceTrajet,int[][] parcours){
 
         int distance = 0;
@@ -102,6 +145,13 @@ public class CalculPoint {
         return distance;
     }
 
+    
+    /** 
+     * @param aretes
+     * @param noeuds
+     * @param joueur
+     * @return int
+     */
     public static int cheminLePlusLong(List<Arete> aretes, List<Noeud> noeuds,Joueur joueur)
     {
         //16 21 

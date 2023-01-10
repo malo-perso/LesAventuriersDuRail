@@ -27,6 +27,12 @@ public class GrillesJoueurModel extends AbstractTableModel {
 	public int    getRowCount   ()                 { return this.lstJoueur.size(); }
 	public String getColumnName (int col)          { return this.tabEntetes[col];  }
     
+    
+    /** 
+     * @param row
+     * @param col
+     * @return Object
+     */
     @Override
     public Object getValueAt(int row, int col) {
 
@@ -38,22 +44,43 @@ public class GrillesJoueurModel extends AbstractTableModel {
         
     }
 
+    
+    /** 
+     * @param rowIndex
+     * @param columnIndex
+     * @return Color
+     */
     public Color couleurBackground(int rowIndex, int columnIndex) 
     {
         return this.lstJoueur.get(rowIndex).getCouleur();
     }
 
+    
+    /** 
+     * @param columnIndex
+     * @return Class<?>
+     */
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
         return getValueAt(0, columnIndex).getClass();
     }
 
+    
+    /** 
+     * @param lstJoueur
+     */
     public void majTable(List<Joueur> lstJoueur) {
         this.lstJoueur = lstJoueur;
         this.fireTableDataChanged();
     }
 
+    
+    /** 
+     * @param value
+     * @param row
+     * @param col
+     */
     public void setValueAt(Object value, int row, int col) {
         switch(col){
             case 0 : this.lstJoueur.get(row).setNomJoueur((String)value);break;

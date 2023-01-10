@@ -78,14 +78,22 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener, Mou
 		this.add(this.panelBoutonSuivant, BorderLayout.SOUTH);
 	}
 
-	public void majTable(List<Joueur> lstJoueur){
+	
+    /** 
+     * @param lstJoueur
+     */
+    public void majTable(List<Joueur> lstJoueur){
 		this.model.majTable(lstJoueur);
 		this.txtNomJoueur.setText("Nom du joueur");
 		this.txtNomJoueur.setEditable(true);
 		this.btnCouleurJoueur.setBackground(null);
 	}
 
-	public void actionPerformed(ActionEvent e){
+	
+    /** 
+     * @param e
+     */
+    public void actionPerformed(ActionEvent e){
 		if(e.getSource() == this.btnCouleurJoueur){
 			this.c = JColorChooser.showDialog(this, "Choisissez une couleur", this.btnCouleurJoueur.getBackground());
 			this.btnCouleurJoueur.setBackground(c);
@@ -137,7 +145,11 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener, Mou
 		}
 	}
 
-	@Override
+	
+    /** 
+     * @param e
+     */
+    @Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == this.txtNomJoueur){	
 			this.txtNomJoueur.setEditable(true);
@@ -145,25 +157,41 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener, Mou
 		}
 	}
 
-	@Override
+	
+    /** 
+     * @param arg0
+     */
+    @Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
+    /** 
+     * @param arg0
+     */
+    @Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
+    /** 
+     * @param arg0
+     */
+    @Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
+	
+    /** 
+     * @param arg0
+     */
+    @Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		

@@ -51,6 +51,10 @@ public class PanelAcceuil extends JPanel implements ActionListener{
         System.out.println("PanelAcceuil");
     }
     
+    
+    /** 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if ( e.getSource() == this.btnJouer ) {

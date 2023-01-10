@@ -56,22 +56,42 @@ public class Controleur {
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
     }
     
+    
+    /** 
+     * @return FramePrincipale
+     */
     public FramePrincipale getIHM(){
         return this.ihm;
     }
 
+    
+    /** 
+     * @return FrameAfficheCarteObjectif
+     */
     public FrameAfficheCarteObjectif getFrameAfficheCarteObjectif(){
         return this.frameAfficheCarteObjectif;
     }
 
+    
+    /** 
+     * @return Metier
+     */
     public Metier getMetier(){
         return this.metier;
     }
 
+    
+    /** 
+     * @return FrameAcceuil
+     */
     public FrameAcceuil getIHMAcceuil(){
         return this.ihmAcceuil;
     }
 
+    
+    /** 
+     * @return ArrayList<Integer>
+     */
     public ArrayList<Integer> getCarteobjectifChoisie(){
         return this.frameAfficheCarteObjectif.getCarteObjectifChoisie();
     }
@@ -85,10 +105,18 @@ public class Controleur {
         frameFinPartie.setVisible(true);
     }
 
+    
+    /** 
+     * @param lstArete
+     */
     public void creerFrameChoixArete(ArrayList<Arete> lstArete){
         FrameChoixArete frameChoixArete = new FrameChoixArete(this, lstArete);
     }
 
+    
+    /** 
+     * @param arete
+     */
     public void creerFrameChoixWagon(Arete arete) {
         new FrameChoixWagon(this, arete, this.metier.getJoueurCourant().getListType());
     }
@@ -99,20 +127,37 @@ public class Controleur {
         this.frameAfficheCarteObjectif.majIHM();
     }
 
+    
+    /** 
+     * @param image
+     */
     public void setImagePlateau(BufferedImage image) {
         this.imagePlateau = image;
     }
 
+    
+    /** 
+     * @param nom
+     * @param RGB
+     */
     public void ajouterJoueur(String nom, int RGB){
         this.metier.ajouterJoueur(nom, RGB);
         this.ihmAcceuil.MAJjoueur();
     }
 
+    
+    /** 
+     * @param joueur
+     */
     public void supprimerJoueur(Joueur joueur){
         this.metier.supprimerJoueur(joueur);
         this.ihmAcceuil.MAJjoueur();
     }
 
+    
+    /** 
+     * @return BufferedImage
+     */
     public BufferedImage getImagePlateau() {
 		return this.imagePlateau;
 	}
@@ -123,6 +168,10 @@ public class Controleur {
         this.ihmAcceuil.dispose();
     }
     
+    
+    /** 
+     * @param args
+     */
     public static void main (String[] args) {
         FlatLightLaf.setup();
         Controleur ctrl = new Controleur();

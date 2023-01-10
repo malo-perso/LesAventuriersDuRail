@@ -17,6 +17,16 @@ public class ColorCellRenderer extends DefaultTableCellRenderer {
         this.setOpaque(true);
     }
 
+    
+    /** 
+     * @param table
+     * @param value
+     * @param isSelected
+     * @param hasFocus
+     * @param row
+     * @param column
+     * @return Component
+     */
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {
         GrillesJoueurModel model = (GrillesJoueurModel) table.getModel();
