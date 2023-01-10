@@ -41,6 +41,7 @@ public class Controleur {
     }
 
     public void initPartie(){
+        this.ihmAcceuil.dispose();
         this.ihm = new FramePrincipale(this);
         this.setImagePlateau(this.imagePlateau);
         this.frameAfficheCarteObjectif = new FrameAfficheCarteObjectif(this);
