@@ -305,6 +305,10 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.panelObjectif.revalidate();
     }
 
+    
+    /** 
+     * @return ArrayList<Integer>
+     */
     public ArrayList<Integer> getCarteObjectifChoisie(){
         return this.carteChoisie;
     }

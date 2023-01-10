@@ -14,27 +14,51 @@ public class CarteObjectif {
         this.estReussi = false;
     }
 
+    
+    /** 
+     * @return Noeud
+     */
     public Noeud getNoeud1() {
         return this.noeud1;
     }
 
+    
+    /** 
+     * @return Noeud
+     */
     public Noeud getNoeud2() {
         return this.noeud2;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getPoints() {
         return this.points;
     }
 
+    
+    /** 
+     * @return boolean
+     */
     public boolean getEstReussi() {
         return this.estReussi;
     }
 
+    
+    /** 
+     * @param estReussi
+     */
     public void setEstReussi(boolean estReussi) {
         this.estReussi = estReussi;
     }
 
 
+    
+    /** 
+     * @return String
+     */
     public String toString(){
         return "Carte Objectif : " + this.noeud1.getNom() + " - " + this.noeud2.getNom() + " (" + this.points + " points)";
     }

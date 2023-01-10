@@ -66,6 +66,10 @@ public class FrameChoixArete extends JFrame implements ActionListener {
         this.add(this.panelBas);
     }
 
+    
+    /** 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i < this.lstCBArete.size(); i++) {

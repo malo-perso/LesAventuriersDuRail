@@ -116,6 +116,11 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelPioche.majPiocheVehiculeVisible();
     }
 
+    
+    /** 
+     * @param nom
+     * @param tour
+     */
     public void afficherJoueur(String nom, int tour)
     {
         if( tour < 1 ){
@@ -133,6 +138,10 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelJoueurs.majPanelJoueur();
     }
 
+    
+    /** 
+     * @return PanelPioche
+     */
     public PanelPioche getPanelPioche() {
         return this.panelPioche;
     }
@@ -163,14 +172,26 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelPlateau.resetNoeudSelect();
     }
 
+    
+    /** 
+     * @param msg
+     */
     public void afficherMsgErreur(String msg){
         JOptionPane.showMessageDialog(null, msg, "Erreur", JOptionPane.ERROR_MESSAGE);
     }
 
+    
+    /** 
+     * @param msg
+     */
     public void afficherMsgInfo(String msg){
         JOptionPane.showMessageDialog(null, msg, "Information", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    
+    /** 
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.menuRegles){
             try{

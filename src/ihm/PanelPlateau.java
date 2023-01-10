@@ -50,7 +50,11 @@ public class PanelPlateau extends JPanel {
 		super.repaint();		
 	}
 	
-	public void paint(Graphics g) {
+	
+    /** 
+     * @param g
+     */
+    public void paint(Graphics g) {
 
         int longueurWagon = this.ctrl.getMetier().getLongueurVehicule();
         double espacementWagon = this.ctrl.getMetier().getEspacementVehicule();
@@ -159,6 +163,13 @@ public class PanelPlateau extends JPanel {
 
     }
 
+    
+    /** 
+     * @param nX
+     * @param nY
+     * @param teta
+     * @return double
+     */
     private double rotationX(double nX,double nY, double teta) {
         double xM = nX;
         double yM = nY;
@@ -167,6 +178,13 @@ public class PanelPlateau extends JPanel {
         return x;
     }
     
+    
+    /** 
+     * @param nX
+     * @param nY
+     * @param teta
+     * @return double
+     */
     private double rotationY(double nX,double nY, double teta) {
         double xM = nX;
         double yM = nY;
@@ -175,6 +193,17 @@ public class PanelPlateau extends JPanel {
         return y;
     }
 
+    
+    /** 
+     * @param aX
+     * @param aY
+     * @param bX
+     * @param bY
+     * @param nbWagon
+     * @param g1
+     * @param color
+     * @param proprietaire
+     */
     private void tracerWagon(double aX, double aY, double bX, double bY, int nbWagon, Graphics2D g1,Color color, Joueur proprietaire) {
 
         int hauteurWagon = this.ctrl.getMetier().getHauteurVehicule();
@@ -251,6 +280,10 @@ public class PanelPlateau extends JPanel {
         this.setEnabled(true);
     }
 
+    
+    /** 
+     * @param g
+     */
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
@@ -265,6 +298,12 @@ public class PanelPlateau extends JPanel {
         this.noeudSelectionne2 = null;
     }
 
+    
+    /** 
+     * @param x
+     * @param y
+     * @return Noeud
+     */
     public Noeud sourisSurNoeud(int x, int y){
         int diametre = this.ctrl.getMetier().getDiametre();
 		for (Noeud n : this.ctrl.getMetier().getLstNoeuds())

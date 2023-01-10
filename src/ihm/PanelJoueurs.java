@@ -148,6 +148,13 @@ public class PanelJoueurs extends JPanel{
         }
     }
 
+    
+    /** 
+     * @param image
+     * @param target
+     * @param preferred
+     * @return BufferedImage
+     */
     public static BufferedImage replace(BufferedImage image, int target, int preferred) {
         int width = image.getWidth();
         int height = image.getHeight();

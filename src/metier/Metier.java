@@ -91,95 +91,187 @@ public class Metier {
 
     }
     
+    
+    /** 
+     * @return List<Joueur>
+     */
     public List<Joueur> getLstJoueurs() {
         return this.lstJoueurs;
     }
 
+    
+    /** 
+     * @return Pioche
+     */
     public Pioche getPioche() {
         return this.pioche;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getDiametre(){
         return this.DIAMETRE;
     }
 
+    
+    /** 
+     * @return double
+     */
     public double getEspacementVehicule() {
 		return this.espacementVehicule;
 	} 
     
+    
+    /** 
+     * @return int
+     */
     public int getNbrJoueurMinimum(){
         return this.nbrJoueurMinimum;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbrJoueurMaximum(){
         return this.nbrJoueurMaximum;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbrJoueurMinimumDoubleRoute(){
         return this.nbrJoueurMiniDoubleRoute;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbVehiculeJoueur(){
         return this.nbVehiculeJoueur;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbVehiculeFinPartie(){
         return this.nbVehiculeFinPartie;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbPointCheminLong(){
         return this.nbPointCheminLong;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getLongueurVehicule() {
         return this.longueurVehicule;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getHauteurVehicule() {
         return this.hauteurVehicule;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbJoker(){
         return this.nombreJoker;
     }
 
+    
+    /** 
+     * @return Color
+     */
     public Color getCouleurJoker(){
         return this.couleurJoker;
     }
 
+    
+    /** 
+     * @return Joueur
+     */
     public Joueur getDernierJoueur() {
         return this.dernierJoueur;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbWagon() {
         return this.nbWagon;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getActionEnCours() {
         return this.actionEnCours;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbAction() {
         return this.nbAction;
     }
 
+    
+    /** 
+     * @return Color
+     */
     public Color getColorSelect() {
         return this.colorSelect;
     }
 
+    
+    /** 
+     * @return int[]
+     */
     public int[] getGrillePoint() {
         return this.grillePoint;
     }
 
 
+    
+    /** 
+     * @return List<Noeud>
+     */
     public List<Noeud> getLstNoeuds(){
         return this.lstNoeuds;
     }
 
+    
+    /** 
+     * @return List<Arete>
+     */
     public List<Arete> getLstAretes(){
         return this.lstAretes;
     }
 
+    
+    /** 
+     * @return List<Type>
+     */
     public List<Type> getLstTypes(){
         ArrayList<Type> listeType = new ArrayList<Type>();
 		boolean trouve;
@@ -201,18 +293,34 @@ public class Metier {
 		return listeType;
     }
 
+    
+    /** 
+     * @return List<CarteVehicule>
+     */
     public List<CarteVehicule> getLstCarteVehicules(){
         return this.lstCarteVehicules;
     }
 
+    
+    /** 
+     * @return List<CarteObjectif>
+     */
     public List<CarteObjectif> getLstCarteObjectifs(){
         return this.lstCarteObjectifs;
     }
 
+    
+    /** 
+     * @return BufferedImage
+     */
     public BufferedImage getImage(){
         return this.bImage;
     }
 
+    
+    /** 
+     * @param joueur
+     */
     public void ajouterJoueur(Joueur joueur) {
         this.lstJoueurs.add(joueur);
     }
@@ -225,6 +333,11 @@ public class Metier {
         this.pioche.melangerCarteObjectif();
     }
 
+    
+    /** 
+     * @param joueur
+     * @return CarteObjectif[]
+     */
     public CarteObjectif[] PiocheCarteObjectif(Joueur joueur)
     {
         CarteObjectif[] cartes = new CarteObjectif[3];
@@ -238,12 +351,20 @@ public class Metier {
         return null;
     }
 
+    
+    /** 
+     * @return Boolean
+     */
     public Boolean areteDoubleActive(){
         if(this.lstJoueurs.size()> this.nbrJoueurMiniDoubleRoute)
             return true;
         return false;
     }
 
+    
+    /** 
+     * @return int[]
+     */
     public int[] generGrillePoint(){
         int longueurMax = 0;
         for (Arete arete : lstAretes) 
@@ -261,14 +382,28 @@ public class Metier {
         return grillePoint;
     }
 
+    
+    /** 
+     * @param joueur
+     * @return Boolean
+     */
     public Boolean PiocherCarteVehicule(Joueur joueur) {
         return false;
     }
 
+    
+    /** 
+     * @param nom
+     * @param RGB
+     */
     public void ajouterJoueur(String nom, int RGB) {
         this.lstJoueurs.add(new Joueur(nom, RGB, this.nbVehiculeJoueur));
     }
 
+    
+    /** 
+     * @param joueur
+     */
     public void supprimerJoueur(Joueur joueur){
         this.lstJoueurs.remove(joueur);
     }
@@ -293,6 +428,10 @@ public class Metier {
         this.bImage = null;
     }
 
+    
+    /** 
+     * @return Boolean
+     */
     public Boolean verifFinDePartie() {
         for (Joueur joueur : this.lstJoueurs) {
             if (joueur.getNbWagon() <= this.nbVehiculeFinPartie) {
@@ -312,6 +451,11 @@ public class Metier {
         return false;
     }
 
+    
+    /** 
+     * @param carteVehicule
+     * @return boolean
+     */
     public boolean verifCarteJoker(CarteVehicule carteVehicule) {
         if(carteVehicule.getType().getColor().equals(this.couleurJoker)){
             return true;
@@ -319,6 +463,11 @@ public class Metier {
         return false;
     }
 
+    
+    /** 
+     * @param arete
+     * @return boolean
+     */
     public boolean verifVoieJoker(Arete arete) {
         if(arete.getType().getColor().equals(this.couleurJoker)){
             return true;
@@ -326,6 +475,13 @@ public class Metier {
         return false;
     }
 
+    
+    /** 
+     * @param arete
+     * @param joueur
+     * @param color
+     * @return boolean
+     */
     public boolean estPrenable(Arete arete, Joueur joueur, Color color)
     {
         if(joueur.getNbCarteWagon(color) +  joueur.getNbCarteWagon(this.couleurJoker)>= arete.getLongueur())
@@ -353,12 +509,20 @@ public class Metier {
         this.ctrl.getFrameAfficheCarteObjectif().setVisible(true);
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbActionJoueur() {
         if(this.lstJoueurs.size()>0)
             return nbAction/this.lstJoueurs.size();
         return nbAction;
     }
 
+    
+    /** 
+     * @return Joueur
+     */
     public Joueur getJoueurCourant() {
         return this.joueurCourant;
     }
@@ -395,6 +559,10 @@ public class Metier {
         this.actionEnCours = 3;
     }
 
+    
+    /** 
+     * @param i
+     */
     public void piocherVehicule(int i) {
         this.actionEnCours = 1;
         System.out.println(nbWagon);
@@ -437,6 +605,11 @@ public class Metier {
         this.ctrl.creerFrameFinPartie();
     }
 
+    
+    /** 
+     * @param noeud1
+     * @param noeud2
+     */
     public void verifAreteSelect(Noeud noeud1, Noeud noeud2){
         this.actionEnCours = 0;
         
@@ -481,6 +654,11 @@ public class Metier {
     
     }
 
+    
+    /** 
+     * @param areteSelect
+     * @param couleurArete
+     */
     public void verifAreteWagon(Arete areteSelect, Color couleurArete){
         List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
 
@@ -508,10 +686,18 @@ public class Metier {
         finDuTour();
     }
 
+    
+    /** 
+     * @param color
+     */
     public void setColorSelect(Color color){
         this.colorSelect = color;
     }
 
+    
+    /** 
+     * @param joueur
+     */
     public void verifCarteObjectif(Joueur joueur) {
         if (joueur.getCartesObjectif().size() == 0)
             return;
@@ -525,6 +711,10 @@ public class Metier {
             }
     }
 
+    
+    /** 
+     * @param areteSelect
+     */
     public void verifAreteMulti(Arete areteSelect){
         if(verifVoieJoker(areteSelect))
             this.ctrl.creerFrameChoixWagon(areteSelect);
@@ -534,6 +724,10 @@ public class Metier {
         
     }
 
+    
+    /** 
+     * @param carteChoisies
+     */
     public void piocherObjectif(ArrayList<Integer> carteChoisies) {
 
         this.actionEnCours = 2;
@@ -545,6 +739,10 @@ public class Metier {
         finDuTour();
     }
 
+    
+    /** 
+     * @param file
+     */
     public void lireXML(File file){
 
         try{

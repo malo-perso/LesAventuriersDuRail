@@ -25,10 +25,18 @@ public class Pioche {
         this.lstCartesObjectif = lstCartesObjectif;
     }
 
+    
+    /** 
+     * @return List<CarteVehicule>
+     */
     public List<CarteVehicule> getLstCarteVehicule() {
         return this.lstCartesVehicule;
     }
 
+    
+    /** 
+     * @return ArrayList<CarteObjectif>
+     */
     public ArrayList<CarteObjectif> getLstCarteObjectif() {
         ArrayList<CarteObjectif> lstObj = new ArrayList<CarteObjectif>();
         //lstObj.add(new CarteObjectif(new Noeud("Plic", 0, 0, 0, 0), new Noeud("Ploc", 1, 1, 1, 1), 10));
@@ -36,6 +44,10 @@ public class Pioche {
         //return this.lstCartesObjectif;
     }
 
+    
+    /** 
+     * @return CarteVehicule[]
+     */
     public CarteVehicule[] majPiocheVehiculeVisible() {
         CarteVehicule[] piocheVehiculeVisible = new CarteVehicule[5];
         for (int i = 0; i < 5; i++) {
@@ -62,6 +74,11 @@ public class Pioche {
         return piocheVehiculeVisible;
     }
 
+    
+    /** 
+     * @param i
+     * @return CarteVehicule
+     */
     public CarteVehicule retirerCarteVehicule(int i) {
         if (this.lstCartesVehicule.size() <= 5)
             return this.lstCartesVehicule.remove(i);
@@ -73,14 +90,27 @@ public class Pioche {
         }
     }
 
+    
+    /** 
+     * @param i
+     * @return CarteObjectif
+     */
     public CarteObjectif retirerCarteObjectif(int i) {
         return this.lstCartesObjectif.remove(i);
     }
 
+    
+    /** 
+     * @param carte
+     */
     public void ajouterCarteVehicule(CarteVehicule carte) {
         this.lstCartesVehicule.add(carte);
     }
 
+    
+    /** 
+     * @param carte
+     */
     public void ajouterCarteObjectif(CarteObjectif carte) {
         this.lstCartesObjectif.add(carte);
     }
@@ -93,6 +123,11 @@ public class Pioche {
         Collections.shuffle(this.lstCartesObjectif);
     }
 
+    
+    /** 
+     * @param i
+     * @return CarteVehicule
+     */
     public CarteVehicule piocherVehicule(int i) {
         if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
             CarteVehicule carteVehi = this.retirerCarteVehicule(i);
@@ -103,6 +138,10 @@ public class Pioche {
         return null;
     }
 
+    
+    /** 
+     * @return List<CarteObjectif>
+     */
     public List<CarteObjectif> piocherObjectif() {
         int tmp = 3;
         List<CarteObjectif> lstPiocheObjectif = new ArrayList<CarteObjectif>();
@@ -123,6 +162,11 @@ public class Pioche {
         return lstPiocheObjectif;
     }
 
+    
+    /** 
+     * @param joueur
+     * @param intCarte
+     */
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
         for (int i = 0; i < intCarte.size(); i++) {
             if(this.lstCartesObjectif.size()==2 && i != 0)
@@ -134,6 +178,10 @@ public class Pioche {
         }     
     }
 
+    
+    /** 
+     * @param cateDefausse
+     */
     public void ajouterCartePioche(List<CarteVehicule> cateDefausse) {
         this.lstCartesVehicule.addAll(cateDefausse);
     }

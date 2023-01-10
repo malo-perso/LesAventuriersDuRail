@@ -23,22 +23,42 @@ public class Joueur implements Comparable<Joueur>{
         this.RGB = RGB;        
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getNom() {
         return this.nom;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getNbWagon() {
         return this.nbWagon;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getPoint(){
         return this.nbPoint;
     }
 
+    
+    /** 
+     * @param nbPoint
+     */
     public void ajouterPoint(int nbPoint){
         this.nbPoint += nbPoint;
     }
 
+    
+    /** 
+     * @return ArrayList<Color>
+     */
     public ArrayList<Color> getListType(){
         ArrayList<Color> lstType = new ArrayList<Color>();
         for (CarteVehicule carteVehicule : this.cartesVehicule) {
@@ -48,30 +68,59 @@ public class Joueur implements Comparable<Joueur>{
         return lstType;
     }
 
+    
+    /** 
+     * @return ArrayList<CarteVehicule>
+     */
     public ArrayList<CarteVehicule> getCartesVehicule() {
         return this.cartesVehicule;
     }
 
+    
+    /** 
+     * @return ArrayList<CarteObjectif>
+     */
     public ArrayList<CarteObjectif> getCartesObjectif() {
         return this.cartesObjectif;
     }
 
+    
+    /** 
+     * @param lstcarte
+     */
     public void ajouterCarteVehicule(CarteVehicule lstcarte) {
         this.cartesVehicule.add(lstcarte);
     }
 
+    
+    /** 
+     * @param carte
+     */
     public void ajouterCarteObjectif(CarteObjectif carte) {
         this.cartesObjectif.add(carte);
     }
 
+    
+    /** 
+     * @param nom
+     */
     public void setNomJoueur(String nom){
         this.nom =nom;
     }
 
+    
+    /** 
+     * @return Color
+     */
     public Color getCouleur() {
         return new Color(this.RGB);
     }
 
+    
+    /** 
+     * @param type
+     * @return int
+     */
     public int getNbCarteWagon(Color type)
     {   
         int nb = 0;
@@ -81,6 +130,10 @@ public class Joueur implements Comparable<Joueur>{
         return nb;
     }
 
+    
+    /** 
+     * @return HashMap<Color, ArrayList<Integer>>
+     */
     public HashMap<Color, ArrayList<Integer>> getHashCouleur() {
         HashMap<Color, ArrayList<Integer>> hashCouleur = new HashMap<Color, ArrayList<Integer>>();
         for (int i=0; i< this.cartesVehicule.size(); i++) {
@@ -92,6 +145,13 @@ public class Joueur implements Comparable<Joueur>{
         return hashCouleur;
     }
 
+    
+    /** 
+     * @param color
+     * @param nb
+     * @param colorJoker
+     * @return List<CarteVehicule>
+     */
     public List<CarteVehicule> supprimerCarteVehicule(Color color, int nb, Color colorJoker) {
         int i=0;
         List<CarteVehicule> cartesDefausse = new ArrayList<CarteVehicule>();
@@ -122,10 +182,19 @@ public class Joueur implements Comparable<Joueur>{
         return cartesDefausse;
     }
 
+    
+    /** 
+     * @param longueur
+     */
     public void supprimerWagon(int longueur) {
         this.nbWagon -= longueur;
     }
 
+    
+    /** 
+     * @param autreJoueur
+     * @return int
+     */
     @Override
     public int compareTo(Joueur autreJoueur) {
         return this.nbPoint - autreJoueur.nbPoint;

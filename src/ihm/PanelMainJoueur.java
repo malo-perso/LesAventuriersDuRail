@@ -153,6 +153,10 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.setVisible(true);
     }
 
+    
+    /** 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub

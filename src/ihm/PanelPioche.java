@@ -76,6 +76,10 @@ public class PanelPioche extends JPanel implements ActionListener{
         }
     }
 
+    
+    /** 
+     * @return List<CarteObjectif>
+     */
     public List<CarteObjectif> getPiochCarteObjectifs(){
         return this.piocheObjectif;
     }
@@ -84,10 +88,18 @@ public class PanelPioche extends JPanel implements ActionListener{
         this.btnPiocheObjectif.setEnabled(true);
     }
 
+    
+    /** 
+     * @param btn
+     */
     public void setUtilisable(JButton btn){
         btn.setEnabled(true);
     }
     
+    
+    /** 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

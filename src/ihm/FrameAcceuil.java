@@ -47,6 +47,10 @@ public class FrameAcceuil extends JFrame {
         this.revalidate();
     }
 
+    
+    /** 
+     * @param nomPanel
+     */
     public void changePanel(String nomPanel){
         this.card = (CardLayout) this.panelFormulaire.getLayout();
         this.card.show(this.panelFormulaire,nomPanel);

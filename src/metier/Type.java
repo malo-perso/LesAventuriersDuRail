@@ -10,7 +10,12 @@ public class Type {
 		this.couleurActuelle = ajouterCouleur(couleur);
 	}
 
-	private static Color ajouterCouleur(Color c) {
+	
+    /** 
+     * @param c
+     * @return Color
+     */
+    private static Color ajouterCouleur(Color c) {
         for( Color coul : listeCouleurs) {
 			if( coul == c ) {
 				return coul;
@@ -20,25 +25,46 @@ public class Type {
         return c;
     }
 
-	public static Type creerType (Color couleur) {
+	
+    /** 
+     * @param couleur
+     * @return Type
+     */
+    public static Type creerType (Color couleur) {
 		
         return new Type(couleur);
 
 	}
 
-	public Color getColor(){
+	
+    /** 
+     * @return Color
+     */
+    public Color getColor(){
 		return this.couleurActuelle;
 	}
 
-	public static ArrayList<Color> getCouleurs(){
+	
+    /** 
+     * @return ArrayList<Color>
+     */
+    public static ArrayList<Color> getCouleurs(){
 		return Type.listeCouleurs;
 	}
 
-	public Color getCouleurActuelle(){
+	
+    /** 
+     * @return Color
+     */
+    public Color getCouleurActuelle(){
 		return this.couleurActuelle;
 	}
 
-	public String toString(){
+	
+    /** 
+     * @return String
+     */
+    public String toString(){
 		return String.valueOf(this.couleurActuelle.getRGB());
 	}
 }
