@@ -2,7 +2,6 @@ package src.ihm;
 
 import src.Controleur;
 import src.metier.Arete;
-import src.metier.Type;
 
 import javax.swing.*;
 
@@ -10,20 +9,18 @@ import java.awt.event.*;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 public class FrameChoixWagon extends JFrame implements ActionListener {
 
-    private Controleur ctrl;
+    private Controleur       ctrl;
     private ArrayList<JRadioButton> lstCBTypeWagon;
-    private JPanel panelHaut, panelBas;
-    private JScrollPane spHaut;
-    private JButton btnValider;
-    private ButtonGroup bg;
+    private JPanel           panelHaut, panelBas;
+    private JScrollPane      spHaut;
+    private JButton          btnValider;
+    private ButtonGroup      bg;
     private ArrayList<Color> lstTypeJoueur;
-    private Arete areteSelect;
+    private Arete            areteSelect;
 
     public FrameChoixWagon(Controleur ctrl, Arete areteSelect , ArrayList<Color> lstTypeJoueur) {
         this.setTitle("Choix du wagon");
@@ -34,15 +31,15 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
         this.lstTypeJoueur = lstTypeJoueur;
-        this.areteSelect =areteSelect;
+        this.areteSelect   = areteSelect;
 
 
         // création des composants
-        this.ctrl = ctrl;
-        this.panelHaut = new JPanel();
-        this.panelBas = new JPanel();
-        this.spHaut = new JScrollPane(this.panelHaut);
-        this.bg = new ButtonGroup();
+        this.ctrl       = ctrl;
+        this.panelHaut  = new JPanel();
+        this.panelBas   = new JPanel();
+        this.spHaut     = new JScrollPane(this.panelHaut);
+        this.bg         = new ButtonGroup();
         this.btnValider = new JButton("Valider");
 
 
@@ -59,7 +56,6 @@ public class FrameChoixWagon extends JFrame implements ActionListener {
             this.lstCBTypeWagon.get(i).setSize(20,20);
             this.bg.add(this.lstCBTypeWagon.get(i));
         }
-
 
         // ajout des composants
         for (int i = 0; i < this.lstCBTypeWagon.size(); i++) {

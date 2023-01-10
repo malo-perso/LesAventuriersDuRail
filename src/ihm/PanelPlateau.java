@@ -1,6 +1,5 @@
 package src.ihm;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.event.*;
@@ -13,14 +12,11 @@ import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.awt.RenderingHints;
 import src.Controleur;
 import src.metier.Joueur;
 import src.metier.Arete;
 import src.metier.Noeud;
-import java.awt.Toolkit;
 
 
 public class PanelPlateau extends JPanel {

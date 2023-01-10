@@ -2,7 +2,6 @@ package src.ihm;
 
 import src.Controleur;
 
-import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,19 +9,19 @@ public class FrameAcceuil extends JFrame {
     
     private Controleur ctrl;
 
-    private JPanel panelFormulaire;
+    private JPanel       panelFormulaire;
     private PanelAcceuil panelAcceuil;
-    private PanelJeu panelJeu;
+    private PanelJeu     panelJeu;
     private PanelCreerJoueurLocal panelCreerJoueur;
 
     CardLayout card;
 
     public FrameAcceuil(Controleur ctrl) {
         this.ctrl = ctrl;
-        this.panelFormulaire = new JPanel(new CardLayout());
+        this.panelFormulaire  = new JPanel(new CardLayout());
         
-        this.panelAcceuil = new PanelAcceuil(ctrl);
-        this.panelJeu = new PanelJeu(ctrl);
+        this.panelAcceuil     = new PanelAcceuil(ctrl);
+        this.panelJeu         = new PanelJeu(ctrl);
         this.panelCreerJoueur = new PanelCreerJoueurLocal(ctrl);
     
 

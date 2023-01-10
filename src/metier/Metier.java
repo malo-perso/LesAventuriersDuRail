@@ -9,9 +9,7 @@ import java.io.*;
 import org.jdom2.*;
 import org.jdom2.input.*;
 
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,6 +17,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
+
 import javax.swing.JOptionPane;
 
 public class Metier {
@@ -42,7 +41,6 @@ public class Metier {
     private List<CarteVehicule> lstCarteVehicules;
     private List<Joueur> lstJoueurs;
     private BufferedImage bImage;
-    private Boolean action;
 
     private Joueur joueurCourant;
     private Joueur dernierJoueur;
@@ -75,7 +73,6 @@ public class Metier {
 
         this.lstJoueurs = new ArrayList<Joueur>();
         this.bImage = null;
-        this.action = false;
 
         this.nbAction = 0;
 
@@ -604,6 +601,7 @@ public class Metier {
         Joueur joueurCheminLPL=null;
         int cheminLPL = 0;
         int cheminLPLJ =0;
+        String nomCLPL = null;
         for (Joueur i : this.lstJoueurs) {
                 verifCarteObjectif(i);
                 cheminLPLJ = CalculPoint.cheminLePlusLong(this.lstAretes, this.lstNoeuds, i);
@@ -612,9 +610,11 @@ public class Metier {
                     joueurCheminLPL = i;
                 }
         }
-        if (joueurCheminLPL != null)
+        if (joueurCheminLPL != null){
             joueurCheminLPL.ajouterPoint(10);
-        this.ctrl.creerFrameFinPartie();
+            nomCLPL = joueurCheminLPL.getNom();
+        }
+        this.ctrl.creerFrameFinPartie(nomCLPL);
     }
 
     
@@ -672,7 +672,7 @@ public class Metier {
      * @param couleurArete
      */
     public void verifAreteWagon(Arete areteSelect, Color couleurArete){
-        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
+        List<CarteVehicule> carteDefausse = new ArrayList<CarteVehicule>();
 
         //verif à assez de carte vehicule pour prendre l'arete
         if (!this.estPrenable(areteSelect, this.joueurCourant, couleurArete)){
@@ -689,13 +689,12 @@ public class Metier {
             return;
         }
 
-        cateDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.getCouleurJoker());
+        carteDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.getCouleurJoker());
         areteSelect.setProprietaire(this.joueurCourant);
 
         this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
         this.joueurCourant.ajouterPoint(grillePoint[ areteSelect.getLongueur()]);
-        this.pioche.ajouterCartePioche(cateDefausse);
-        System.out.println(this.pioche.getLstCarteVehicule().size());
+        this.pioche.ajouterCartePioche(carteDefausse);
         finDuTour();
     }
 
@@ -872,5 +871,40 @@ public class Metier {
             }
         }
     }
+
+    public void ajouterCartePourTest(){
+    
+
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(0).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
+        this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));        
+
+        this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));
+    }      
+	
 
 }
