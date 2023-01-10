@@ -44,11 +44,29 @@ public class Pioche {
             else
                 piocheVehiculeVisible[i] = null;
         }
+
+        int nbJoker = 0;
+        for (int i = 0; i < 5; i++) {
+            if (piocheVehiculeVisible[i].getType().getColor().equals(this.ctrl.getMetier().getCouleurJoker()))
+                nbJoker++;
+        }
+
+        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3) {
+            //this.ctrl.afficherMessage("Il y a plus de 3 jokers dans la pioche visible, la pioche a été remélangée.");
+            Collections.shuffle(this.lstCartesVehicule);
+            return this.majPiocheVehiculeVisible();
+        }
+
         return piocheVehiculeVisible;
     }
 
     public CarteVehicule retirerCarteVehicule(int i) {
-        return  this.lstCartesVehicule.remove(i);
+        //return  this.lstCartesVehicule.remove(i);
+        CarteVehicule carte = this.lstCartesVehicule.get(i);
+        this.lstCartesVehicule.set(i, this.lstCartesVehicule.get(5));
+        this.lstCartesVehicule.remove(5);
+
+        return carte;
     }
 
     public CarteObjectif retirerCarteObjectif(int i) {

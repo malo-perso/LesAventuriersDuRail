@@ -26,10 +26,10 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     private JPanel panelCarteObjectif;
     private JPanel panelOrganisation;
     private JPanel panelInfo;
-    private JButton btnPerso;
     private JButton btnParametre;
 
     private JLabel lblNbVehicule;
+    private JLabel lblPerso;
     private JLabel lblNbPoints;
 
     private JScrollPane scrollCarteCoul;
@@ -122,19 +122,19 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
         this.scrollCarteObjectif.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         this.scrollCarteObjectif.getVerticalScrollBar().setUnitIncrement(16);
 
-        this.btnPerso = new JButton("MisterConfiture");
+        this.lblPerso = new JLabel("Joueur courant");
         this.btnParametre = new JButton(new ImageIcon(img1));
 
         this.btnParametre.setBorder(null);
 
-        this.lblNbVehicule = new JLabel("Nb Vehicule : 70");
-        this.lblNbPoints = new JLabel("Nb Points : 200");
+        this.lblNbVehicule = new JLabel("Nb vehicule");
+        this.lblNbPoints = new JLabel("Nb points");
 
         this.btnParametre.addActionListener(this);
 
         
 
-        this.panelInfo.add(this.btnPerso);
+        this.panelInfo.add(this.lblPerso);
         this.panelInfo.add(this.lblNbVehicule);
         this.panelInfo.add(this.lblNbPoints);
         this.panelInfo.add(this.btnParametre);
@@ -167,7 +167,15 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
 
         Collections.sort(this.lstCarteVehicule);
 
-        this.btnPerso.setText(this.ctrl.getJoueurCourant().getNom());
+        Font newLabelFont=new Font(this.lblPerso.getFont().getName(),Font.BOLD,this.lblPerso.getFont().getSize());
+
+        this.lblPerso.setText(this.ctrl.getJoueurCourant().getNom());
+        this.lblPerso.setHorizontalAlignment(SwingConstants.CENTER);
+        this.lblPerso.setVerticalAlignment(SwingConstants.CENTER);
+        this.lblPerso.setFont(newLabelFont);
+        this.lblPerso.setForeground(new Color(Color.WHITE.getRGB() - this.ctrl.getJoueurCourant().getCouleur().getRGB()));
+        this.lblPerso.setBackground(this.ctrl.getJoueurCourant().getCouleur());
+        this.lblPerso.setOpaque(true);
         this.lblNbVehicule.setText("Nb Vehicule : "+this.ctrl.getJoueurCourant().getNbWagon());
         this.lblNbPoints.setText("Nb Points : "+this.ctrl.getJoueurCourant().getPoint());
 
@@ -217,7 +225,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public void setInutilisable(){
         this.panelInfo.setEnabled(false);
         this.panelCarteObjectif.setEnabled(false);
-        this.btnPerso.setEnabled(false);
+        this.lblPerso.setEnabled(false);
         this.btnParametre.setEnabled(false);
         this.lblNbVehicule.setEnabled(false);
         this.lblNbPoints.setEnabled(false);
@@ -230,7 +238,7 @@ public class PanelMainJoueur extends JPanel implements ActionListener {
     public void setUtilisable(){
         this.panelInfo.setEnabled(true);
         this.panelCarteObjectif.setEnabled(true);
-        this.btnPerso.setEnabled(true);
+        this.lblPerso.setEnabled(true);
         this.btnParametre.setEnabled(true);
         this.lblNbVehicule.setEnabled(true);
         this.lblNbPoints.setEnabled(true);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class point {
+public class Point {
     
     private static int INF = (int) 1e7;
 
