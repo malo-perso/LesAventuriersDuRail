@@ -657,7 +657,7 @@ public class Metier {
      * @param couleurArete
      */
     public void verifAreteWagon(Arete areteSelect, Color couleurArete){
-        List<CarteVehicule> cateDefausse = new ArrayList<CarteVehicule>();
+        List<CarteVehicule> carteDefausse = new ArrayList<CarteVehicule>();
 
         //verif à assez de carte vehicule pour prendre l'arete
         if (!this.estPrenable(areteSelect, this.joueurCourant, couleurArete)){
@@ -674,12 +674,12 @@ public class Metier {
             return;
         }
 
-        cateDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.getCouleurJoker());
+        carteDefausse = this.joueurCourant.supprimerCarteVehicule(couleurArete, areteSelect.getLongueur(),this.getCouleurJoker());
         areteSelect.setProprietaire(this.joueurCourant);
 
         this.joueurCourant.supprimerWagon(areteSelect.getLongueur());
         this.joueurCourant.ajouterPoint(grillePoint[ areteSelect.getLongueur()]);
-        this.getPioche().ajouterCartePioche(cateDefausse);
+        this.getPioche().ajouterCartePioche(carteDefausse);
         finDuTour();
     }
 
