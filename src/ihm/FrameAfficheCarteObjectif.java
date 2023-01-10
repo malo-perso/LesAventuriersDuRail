@@ -56,43 +56,70 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
 
         this.panelObjectif.removeAll();
 
-        for(int i= 0; i < this.lstCartePioche.size(); i++){
-
-            this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
-            this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
-            this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
-            this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
-            this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            this.btnCarteObjectif[i].setBorder(null);
-            this.panelObjectif.add(this.btnCarteObjectif[i]);
-            if(this.lstCartePioche.size() == 2 && i == 1){
-                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[2].setText("Plus de carte objectif");
-                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[2]);
+        if(this.lstCartePioche.size() > 2){
+            for(int i =0; i< this.lstCartePioche.size(); i++){
+                this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
+                this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[i]);
             }
-            if(this.lstCartePioche.size() == 1){
-                this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[1].setText("Plus de carte objectif");
-                this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[1].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[1]);
-
-                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[2].setText("Plus de carte objectif");
-                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[2]);
-            }
-            
         }
+
+        if(this.lstCartePioche.size() == 2){
+            this.btnCarteObjectif[0] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[0].setText("De " + this.lstCartePioche.get(0).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(0).getNoeud2().getNom() + " " + this.lstCartePioche.get(0).getPoints() + " points");
+            this.btnCarteObjectif[0].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[0].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[0]);
+
+            this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[1].setText("De " + this.lstCartePioche.get(1).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(1).getNoeud2().getNom() + " " + this.lstCartePioche.get(1).getPoints() + " points");
+            this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[1]);
+
+            this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[2].setText("Plus de carte objectif");
+            this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[2]);
+        }
+
+        if(this.lstCartePioche.size() == 1){
+            this.btnCarteObjectif[0] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[0].setText("De " + this.lstCartePioche.get(0).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(0).getNoeud2().getNom() + " " + this.lstCartePioche.get(0).getPoints() + " points");
+            this.btnCarteObjectif[0].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[0].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[0]);
+
+            this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[1].setText("Plus de carte objectif");
+            this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[1]);
+
+            this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[2].setText("Plus de carte objectif");
+            this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setBorder(null);
+            this.panelObjectif.add(this.btnCarteObjectif[2]);
+        }
+            
 
         this.btnValider = new JButton("Valider");
         this.btnValider.setEnabled(false);
@@ -237,50 +264,79 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.btnCarteObjectif = new JButton[3];
         this.panelObjectif.removeAll();
 
-        for(int i= 0; i < this.lstCartePioche.size(); i++){
-
-            this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
-            this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
-            this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
-            this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
-            this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
-            this.btnCarteObjectif[i].setBorder(null);
-            this.panelObjectif.add(this.btnCarteObjectif[i]);
-            this.btnCarteObjectif[i].addActionListener(this);
-
-            if(this.lstCartePioche.size() == 2 && i == 1){
-                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[2].setText("Plus de carte objectif");
-                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[2]);
-                this.btnCarteObjectif[2].addActionListener(this);
+        if(this.lstCartePioche.size() > 2){
+            for(int i =0; i< this.lstCartePioche.size(); i++){
+                this.btnCarteObjectif[i] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[i].setText("De " + this.lstCartePioche.get(i).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(i).getNoeud2().getNom() + " " + this.lstCartePioche.get(i).getPoints() + " points");
+                this.btnCarteObjectif[i].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[i].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[i].setBorder(null);
+                this.btnCarteObjectif[i].addActionListener(this);
+                this.panelObjectif.add(this.btnCarteObjectif[i]);
             }
-            if(this.lstCartePioche.size() == 1){
-                this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[1].setText("Plus de carte objectif");
-                this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[1].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[1]);
-                this.btnCarteObjectif[1].addActionListener(this);
+        }
 
-                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
-                this.btnCarteObjectif[2].setText("Plus de carte objectif");
-                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
-                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
-                this.btnCarteObjectif[2].setBorder(null);
-                this.panelObjectif.add(this.btnCarteObjectif[2]);
-                this.btnCarteObjectif[2].addActionListener(this);
-            }
-            
+        if(this.lstCartePioche.size() == 2){
+            this.btnCarteObjectif[0] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[0].setText("De " + this.lstCartePioche.get(0).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(0).getNoeud2().getNom() + " " + this.lstCartePioche.get(0).getPoints() + " points");
+            this.btnCarteObjectif[0].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[0].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setBorder(null);
+            this.btnCarteObjectif[0].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[0]);
+
+            this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[1].setText("De " + this.lstCartePioche.get(1).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(1).getNoeud2().getNom() + " " + this.lstCartePioche.get(1).getPoints() + " points");
+            this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setBorder(null);
+            this.btnCarteObjectif[1].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[1]);
+
+            this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[2].setText("Plus de carte objectif");
+            this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setBorder(null);
+            this.btnCarteObjectif[2].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[2]);
+        }
+
+        if(this.lstCartePioche.size() == 1){
+            this.btnCarteObjectif[0] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[0].setText("De " + this.lstCartePioche.get(0).getNoeud1().getNom() + " à " +  this.lstCartePioche.get(0).getNoeud2().getNom() + " " + this.lstCartePioche.get(0).getPoints() + " points");
+            this.btnCarteObjectif[0].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[0].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[0].setBorder(null);
+            this.btnCarteObjectif[0].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[0]);
+
+            this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[1].setText("Plus de carte objectif");
+            this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[1].setBorder(null);
+            this.btnCarteObjectif[1].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[1]);
+
+            this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+            this.btnCarteObjectif[2].setText("Plus de carte objectif");
+            this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+            this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+            this.btnCarteObjectif[2].setBorder(null);
+            this.btnCarteObjectif[2].addActionListener(this);
+            this.panelObjectif.add(this.btnCarteObjectif[2]);
         }
         System.out.println("lst carte piocher" + this.lstCarteObjectifs.size());
         this.panelObjectif.revalidate();
+
     }
 
     
