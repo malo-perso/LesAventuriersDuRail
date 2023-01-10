@@ -62,10 +62,13 @@ public class PanelPioche extends JPanel implements ActionListener{
             this.piocheVehiculeVisible[i] = this.ctrl.getMetier().getPioche().majPiocheVehiculeVisible()[i];
 
             if (this.piocheVehiculeVisible[i] != null) {
+                this.btnPiocheVehiculeVisible[i].setEnabled(true);
                 this.btnPiocheVehiculeVisible[i].setBackground(this.piocheVehiculeVisible[i].getType().getColor());
+                this.btnPiocheVehiculeVisible[i].setText("");
             } else {
                 this.btnPiocheVehiculeVisible[i].setBackground(null);
-                this.btnPiocheVehiculeVisible[i].setText("Y'a plus de cartes mon reuf");
+                this.btnPiocheVehiculeVisible[i].setText("il n'y a plus de cartes");
+                this.btnPiocheVehiculeVisible[i].setEnabled(false);
             }
         }
     }

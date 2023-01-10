@@ -91,8 +91,8 @@ public class Controleur {
         this.ihm.majPioche();
     }
 
-    public void creerFrameFinPartie(){
-        FrameFinPartie frameFinPartie = new FrameFinPartie(this);
+    public void creerFrameFinPartie(String nomGagnant){
+        FrameFinPartie frameFinPartie = new FrameFinPartie(this, nomGagnant);
         frameFinPartie.setVisible(true);
     }
 
