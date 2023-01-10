@@ -2,7 +2,6 @@ package src.ihm;
 
 import src.Controleur;
 import src.metier.Arete;
-import src.metier.Type;
 
 import javax.swing.*;
 
@@ -10,8 +9,6 @@ import java.awt.event.*;
 import java.awt.GridLayout;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 public class FrameChoixWagon extends JFrame implements ActionListener {

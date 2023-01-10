@@ -2,28 +2,18 @@ package src;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.Color;
 
 import src.ihm.FrameAcceuil;
 import src.ihm.FramePrincipale;
 import src.metier.Arete;
-import src.metier.CarteObjectif;
-import src.metier.CarteVehicule;
 import src.ihm.FrameAfficheCarteObjectif;
 import src.ihm.FrameChoixArete;
 import src.ihm.FrameChoixWagon;
 import src.ihm.FrameFinPartie;
 import src.metier.Joueur;
 import src.metier.Metier;
-import src.metier.Noeud;
-import src.metier.Pioche;
-import src.metier.Type;
-import src.metier.CalculPoint;
 
 public class Controleur {
 
@@ -174,7 +164,7 @@ public class Controleur {
      */
     public static void main (String[] args) {
         FlatLightLaf.setup();
-        Controleur ctrl = new Controleur();
+        new Controleur();
     }	
 }
 

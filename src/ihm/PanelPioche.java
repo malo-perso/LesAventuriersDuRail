@@ -2,24 +2,19 @@ package src.ihm;
 
 import javax.swing.*;
 
-import java.awt.Color;
-
 import java.awt.GridLayout;
 import java.awt.event.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import src.Controleur;
 import src.metier.CarteVehicule;
 import src.metier.CarteObjectif;
-import src.ihm.FrameAfficheCarteObjectif;
 
 public class PanelPioche extends JPanel implements ActionListener{
     
     private Controleur ctrl;
     private FrameAfficheCarteObjectif afficheCarteObjectif;
-    private List<CarteVehicule> piocheVehicule;
     private List<CarteObjectif> piocheObjectif;
     private CarteVehicule[] piocheVehiculeVisible;
 
@@ -30,7 +25,6 @@ public class PanelPioche extends JPanel implements ActionListener{
     public PanelPioche(Controleur ctrl) {
         this.ctrl = ctrl;
         this.afficheCarteObjectif = new FrameAfficheCarteObjectif(this.ctrl);
-        this.piocheVehicule = ctrl.getMetier().getPioche().getLstCarteVehicule();
         this.piocheObjectif = ctrl.getMetier().getPioche().getLstCarteObjectif();
         this.piocheVehiculeVisible = this.ctrl.getMetier().getPioche().majPiocheVehiculeVisible();
         this.btnPiocheVehiculeVisible = new JButton[5];
