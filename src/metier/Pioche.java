@@ -51,7 +51,7 @@ public class Pioche {
                 nbJoker++;
         }
 
-        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3) {
+        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3 && this.ctrl.getIHM() != null) {
             this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
             Collections.shuffle(this.lstCartesVehicule);
             return this.majPiocheVehiculeVisible();
@@ -120,8 +120,14 @@ public class Pioche {
     }
 
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
-        for(int i = intCarte.size()-1; i >= 0; i--)
-            joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(i));
+        for (int i = 0; i < intCarte.size(); i++) {
+            if(this.lstCartesObjectif.size()==2 && i != 0)
+                i--;
+            if (this.lstCartesObjectif.size() > i){
+                CarteObjectif remove = this.lstCartesObjectif.remove(i);
+                joueur.ajouterCarteObjectif(remove);
+            }
+        }     
     }
 
     public void ajouterCartePioche(List<CarteVehicule> cateDefausse) {
