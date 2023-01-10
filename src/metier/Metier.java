@@ -507,13 +507,13 @@ public class Metier {
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));
 
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(2), this.lstNoeuds.get(3), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(4), this.lstNoeuds.get(5), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(6), this.lstNoeuds.get(7), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(8), this.lstNoeuds.get(9), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(10), this.lstNoeuds.get(11), 10));
-        this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(12), this.lstNoeuds.get(13), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(2), this.lstNoeuds.get(3), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(4), this.lstNoeuds.get(5), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(6), this.lstNoeuds.get(7), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(8), this.lstNoeuds.get(9), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(10), this.lstNoeuds.get(11), 10));
+        // this.lstCarteObjectifs.add(new CarteObjectif(this.lstNoeuds.get(12), this.lstNoeuds.get(13), 10));
         
 
         this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));

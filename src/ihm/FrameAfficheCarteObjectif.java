@@ -59,34 +59,9 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.icon1 = new ImageIcon(this.ctrl.getImagePlateau());
         this.img1 = this.icon1.getImage().getScaledInstance(315,215,Image.SCALE_SMOOTH);
 
-        this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
+        this.btnCarteObjectif = new JButton[3];
 
         this.panelObjectif.removeAll();
-
-        if(this.lstCartePioche.size() < 3){
-            switch(lstCartePioche.size()){
-                case 2 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-                         this.panelCB.removeAll();
-                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelCB.add(this.cbCarte1);
-                         this.panelCB.add(this.cbCarte2);
-                         this.panelValidation.removeAll();
-                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelValidation.add(new JLabel());
-                         this.panelValidation.add(this.btnValider);
-                         break;
-
-                case 1 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-                         this.panelCB.removeAll();
-                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelCB.add(this.cbCarte1);
-                         this.panelValidation.removeAll();
-                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelValidation.add(new JLabel());
-                         this.panelValidation.add(this.btnValider);
-                         break;
-            }
-        }
 
         for(int i= 0; i < this.lstCartePioche.size(); i++){
 
@@ -97,7 +72,32 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             this.btnCarteObjectif[i].setHorizontalTextPosition(SwingConstants.CENTER);
             this.btnCarteObjectif[i].setBorder(null);
             this.panelObjectif.add(this.btnCarteObjectif[i]);
+            if(this.lstCartePioche.size() == 2 && i == 1){
+                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[2].setText("Plus de carte objectif");
+                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[2]);
+            }
+            if(this.lstCartePioche.size() == 1){
+                this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[1].setText("Plus de carte objectif");
+                this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[1].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[1]);
 
+                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[2].setText("Plus de carte objectif");
+                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[2]);
+            }
             
         }
 
@@ -211,6 +211,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
                     this.ctrl.piocherObjectif(this.carteChoisie);
+                    System.out.println(this.carteChoisie);
                 }
             }else{
                 if(carteChoisie.size() == 0){
@@ -221,6 +222,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
                     this.ctrl.getIHM().activer();
                     this.ctrl.getIHM().setVisible(true);
                     this.ctrl.piocherObjectif(this.carteChoisie);    
+                    System.out.println(this.carteChoisie);
                 }
             }
         }
@@ -230,33 +232,33 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
         this.lstCartePioche = new ArrayList<CarteObjectif>(this.ctrl.getPioche().piocherObjectif());
         this.lstCarteObjectifs = new ArrayList<CarteObjectif>(this.ctrl.getLstCarteObjectifs());
 
-        this.btnCarteObjectif = new JButton[this.lstCartePioche.size()];
+        this.btnCarteObjectif = new JButton[3];
         this.panelObjectif.removeAll();
 
-        if(this.lstCartePioche.size() < 3){
-            switch(lstCartePioche.size()){
-                case 2 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-                         this.panelCB.removeAll();
-                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelCB.add(this.cbCarte1);
-                         this.panelCB.add(this.cbCarte2);
-                         this.panelValidation.removeAll();
-                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelValidation.add(new JLabel());
-                         this.panelValidation.add(this.btnValider);
-                         break;
+        // if(this.lstCartePioche.size() < 3){
+        //     switch(lstCartePioche.size()){
+        //         case 2 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+        //                  this.panelCB.removeAll();
+        //                  this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+        //                  this.panelCB.add(this.cbCarte1);
+        //                  this.panelCB.add(this.cbCarte2);
+        //                  this.panelValidation.removeAll();
+        //                  this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+        //                  this.panelValidation.add(new JLabel());
+        //                  this.panelValidation.add(this.btnValider);
+        //                  break;
 
-                case 1 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
-                         this.panelCB.removeAll();
-                         this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelCB.add(this.cbCarte1);
-                         this.panelValidation.removeAll();
-                         this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
-                         this.panelValidation.add(new JLabel());
-                         this.panelValidation.add(this.btnValider);
-                         break;
-            }
-        }
+        //         case 1 : this.panelObjectif.setLayout(new GridLayout(1,this.lstCartePioche.size(), 5, 0));
+        //                  this.panelCB.removeAll();
+        //                  this.panelCB.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+        //                  this.panelCB.add(this.cbCarte1);
+        //                  this.panelValidation.removeAll();
+        //                  this.panelValidation.setLayout(new GridLayout(1,this.lstCartePioche.size()));
+        //                  this.panelValidation.add(new JLabel());
+        //                  this.panelValidation.add(this.btnValider);
+        //                  break;
+        //     }
+        // }
 
         for(int i= 0; i < this.lstCartePioche.size(); i++){
 
@@ -268,6 +270,36 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             this.btnCarteObjectif[i].setBorder(null);
             this.panelObjectif.add(this.btnCarteObjectif[i]);
             this.btnCarteObjectif[i].addActionListener(this);
+
+            if(this.lstCartePioche.size() == 2 && i == 1){
+                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[2].setText("Plus de carte objectif");
+                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[2]);
+                this.btnCarteObjectif[2].addActionListener(this);
+            }
+            if(this.lstCartePioche.size() == 1){
+                this.btnCarteObjectif[1] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[1].setText("Plus de carte objectif");
+                this.btnCarteObjectif[1].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[1].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[1].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[1].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[1]);
+                this.btnCarteObjectif[1].addActionListener(this);
+
+                this.btnCarteObjectif[2] = new JButton(new ImageIcon(img1));
+                this.btnCarteObjectif[2].setText("Plus de carte objectif");
+                this.btnCarteObjectif[2].setFont(new Font("Calibri",Font.BOLD,14));
+                this.btnCarteObjectif[2].setVerticalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setHorizontalTextPosition(SwingConstants.CENTER);
+                this.btnCarteObjectif[2].setBorder(null);
+                this.panelObjectif.add(this.btnCarteObjectif[2]);
+                this.btnCarteObjectif[2].addActionListener(this);
+            }
             
         }
         System.out.println("lst carte piocher" + this.lstCarteObjectifs);
