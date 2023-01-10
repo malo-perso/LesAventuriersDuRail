@@ -1023,6 +1023,101 @@
 			<noeud2>Oklahoma City</noeud2>
 			<point>20</point>
     	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Montréal</noeud1>
+			<noeud2>Miami</noeud2>
+			<point>30</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Dallas</noeud1>
+			<noeud2>Los Angeles</noeud2>
+			<point>15</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Charleston</noeud1>
+			<noeud2>Omaha</noeud2>
+			<point>20</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Denver</noeud1>
+			<noeud2>Washington</noeud2>
+			<point>25</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Duluth</noeud1>
+			<noeud2>El Paso</noeud2>
+			<point>30</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Little Rock</noeud1>
+			<noeud2>Raleigh</noeud2>
+			<point>10</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>New Orleans</noeud1>
+			<noeud2>Helena</noeud2>
+			<point>25</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Pittsburgh</noeud1>
+			<noeud2>Phoenix</noeud2>
+			<point>30</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Atlanta</noeud1>
+			<noeud2>Las Vegas</noeud2>
+			<point>35</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Charleston</noeud1>
+			<noeud2>Vancouver</noeud2>
+			<point>50</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Saint Louis</noeud1>
+			<noeud2>Los Angeles</noeud2>
+			<point>30</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Portland</noeud1>
+			<noeud2>Phoenix</noeud2>
+			<point>15</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Toronto</noeud1>
+			<noeud2>Oklahoma City</noeud2>
+			<point>10</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Duluth</noeud1>
+			<noeud2>Santa Fe</noeud2>
+			<point>10</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Raleigh</noeud1>
+			<noeud2>Dallas</noeud2>
+			<point>10</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Boston</noeud1>
+			<noeud2>Chicago</noeud2>
+			<point>10</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Chicago</noeud1>
+			<noeud2>Calcary</noeud2>
+			<point>15</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Houston</noeud1>
+			<noeud2>Vancouver</noeud2>
+			<point>30</point>
+    	</carteObjectif>
+		<carteObjectif>
+			<noeud1>Washington</noeud1>
+			<noeud2>El Paso</noeud2>
+			<point>25</point>
+    	</carteObjectif>
 	</lstCarteObjectifs>
 	<hashMapCarteVehicules>
 		<lstCarteVehicule>

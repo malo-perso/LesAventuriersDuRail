@@ -279,7 +279,7 @@ public class FrameAfficheCarteObjectif extends JDialog implements ActionListener
             }
             
         }
-        System.out.println("lst carte piocher" + this.lstCarteObjectifs);
+        System.out.println("lst carte piocher" + this.lstCarteObjectifs.size());
         this.panelObjectif.revalidate();
     }
 
