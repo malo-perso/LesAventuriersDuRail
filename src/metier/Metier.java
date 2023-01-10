@@ -299,6 +299,16 @@ public class Metier {
                 return true;
             }
         }
+        int nbAretesPrises = 0;
+        if(areteDoubleActive()){
+            for (Arete arete : this.lstAretes){
+                if(!arete.estDisponible()){
+                    nbAretesPrises++;
+                }
+            }
+        }
+        if(nbAretesPrises >= this.lstAretes.size()) return true;
+        
         return false;
     }
 
