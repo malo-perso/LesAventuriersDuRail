@@ -589,6 +589,7 @@ public class Metier {
         Joueur joueurCheminLPL=null;
         int cheminLPL = 0;
         int cheminLPLJ =0;
+        String nomCLPL = null;
         for (Joueur i : this.lstJoueurs) {
                 verifCarteObjectif(i);
                 cheminLPLJ = CalculPoint.cheminLePlusLong(this.lstAretes, this.lstNoeuds, i);
@@ -597,9 +598,11 @@ public class Metier {
                     joueurCheminLPL = i;
                 }
         }
-        if (joueurCheminLPL != null)
+        if (joueurCheminLPL != null){
             joueurCheminLPL.ajouterPoint(10);
-        this.ctrl.creerFrameFinPartie();
+            nomCLPL = joueurCheminLPL.getNom();
+        }
+        this.ctrl.creerFrameFinPartie(nomCLPL);
     }
 
     
