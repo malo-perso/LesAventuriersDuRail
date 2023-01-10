@@ -51,7 +51,7 @@ public class Pioche {
                 nbJoker++;
         }
 
-        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 3) {
+        if (nbJoker >= 3 && this.lstCartesVehicule.size() > 5) {
             if (this.ctrl.getIHM() != null) {
                 this.ctrl.getIHM().afficherMsgInfo("Il y a plus de 3 jokers dans la pioche visible, on mélange la pioche");
             }
@@ -63,12 +63,14 @@ public class Pioche {
     }
 
     public CarteVehicule retirerCarteVehicule(int i) {
-        //return  this.lstCartesVehicule.remove(i);
-        CarteVehicule carte = this.lstCartesVehicule.get(i);
-        this.lstCartesVehicule.set(i, this.lstCartesVehicule.get(5));
-        this.lstCartesVehicule.remove(5);
-
-        return carte;
+        if (this.lstCartesVehicule.size() <= 5)
+            return this.lstCartesVehicule.remove(i);
+        else {
+            CarteVehicule carte = this.lstCartesVehicule.get(i);
+            this.lstCartesVehicule.set(i, this.lstCartesVehicule.get(5));
+            this.lstCartesVehicule.remove(5);
+            return carte;
+        }
     }
 
     public CarteObjectif retirerCarteObjectif(int i) {
@@ -92,7 +94,7 @@ public class Pioche {
     }
 
     public CarteVehicule piocherVehicule(int i) {
-        if (i >= 0 && i < 7 && i < this.lstCartesVehicule.size()) {
+        if (i >= 0 && i < 6 && i < this.lstCartesVehicule.size()) {
             CarteVehicule carteVehi = this.retirerCarteVehicule(i);
             this.ctrl.majPioche();
             return carteVehi;
@@ -114,7 +116,7 @@ public class Pioche {
             //         lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
             // }
             // else
-                lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
+            lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
             
         }
         System.out.println(lstPiocheObjectif);
