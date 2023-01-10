@@ -981,7 +981,7 @@
 		<carteObjectif>
 			<noeud1>Seattle</noeud1>
 			<noeud2>Miami</noeud2>
-			<point>30</point>
+			<point>100</point>
     	</carteObjectif>
 		<carteObjectif>
 			<noeud1>Kansas City</noeud1>

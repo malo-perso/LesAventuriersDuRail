@@ -11,7 +11,7 @@ import java.awt.*;
 
 import java.util.List;
 
-public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
+public class PanelCreerJoueurLocal extends JPanel implements ActionListener, MouseListener{
 
     private Controleur  ctrl;
 	private JTextField  txtNomJoueur;
@@ -32,7 +32,7 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		this.panelCentre        = new JPanel(new BorderLayout(10,10));
 		this.panelBoutonHaut    = new JPanel(new GridLayout(2,3,10,10));
 
-		this.txtNomJoueur 		= new JTextField ();
+		this.txtNomJoueur 		= new JTextField ("Nom du joueur");
 		this.btnAjouterJoueur 	= new JButton("Ajouter");
 		this.btnSupprJoueur 	= new JButton("Suppr");
 		this.btnCouleurJoueur 	= new JButton("Couleur");
@@ -52,9 +52,11 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		this.tabJoueur.setDefaultRenderer(Color.class, new ColorCellRenderer());
         this.tabJoueur.getColumnModel().getColumn(1).setCellRenderer(new ColorCellRenderer());
 
+		this.txtNomJoueur.setEditable(false);
+
 		this.btnAjouterJoueur.addActionListener(this);
 		this.btnSupprJoueur.addActionListener(this);
-		this.txtNomJoueur.addActionListener(this);
+		this.txtNomJoueur.addMouseListener(this);
 		this.btnCouleurJoueur.addActionListener(this);
 		this.btnLancerPartie.addActionListener(this);
 		this.btnRetour.addActionListener(this);
@@ -78,7 +80,8 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 
 	public void majTable(List<Joueur> lstJoueur){
 		this.model.majTable(lstJoueur);
-		this.txtNomJoueur.setText("");
+		this.txtNomJoueur.setText("Nom du joueur");
+		this.txtNomJoueur.setEditable(true);
 		this.btnCouleurJoueur.setBackground(null);
 	}
 
@@ -96,13 +99,17 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 					if(j.getNom().equals(this.txtNomJoueur.getText()) || j.getCouleur().getRGB() == this.c.getRGB()) joueurExistePas=false;
 				}
 
-				if(joueurExistePas){
+				if(this.txtNomJoueur.getText().length() > 14){
+					JOptionPane.showMessageDialog(this, "Le nom du joueur ne doit pas dépasser 14 caractères", "Erreur", JOptionPane.ERROR_MESSAGE);
+				}
+				else if(joueurExistePas){
 					this.ctrl.getMetier().ajouterJoueur(this.txtNomJoueur.getText(), this.c.getRGB());
 					this.majTable(this.ctrl.getMetier().getLstJoueurs());
-					this.txtNomJoueur.setText("");
+					this.txtNomJoueur.setText("Nom du joueur");
 					this.c = null;
 				}
 			}
+			this.txtNomJoueur.setText("Nom du joueur");
 		}
 		
 		if(e.getSource() == this.btnSupprJoueur){
@@ -114,6 +121,8 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 		if(e.getSource() == this.btnRetour){
 			this.ctrl.resetMetier();
 			this.majTable(this.ctrl.getMetier().getLstJoueurs());
+            this.txtNomJoueur.setEditable(false);
+
 			this.ctrl.getIHMAcceuil().changePanel("panelJeu");
 
 		}
@@ -126,6 +135,38 @@ public class PanelCreerJoueurLocal extends JPanel implements ActionListener{
 			}
 
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(e.getSource() == this.txtNomJoueur){	
+			this.txtNomJoueur.setEditable(true);
+			this.txtNomJoueur.setText("");
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
