@@ -4,7 +4,6 @@ import src.Controleur;
 
 
 import javax.swing.*;
-import javax.imageio.ImageIO;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;

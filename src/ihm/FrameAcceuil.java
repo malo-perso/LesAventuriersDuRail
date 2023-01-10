@@ -2,7 +2,6 @@ package src.ihm;
 
 import src.Controleur;
 
-import java.awt.Color;
 import javax.swing.*;
 import java.awt.*;
 

@@ -7,9 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import src.ihm.grilles.GrillesJoueurModel;
-
-
 public class ColorCellRendererResultat extends DefaultTableCellRenderer {
 
     public ColorCellRendererResultat()
