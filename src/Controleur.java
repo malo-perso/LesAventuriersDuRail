@@ -11,7 +11,6 @@ import java.awt.Color;
 
 import src.ihm.FrameAcceuil;
 import src.ihm.FramePrincipale;
-import src.ihm.grilles.ListDialog;
 import src.metier.Arete;
 import src.metier.CarteObjectif;
 import src.metier.CarteVehicule;
@@ -24,7 +23,7 @@ import src.metier.Metier;
 import src.metier.Noeud;
 import src.metier.Pioche;
 import src.metier.Type;
-import src.metier.point;
+import src.metier.Point;
 
 public class Controleur {
 
@@ -201,7 +200,7 @@ public class Controleur {
         int cheminLPLJ =0;
         for (Joueur i : this.metier.getLstJoueurs()) {
                 verifCarteObjectif(i);
-                cheminLPLJ = point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), i);
+                cheminLPLJ = Point.cheminLePlusLong(this.metier.getLstAretes(), this.metier.getLstNoeuds(), i);
                 System.out.println("Le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
                 if (cheminLPLJ >cheminLPL) {
                     joueurCheminLPL = i;
@@ -301,7 +300,7 @@ public class Controleur {
         if (joueur.getCartesObjectif().size() == 0)
             return;
         for (CarteObjectif carteObjectif : joueur.getCartesObjectif()) 
-            if (!carteObjectif.getEstReussi() && point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueur, carteObjectif)){
+            if (!carteObjectif.getEstReussi() && Point.aReussitDestination(this.metier.getLstAretes(), this.metier.getLstNoeuds(), joueur, carteObjectif)){
                 joueur.ajouterPoint(carteObjectif.getPoints());
                 carteObjectif.setEstReussi(true);
             }
