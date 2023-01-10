@@ -283,7 +283,7 @@ public class PanelPlateau extends JPanel {
     //Permet de dessiner un fond d'écran 
 	public void paintComponent (Graphics g)
 	{
-		super.paintComponent(g);
+        super.paintComponent(g);
 		Image img = this.ctrl.getImagePlateau();
 		
 		g.drawImage(img, 0, 0, 1200 , 800 , this);
