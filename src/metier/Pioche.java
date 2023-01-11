@@ -174,7 +174,8 @@ public class Pioche {
      */
     public void deffausserCarteObjectif(Joueur joueur, ArrayList<Integer> intCarte) {
         for (int i = intCarte.size() - 1; i >=0; i--) {
-            joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(i));
+            int tmp = intCarte.get(i);
+            joueur.ajouterCarteObjectif(this.lstCartesObjectif.remove(tmp));
         }     
     }
 
