@@ -3,7 +3,7 @@
 	<regles>
 		<nombreJoker>14</nombreJoker>
 		<nombreJoueurMinimum>1</nombreJoueurMinimum>
-		<nombreJoueurMaximum >50</nombreJoueurMaximum>
+		<nombreJoueurMaximum >50</nombreJoueurMaximum> 
 		<nombreVehiculeJoueur>45</nombreVehiculeJoueur>
 		<nombreJoueurMiniDoubleRoute>4</nombreJoueurMiniDoubleRoute>
 		<nombreVehiculeFin>2</nombreVehiculeFin>
