@@ -576,6 +576,21 @@ public class Metier {
             this.ctrl.getIHM().activerComposants();
             this.ctrl.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
         }
+
+        
+        if(this.nbWagon == 1 && this.lstCarteVehicules.size()<6 ){
+            boolean bloque = true;
+            for(int j=0; j<5; j++){
+                if(!this.verifCarteJoker(this.lstCarteVehicules.get(j))) bloque = false;
+            }
+            if(bloque){
+                this.ctrl.getIHM().afficherMsgErreur("Il n'y a plus de carte !");
+                this.ctrl.getIHM().activerComposants();
+                this.ctrl.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
+                finDuTour();
+            }
+        }
+
         if (i==6 && i > this.pioche.getLstCarteVehicule().size()){
             this.ctrl.getIHM().afficherMsgErreur("Il n'y a plus de carte !");
             return;
@@ -589,16 +604,6 @@ public class Metier {
         }
         else{
             this.nbWagon++;
-        }
-
-        if(this.nbWagon == 1 ){
-            boolean bloque = true;
-            for(int j=0; j<5; j++){
-                if(!this.verifCarteJoker(this.lstCarteVehicules.get(j))) bloque = false;
-            }
-            if(bloque){
-                this.nbWagon = 2;
-            }
         }
         
         this.joueurCourant.ajouterCarteVehicule(this.getPioche().piocherVehicule(i));
@@ -967,12 +972,6 @@ public class Metier {
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
-        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
         this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
