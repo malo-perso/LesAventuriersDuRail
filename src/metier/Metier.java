@@ -507,24 +507,30 @@ public class Metier {
                 }
             }
         }else{
-            ArrayList<Arete> lstTmp = new ArrayList<>();
-            for(int i=0; i<this.lstAretes.size(); i++){
-                for(int j=i;j<this.lstAretes.size(); j++){
-                    if((this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(j).getNoeud1() &&
-                        this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(j).getNoeud2()) || (
-                        this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(j).getNoeud2() &&
-                        this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(j).getNoeud1())){
-                            if (!this.lstAretes.get(i).estDisponible() || !this.lstAretes.get(j).estDisponible()){
-                                nbAretesPrises=+2;
-                            }
-                    }else{
+            for(int i=0; i<this.lstAretes.size()-1; i++){
+                if((this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(i+1).getNoeud1() &&
+                    this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(i+1).getNoeud2()) || (
+                    this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(i+1).getNoeud2() &&
+                    this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(i+1).getNoeud1()))
+                {
+                    if (!this.lstAretes.get(i).estDisponible() || !this.lstAretes.get(i+1).estDisponible()){
                         nbAretesPrises++;
+                        
                     }
                 }
             }
+            
+            for (Arete arete : this.lstAretes){
+                if(!arete.estDisponible()){
+                    nbAretesPrises++;
+                }
+            }
         }
-        if(nbAretesPrises >= this.lstAretes.size()) finDePartie();
-
+        if(nbAretesPrises >= this.lstAretes.size()){
+            finDePartie();
+            return;
+        }
+        
 
         if (dernierJoueur != null && this.joueurCourant.equals(dernierJoueur)) {
             this.ctrl.getIHM().afficherMsgErreur("C'est la fin de la partie!");

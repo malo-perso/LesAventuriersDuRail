@@ -32,9 +32,9 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 	public FrameFinPartie(Controleur ctrl, String nomGagnant){
 		this.setTitle("Fin de partie");
 		this.setLayout(new BorderLayout());
+		this.setSize(800,500);
         this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(800,500);
 		this.setResizable(false);
 
 
