@@ -580,6 +580,8 @@ public class Metier {
             this.ctrl.getIHM().afficherMsgErreur("Il n'y a plus de carte !");
             return;
         }
+
+        //Verifie si la carte piochee est un joker
         if (i<6 && this.verifCarteJoker(this.lstCarteVehicules.get(i))){
             if(nbWagon==1)
                 return;
@@ -588,15 +590,27 @@ public class Metier {
         else{
             this.nbWagon++;
         }
+
+        if(this.nbWagon == 1 ){
+            boolean bloque = true;
+            for(int j=0; j<5; j++){
+                if(!this.verifCarteJoker(this.lstCarteVehicules.get(j))) bloque = false;
+            }
+            if(bloque){
+                this.nbWagon = 2;
+            }
+        }
         
         this.joueurCourant.ajouterCarteVehicule(this.getPioche().piocherVehicule(i));
         this.ctrl.majIHM();
         this.ctrl.getIHM().setVisible(true);
+
         if(this.ctrl.getMetier().getPioche().getLstCarteVehicule().size()==0){
             this.ctrl.getIHM().activerComposants();
             this.ctrl.getIHM().getPanelPioche().setBtnPiocheObjectifUtilisable();
             finDuTour();
         }
+
         if(this.nbWagon==2)
         {
             this.ctrl.getIHM().activerComposants();
