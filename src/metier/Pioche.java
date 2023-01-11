@@ -162,16 +162,8 @@ public class Pioche {
             tmp = this.lstCartesObjectif.size();
         for(int i=0; i<tmp; i++)
         {
-            // if(this.lstCartesObjectif.size()<=3)
-            // {
-            //     for(int j=0; j<this.lstCartesObjectif.size(); j++)
-            //         lstPiocheObjectif.add(this.lstCartesObjectif.get(j));
-            // }
-            // else
-            lstPiocheObjectif.add(this.lstCartesObjectif.get(i));
-            
+            lstPiocheObjectif.add(this.lstCartesObjectif.get(i));            
         }
-        System.out.println(lstPiocheObjectif);
         return lstPiocheObjectif;
     }
 

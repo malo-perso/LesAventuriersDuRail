@@ -7,7 +7,7 @@
 		<nombreVehiculeJoueur>45</nombreVehiculeJoueur>
 		<nombreJoueurMiniDoubleRoute>4</nombreJoueurMiniDoubleRoute>
 		<nombreVehiculeFin>2</nombreVehiculeFin>
-		<nombrePointCheminLong>-1</nombrePointCheminLong>
+		<nombrePointCheminLong>15</nombrePointCheminLong>
 		<longueurVehicule>33</longueurVehicule>
 		<hauteurVehicule>12</hauteurVehicule>
 		<espacementVehicule>1.4</espacementVehicule>

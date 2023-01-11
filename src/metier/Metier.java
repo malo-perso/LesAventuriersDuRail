@@ -608,10 +608,11 @@ public class Metier {
                 System.out.println("Le chemin le plus long de " + i.getNom() +" est de : " + cheminLPLJ);        
                 if (cheminLPLJ >cheminLPL) {
                     joueurCheminLPL = i;
+                    cheminLPL = cheminLPLJ;
                 }
         }
-        if (joueurCheminLPL != null){
-            joueurCheminLPL.ajouterPoint(10);
+        if (joueurCheminLPL != null && this.nbPointCheminLong != -1){
+            joueurCheminLPL.ajouterPoint(this.nbPointCheminLong);
             nomCLPL = joueurCheminLPL.getNom();
         }
         this.ctrl.creerFrameFinPartie(nomCLPL);

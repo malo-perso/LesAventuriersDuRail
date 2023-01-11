@@ -45,8 +45,6 @@ public class FrameFinPartie extends JFrame implements ActionListener{
 		
 		this.lstJoueurs = this.ctrl.getMetier().getLstJoueurs();
 
-		System.out.println("Taille lstJoueurs : " + this.lstJoueurs.size());
-
 		this.modelResultats = new DefaultTableModel(new Object[]{"Rang", "Pseudo", "Couleur","Score", "Nb Wagons", "Objectifs ✓"},0){
 			public boolean isCellEditable(int row, int col) {
 				return false;
