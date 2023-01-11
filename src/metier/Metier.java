@@ -661,6 +661,10 @@ public class Metier {
             this.ctrl.creerFrameChoixArete(aretesSelect);
         else {
             areteSelect = aretesSelect.get(0);
+            if (areteSelect.getProprietaire() != null){
+                this.ctrl.getIHM().afficherMsgErreur("Vous ne pouvez pas prendre cette arete");
+                return;
+            }
             verifAreteMulti(areteSelect);
         }
     
