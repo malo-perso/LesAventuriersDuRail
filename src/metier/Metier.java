@@ -423,29 +423,6 @@ public class Metier {
 
     
     /** 
-     * @return Boolean
-     */
-    public Boolean verifFinDePartie() {
-        for (Joueur joueur : this.lstJoueurs) {
-            if (joueur.getNbWagon() <= this.nbVehiculeFinPartie) {
-                return true;
-            }
-        }
-        int nbAretesPrises = 0;
-        if(areteDoubleActive()){
-            for (Arete arete : this.lstAretes){
-                if(!arete.estDisponible()){
-                    nbAretesPrises++;
-                }
-            }
-        }
-        if(nbAretesPrises >= this.lstAretes.size()) return true;
-        
-        return false;
-    }
-
-    
-    /** 
      * @param carteVehicule
      * @return boolean
      */
@@ -521,15 +498,46 @@ public class Metier {
     }
 
     public void finDuTour() {
+
+        int nbAretesPrises = 0;
+        if(areteDoubleActive()){
+            for (Arete arete : this.lstAretes){
+                if(!arete.estDisponible()){
+                    nbAretesPrises++;
+                }
+            }
+        }else{
+            ArrayList<Arete> lstTmp = new ArrayList<>();
+            for(int i=0; i<this.lstAretes.size(); i++){
+                for(int j=i;j<this.lstAretes.size(); j++){
+                    if((this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(j).getNoeud1() &&
+                        this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(j).getNoeud2()) || (
+                        this.lstAretes.get(i).getNoeud1() == this.lstAretes.get(j).getNoeud2() &&
+                        this.lstAretes.get(i).getNoeud2() == this.lstAretes.get(j).getNoeud1())){
+                            if (!this.lstAretes.get(i).estDisponible() || !this.lstAretes.get(j).estDisponible()){
+                                nbAretesPrises=+2;
+                            }
+                    }else{
+                        nbAretesPrises++;
+                    }
+                }
+            }
+        }
+        if(nbAretesPrises >= this.lstAretes.size()) finDePartie();
+
+
         if (dernierJoueur != null && this.joueurCourant.equals(dernierJoueur)) {
             this.ctrl.getIHM().afficherMsgErreur("C'est la fin de la partie!");
             finDePartie();
             return;
         }
+
         for (Joueur joueur : this.lstJoueurs) {
             if(joueur.getNbWagon() < this.nbVehiculeFinPartie){
-                this.dernierJoueur = joueur;
-                this.ctrl.getIHM().afficherMsgErreur(this.joueurCourant.getNom() + " a moins de de " + this.nbVehiculeFinPartie+" wagons. C'est le dernier tour pour tout le monde");
+                if(this.dernierJoueur == null){
+                    this.dernierJoueur = joueur;
+                    this.ctrl.getIHM().afficherMsgErreur(this.dernierJoueur.getNom() + " a moins de de " + this.nbVehiculeFinPartie+" wagons. C'est le dernier tour pour tout le monde");
+                }
             }
         }
     
