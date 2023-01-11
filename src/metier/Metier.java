@@ -647,11 +647,10 @@ public class Metier {
 
         }
 
-        for (Arete arete : aretesSelect) {
-            if (!arete.estDisponible()){
-                aretesSelect.remove(arete);
-            }
-        }
+        for (int index = 0; index < aretesSelect.size(); index++) 
+            if (!aretesSelect.get(index).estDisponible())
+                aretesSelect.remove(aretesSelect.get(index));
+        
 
         //verif s il a selectionne quelque chose 
         if (aretesSelect.size()==0)
@@ -905,13 +904,67 @@ public class Metier {
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));        
 
         this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));
-    }    
+    }   
+    
+    public void scenario2(){
+
+        this.pioche.getLstCarteVehicule().clear();
+        //partie visible
+
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-154))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-26113))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16776961))));
+
+        //partie cachée
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16777216))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16777216))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16777216))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16777216))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-16777216))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(new Color(-65485))));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+        this.pioche.getLstCarteVehicule().add(new CarteVehicule(new Type(this.couleurJoker)));
+
+        this.ctrl.majPioche();
+        this.ctrl.majIHM();
+
+    }
 
     public void scenario3(){
+        
+        this.lstJoueurs.get(0).getCartesObjectif().clear();
+        this.lstJoueurs.get(1).getCartesObjectif().clear();
+        this.lstJoueurs.get(2).getCartesObjectif().clear();
+
+        this.lstJoueurs.get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
+        this.lstJoueurs.get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(22), this.lstNoeuds.get(1), 10));
+        this.lstJoueurs.get(1).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(23), this.lstNoeuds.get(30), 10));
+        this.lstJoueurs.get(1).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(4), this.lstNoeuds.get(2), 10));
+        this.lstJoueurs.get(2).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
+        this.lstJoueurs.get(2).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 10));
+
         this.lstAretes.get(0).setProprietaire(this.lstJoueurs.get(0));
-        this.lstAretes.get(1).setProprietaire(this.lstJoueurs.get(0));
         this.lstAretes.get(2).setProprietaire(this.lstJoueurs.get(0));
-        this.lstAretes.get(3).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(1).setProprietaire(this.lstJoueurs.get(0));
         this.lstAretes.get(4).setProprietaire(this.lstJoueurs.get(0));
         this.lstAretes.get(5).setProprietaire(this.lstJoueurs.get(0));
         this.lstAretes.get(6).setProprietaire(this.lstJoueurs.get(0));
@@ -928,7 +981,6 @@ public class Metier {
         this.lstAretes.get(10).setProprietaire(this.lstJoueurs.get(1));
         this.lstAretes.get(34).setProprietaire(this.lstJoueurs.get(1));
         this.lstAretes.get(35).setProprietaire(this.lstJoueurs.get(1));
-        this.lstAretes.get(36).setProprietaire(this.lstJoueurs.get(1));
         this.lstAretes.get(37).setProprietaire(this.lstJoueurs.get(1));
         this.lstAretes.get(38).setProprietaire(this.lstJoueurs.get(1));
         this.lstAretes.get(44).setProprietaire(this.lstJoueurs.get(1));
@@ -953,11 +1005,12 @@ public class Metier {
         this.lstJoueurs.get(1).supprimerWagon(37);
         this.lstJoueurs.get(2).supprimerWagon(26);
 
-        this.lstJoueurs.get(0).ajouterPoint(67);
-        this.lstJoueurs.get(1).ajouterPoint(53);
-        this.lstJoueurs.get(2).ajouterPoint(33);
+        
+        this.lstJoueurs.get(0).setPoint(100);
+        this.lstJoueurs.get(1).setPoint(100);
+        this.lstJoueurs.get(2).setPoint(100);
 
-
+        this.ctrl.majPioche();
         this.ctrl.majIHM();
         
     }

@@ -47,6 +47,10 @@ public class Joueur implements Comparable<Joueur>{
         return this.nbPoint;
     }
 
+    public void setPoint(int nbPoint){
+        this.nbPoint = nbPoint;
+    }
+
     
     /** 
      * @param nbPoint
@@ -115,7 +119,6 @@ public class Joueur implements Comparable<Joueur>{
     public Color getCouleur() {
         return new Color(this.RGB);
     }
-
     
     /** 
      * @param type

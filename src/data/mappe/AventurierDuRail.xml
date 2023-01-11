@@ -2,11 +2,11 @@
 <mappe>
 	<regles>
 		<nombreJoker>14</nombreJoker>
-		<nombreJoueurMinimum>1</nombreJoueurMinimum>
-		<nombreJoueurMaximum >50</nombreJoueurMaximum>
+		<nombreJoueurMinimum>2</nombreJoueurMinimum>
+		<nombreJoueurMaximum>5</nombreJoueurMaximum>
 		<nombreVehiculeJoueur>45</nombreVehiculeJoueur>
 		<nombreJoueurMiniDoubleRoute>4</nombreJoueurMiniDoubleRoute>
-		<nombreVehiculeFin>2</nombreVehiculeFin>
+		<nombreVehiculeFin>8</nombreVehiculeFin>
 		<nombrePointCheminLong>15</nombrePointCheminLong>
 		<longueurVehicule>33</longueurVehicule>
 		<hauteurVehicule>12</hauteurVehicule>

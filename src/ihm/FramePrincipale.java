@@ -24,6 +24,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
     private JMenu menuPresentation;
 
     private JMenuItem menuFinDePartie;
+    private JMenuItem menuScenario2;
     private JMenuItem menuScenario3;
 
     private JScrollPane scrollPane;
@@ -57,6 +58,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
 
         this.menuPresentation = new JMenu("Presentation");
         this.menuFinDePartie = new JMenuItem("Fin de Partie");
+        this.menuScenario2 = new JMenuItem("Scenario 2");
         this.menuScenario3 = new JMenuItem("Scenario 3");
 
         this.reglePDF = new File("./src/data/PDF/Regles.pdf");
@@ -66,6 +68,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.btnJouerLocal = new JButton("Jouer en local");
         this.btnJouerLocal.addActionListener(this);
         this.menuFinDePartie.addActionListener(this);
+        this.menuScenario2.addActionListener(this);
         this.menuScenario3.addActionListener(this);
 
         //Positionnement des composants
@@ -75,6 +78,7 @@ public class FramePrincipale extends JFrame implements ActionListener {
         this.panelBase.add(this.panelJoueurs, BorderLayout.NORTH);
 
         this.menuPresentation.add(this.menuFinDePartie);
+        this.menuPresentation.add(this.menuScenario2);
         this.menuPresentation.add(this.menuScenario3);
 
         this.menuBarre.add(this.menuPresentation);
@@ -181,6 +185,8 @@ public class FramePrincipale extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.menuFinDePartie)
             this.ctrl.getMetier().finDePartie();
+        if(e.getSource() == this.menuScenario2)
+            this.ctrl.getMetier().scenario2();
         if(e.getSource() == this.menuScenario3)
             this.ctrl.getMetier().scenario3();
     }
