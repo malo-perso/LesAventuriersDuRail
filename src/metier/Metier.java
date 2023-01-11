@@ -912,7 +912,17 @@ public class Metier {
         this.lstJoueurs.get(1).ajouterCarteVehicule(new CarteVehicule(new Type(this.couleurJoker)));        
 
         this.getLstJoueurs().get(0).ajouterCarteObjectif(new CarteObjectif(this.lstNoeuds.get(0), this.lstNoeuds.get(1), 100));
-    }   
+    }  
+    
+    public void scenarioAll(){
+        this.lstAretes.get(0).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(1).setProprietaire(this.lstJoueurs.get(0));
+        this.lstAretes.get(2).setProprietaire(this.lstJoueurs.get(1));
+        this.lstAretes.get(3).setProprietaire(this.lstJoueurs.get(1));
+
+        this.ctrl.majPioche();
+        this.ctrl.majIHM();
+    }
     
     public void scenario2(){
 
