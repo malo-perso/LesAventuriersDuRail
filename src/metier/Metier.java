@@ -78,10 +78,6 @@ public class Metier {
 
 
         this.ctrl = ctrl;
-        //TEMPORAIRE
-        this.lstJoueurs.add(new Joueur("Eragon7237", -52,45));
-        this.lstJoueurs.add(new Joueur("Bou",  2500,45));
-        this.lstJoueurs.add(new Joueur("erasmamael", 556,45));
         
         
         this.nbAction = 0;
