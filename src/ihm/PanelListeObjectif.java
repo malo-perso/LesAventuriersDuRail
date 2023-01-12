@@ -174,7 +174,7 @@ public class PanelListeObjectif extends JPanel implements ActionListener{
                 this.ctrl.ajouterCarteObjectif(
                     this.ctrl.getLstNoeuds().get(this.listNoeud1.getSelectedIndex()),
                     this.ctrl.getLstNoeuds().get(this.listNoeud2.getSelectedIndex()),
-                    Integer.parseInt(this.txtNbPoints.getText())
+                    Math.abs(Integer.parseInt(this.txtNbPoints.getText()))
                 );
                 this.removePanelRemplissage();
             }
