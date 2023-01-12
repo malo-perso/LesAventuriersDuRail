@@ -314,6 +314,7 @@ public class GererXML {
 			bw.write("<mappe>\n");
 
 			bw.write("\t<regles>\n" + 
+					 "\t\t<nombreJoker>" + this.getNombreJoker() + "</nombreJoker>\n" +
 					 "\t\t<nombreJoueurMinimum>" + this.getNombreJoueurMinimum() + "</nombreJoueurMinimum>\n" +
 					 "\t\t<nombreJoueurMaximum >" + this.getNombreJoueurMaximum() + "</nombreJoueurMaximum>\n" +
 					 "\t\t<nombreVehiculeJoueur>" + this.getNbVehiculeJoueur() + "</nombreVehiculeJoueur>\n" +
@@ -375,8 +376,6 @@ public class GererXML {
 
 			bw.write("\t</hashMapCarteVehicules>\n");
 
-			bw.write("\t<nombreJoker>" + this.getNombreJoker() + "</nombreJoker>\n");
-
 			bw.write("\t<imagePlateau>" + Base64.getEncoder().encodeToString(bytes) +
 					 "</imagePlateau>\n");
 					 
@@ -394,6 +393,7 @@ public class GererXML {
 			racine = document.getRootElement();
 
 			Element regles = racine.getChild("regles");
+			this.setNombreJoker(Integer.parseInt(regles.getChildText("nombreJoker")));
 			this.setNombreJoueurMinimum(Integer.parseInt(regles.getChildText("nombreJoueurMinimum")));
 			this.setNombreJoueurMaximum(Integer.parseInt(regles.getChildText("nombreJoueurMaximum")));
 			this.setNbVehiculeJoueur(Integer.parseInt(regles.getChildText("nombreVehiculeJoueur")));
